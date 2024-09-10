@@ -1,5 +1,10 @@
 function App() {
-  return <>Hello</>;
+  return (
+    <main>
+      Hello
+      <button>Toggle</button>
+    </main>
+  );
 }
 
 export default App;
