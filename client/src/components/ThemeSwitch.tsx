@@ -1,16 +1,18 @@
 import { useTheme } from "@/theme-provider";
-import { Switch } from "./ui/switch";
+import { MoonIcon, SunIcon } from "lucide-react";
+import { Button } from "./ui/button";
 
 export default function ThemeSwitch() {
   const { setTheme, theme } = useTheme();
 
   return (
-    <div className="flex items-center justify-center">
-      <Switch
-        checked={theme === "dark"}
-        onCheckedChange={() => setTheme(theme === "dark" ? "light" : "dark")}
-      />
-      <p className="text-sm">Dark Mode</p>
-    </div>
+    <Button
+      variant={"outline"}
+      size={"icon"}
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      className="inline-flex items-center justify-center rounded-full"
+    >
+      {theme === "dark" ? <SunIcon /> : <MoonIcon />}
+    </Button>
   );
 }
