@@ -1,7 +1,7 @@
 import { useTheme } from "@/theme-provider";
 import { Switch } from "./ui/switch";
 
-export default function DarkModeSwitch() {
+export default function ThemeSwitch() {
   const { setTheme, theme } = useTheme();
 
   return (
