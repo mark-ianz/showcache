@@ -7,10 +7,10 @@ export default function Header() {
   return (
     <>
       <header className="flex items-center justify-between border-b pb-3 mb-4">
-        <Logo />
+        <Logo className={"mr-20"}/>
         <div className="flex grow gap-4">
           <Input
-            className="max-w-md ml-auto"
+            className="max-w-md ml-auto grow"
             placeholder="Search for Movies or TV Shows"
           />
           <ThemeSwitch />

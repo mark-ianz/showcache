@@ -30,7 +30,7 @@ export default function Nav() {
       <ol className="flex justify-around">
         {lists.map(({ name }, id) => (
           <Button key={id} asChild variant={"link"}>
-            <li className="cursor-pointer">{name}</li>
+            <li className="cursor-pointer text-lg">{name}</li>
           </Button>
         ))}
       </ol>
