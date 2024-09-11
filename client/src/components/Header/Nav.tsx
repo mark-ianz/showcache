@@ -26,7 +26,7 @@ export default function Nav() {
   ];
 
   return (
-    <nav className="w-full">
+    <nav className="w-full mb-20">
       <ol className="flex justify-around">
         {lists.map(({ name }, id) => (
           <Button key={id} asChild variant={"link"}>
