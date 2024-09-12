@@ -36,7 +36,7 @@ export default function LandingPage() {
     <main>
       <ul className="grid grid-cols-4 gap-4">
         {movies.map((movie) => (
-          <li className="" key={movie.id}>
+          <li key={movie.id}>
             <MovieCard name={movie.name} image={movie.image} />
           </li>
         ))}
