@@ -1,9 +1,7 @@
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import dummy from "../assets/my_president.png";
 import doctor_strange from "../assets/doctor_strange.jpg";
 import ss from "../assets/ss.jfif";
 import { useId } from "react";
-import { Button } from "@/components/ui/button";
+import MovieCard from "@/components/MovieCard";
 
 export default function LandingPage() {
   const movies = [
@@ -14,22 +12,33 @@ export default function LandingPage() {
     },
     {
       id: useId(),
-      name: "Shaw",
+      name: "Shawshank Redemption",
+      image: ss,
+    },
+    {
+      id: useId(),
+      name: "Doctor Strange",
+      image: doctor_strange,
+    },
+    {
+      id: useId(),
+      name: "Shawshank Redemption Test Haw jkahdjkawhdkjahw ajkdhaskjdhaskdjahsdkjashdkjashdjkas",
+      image: ss,
+    },
+    {
+      id: useId(),
+      name: "Shawshank Redemption asdHG ajsdas AKHJSGD jh",
       image: ss,
     },
   ];
 
   return (
     <main>
-      <ul className="grid grid-cols-6 gap-4">
+      <ul className="grid grid-cols-4 gap-4">
         {movies.map((movie) => (
-          <Card className="border" key={movie.id}>
-            <img src={movie.image} alt="image" className="rounded-t-xl" />
-            <CardContent className="p-2 flex flex-col items-center">
-              <CardTitle>{movie.name}</CardTitle>
-              <Button variant={"default"} className="mt-4">Watch Later</Button>
-            </CardContent>
-          </Card>
+          <li className="" key={movie.id}>
+            <MovieCard name={movie.name} image={movie.image} />
+          </li>
         ))}
       </ul>
     </main>
