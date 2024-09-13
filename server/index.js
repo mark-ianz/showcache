@@ -1,7 +1,7 @@
 import express from "express";
-import fetch from "node-fetch";
 import "dotenv/config";
 import cors from "cors";
+import axios from "axios";
 
 const app = express();
 app.use(cors());
@@ -18,9 +18,8 @@ app.get("/", async (req, res) => {
     },
   };
 
-  const response = await fetch(url, options);
-  const result = await response.json();
-  res.send(result);
+  const response = await axios.get(url, options);
+  res.send(response);
 });
 
 app.get("/popular", async (req, res) => {
@@ -34,7 +33,6 @@ app.get("/popular", async (req, res) => {
     },
   };
 
-  const response = await fetch(url, options);
-  const result = await response.json();
-  return res.status(200).json(result);
+  const response = await axios.get(url, options);
+  return res.status(200).json(response);
 });
