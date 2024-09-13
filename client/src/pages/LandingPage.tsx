@@ -1,43 +1,39 @@
-import doctor_strange from "../assets/doctor_strange.jpg";
-import ss from "../assets/ss.jfif";
-import { useId } from "react";
 import MovieCard from "@/components/MovieCard";
+import { useQuery } from "@tanstack/react-query";
+import { getPopularMovies } from "@/utils/api";
+
+export type Movie = {
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: Date;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+};
 
 export default function LandingPage() {
-  const movies = [
-    {
-      id: useId(),
-      name: "Doctor Strange",
-      image: doctor_strange,
-    },
-    {
-      id: useId(),
-      name: "Shawshank Redemption",
-      image: ss,
-    },
-    {
-      id: useId(),
-      name: "Doctor Strange",
-      image: doctor_strange,
-    },
-    {
-      id: useId(),
-      name: "Shawshank Redemption Test Haw jkahdjkawhdkjahw ajkdhaskjdhaskdjahsdkjashdkjashdjkas",
-      image: ss,
-    },
-    {
-      id: useId(),
-      name: "Shawshank Redemption asdHG ajsdas AKHJSGD jh",
-      image: ss,
-    },
-  ];
+  const { data } = useQuery({
+    queryKey: ["popular_movies"],
+    queryFn: getPopularMovies,
+    refetchOnWindowFocus: false,
+  });
 
+  const movies = data?.results;
+  console.log(movies);
   return (
     <main>
       <ul className="grid grid-cols-4 gap-4">
-        {movies.map((movie) => (
+        {movies?.map((movie) => (
           <li key={movie.id}>
-            <MovieCard name={movie.name} image={movie.image} />
+            <MovieCard
+              name={movie.original_title}
+              image={"https://image.tmdb.org/t/p/original" + movie.poster_path}
+            />
           </li>
         ))}
       </ul>
