@@ -8,8 +8,24 @@ type API_Result = {
   total_results: number;
 };
 
+type getTrendingMoviesProps = {
+  queryKey: [string, "day" | "week"];
+};
+
 export async function getPopularMovies(): Promise<API_Result> {
-  const { data } = await axios.get("http://localhost:3000/popular");
+  const { data } = await axios.get("http://localhost:3000/trending");
+  console.log(data);
+  return data;
+}
+
+export async function getTrendingMovies({
+  queryKey,
+}: getTrendingMoviesProps): Promise<API_Result> {
+  const { data } = await axios.get("http://localhost:3000/trending", {
+    params: {
+      date: queryKey[1],
+    },
+  });
   console.log(data);
   return data;
 }

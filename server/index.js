@@ -41,3 +41,19 @@ app.get("/popular", async (req, res) => {
     return res.status(500).json({ error: "Internal Error" });
   }
 });
+
+app.get("/trending", async (req, res) => {
+  const { date } = req.query;
+
+  const url = `https://api.themoviedb.org/3/trending/movie/${date}?language=en-US`;
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiNTgxZWI2MTg4ZDM0MWMyNTQ0YWEwYjZkZjQ0YTk4OSIsIm5iZiI6MTcyNjIyOTg0NS4zMDAzNDQsInN1YiI6IjY2ZTQyYzQzZjQ2N2MyYWQ2MmY5N2YxYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.5w-qePuDD6F-VTAj4eVhQiowd1d0g-z08lEf-7iYP3M",
+    },
+  };
+  const { data } = await axios.get(url, options);
+  return res.status(200).json(data);
+});
