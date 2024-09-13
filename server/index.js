@@ -33,6 +33,11 @@ app.get("/popular", async (req, res) => {
     },
   };
 
-  const response = await axios.get(url, options);
-  return res.status(200).json(response);
+  try {
+    const { data } = await axios.get(url, options);
+    return res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Internal Error" });
+  }
 });
