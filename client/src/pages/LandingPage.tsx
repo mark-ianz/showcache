@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { getNewReleases, getTrendingThisWeek } from "@/utils/api";
 import MovieSection from "@/components/MovieSection";
 import useMovies from "@/hooks/useMovies";

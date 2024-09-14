@@ -6,7 +6,7 @@ import Logo from "./Logo";
 export default function Header() {
   return (
     <>
-      <header className="flex items-center justify-between border-b pb-3 mb-4">
+      <header className="flex items-center justify-between border-b pb-3 mb-4 w-full">
         <Logo className={"mr-20"}/>
         <div className="flex grow gap-4">
           <Input
