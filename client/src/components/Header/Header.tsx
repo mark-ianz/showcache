@@ -7,6 +7,7 @@ import Logo from "./Logo";
 import { Separator } from "../ui/separator";
 import { useTheme } from "@/theme-provider";
 import ThemeSwitch2 from "../ThemeSwitch2";
+import LanguageSelect from "../LanguageSelect";
 
 export default function Header() {
   const { theme } = useTheme();
@@ -27,8 +28,9 @@ export default function Header() {
             <PopoverContent align="end" className="mt-2">
               <p className="text-lg font-semibold">Settings</p>
               <Separator className="my-2" />
-              <div>
+              <div className="flex flex-col gap-4">
                 <ThemeSwitch2 />
+                <LanguageSelect />
               </div>
             </PopoverContent>
           </Popover>
