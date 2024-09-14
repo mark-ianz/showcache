@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getNewReleases, getTrendingThisWeek } from "@/utils/api";
 import MovieSection from "@/components/MovieSection";
+import useMovies from "@/hooks/useMovies";
 
 export type Movie = {
   id: number;
@@ -19,24 +20,22 @@ export type Movie = {
 export default function LandingPage() {
   const {
     data: trending_this_week,
+    error: trending_this_week_error,
     isLoading: is_trending_this_week_loading,
     isError: is_trending_this_week_error,
-    error: trending_this_week_error,
-  } = useQuery({
+  } = useMovies({
     queryKey: ["trending_this_week"],
     queryFn: getTrendingThisWeek,
-    staleTime: 1000 * 60 * 5,
   });
 
   const {
     data: new_releases,
+    error: new_releases_error,
     isLoading: is_new_releases_loading,
     isError: is_new_releases_error,
-    error: new_releases_error,
-  } = useQuery({
+  } = useMovies({
     queryKey: ["new_releases"],
     queryFn: getNewReleases,
-    staleTime: 1000 * 60 * 5,
   });
 
   if (is_trending_this_week_loading || is_new_releases_loading) {
