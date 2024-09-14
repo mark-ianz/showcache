@@ -13,19 +13,24 @@ type getTrendingMoviesProps = {
 };
 
 export async function getPopularMovies(): Promise<API_Result> {
-  const { data } = await axios.get("http://localhost:3000/trending");
-  console.log(data);
-  return data;
+  try {
+    const { data } = await axios.get("http://localhost:3000/trending");
+    return data;
+  } catch (error) {
+    throw new Error("Failed to fetch popular movies");
+  }
 }
 
 export async function getTrendingMovies({
   queryKey,
 }: getTrendingMoviesProps): Promise<API_Result> {
-  const { data } = await axios.get("http://localhost:3000/trending", {
-    params: {
-      date: queryKey[1],
-    },
-  });
-  console.log(data);
+  const { data }: { data: API_Result } = await axios.get(
+    "http://localhost:3000/trending",
+    {
+      params: {
+        date: queryKey[1],
+      },
+    }
+  );
   return data;
 }
