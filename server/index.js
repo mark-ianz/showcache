@@ -11,8 +11,14 @@ app.listen(3000);
 
 app.get("/", async (req, res) => {
   const url = "https://api.themoviedb.org/3/authentication";
-  const { data } = await axios.get(url, get_options);
-  res.json(data);
+  try {
+    const { data } = await axios.get(url, get_options);
+    res.json(data);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ error: "Server Error. Please try again later." });
+  }
 });
 
 app.get("/popular", async (req, res) => {
@@ -32,29 +38,53 @@ app.get("/trending", async (req, res) => {
 
   const url = `https://api.themoviedb.org/3/trending/movie/${date}?language=${language}`;
 
-  const { data } = await axios.get(url, get_options);
-  return res.status(200).json(data);
+  try {
+    const { data } = await axios.get(url, get_options);
+    return res.status(200).json(data);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ error: "Server Error. Please try again later." });
+  }
 });
 
 app.get("/new_releases", async (req, res) => {
   const { page = 1, language } = req.query;
   const url = `https://api.themoviedb.org/3/movie/now_playing?language=${language}&page=${page}`;
 
-  const { data } = await axios.get(url, get_options);
-  return res.status(200).json(data);
+  try {
+    const { data } = await axios.get(url, get_options);
+    return res.status(200).json(data);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ error: "Server Error. Please try again later." });
+  }
 });
 
 app.get("/upcoming", async (req, res) => {
   const { page = 1, language } = req.query;
   const url = `https://api.themoviedb.org/3/movie/upcoming?language=${language}&page=${page}`;
-  const { data } = await axios.get(url, get_options);
-  return res.status(200).json(data);
+  try {
+    const { data } = await axios.get(url, get_options);
+    return res.status(200).json(data);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ error: "Server Error. Please try again later." });
+  }
 });
 
 app.get("/tv_shows", async (req, res) => {
   // default: top rated
   const { page = 1, language, sort = "top_rated" } = req.query;
   const url = `https://api.themoviedb.org/3/tv/${sort}?language=${language}&page=${page}`;
-  const { data } = await axios.get(url, get_options);
-  return res.status(200).json(data);
+  try {
+    const { data } = await axios.get(url, get_options);
+    return res.status(200).json(data);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ error: "Server Error. Please try again later." });
+  }
 });
