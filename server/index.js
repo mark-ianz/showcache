@@ -58,7 +58,7 @@ app.get("/new_releases", async (req, res) => {
 
 app.get("/upcoming", async (req, res) => {
   const { page = 1, language } = req.query;
-  const url = `https://api.themoviedb.org/3/movie/upcoming?language=${language}&page=${page}`;
+  const url = `https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=false&language=${language}&page=${page}&primary_release_date.gte=${new Date()}&sort_by=popularity.desc`;
   try {
     const { data } = await axios.get(url, get_options);
     return res.status(200).json(data);
