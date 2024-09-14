@@ -8,15 +8,15 @@ export default function Nav() {
       id: useId(),
     },
     {
+      name: "Popular Movies",
+      id: useId(),
+    },
+    {
       name: "New Releases",
       id: useId(),
     },
     {
       name: "TV Shows",
-      id: useId(),
-    },
-    {
-      name: "People",
       id: useId(),
     },
     {
@@ -27,10 +27,10 @@ export default function Nav() {
 
   return (
     <nav className="w-full mb-20">
-      <ol className="flex justify-between">
+      <ol className="flex justify-around">
         {lists.map(({ name, id }) => (
-          <Button key={id} asChild variant={"link"}>
-            <li className="cursor-pointer text-lg">{name}</li>
+          <Button key={id} asChild variant={"link"} className="cursor-pointer text-md">
+            <li>{name}</li>
           </Button>
         ))}
       </ol>
