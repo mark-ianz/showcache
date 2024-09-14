@@ -3,6 +3,7 @@ import "dotenv/config";
 import cors from "cors";
 import axios from "axios";
 import { get_options } from "./utils/constants.js";
+import { throwServerError } from "./utils/helpers.js";
 
 const app = express();
 app.use(cors());
@@ -15,9 +16,7 @@ app.get("/", async (req, res) => {
     const { data } = await axios.get(url, get_options);
     res.json(data);
   } catch (error) {
-    return res
-      .status(500)
-      .json({ error: "Server Error. Please try again later." });
+    throwServerError(res);
   }
 });
 
@@ -28,8 +27,7 @@ app.get("/popular", async (req, res) => {
     const { data } = await axios.get(url, get_options);
     return res.status(200).json(data);
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: "Internal Error" });
+    throwServerError(res);
   }
 });
 
@@ -42,9 +40,7 @@ app.get("/trending", async (req, res) => {
     const { data } = await axios.get(url, get_options);
     return res.status(200).json(data);
   } catch (error) {
-    return res
-      .status(500)
-      .json({ error: "Server Error. Please try again later." });
+    throwServerError(res);
   }
 });
 
@@ -56,9 +52,7 @@ app.get("/new_releases", async (req, res) => {
     const { data } = await axios.get(url, get_options);
     return res.status(200).json(data);
   } catch (error) {
-    return res
-      .status(500)
-      .json({ error: "Server Error. Please try again later." });
+    throwServerError(res);
   }
 });
 
@@ -69,9 +63,7 @@ app.get("/upcoming", async (req, res) => {
     const { data } = await axios.get(url, get_options);
     return res.status(200).json(data);
   } catch (error) {
-    return res
-      .status(500)
-      .json({ error: "Server Error. Please try again later." });
+    throwServerError(res);
   }
 });
 
@@ -84,8 +76,6 @@ app.get("/tv_shows", async (req, res) => {
     const { data } = await axios.get(url, get_options);
     return res.status(200).json(data);
   } catch (error) {
-    return res
-      .status(500)
-      .json({ error: "Server Error. Please try again later." });
+    throwServerError(res);
   }
 });
