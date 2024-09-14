@@ -28,7 +28,7 @@ export default function Nav() {
   return (
     <nav className="w-full mb-20">
       <ol className="flex justify-between">
-        {lists.map(({ name }, id) => (
+        {lists.map(({ name, id }) => (
           <Button key={id} asChild variant={"link"}>
             <li className="cursor-pointer text-lg">{name}</li>
           </Button>
