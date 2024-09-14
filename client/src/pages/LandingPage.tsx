@@ -1,4 +1,8 @@
-import { getNewReleases, getTrendingThisWeek } from "@/utils/api";
+import {
+  getNewReleases,
+  getTrendingThisWeek,
+  getUpcomingMovies,
+} from "@/utils/api";
 import MovieSection from "@/components/MovieSection";
 import useMovies from "@/hooks/useMovies";
 
@@ -37,17 +41,39 @@ export default function LandingPage() {
     queryFn: getNewReleases,
   });
 
-  if (is_trending_this_week_loading || is_new_releases_loading) {
+  const {
+    data: upcoming_movies,
+    error: upcoming_movies_error,
+    isError: is_upcoming_movies_error,
+    isLoading: is_upcoming_movies_loading,
+  } = useMovies({
+    queryKey: ["upcoming_movies"],
+    queryFn: getUpcomingMovies,
+  });
+
+  if (
+    is_trending_this_week_loading ||
+    is_new_releases_loading ||
+    is_upcoming_movies_loading
+  ) {
     return <p>Loading...</p>;
   }
 
-  if (is_new_releases_error || is_trending_this_week_error) {
+  if (
+    is_new_releases_error ||
+    is_trending_this_week_error ||
+    is_upcoming_movies_error
+  ) {
     return (
-      <p>{trending_this_week_error?.message || new_releases_error?.message}</p>
+      <p>
+        {trending_this_week_error?.message ||
+          new_releases_error?.message ||
+          upcoming_movies_error?.message}
+      </p>
     );
   }
 
-  if (trending_this_week && new_releases) {
+  if (trending_this_week && new_releases && upcoming_movies) {
     return (
       <main className="flex flex-col gap-20">
         <MovieSection
@@ -57,6 +83,10 @@ export default function LandingPage() {
         <MovieSection
           movieArray={new_releases.slice(0, 18)}
           title="New Releases"
+        />
+        <MovieSection
+          movieArray={upcoming_movies.slice(0, 18)}
+          title="Upcoming Movies"
         />
       </main>
     );

@@ -8,6 +8,7 @@ type MovieSectionProps = {
 };
 
 export default function MovieSection({ movieArray, title }: MovieSectionProps) {
+  console.log(movieArray)
   return (
     <section>
       <p className="text-2xl mb-3">{title}</p>
@@ -16,7 +17,7 @@ export default function MovieSection({ movieArray, title }: MovieSectionProps) {
           <li key={movie.id}>
             <MovieCard
               name={movie.title}
-              image={"https://image.tmdb.org/t/p/original" + movie.poster_path}
+              image={"https://image.tmdb.org/t/p/w400" + movie.poster_path}
             />
           </li>
         ))}
