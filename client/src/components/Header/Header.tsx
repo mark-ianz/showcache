@@ -1,16 +1,13 @@
 import { Settings } from "lucide-react";
-import ThemeSwitch from "../ThemeSwitchButton";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import Logo from "./Logo";
 import { Separator } from "../ui/separator";
-import { useTheme } from "@/theme-provider";
 import ThemeSwitch2 from "../ThemeSwitch2";
 import LanguageSelect from "../LanguageSelect";
 
 export default function Header() {
-  const { theme } = useTheme();
   return (
     <>
       <header className="flex items-center justify-between border-b pb-3 mb-4 w-full">
@@ -23,7 +20,7 @@ export default function Header() {
           <Button>Login</Button>
           <Popover>
             <PopoverTrigger asChild>
-              <Settings className="w-8 min-w-6 h-8 min-h-6" />
+              <Settings className="w-8 min-w-6 h-8 min-h-6 cursor-pointer" />
             </PopoverTrigger>
             <PopoverContent align="end" className="mt-2">
               <p className="text-lg font-semibold">Settings</p>
