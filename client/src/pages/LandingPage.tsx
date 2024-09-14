@@ -17,25 +17,47 @@ export type Movie = {
 };
 
 export default function LandingPage() {
-  const { data: trending_this_week } = useQuery({
+  const {
+    data: trending_this_week,
+    isLoading: is_trending_this_week_loading,
+    isError: is_trending_this_week_error,
+    error: trending_this_week_error,
+  } = useQuery({
     queryKey: ["trending_this_week"],
     queryFn: getTrendingThisWeek,
     staleTime: 1000 * 60 * 5,
   });
 
-  const { data: new_releases } = useQuery({
+  const {
+    data: new_releases,
+    isLoading: is_new_releases_loading,
+    isError: is_new_releases_error,
+    error: new_releases_error,
+  } = useQuery({
     queryKey: ["new_releases"],
     queryFn: getNewReleases,
     staleTime: 1000 * 60 * 5,
   });
 
-  const trending: Movie[] = trending_this_week?.results;
-  const newReleases: Movie[] = new_releases?.results;
+  if (is_trending_this_week_loading || is_new_releases_loading) {
+    return <p>Loading...</p>;
+  }
 
-  return (
-    <main className="flex flex-col gap-20">
-      <MovieSection movieArray={trending} title="Trending This Week" />
-      <MovieSection movieArray={newReleases} title="New Releases" />
-    </main>
-  );
+  if (is_new_releases_error || is_trending_this_week_error) {
+    return (
+      <p>{trending_this_week_error?.message || new_releases_error?.message}</p>
+    );
+  }
+
+  if (trending_this_week && new_releases) {
+    return (
+      <main className="flex flex-col gap-20">
+        <MovieSection
+          movieArray={trending_this_week}
+          title="Trending This Week"
+        />
+        <MovieSection movieArray={new_releases} title="New Releases" />
+      </main>
+    );
+  }
 }
