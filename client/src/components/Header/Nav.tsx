@@ -4,15 +4,11 @@ import { Button } from "../ui/button";
 export default function Nav() {
   const lists: { name: string; id: string }[] = [
     {
-      name: "New Releases",
-      id: useId(),
-    },
-    {
       name: "Top Rated",
       id: useId(),
     },
     {
-      name: "Movies",
+      name: "New Releases",
       id: useId(),
     },
     {
@@ -20,7 +16,11 @@ export default function Nav() {
       id: useId(),
     },
     {
-      name: "Discover",
+      name: "People",
+      id: useId(),
+    },
+    {
+      name: "Upcoming",
       id: useId(),
     },
   ];

@@ -27,7 +27,7 @@ export default function LandingPage() {
   console.log(movies);
   return (
     <main>
-      <ul className="grid grid-cols-4 gap-4">
+      <ul className="grid grid-cols-5 gap-4">
         {movies?.map((movie) => (
           <li key={movie.id}>
             <MovieCard
