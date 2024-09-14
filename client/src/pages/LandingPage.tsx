@@ -1,6 +1,6 @@
-import MovieCard from "@/components/MovieCard";
 import { useQuery } from "@tanstack/react-query";
 import { getNewReleases, getTrendingThisWeek } from "@/utils/api";
+import MovieSection from "@/components/MovieSection";
 
 export type Movie = {
   id: number;
@@ -29,41 +29,13 @@ export default function LandingPage() {
     staleTime: 1000 * 60 * 5,
   });
 
-  const newReleases = new_releases?.results;
-  const trending = trending_this_week?.results;
+  const trending: Movie[] = trending_this_week?.results;
+  const newReleases: Movie[] = new_releases?.results;
 
   return (
     <main className="flex flex-col gap-20">
-      <section>
-        <p className="text-2xl mb-3">Trending This Week</p>
-        <ul className="grid grid-cols-5 gap-4">
-          {trending?.map((movie) => (
-            <li key={movie.id}>
-              <MovieCard
-                name={movie.original_title}
-                image={
-                  "https://image.tmdb.org/t/p/original" + movie.poster_path
-                }
-              />
-            </li>
-          ))}
-        </ul>
-      </section>
-      <section>
-        <p className="text-2xl mb-3">New Releases</p>
-        <ul className="grid grid-cols-5 gap-4">
-          {newReleases?.map((movie) => (
-            <li key={movie.id}>
-              <MovieCard
-                name={movie.original_title}
-                image={
-                  "https://image.tmdb.org/t/p/original" + movie.poster_path
-                }
-              />
-            </li>
-          ))}
-        </ul>
-      </section>
+      <MovieSection movieArray={trending} title="Trending This Week" />
+      <MovieSection movieArray={newReleases} title="New Releases" />
     </main>
   );
 }
