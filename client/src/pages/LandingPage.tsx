@@ -1,6 +1,6 @@
 import MovieCard from "@/components/MovieCard";
 import { useQuery } from "@tanstack/react-query";
-import { getPopularMovies, getTrendingMovies } from "@/utils/api";
+import { getTrendingThisWeek } from "@/utils/api";
 
 export type Movie = {
   id: number;
@@ -18,8 +18,8 @@ export type Movie = {
 
 export default function LandingPage() {
   const { data } = useQuery({
-    queryKey: ["popular_movies", "week"],
-    queryFn: getTrendingMovies,
+    queryKey: ["popular_movies"],
+    queryFn: getTrendingThisWeek,
     refetchOnWindowFocus: false,
   });
 
