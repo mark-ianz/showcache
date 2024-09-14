@@ -2,7 +2,7 @@ import express from "express";
 import "dotenv/config";
 import cors from "cors";
 import axios from "axios";
-import { get_options } from "./utils/constants";
+import { get_options } from "./utils/constants.js";
 
 const app = express();
 app.use(cors());
@@ -16,9 +16,8 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/popular", async (req, res) => {
-  const { page = 1 } = req.query;
-  const url =
-    "https://api.themoviedb.org/3/movie/popular?language=en-US&page=" + page;
+  const { page = 1, language } = req.query;
+  const url = `https://api.themoviedb.org/3/movie/popular?language=${language}&page=${page}`;
   try {
     const { data } = await axios.get(url, get_options);
     return res.status(200).json(data);
@@ -29,9 +28,17 @@ app.get("/popular", async (req, res) => {
 });
 
 app.get("/trending", async (req, res) => {
-  const { date } = req.query;
+  const { date = "week", language } = req.query;
 
-  const url = `https://api.themoviedb.org/3/trending/movie/${date}?language=en-US`;
+  const url = `https://api.themoviedb.org/3/trending/movie/${date}?language=${language}`;
+
+  const { data } = await axios.get(url, get_options);
+  return res.status(200).json(data);
+});
+
+app.get("/now_playing", async (req, res) => {
+  const { page = 1, language } = req.query;
+  const url = `https://api.themoviedb.org/3/movie/now_playing?language=${language}&page=${page}`;
 
   const { data } = await axios.get(url, get_options);
   return res.status(200).json(data);
