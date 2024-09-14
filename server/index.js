@@ -36,10 +36,25 @@ app.get("/trending", async (req, res) => {
   return res.status(200).json(data);
 });
 
-app.get("/now_playing", async (req, res) => {
+app.get("/new_releases", async (req, res) => {
   const { page = 1, language } = req.query;
   const url = `https://api.themoviedb.org/3/movie/now_playing?language=${language}&page=${page}`;
 
+  const { data } = await axios.get(url, get_options);
+  return res.status(200).json(data);
+});
+
+app.get("/upcoming", async (req, res) => {
+  const { page = 1, language } = req.query;
+  const url = `https://api.themoviedb.org/3/movie/upcoming?language=${language}&page=${page}`;
+  const { data } = await axios.get(url, get_options);
+  return res.status(200).json(data);
+});
+
+app.get("/tv_shows", async (req, res) => {
+  // default: top rated
+  const { page = 1, language, sort = "top_rated" } = req.query;
+  const url = `https://api.themoviedb.org/3/tv/${sort}?language=${language}&page=${page}`;
   const { data } = await axios.get(url, get_options);
   return res.status(200).json(data);
 });
