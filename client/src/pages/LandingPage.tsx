@@ -51,10 +51,13 @@ export default function LandingPage() {
     return (
       <main className="flex flex-col gap-20">
         <MovieSection
-          movieArray={trending_this_week}
+          movieArray={trending_this_week.slice(0, 18)}
           title="Trending This Week"
         />
-        <MovieSection movieArray={new_releases} title="New Releases" />
+        <MovieSection
+          movieArray={new_releases.slice(0, 18)}
+          title="New Releases"
+        />
       </main>
     );
   }
