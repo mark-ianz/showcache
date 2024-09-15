@@ -7,6 +7,14 @@ import {
 import ShowSection from "@/components/show/ShowSection";
 import useMovies from "@/hooks/useMovies";
 import { useLanguage } from "@/components/context/language-provider";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 type Show = {
   adult: boolean;
@@ -106,24 +114,14 @@ export default function LandingPage() {
 
   if (trending_this_week && new_releases && upcoming_movies && tv) {
     return (
-      <main className="flex flex-col gap-20">
+      <main className="flex flex-col gap-20 max-w-screen-2xl">
         <ShowSection
-          showArray={trending_this_week.slice(0, 9)}
+          showArray={trending_this_week}
           title="Trending This Week"
         />
-        <ShowSection
-          showArray={new_releases.slice(0, 9)}
-          title="New Releases"
-        />
-        <ShowSection
-          showArray={upcoming_movies.slice(0, 9)}
-          title="Upcoming Movies"
-        />
-        <ShowSection
-          showArray={tv.slice(0, 9)}
-          title="TV Shows"
-          isTv
-        />
+        <ShowSection showArray={new_releases} title="New Releases" />
+        <ShowSection showArray={upcoming_movies} title="Upcoming Movies" />
+        <ShowSection showArray={tv} title="TV Shows" isTv />
       </main>
     );
   }
