@@ -15,7 +15,7 @@ export default function () {
             size={"icon"}
             asChild
             className={`rounded-full border cursor-pointer ${
-              theme === "light" && "border-blue-500"
+              theme === "light" && "border-tertiary"
             }`}
             onClick={() => setTheme("light")}
           >
@@ -47,7 +47,7 @@ export default function () {
             size={"icon"}
             asChild
             className={`rounded-full border cursor-pointer ${
-              theme === "system" && "border-blue-500"
+              theme === "system" && "border-tertiary"
             }`}
             onClick={() => setTheme("system")}
           >
