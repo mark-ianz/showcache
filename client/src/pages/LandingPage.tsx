@@ -22,7 +22,9 @@ export type Movie = {
 };
 
 export default function LandingPage() {
-  const { language } = useLanguage();
+  const {
+    language: { iso_639_1: language },
+  } = useLanguage();
 
   const {
     data: trending_this_week,

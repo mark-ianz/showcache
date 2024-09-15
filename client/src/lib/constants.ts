@@ -1,12 +1,25 @@
-import { Language } from "@/components/context/language-provider";
+export type LanguageCode =
+  | "en"
+  | "es"
+  | "fr"
+  | "de"
+  | "zh"
+  | "ja"
+  | "ko"
+  | "ru"
+  | "pt"
+  | "hi"
+  | "bn"
+  | "sw"
+  | "ar";
 
-type Languages = {
-  iso_639_1: Language;
+export type Language = {
+  iso_639_1: LanguageCode;
   english_name: string;
   name: string;
 };
 
-export const languages: Languages[] = [
+export const languages: Language[] = [
   {
     iso_639_1: "en",
     english_name: "English",

@@ -16,7 +16,7 @@ export default function LanguageSelect() {
         <PopoverTrigger asChild>
           <Button className="w-full" variant={"outline"} size={"sm"}>
             Select Language:
-            <span className="ml-1 font-bold">{language.toUpperCase()}</span>
+            <span className="ml-1 font-bold">{language.english_name}</span>
           </Button>
         </PopoverTrigger>
         <PopoverContent asChild>
@@ -28,7 +28,7 @@ export default function LanguageSelect() {
                 variant={"ghost"}
                 onClick={() => {
                   setOpen(!open);
-                  setLanguage(language.iso_639_1);
+                  setLanguage(language);
                 }}
                 className="cursor-pointer"
               >

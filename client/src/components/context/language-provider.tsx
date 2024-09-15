@@ -1,19 +1,5 @@
+import { Language } from "@/lib/constants";
 import { createContext, ReactNode, useContext, useState } from "react";
-
-export type Language =
-  | "en"
-  | "es"
-  | "fr"
-  | "de"
-  | "zh"
-  | "ja"
-  | "ko"
-  | "ru"
-  | "pt"
-  | "hi"
-  | "bn"
-  | "sw"
-  | "ar";
 
 type LanguageProviderState = {
   language: Language;
@@ -21,7 +7,11 @@ type LanguageProviderState = {
 };
 
 const initialState: LanguageProviderState = {
-  language: "en",
+  language: {
+    iso_639_1: "en",
+    english_name: "English",
+    name: "English",
+  },
   setLanguage: () => null,
 };
 
@@ -29,17 +19,23 @@ const LanguageProviderContext =
   createContext<LanguageProviderState>(initialState);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const storageKey = "language";
-  const defaultLanguage: Language = "en";
+  const storageKey: string = "language";
+  const defaultLanguage: Language = {
+    iso_639_1: "en",
+    english_name: "English",
+    name: "English",
+  };
 
   const [language, setLanguage] = useState<Language>(
-    () => (localStorage.getItem(storageKey) as Language) || defaultLanguage
+    () =>
+      (JSON.parse(localStorage.getItem(storageKey)!) as Language) ||
+      defaultLanguage
   );
 
-  const value = {
+  const value: LanguageProviderState = {
     language,
     setLanguage: (language: Language) => {
-      localStorage.setItem(storageKey, language);
+      localStorage.setItem(storageKey, JSON.stringify(language));
       setLanguage(language);
     },
   };
