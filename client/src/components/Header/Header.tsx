@@ -6,6 +6,7 @@ import Logo from "./Logo";
 import { Separator } from "../ui/separator";
 import ThemeSwitch2 from "../ThemeSwitch2";
 import LanguageSelect from "../LanguageSelect";
+import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 
 export default function Header() {
   return (
@@ -17,10 +18,9 @@ export default function Header() {
             className="max-w-md ml-auto grow"
             placeholder="Search for Movies or TV Shows"
           />
-          <Button>Login</Button>
           <Popover>
             <PopoverTrigger asChild>
-              <Settings className="w-8 min-w-6 h-8 min-h-6 cursor-pointer" />
+              <HamburgerMenuIcon className="w-8 min-w-6 h-8 min-h-6 cursor-pointer" />
             </PopoverTrigger>
             <PopoverContent align="end" className="mt-2">
               <p className="text-lg font-semibold">Settings</p>
