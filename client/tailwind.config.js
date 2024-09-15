@@ -10,7 +10,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
-        tertiary: "rgb(59 130 246 / var(--tw-border-opacity))",
+        tertiary: "rgb(59 130 246)",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
