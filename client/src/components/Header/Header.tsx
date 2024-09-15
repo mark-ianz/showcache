@@ -1,12 +1,8 @@
-import { Settings } from "lucide-react";
-import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import Logo from "./Logo";
-import { Separator } from "../ui/separator";
-import ThemeSwitch2 from "../ThemeSwitch2";
-import LanguageSelect from "../LanguageSelect";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import Settings from "./Settings";
 
 export default function Header() {
   return (
@@ -26,25 +22,7 @@ export default function Header() {
               align="end"
               className="mt-2 flex flex-col gap-4 text-sm"
             >
-              <div>
-                <p className="text-lg font-semibold">Settings</p>
-                <Separator className="my-2" />
-                <div className="flex flex-col gap-4">
-                  <ThemeSwitch2 />
-                  <LanguageSelect />
-                </div>
-              </div>
-              <div>
-                <p className="text-md font-semibold">Account</p>
-                <div className="flex flex-col gap-1">
-                  <Button variant={"outline"} size={"sm"}>
-                    Login
-                  </Button>
-                  <Button variant={"outline"} size={"sm"}>
-                    Signup
-                  </Button>
-                </div>
-              </div>
+              <Settings />
             </PopoverContent>
           </Popover>
         </div>
