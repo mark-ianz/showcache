@@ -2,7 +2,7 @@ import {
   getNewReleases,
   getTrendingThisWeek,
   getUpcomingMovies,
-} from "@/utils/api";
+} from "@/lib/api";
 import MovieSection from "@/components/MovieSection";
 import useMovies from "@/hooks/useMovies";
 
