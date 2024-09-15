@@ -5,6 +5,7 @@ import {
 } from "@/lib/api";
 import MovieSection from "@/components/MovieSection";
 import useMovies from "@/hooks/useMovies";
+import { useLanguage } from "@/components/context/language-provider";
 
 export type Movie = {
   id: number;
@@ -21,13 +22,15 @@ export type Movie = {
 };
 
 export default function LandingPage() {
+  const { language } = useLanguage();
+
   const {
     data: trending_this_week,
     error: trending_this_week_error,
     isLoading: is_trending_this_week_loading,
     isError: is_trending_this_week_error,
   } = useMovies({
-    queryKey: ["trending_this_week"],
+    queryKey: ["trending_this_week", language],
     queryFn: getTrendingThisWeek,
   });
 

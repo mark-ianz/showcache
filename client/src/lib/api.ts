@@ -1,4 +1,5 @@
 import { Movie } from "@/pages/LandingPage";
+import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 
 type API_Result = {
@@ -16,10 +17,18 @@ export async function getPopularMovies(): Promise<Movie[]> {
   }
 }
 
-export async function getTrendingThisWeek(): Promise<Movie[]> {
+export async function getTrendingThisWeek({
+  queryKey,
+}: QueryFunctionContext): Promise<Movie[]> {
+  const [_key, language] = queryKey; // Destructure to access language
+
   const { data }: { data: API_Result } = await axios.get(
-    "http://localhost:3000/trending"
+    "http://localhost:3000/trending",
+    {
+      params: { language },
+    }
   );
+
   return data.results;
 }
 

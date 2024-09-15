@@ -33,6 +33,7 @@ app.get("/popular", async (req, res) => {
 
 app.get("/trending", async (req, res) => {
   const { date = "week", language } = req.query;
+  console.log(req.query);
 
   const url = `https://api.themoviedb.org/3/trending/movie/${date}?language=${language}`;
 

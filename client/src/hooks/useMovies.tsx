@@ -1,9 +1,9 @@
 import { Movie } from "@/pages/LandingPage";
-import { useQuery } from "@tanstack/react-query";
+import { QueryFunctionContext, useQuery } from "@tanstack/react-query";
 
 type useMoviesProps = {
   queryKey: any[];
-  queryFn: () => Promise<Movie[]>;
+  queryFn: (context: QueryFunctionContext) => Promise<Movie[]>;
 };
 
 type useMoviesReturn = {
