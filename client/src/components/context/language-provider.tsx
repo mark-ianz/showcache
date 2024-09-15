@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
-type Language =
+export type Language =
   | "en"
   | "es"
   | "fr"
@@ -50,7 +50,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export const useTheme = () => {
+export const useLanguage = () => {
   const context = useContext(LanguageProviderContext);
 
   if (context === undefined)

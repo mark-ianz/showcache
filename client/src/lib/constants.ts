@@ -1,4 +1,12 @@
-export const languages = [
+import { Language } from "@/components/context/language-provider";
+
+type Languages = {
+  iso_639_1: Language;
+  english_name: string;
+  name: string;
+};
+
+export const languages: Languages[] = [
   {
     iso_639_1: "en",
     english_name: "English",
