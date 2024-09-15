@@ -22,12 +22,28 @@ export default function Header() {
             <PopoverTrigger asChild>
               <HamburgerMenuIcon className="w-8 min-w-6 h-8 min-h-6 cursor-pointer" />
             </PopoverTrigger>
-            <PopoverContent align="end" className="mt-2">
-              <p className="text-lg font-semibold">Settings</p>
-              <Separator className="my-2" />
-              <div className="flex flex-col gap-4">
-                <ThemeSwitch2 />
-                <LanguageSelect />
+            <PopoverContent
+              align="end"
+              className="mt-2 flex flex-col gap-4 text-sm"
+            >
+              <div>
+                <p className="text-lg font-semibold">Settings</p>
+                <Separator className="my-2" />
+                <div className="flex flex-col gap-4">
+                  <ThemeSwitch2 />
+                  <LanguageSelect />
+                </div>
+              </div>
+              <div>
+                <p className="text-md font-semibold">Account</p>
+                <div className="flex flex-col gap-1">
+                  <Button variant={"outline"} size={"sm"}>
+                    Login
+                  </Button>
+                  <Button variant={"outline"} size={"sm"}>
+                    Signup
+                  </Button>
+                </div>
               </div>
             </PopoverContent>
           </Popover>

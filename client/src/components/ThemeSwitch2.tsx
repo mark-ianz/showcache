@@ -6,9 +6,9 @@ export default function () {
   const { setTheme, theme } = useTheme();
 
   return (
-    <div>
-      <p>Theme</p>
-      <div className="flex justify-between mt-2">
+    <div className="text-sm">
+      <p className="text-md font-semibold">Theme</p>
+      <div className="flex justify-between">
         <div className="flex justify-center items-center gap-1">
           <Button
             variant={"outline"}
