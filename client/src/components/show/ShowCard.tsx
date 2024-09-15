@@ -1,9 +1,9 @@
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
-type MovieCardProps = { name: string; image: string };
+type ShowCardProps = { name: string; image: string };
 
-export default function MovieCard({ name, image }: MovieCardProps) {
+export default function ShowCard({ name, image }: ShowCardProps) {
   return (
     <Card className="border cursor-pointer w-full h-full flex flex-col overflow-hidden">
       <img src={image} alt="image" className="rounded-t-xl" loading="lazy" />

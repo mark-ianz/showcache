@@ -1,24 +1,37 @@
 import {
   getNewReleases,
   getTrendingThisWeek,
+  getTv,
   getUpcomingMovies,
 } from "@/lib/api";
-import MovieSection from "@/components/MovieSection";
+import ShowSection from "@/components/show/ShowSection";
 import useMovies from "@/hooks/useMovies";
 import { useLanguage } from "@/components/context/language-provider";
 
-export type Movie = {
+type Show = {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
   id: number;
   original_language: string;
-  original_title: string;
   overview: string;
   popularity: number;
   poster_path: string;
-  release_date: Date;
-  title: string;
-  video: boolean;
   vote_average: number;
   vote_count: number;
+};
+
+export type Movie = Show & {
+  original_title: string;
+  release_date: Date;
+  title: string;
+};
+
+export type TV = Show & {
+  origin_country: string[];
+  original_name: string;
+  first_air_date: Date;
+  name: string;
 };
 
 export default function LandingPage() {
@@ -56,10 +69,21 @@ export default function LandingPage() {
     queryFn: getUpcomingMovies,
   });
 
+  const {
+    data: tv,
+    error: tv_error,
+    isError: is_tv_error,
+    isLoading: is_tv_loading,
+  } = useMovies({
+    queryKey: ["tv", language],
+    queryFn: getTv,
+  });
+
   if (
     is_trending_this_week_loading ||
     is_new_releases_loading ||
-    is_upcoming_movies_loading
+    is_upcoming_movies_loading ||
+    is_tv_loading
   ) {
     return <p>Loading...</p>;
   }
@@ -67,30 +91,36 @@ export default function LandingPage() {
   if (
     is_new_releases_error ||
     is_trending_this_week_error ||
-    is_upcoming_movies_error
+    is_upcoming_movies_error ||
+    is_tv_error
   ) {
     return (
       <p>
         {trending_this_week_error?.message ||
           new_releases_error?.message ||
-          upcoming_movies_error?.message}
+          upcoming_movies_error?.message ||
+          tv_error?.message}
       </p>
     );
   }
 
-  if (trending_this_week && new_releases && upcoming_movies) {
+  if (trending_this_week && new_releases && upcoming_movies && tv) {
     return (
       <main className="flex flex-col gap-20">
-        <MovieSection
-          movieArray={trending_this_week.slice(0, 18)}
+        <ShowSection
+          showArray={trending_this_week.slice(0, 18)}
           title="Trending This Week"
         />
-        <MovieSection
-          movieArray={new_releases.slice(0, 18)}
+        <ShowSection
+          showArray={new_releases.slice(0, 18)}
           title="New Releases"
         />
-        <MovieSection
-          movieArray={upcoming_movies.slice(0, 18)}
+        <ShowSection
+          showArray={upcoming_movies.slice(0, 18)}
+          title="Upcoming Movies"
+        />
+        <ShowSection
+          showArray={tv.slice(0, 18)}
           title="Upcoming Movies"
         />
       </main>

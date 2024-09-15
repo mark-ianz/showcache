@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export default function MovieListWrapper({
+export default function ShowListWrapper({
   children,
 }: {
   children: ReactNode;

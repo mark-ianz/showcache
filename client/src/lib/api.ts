@@ -64,12 +64,12 @@ export async function getUpcomingMovies({
 }
 
 // eh
-export async function getTvShows({
+export async function getTv({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
   const [_key, language] = queryKey;
   const { data }: { data: API_Result } = await axios.get(
-    "http://localhost:3000/upcoming",
+    "http://localhost:3000/tv",
     {
       params: { language },
     }
