@@ -68,7 +68,7 @@ app.get("/upcoming", async (req, res) => {
   }
 });
 
-app.get("/tv_shows", async (req, res) => {
+app.get("/tv", async (req, res) => {
   // default sort: top rated
   // sorts: top_rated, airing_today, popular,on_the_air
   const { page = 1, language, sort = "top_rated" } = req.query;

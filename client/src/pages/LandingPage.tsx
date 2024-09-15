@@ -121,7 +121,8 @@ export default function LandingPage() {
         />
         <ShowSection
           showArray={tv.slice(0, 18)}
-          title="Upcoming Movies"
+          title="TV Shows"
+          isTv
         />
       </main>
     );
