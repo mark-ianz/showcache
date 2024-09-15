@@ -7,7 +7,7 @@ import { useLanguage } from "./context/language-provider";
 export default function LanguageSelect() {
   const [open, setOpen] = useState<boolean>(false);
 
-  const { setLanguage } = useLanguage();
+  const { setLanguage, language } = useLanguage();
 
   return (
     <div className="flex items-start justify-center flex-col">
@@ -15,7 +15,8 @@ export default function LanguageSelect() {
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button className="w-full" variant={"outline"} size={"sm"}>
-            Select Language
+            Select Language:
+            <span className="ml-1 font-bold">{language.toUpperCase()}</span>
           </Button>
         </PopoverTrigger>
         <PopoverContent asChild>
