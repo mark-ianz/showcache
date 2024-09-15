@@ -40,7 +40,7 @@ export default function LandingPage() {
     isLoading: is_new_releases_loading,
     isError: is_new_releases_error,
   } = useMovies({
-    queryKey: ["new_releases"],
+    queryKey: ["new_releases", language],
     queryFn: getNewReleases,
   });
 
@@ -50,7 +50,7 @@ export default function LandingPage() {
     isError: is_upcoming_movies_error,
     isLoading: is_upcoming_movies_loading,
   } = useMovies({
-    queryKey: ["upcoming_movies"],
+    queryKey: ["upcoming_movies", language],
     queryFn: getUpcomingMovies,
   });
 

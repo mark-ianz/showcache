@@ -8,9 +8,15 @@ type API_Result = {
   total_pages: number;
   total_results: number;
 };
-export async function getPopularMovies(): Promise<Movie[]> {
+export async function getPopularMovies({
+  queryKey,
+}: QueryFunctionContext): Promise<Movie[]> {
+  const [_key, language] = queryKey;
+
   try {
-    const { data } = await axios.get("http://localhost:3000/popular");
+    const { data } = await axios.get("http://localhost:3000/popular", {
+      params: { language },
+    });
     return data.results;
   } catch (error) {
     throw new Error("Failed to fetch popular movies");
@@ -20,8 +26,7 @@ export async function getPopularMovies(): Promise<Movie[]> {
 export async function getTrendingThisWeek({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
-  const [_key, language] = queryKey; // Destructure to access language
-
+  const [_key, language] = queryKey;
   const { data }: { data: API_Result } = await axios.get(
     "http://localhost:3000/trending",
     {
@@ -32,24 +37,42 @@ export async function getTrendingThisWeek({
   return data.results;
 }
 
-export async function getNewReleases(): Promise<Movie[]> {
+export async function getNewReleases({
+  queryKey,
+}: QueryFunctionContext): Promise<Movie[]> {
+  const [_key, language] = queryKey;
   const { data }: { data: API_Result } = await axios.get(
-    "http://localhost:3000/new_releases"
+    "http://localhost:3000/new_releases",
+    {
+      params: { language },
+    }
   );
   return data.results;
 }
 
-export async function getUpcomingMovies(): Promise<Movie[]> {
+export async function getUpcomingMovies({
+  queryKey,
+}: QueryFunctionContext): Promise<Movie[]> {
+  const [_key, language] = queryKey;
   const { data }: { data: API_Result } = await axios.get(
-    "http://localhost:3000/upcoming"
+    "http://localhost:3000/upcoming",
+    {
+      params: { language },
+    }
   );
   return data.results;
 }
 
 // eh
-export async function getTvShows(): Promise<Movie[]> {
+export async function getTvShows({
+  queryKey,
+}: QueryFunctionContext): Promise<Movie[]> {
+  const [_key, language] = queryKey;
   const { data }: { data: API_Result } = await axios.get(
-    "http://localhost:3000/upcoming"
+    "http://localhost:3000/upcoming",
+    {
+      params: { language },
+    }
   );
   return data.results;
 }

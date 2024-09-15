@@ -63,11 +63,6 @@ export const languages: Languages[] = [
     name: "বাংলা",
   },
   {
-    iso_639_1: "sw",
-    english_name: "Swahili",
-    name: "Kiswahili",
-  },
-  {
     iso_639_1: "ar",
     english_name: "Arabic",
     name: "العربية",
