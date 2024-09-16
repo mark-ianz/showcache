@@ -7,6 +7,11 @@ import { ThemeProvider } from "./theme-provider.tsx";
 import LandingPage from "./pages/LandingPage.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LanguageProvider } from "./components/context/language-provider.tsx";
+import TopRated from "./pages/TopRated.tsx";
+import Popular from "./pages/Popular.tsx";
+import New from "./pages/New.tsx";
+import Tv from "./Tv.tsx";
+import Upcoming from "./pages/Upcoming.tsx";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +23,26 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <LandingPage />,
+      },
+      {
+        path: "top_rated",
+        element: <TopRated />,
+      },
+      {
+        path: "/popular",
+        element: <Popular />,
+      },
+      {
+        path: "/new",
+        element: <New />,
+      },
+      {
+        path: "/tv",
+        element: <Tv />,
+      },
+      {
+        path: "/upcoming",
+        element: <Upcoming />,
       },
     ],
   },

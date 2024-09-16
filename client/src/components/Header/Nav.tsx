@@ -1,36 +1,47 @@
 import { useId } from "react";
 import { Button } from "../ui/button";
+import { NavLink } from "react-router-dom";
 
 export default function Nav() {
-  const lists: { name: string; id: string }[] = [
+  const lists: { name: string; path: string }[] = [
+    {
+      name: "Home",
+      path: "/",
+
+    },
     {
       name: "Top Rated",
-      id: useId(),
+      path: "/top_rated",
     },
     {
       name: "Popular Movies",
-      id: useId(),
+      path: "/popular",
     },
     {
       name: "New Releases",
-      id: useId(),
+      path: "/new",
     },
     {
       name: "TV Shows",
-      id: useId(),
+      path: "/tv",
     },
     {
       name: "Upcoming",
-      id: useId(),
+      path: "/upcoming",
     },
   ];
 
   return (
     <nav className="w-full mb-20">
       <ol className="flex justify-around">
-        {lists.map(({ name, id }) => (
-          <Button key={id} asChild variant={"link"} className="cursor-pointer text-md">
-            <li>{name}</li>
+        {lists.map(({ name, path }) => (
+          <Button
+            key={useId()}
+            asChild
+            variant={"link"}
+            className="cursor-pointer text-md"
+          >
+            <NavLink to={path}>{name}</NavLink>
           </Button>
         ))}
       </ol>
