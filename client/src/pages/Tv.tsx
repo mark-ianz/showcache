@@ -1,4 +1,5 @@
 import { useLanguage } from "@/components/context/language-provider";
+import ShowListWrapper from "@/components/show/ShowListWrapper";
 import ShowSection from "@/components/show/ShowSection";
 import useShows from "@/hooks/useShows";
 import { getTv } from "@/lib/api";
@@ -20,8 +21,8 @@ export default function Tv() {
   }
 
   return (
-    <main className="flex flex-col gap-20 max-w-screen-2xl">
-      <ShowSection showArray={data} title="Top Rated" isTv/>
-    </main>
+    <ShowListWrapper>
+      <ShowSection showArray={data} title="Top Rated" isTv />
+    </ShowListWrapper>
   );
 }
