@@ -10,7 +10,7 @@ import { LanguageProvider } from "./components/context/language-provider.tsx";
 import TopRated from "./pages/TopRated.tsx";
 import Popular from "./pages/Popular.tsx";
 import New from "./pages/New.tsx";
-import Tv from "./Tv.tsx";
+import Tv from "./pages/Tv.tsx";
 import Upcoming from "./pages/Upcoming.tsx";
 
 const queryClient = new QueryClient();
