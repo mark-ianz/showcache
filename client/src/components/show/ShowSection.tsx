@@ -1,6 +1,7 @@
 import { Movie, TV } from "@/pages/LandingPage";
 import ShowCard from "./ShowCard";
 import ShowListWrapper from "./ShowListWrapper";
+import no_image from "@/assets/no-image.png";
 
 type ShowSectionProps = {
   showArray: Movie[] | TV[];
@@ -21,7 +22,11 @@ export default function ShowSection({
           <li key={show.id}>
             <ShowCard
               name={isTv ? (show as TV).name : (show as Movie).title}
-              image={"https://image.tmdb.org/t/p/w400" + show.poster_path}
+              image={
+                show.poster_path
+                  ? "https://image.tmdb.org/t/p/w400" + show.poster_path
+                  : no_image
+              }
             />
           </li>
         ))}
