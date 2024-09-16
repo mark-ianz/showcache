@@ -1,22 +1,22 @@
-import { Movie } from "@/pages/LandingPage";
+import { Movie, TV } from "@/pages/LandingPage";
 import { QueryFunctionContext, useQuery } from "@tanstack/react-query";
 
-type useMoviesProps = {
+export type useShowsProps = {
   queryKey: any[];
-  queryFn: (context: QueryFunctionContext) => Promise<Movie[]>;
+  queryFn: (context: QueryFunctionContext) => Promise<Movie[] | TV[]>;
 };
 
-type useMoviesReturn = {
-  data: Movie[] | undefined;
+type useShowsReturn = {
+  data: Movie[] | TV[] | undefined;
   isError: boolean;
   isLoading: boolean;
   error: Error | null;
 };
 
-export default function useMovies({
+export default function useShows({
   queryKey,
   queryFn,
-}: useMoviesProps): useMoviesReturn {
+}: useShowsProps): useShowsReturn {
   const { data, isError, isLoading, error } = useQuery({
     queryKey,
     queryFn,

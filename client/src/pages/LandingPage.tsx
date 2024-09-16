@@ -5,16 +5,8 @@ import {
   getUpcomingMovies,
 } from "@/lib/api";
 import ShowSection from "@/components/show/ShowSection";
-import useMovies from "@/hooks/useMovies";
+import useShows, { useShowsProps } from "@/hooks/useShows";
 import { useLanguage } from "@/components/context/language-provider";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 type Show = {
   adult: boolean;
@@ -42,86 +34,52 @@ export type TV = Show & {
   name: string;
 };
 
+const useData = ({ queryKey, queryFn }: useShowsProps) => {
+  return useShows({
+    queryKey,
+    queryFn,
+  });
+};
+
 export default function LandingPage() {
   const {
     language: { iso_639_1: language },
   } = useLanguage();
 
-  const {
-    data: trending_this_week,
-    error: trending_this_week_error,
-    isLoading: is_trending_this_week_loading,
-    isError: is_trending_this_week_error,
-  } = useMovies({
+  const trending_this_week = useData({
     queryKey: ["trending_this_week", language],
     queryFn: getTrendingThisWeek,
   });
 
-  const {
-    data: new_releases,
-    error: new_releases_error,
-    isLoading: is_new_releases_loading,
-    isError: is_new_releases_error,
-  } = useMovies({
+  const new_releases = useData({
     queryKey: ["new_releases", language],
     queryFn: getNewReleases,
   });
 
-  const {
-    data: upcoming_movies,
-    error: upcoming_movies_error,
-    isError: is_upcoming_movies_error,
-    isLoading: is_upcoming_movies_loading,
-  } = useMovies({
+  const upcoming_movies = useData({
     queryKey: ["upcoming_movies", language],
     queryFn: getUpcomingMovies,
   });
-
-  const {
-    data: tv,
-    error: tv_error,
-    isError: is_tv_error,
-    isLoading: is_tv_loading,
-  } = useMovies({
+  const tv = useData({
     queryKey: ["tv", language],
     queryFn: getTv,
   });
 
   if (
-    is_trending_this_week_loading ||
-    is_new_releases_loading ||
-    is_upcoming_movies_loading ||
-    is_tv_loading
+    trending_this_week.data &&
+    new_releases.data &&
+    upcoming_movies.data &&
+    tv.data
   ) {
-    return <p>Loading...</p>;
-  }
-
-  if (
-    is_new_releases_error ||
-    is_trending_this_week_error ||
-    is_upcoming_movies_error ||
-    is_tv_error
-  ) {
-    return (
-      <p>
-        {trending_this_week_error?.message ||
-          new_releases_error?.message ||
-          upcoming_movies_error?.message ||
-          tv_error?.message}
-      </p>
-    );
-  }
-
-  if (trending_this_week && new_releases && upcoming_movies && tv) {
     return (
       <main className="flex flex-col gap-20 max-w-screen-2xl">
         <ShowSection
-          showArray={trending_this_week}
+          showArray={trending_this_week.data}
           title="Trending This Week"
         />
-        <ShowSection showArray={new_releases} title="New Releases" />
-        <ShowSection showArray={upcoming_movies} title="Upcoming Movies" />
-        <ShowSection showArray={tv} title="TV Shows" isTv />
+        <ShowSection showArray={new_releases.data} title="New Releases" />
+        <ShowSection showArray={upcoming_movies.data} title="Upcoming Movies" />
+        <ShowSection showArray={tv.data} title="TV Shows" isTv />
       </main>
     );
   }
