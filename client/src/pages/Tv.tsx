@@ -1,6 +1,5 @@
 import { useLanguage } from "@/components/context/language-provider";
 import ListMainWrapper from "@/components/ListMainWrapper";
-import ShowListWrapper from "@/components/show/ShowListWrapper";
 import ShowSection from "@/components/show/ShowSection";
 import useShows from "@/hooks/useShows";
 import { getTv } from "@/lib/api";
