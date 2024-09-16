@@ -80,7 +80,7 @@ export async function getTopRated({
 }: QueryFunctionContext): Promise<Movie[]> {
   const [_key, language] = queryKey;
   const { data }: { data: API_Result } = await axios.get(
-    "http://localhost:3000/tv",
+    "http://localhost:3000/top_rated",
     {
       params: { language },
     }
