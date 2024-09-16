@@ -11,7 +11,7 @@ import TopRated from "./pages/TopRated.tsx";
 import Popular from "./pages/PopularMovies.tsx";
 import New from "./pages/NewReleases.tsx";
 import Tv from "./pages/Tv.tsx";
-import Upcoming from "./pages/Upcoming.tsx";
+import Upcoming from "./pages/UpcomingMovies.tsx";
 
 const queryClient = new QueryClient();
 
