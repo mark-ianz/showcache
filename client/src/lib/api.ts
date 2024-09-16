@@ -1,10 +1,10 @@
-import { Movie } from "@/pages/LandingPage";
+import { Movie, TV } from "@/pages/LandingPage";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 
 type API_Result = {
   page: number;
-  results: Movie[];
+  results: [];
   total_pages: number;
   total_results: number;
 };
@@ -64,7 +64,18 @@ export async function getUpcomingMovies({
 }
 
 // eh
-export async function getTv({
+export async function getTv({ queryKey }: QueryFunctionContext): Promise<TV[]> {
+  const [_key, language] = queryKey;
+  const { data }: { data: API_Result } = await axios.get(
+    "http://localhost:3000/tv",
+    {
+      params: { language },
+    }
+  );
+  return data.results;
+}
+
+export async function getTopRated({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
   const [_key, language] = queryKey;
