@@ -15,8 +15,6 @@ export default function UpcomingMovies() {
     queryFn: getUpcomingMovies,
   });
 
-  console.log(data);
-
   if (!data || isLoading) {
     return <LoaderIcon />;
   }
