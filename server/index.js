@@ -80,3 +80,14 @@ app.get("/tv", async (req, res) => {
     throwServerError(res);
   }
 });
+
+app.get("/top_rated", async (req, res) => {
+  const { page = 1, language } = req.query;
+  const url = `https://api.themoviedb.org/3/movie/top_rated?language=${language}&page=${page}`;
+  try {
+    const { data } = await axios.get(url, get_options);
+    return res.status(200).json(data);
+  } catch (error) {
+    throwServerError(res);
+  }
+});
