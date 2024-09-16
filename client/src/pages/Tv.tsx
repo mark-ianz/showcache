@@ -1,10 +1,10 @@
 import { useLanguage } from "@/components/context/language-provider";
+import ListMainWrapper from "@/components/ListMainWrapper";
 import ShowListWrapper from "@/components/show/ShowListWrapper";
 import ShowSection from "@/components/show/ShowSection";
 import useShows from "@/hooks/useShows";
 import { getTv } from "@/lib/api";
 import { LoaderIcon } from "lucide-react";
-import React from "react";
 
 export default function Tv() {
   const {
@@ -21,8 +21,8 @@ export default function Tv() {
   }
 
   return (
-    <ShowListWrapper>
+    <ListMainWrapper>
       <ShowSection showArray={data} title="Top Rated" isTv />
-    </ShowListWrapper>
+    </ListMainWrapper>
   );
 }

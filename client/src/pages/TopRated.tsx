@@ -1,5 +1,5 @@
 import { useLanguage } from "@/components/context/language-provider";
-import ShowListWrapper from "@/components/show/ShowListWrapper";
+import ListMainWrapper from "@/components/ListMainWrapper";
 import ShowSection from "@/components/show/ShowSection";
 import useShows from "@/hooks/useShows";
 import { getTopRated } from "@/lib/api";
@@ -20,8 +20,8 @@ export default function TopRated() {
   }
 
   return (
-    <ShowListWrapper>
+    <ListMainWrapper>
       <ShowSection showArray={data} title="Top Rated" />
-    </ShowListWrapper>
+    </ListMainWrapper>
   );
 }

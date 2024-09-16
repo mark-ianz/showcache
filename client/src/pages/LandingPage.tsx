@@ -7,7 +7,7 @@ import {
 import ShowSection from "@/components/show/ShowSection";
 import useShows, { useShowsProps } from "@/hooks/useShows";
 import { useLanguage } from "@/components/context/language-provider";
-import ShowListWrapper from "@/components/show/ShowListWrapper";
+import ListMainWrapper from "@/components/ListMainWrapper";
 
 type Show = {
   adult: boolean;
@@ -73,7 +73,7 @@ export default function LandingPage() {
     tv.data
   ) {
     return (
-      <ShowListWrapper>
+      <ListMainWrapper>
         <ShowSection
           showArray={trending_this_week.data}
           title="Trending This Week"
@@ -81,7 +81,7 @@ export default function LandingPage() {
         <ShowSection showArray={new_releases.data} title="New Releases" />
         <ShowSection showArray={upcoming_movies.data} title="Upcoming Movies" />
         <ShowSection showArray={tv.data} title="TV Shows" isTv />
-      </ShowListWrapper>
+      </ListMainWrapper>
     );
   }
 }
