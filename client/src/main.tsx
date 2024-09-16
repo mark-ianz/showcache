@@ -9,7 +9,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LanguageProvider } from "./components/context/language-provider.tsx";
 import TopRated from "./pages/TopRated.tsx";
 import Popular from "./pages/PopularMovies.tsx";
-import New from "./pages/New.tsx";
+import New from "./pages/NewReleases.tsx";
 import Tv from "./pages/Tv.tsx";
 import Upcoming from "./pages/Upcoming.tsx";
 
