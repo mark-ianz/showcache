@@ -20,20 +20,22 @@ export default function ShowCard({
   const genre_list = getGenre(genre_ids);
 
   return (
-    <Card className="border cursor-pointer w-full h-full flex flex-col overflow-hidden">
-      <img
-        src={image}
-        alt={`Poster image of ${name} movie`}
-        className="rounded-t-xl w-full h-full object-cover"
-        loading="lazy"
-      />
+    <Card className="border cursor-pointer w-full h-full flex flex-col overflow-hidden hover:scale-105 transition-all">
+      <div className="">
+        <img
+          src={image}
+          alt={`Poster image of ${name} movie`}
+          className="rounded-t-xl w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
       <CardContent className="p-2 flex flex-col justify-between flex-grow gap-2">
         <div className="flex items-center justify-between">
           <CardTitle className="font-semibold text-sm line-clamp-1 hover:underline">
             {name}
           </CardTitle>
           <div className="flex items-center gap-1">
-            <StarFilledIcon className="mt-[.15em]" color="#3b82f6" />
+            <StarFilledIcon className="mt-[.10em]" color="#3b82f6" />
             <p>{vote_average.toFixed(1)}</p>
           </div>
         </div>
@@ -42,7 +44,7 @@ export default function ShowCard({
             <Badge
               key={useId()}
               variant={"secondary"}
-              className="cursor-text"
+              className="cursor-text text-gray-500"
               title={genre}
             >
               {genre}
