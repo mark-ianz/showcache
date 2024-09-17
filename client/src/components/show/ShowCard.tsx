@@ -20,12 +20,12 @@ export default function ShowCard({
   const genre_list = getGenre(genre_ids);
 
   return (
-    <Card className="border cursor-pointer w-full h-full flex flex-col overflow-hidden hover:scale-105 transition-all">
-      <div className="">
+    <Card className="cursor-pointer w-full h-full flex flex-col">
+      <div>
         <img
           src={image}
-          alt={`Poster image of ${name} movie`}
-          className="rounded-t-xl w-full h-full object-cover"
+          alt={`Poster image of ${name}`}
+          className="w-full h-full object-cover rounded-t-xl"
           loading="lazy"
         />
       </div>
