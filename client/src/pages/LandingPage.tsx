@@ -8,7 +8,6 @@ import ShowSection from "@/components/show/ShowSection";
 import useShows, { useShowsProps } from "@/hooks/useShows";
 import { useLanguage } from "@/components/context/language-provider";
 import ListMainWrapper from "@/components/ListMainWrapper";
-import { Genre } from "@/lib/constants";
 
 type Show = {
   adult: boolean;

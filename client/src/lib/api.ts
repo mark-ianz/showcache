@@ -1,7 +1,7 @@
 import { Movie, TV } from "@/pages/LandingPage";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
-import { axios_config } from "./utils";
+import { axios_config, throwFetchError } from "./utils";
 
 type API_Result = {
   page: number;
@@ -42,8 +42,8 @@ export async function getTrendingThisWeek({
     );
 
     return data.results;
-  } catch (error) {
-    throw new Error("Test");
+  } catch (error: unknown) {
+    throwFetchError(error);
   }
 }
 
