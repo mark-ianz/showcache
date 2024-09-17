@@ -19,6 +19,7 @@ export default function TopRated() {
     return <LoaderIcon />;
   }
 
+  console.log(data);
   return (
     <ListMainWrapper>
       <ShowSection showArray={data} title="Top Rated" />

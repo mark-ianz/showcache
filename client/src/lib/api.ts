@@ -1,6 +1,7 @@
 import { Movie, TV } from "@/pages/LandingPage";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
+import { axios_config } from "./utils";
 
 type API_Result = {
   page: number;
@@ -11,12 +12,16 @@ type API_Result = {
 export async function getPopularMovies({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
-  const [_key, language] = queryKey;
+  const [_key, language, page] = queryKey;
 
   try {
-    const { data } = await axios.get("http://localhost:3000/popular", {
-      params: { language },
-    });
+    const { data }: { data: API_Result } = await axios.get(
+      `https://api.themoviedb.org/3/movie/popular`,
+      axios_config({
+        method: "GET",
+        params: { language, page },
+      })
+    );
     return data.results;
   } catch (error) {
     throw new Error("Failed to fetch popular movies");
@@ -26,12 +31,13 @@ export async function getPopularMovies({
 export async function getTrendingThisWeek({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
-  const [_key, language] = queryKey;
+  const [_key, language, date = "week"] = queryKey;
   const { data }: { data: API_Result } = await axios.get(
-    "http://localhost:3000/trending",
-    {
+    `https://api.themoviedb.org/3/trending/movie/${date}`,
+    axios_config({
+      method: "GET",
       params: { language },
-    }
+    })
   );
 
   return data.results;
@@ -40,12 +46,13 @@ export async function getTrendingThisWeek({
 export async function getNewReleases({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
-  const [_key, language] = queryKey;
+  const [_key, language, page] = queryKey;
   const { data }: { data: API_Result } = await axios.get(
-    "http://localhost:3000/new_releases",
-    {
-      params: { language },
-    }
+    "https://api.themoviedb.org/3/movie/now_playing",
+    axios_config({
+      method: "GET",
+      params: { language, page },
+    })
   );
   return data.results;
 }
@@ -53,24 +60,23 @@ export async function getNewReleases({
 export async function getUpcomingMovies({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
-  const [_key, language] = queryKey;
+  const [_key, language, page] = queryKey;
   const { data }: { data: API_Result } = await axios.get(
-    "http://localhost:3000/upcoming",
-    {
-      params: { language },
-    }
+    "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&sort_by=popularity.desc",
+    axios_config({
+      method: "GET",
+      params: { language, "primary_release_date.gte": new Date(), page },
+    })
   );
   return data.results;
 }
 
 // eh
 export async function getTv({ queryKey }: QueryFunctionContext): Promise<TV[]> {
-  const [_key, language] = queryKey;
+  const [_key, language, page, sort = "top_rated"] = queryKey;
   const { data }: { data: API_Result } = await axios.get(
-    "http://localhost:3000/tv",
-    {
-      params: { language },
-    }
+    `https://api.themoviedb.org/3/tv/${sort}`,
+    axios_config({ method: "GET", params: { language, page } })
   );
   return data.results;
 }
@@ -80,10 +86,8 @@ export async function getTopRated({
 }: QueryFunctionContext): Promise<Movie[]> {
   const [_key, language] = queryKey;
   const { data }: { data: API_Result } = await axios.get(
-    "http://localhost:3000/top_rated",
-    {
-      params: { language },
-    }
+    "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+    axios_config({ method: "GET", params: { language } })
   );
   return data.results;
 }
