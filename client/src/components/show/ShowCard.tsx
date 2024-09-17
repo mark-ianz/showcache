@@ -35,7 +35,7 @@ export default function ShowCard({
             {name}
           </CardTitle>
           <div className="flex items-center gap-1">
-            <StarFilledIcon className="mt-[.10em]" color="#3b82f6" />
+            <StarFilledIcon color="#3b82f6" />
             <p>{vote_average.toFixed(1)}</p>
           </div>
         </div>
