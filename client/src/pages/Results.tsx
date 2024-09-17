@@ -2,38 +2,32 @@ import { useLanguage } from "@/components/context/language-provider";
 import ListMainWrapper from "@/components/ListMainWrapper";
 import ShowSection from "@/components/show/ShowSection";
 import useShows from "@/hooks/useShows";
-import { LoaderIcon } from "lucide-react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { getSearchResult } from "@/lib/api";
+import { useSearchParams } from "react-router-dom";
 
-/* export default function Results() {
+export default function Results() {
   const {
     language: { iso_639_1: language },
   } = useLanguage();
 
   const [searchParams] = useSearchParams();
-  const search = searchParams.get("search");
+  const query = searchParams.get("query");
+  const searchFor = searchParams.get("searchFor");
 
-  const { data, error, isError, isLoading } = useShows({
-    queryKey: ["results", language, search],
-    queryFn: testAuth,
+  const { data, error, isLoading } = useShows({
+    queryKey: ["results", language, query, searchFor],
+    queryFn: getSearchResult,
   });
-
-  if (!data || isLoading) {
-    return <LoaderIcon />;
-  }
 
   return (
     <ListMainWrapper>
-      <ShowSection showArray={data} title="Top Rated" />
+      <ShowSection
+        showArray={data}
+        error={error}
+        loading={isLoading}
+        title="Top Rated"
+        isTv={searchFor === "tv"}
+      />
     </ListMainWrapper>
   );
-} */
-
-import React from 'react'
-
-export default function Results() {
-  return (
-    <div>Results</div>
-  )
 }
-

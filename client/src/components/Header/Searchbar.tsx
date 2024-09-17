@@ -6,14 +6,31 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Input } from "../ui/input";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Searchbar() {
+  const navigate = useNavigate();
   const [searchFor, setSearchFor] = useState<string>("movie");
+  const [input, setInput] = useState<string>("");
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    navigate(`/results?query=${input}&searchFor=${searchFor}`);
+  };
 
   return (
-    <form action="/results" className="grow max-w-md ml-auto flex relative">
-      <Input name="search" placeholder="Search for Movies or TV Shows" className="pr-20" />
+    <form
+      onSubmit={handleSearchSubmit}
+      className="grow max-w-md ml-auto flex relative"
+    >
+      <Input
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        name="query"
+        placeholder="Search for Movies or TV Shows"
+        className="pr-20"
+      />
       <Select value={searchFor} onValueChange={setSearchFor}>
         <SelectTrigger className="absolute w-fit gap-1 top-1/2 -translate-y-1/2 right-2 text-xs p-1 h-auto border-none focus:ring-0">
           <SelectValue />

@@ -95,3 +95,14 @@ export async function getTopRated({
   );
   return data.results;
 }
+
+export async function getSearchResult({
+  queryKey,
+}: QueryFunctionContext): Promise<Movie[]> {
+  const [_key, language, query, searchFor, page] = queryKey;
+  const { data }: { data: API_Result } = await axios.get(
+    `https://api.themoviedb.org/3/search/${searchFor}?include_adult=false`,
+    axios_config({ method: "GET", params: { language, page, query } })
+  );
+  return data.results;
+}
