@@ -32,15 +32,19 @@ export async function getTrendingThisWeek({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
   const [_key, language, date = "week"] = queryKey;
-  const { data }: { data: API_Result } = await axios.get(
-    `https://api.themoviedb.org/3/trending/movie/${date}`,
-    axios_config({
-      method: "GET",
-      params: { language },
-    })
-  );
+  try {
+    const { data }: { data: API_Result } = await axios.get(
+      `https://api.themoviedb.org/3/trending/movie/${date}`,
+      axios_config({
+        method: "GET",
+        params: { language },
+      })
+    );
 
-  return data.results;
+    return data.results;
+  } catch (error) {
+    throw new Error("Test");
+  }
 }
 
 export async function getNewReleases({

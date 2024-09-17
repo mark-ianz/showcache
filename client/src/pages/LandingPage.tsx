@@ -67,25 +67,33 @@ export default function LandingPage() {
     queryFn: getTv,
   });
 
-  if (
-    trending_this_week.data &&
-    new_releases.data &&
-    upcoming_movies.data &&
-    tv.data
-  ) {
-    console.log("tv:", tv.data[0]);
-    console.log("trending_this_week:", trending_this_week.data[0]);
-
-    return (
-      <ListMainWrapper>
-        <ShowSection
-          showArray={trending_this_week.data}
-          title="Trending This Week"
-        />
-        <ShowSection showArray={new_releases.data} title="New Releases" />
-        <ShowSection showArray={upcoming_movies.data} title="Upcoming Movies" />
-        <ShowSection showArray={tv.data} title="TV Shows" isTv />
-      </ListMainWrapper>
-    );
-  }
+  return (
+    <ListMainWrapper>
+      <ShowSection
+        showArray={trending_this_week.data}
+        error={trending_this_week.error}
+        loading={trending_this_week.isLoading}
+        title="Trending This Week"
+      />
+      <ShowSection
+        showArray={new_releases.data}
+        error={new_releases.error}
+        loading={new_releases.isLoading}
+        title="New Releases"
+      />
+      <ShowSection
+        showArray={upcoming_movies.data}
+        error={upcoming_movies.error}
+        loading={upcoming_movies.isLoading}
+        title="Upcoming Movies"
+      />
+      <ShowSection
+        showArray={tv.data}
+        error={tv.error}
+        loading={tv.isLoading}
+        title="TV Shows"
+        isTv
+      />
+    </ListMainWrapper>
+  );
 }

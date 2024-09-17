@@ -2,21 +2,31 @@ import { Movie, TV } from "@/pages/LandingPage";
 import ShowCard from "./ShowCard";
 import ShowListWrapper from "./ShowListWrapper";
 import no_image from "@/assets/no-image.png";
+import { LoaderIcon } from "lucide-react";
 
 type ShowSectionProps = {
-  showArray: Movie[] | TV[];
+  showArray: Movie[] | TV[] | undefined;
   title: string;
   isTv?: boolean;
+  error: Error | null;
+  loading: boolean;
 };
 
 export default function ShowSection({
   showArray,
   title,
   isTv,
+  error,
+  loading,
 }: ShowSectionProps) {
+  console.log(showArray);
   return (
     <section>
       <p className="text-2xl mb-3">{title}</p>
+      <p>{error?.message}</p>
+      <div className="flex items-center justify-center">
+        {loading && <LoaderIcon />}
+      </div>
       <ShowListWrapper>
         {showArray?.map((show) => (
           <li key={show.id}>
