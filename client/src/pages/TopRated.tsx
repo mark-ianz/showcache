@@ -3,7 +3,6 @@ import ListMainWrapper from "@/components/ListMainWrapper";
 import ShowSection from "@/components/show/ShowSection";
 import useShows from "@/hooks/useShows";
 import { getTopRated } from "@/lib/api";
-import { LoaderIcon } from "lucide-react";
 
 export default function TopRated() {
   const {
