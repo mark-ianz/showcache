@@ -21,6 +21,8 @@ export default function ShowSection({
         {showArray?.map((show) => (
           <li key={show.id}>
             <ShowCard
+              genre_ids={show.genre_ids}
+              vote_average={show.vote_average}
               name={isTv ? (show as TV).name : (show as Movie).title}
               image={
                 show.poster_path
