@@ -12,6 +12,7 @@ import Popular from "./pages/PopularMovies.tsx";
 import New from "./pages/NewReleases.tsx";
 import Tv from "./pages/Tv.tsx";
 import Upcoming from "./pages/UpcomingMovies.tsx";
+import Results from "./pages/Results.tsx";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "/upcoming",
         element: <Upcoming />,
+      },
+      {
+        path: "/results",
+        element: <Results />,
       },
     ],
   },
