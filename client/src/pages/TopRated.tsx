@@ -10,19 +10,20 @@ export default function TopRated() {
     language: { iso_639_1: language },
   } = useLanguage();
 
-  const { data, error, isError, isLoading } = useShows({
+  const { data, error, isLoading } = useShows({
     queryKey: ["top_rated", language],
     queryFn: getTopRated,
   });
 
-  if (!data || isLoading) {
-    return <LoaderIcon />;
-  }
-
   console.log(data);
   return (
     <ListMainWrapper>
-      <ShowSection showArray={data} title="Top Rated" />
+      <ShowSection
+        showArray={data}
+        error={error}
+        loading={isLoading}
+        title="Top Rated"
+      />
     </ListMainWrapper>
   );
 }
