@@ -34,7 +34,6 @@ export const axios_config = ({
   params,
   data,
 }: AxiosConfig) => {
-  console.log(params);
   return {
     method,
     headers: {

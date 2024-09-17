@@ -19,7 +19,6 @@ export default function ShowSection({
   error,
   loading,
 }: ShowSectionProps) {
-  console.log(showArray);
   return (
     <section>
       <p className="text-2xl mb-3">{title}</p>
