@@ -13,6 +13,7 @@ import New from "./pages/NewReleases.tsx";
 import Tv from "./pages/Tv.tsx";
 import Upcoming from "./pages/UpcomingMovies.tsx";
 import Results from "./pages/Results.tsx";
+import ViewShow from "./pages/ViewShow.tsx";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/results",
         element: <Results />,
+      },
+      {
+        path: "/:show/:id",
+        element: <ViewShow />,
       },
     ],
   },

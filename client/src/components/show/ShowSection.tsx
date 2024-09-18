@@ -28,7 +28,7 @@ export default function ShowSection({
       </div>
       <ShowListWrapper>
         {showArray?.map((show) => (
-          <li key={show.id}>
+          <li key={show.id} onClick={() => console.log(show)}>
             <ShowCard
               genre_ids={show.genre_ids}
               vote_average={show.vote_average}

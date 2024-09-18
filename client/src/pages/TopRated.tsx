@@ -14,7 +14,6 @@ export default function TopRated() {
     queryFn: getTopRated,
   });
 
-  console.log(data);
   return (
     <ListMainWrapper>
       <ShowSection
