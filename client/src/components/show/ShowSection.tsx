@@ -3,6 +3,7 @@ import ShowCard from "./ShowCard";
 import ShowListWrapper from "./ShowListWrapper";
 import no_image from "@/assets/no-image.png";
 import { LoaderIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 
 type ShowSectionProps = {
   showArray: Movie[] | TV[] | undefined;
@@ -29,16 +30,18 @@ export default function ShowSection({
       <ShowListWrapper>
         {showArray?.map((show) => (
           <li key={show.id} onClick={() => console.log(show)}>
-            <ShowCard
-              genre_ids={show.genre_ids}
-              vote_average={show.vote_average}
-              name={isTv ? (show as TV).name : (show as Movie).title}
-              image={
-                show.poster_path
-                  ? "https://image.tmdb.org/t/p/w400" + show.poster_path
-                  : no_image
-              }
-            />
+            <Link to={`/${isTv ? "tv" : "movie"}/${show.id}`}>
+              <ShowCard
+                genre_ids={show.genre_ids}
+                vote_average={show.vote_average}
+                name={isTv ? (show as TV).name : (show as Movie).title}
+                image={
+                  show.poster_path
+                    ? "https://image.tmdb.org/t/p/w400" + show.poster_path
+                    : no_image
+                }
+              />
+            </Link>
           </li>
         ))}
       </ShowListWrapper>
