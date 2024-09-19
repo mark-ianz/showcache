@@ -1,4 +1,4 @@
-import { Movie, TV } from "@/pages/LandingPage";
+import { Movie, MovieFullDetails, TV } from "@/pages/LandingPage";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 import { axios_config, throwFetchError } from "./utils";
@@ -109,9 +109,9 @@ export async function getSearchResult({
 
 export async function getOneMovie({
   queryKey,
-}: QueryFunctionContext): Promise<Movie> {
+}: QueryFunctionContext): Promise<MovieFullDetails> {
   const [_key, language, id] = queryKey;
-  const { data }: { data: Movie } = await axios.get(
+  const { data }: { data: MovieFullDetails } = await axios.get(
     `https://api.themoviedb.org/3/movie/${id}`,
     axios_config({ method: "GET", params: { language } })
   );

@@ -17,10 +17,12 @@ export default function ViewShow() {
     queryFn: getOneMovie,
   });
 
-  console.log(data);
+  const genreList = data?.genres.map((genre) => genre.name);
+  const year = data && new Date(data?.release_date).getFullYear();
+
   return (
     <main className="w-full">
-      <AspectRatio ratio={16 / 5} className="relative">
+      <AspectRatio ratio={16 / 6} className="relative">
         <span className="absolute inset-0 bg-black bg-opacity-55"></span>
         <img
           src={getImg(data?.backdrop_path!, "w1280")}
@@ -28,20 +30,29 @@ export default function ViewShow() {
           className="w-full h-full object-cover"
         />
       </AspectRatio>
-      <div className="mt-8 border rounded-lg p-4">
-        <div className="flex gap-2 font-thin">
-          <p>108 min</p>
-          <p>Action/Comedy</p>
-          <p>2024</p>
-        </div>
-        <div className="flex gap-4 items-center">
-          <p className="text-4xl font-bold">Deadpool & Wolverine</p>
-          <div className="flex items-center gap-1">
-            <p className="font-thin">8.2</p>
-            <StarFilledIcon />
+      <div className="mt-8 flex gap-10">
+        <img
+          src={getImg(data?.poster_path!, "w300")}
+          alt={data?.title + "backdrop"}
+          className="object-cover rounded-lg"
+        />
+        <div>
+          <div className="flex gap-2 font-thin">
+            <p>{data?.runtime} min</p>
+            <p>{genreList?.join(" / ")}</p>
+            <p>{year}</p>
           </div>
+          <div className="flex gap-4 items-center">
+            <p className="text-4xl font-bold">{data?.title}</p>
+            <div className="flex items-center gap-1">
+              <p className="font-thin">8.2</p>
+              <StarFilledIcon />
+            </div>
+          </div>
+          <p className="text-muted-foreground italic">{`"${data?.tagline}"`}</p>
+          <p className="text-xl font-bold mt-4">Overview</p>
+          <p>{data?.overview}</p>
         </div>
-        <p>{data?.overview}</p>
       </div>
     </main>
   );
