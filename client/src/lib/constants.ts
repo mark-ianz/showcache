@@ -165,3 +165,7 @@ export const genres: Genre[] = [
     name: "Western",
   },
 ];
+
+export const getImg = (path: string, size: "w300" | "w780" | "w1280" | "original") => {
+  return `https://image.tmdb.org/t/p/${size}${path}`;
+};

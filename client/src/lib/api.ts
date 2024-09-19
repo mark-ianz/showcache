@@ -98,7 +98,7 @@ export async function getTopRated({
 
 export async function getSearchResult({
   queryKey,
-}: QueryFunctionContext): Promise<Movie[]> {
+}: QueryFunctionContext): Promise<Movie[] | TV[]> {
   const [_key, language, query, searchFor, page] = queryKey;
   const { data }: { data: API_Result } = await axios.get(
     `https://api.themoviedb.org/3/search/${searchFor}?include_adult=false`,
@@ -107,4 +107,14 @@ export async function getSearchResult({
   return data.results;
 }
 
-// test
+export async function getOneMovie({
+  queryKey,
+}: QueryFunctionContext): Promise<Movie> {
+  const [_key, language, id] = queryKey;
+  const { data }: { data: Movie } = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}`,
+    axios_config({ method: "GET", params: { language } })
+  );
+
+  return data;
+}
