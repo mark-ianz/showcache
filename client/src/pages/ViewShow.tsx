@@ -1,3 +1,4 @@
+import Rating from "@/components/Rating";
 import { useLanguage } from "@/context/language-provider";
 import RatingIcon from "@/icons/RatingIcon";
 import { getOneMovie } from "@/lib/api";
@@ -43,10 +44,7 @@ export default function ViewShow() {
           </div>
           <div className="flex gap-4 items-center">
             <p className="text-4xl font-bold">{data?.title}</p>
-            <div className="flex items-center gap-1">
-              <p className="font-thin">8.2</p>
-              <RatingIcon />
-            </div>
+            <Rating rating={data?.vote_average!}/>
           </div>
           <p className="text-muted-foreground italic">{`"${data?.tagline}"`}</p>
           <p className="text-xl font-bold mt-4">Overview</p>

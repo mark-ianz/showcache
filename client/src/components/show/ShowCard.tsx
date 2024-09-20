@@ -4,6 +4,7 @@ import { Badge } from "../ui/badge";
 import { getGenre } from "@/lib/utils";
 import { useId } from "react";
 import RatingIcon from "@/icons/RatingIcon";
+import Rating from "../Rating";
 
 type ShowCardProps = {
   name: string;
@@ -35,10 +36,7 @@ export default function ShowCard({
           <CardTitle className="font-semibold text-sm line-clamp-1 hover:underline">
             {name}
           </CardTitle>
-          <div className="flex items-center gap-1">
-            <RatingIcon />
-            <p>{vote_average.toFixed(1)}</p>
-          </div>
+          <Rating rating={vote_average} />
         </div>
         <div className="flex items-end gap-2 flex-wrap truncate">
           {genre_list.slice(0, 2).map((genre) => (
