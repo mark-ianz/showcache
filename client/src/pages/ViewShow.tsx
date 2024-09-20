@@ -21,23 +21,23 @@ export default function ViewShow() {
   const year = data && new Date(data?.release_date).getFullYear();
 
   return (
-    <main className="w-full">
-      <AspectRatio ratio={16 / 6} className="relative">
-        <span className="absolute inset-0 bg-black bg-opacity-55"></span>
-        <img
-          src={getImg(data?.backdrop_path!, "w1280")}
-          alt={data?.title + "backdrop"}
-          className="w-full h-full object-cover"
-        />
-      </AspectRatio>
-      <div className="mt-8 flex gap-10">
+    <main
+      className={`w-full relative p-6`}
+      style={{
+        backgroundImage: `url(${getImg(data?.backdrop_path!, "w1280")})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="absolute inset-0 bg-background opacity-90 z-0"></div>
+      <div className="flex gap-10 relative z-10">
         <img
           src={getImg(data?.poster_path!, "w300")}
           alt={data?.title + "backdrop"}
           className="object-cover rounded-lg"
         />
         <div>
-          <div className="flex gap-2 font-thin">
+          <div className="flex gap-4 font-thin">
             <p>{data?.runtime} min</p>
             <p>{genreList?.join(" / ")}</p>
             <p>{year}</p>
@@ -56,4 +56,15 @@ export default function ViewShow() {
       </div>
     </main>
   );
+}
+
+{
+  /* <AspectRatio ratio={16 / 4} className="relative">
+  <span className="absolute inset-0 bg-black bg-opacity-55"></span>
+  <img
+    src={getImg(data?.backdrop_path!, "w1280")}
+    alt={data?.title + "backdrop"}
+    className="w-full h-full object-cover"
+  />
+</AspectRatio> */
 }
