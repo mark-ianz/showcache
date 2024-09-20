@@ -1,4 +1,4 @@
-import { useLanguage } from "@/components/context/language-provider";
+import { useLanguage } from "@/context/language-provider";
 import ListMainWrapper from "@/components/ListMainWrapper";
 import ShowSection from "@/components/show/ShowSection";
 import useShows from "@/hooks/useShows";

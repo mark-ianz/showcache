@@ -6,7 +6,7 @@ import {
 } from "@/lib/api";
 import ShowSection from "@/components/show/ShowSection";
 import useShows, { useShowsProps } from "@/hooks/useShows";
-import { useLanguage } from "@/components/context/language-provider";
+import { useLanguage } from "@/context/language-provider";
 import ListMainWrapper from "@/components/ListMainWrapper";
 import { URL } from "url";
 

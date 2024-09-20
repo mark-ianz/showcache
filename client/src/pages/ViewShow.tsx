@@ -1,4 +1,4 @@
-import { useLanguage } from "@/components/context/language-provider";
+import { useLanguage } from "@/context/language-provider";
 import RatingIcon from "@/icons/RatingIcon";
 import { getOneMovie } from "@/lib/api";
 import { getImg } from "@/lib/constants";
