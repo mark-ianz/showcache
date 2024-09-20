@@ -40,6 +40,25 @@ type API_Result = {
   total_pages: number;
   total_results: number;
 };
+
+type Video = {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: false;
+  published_at: Date;
+  id: string;
+};
+
+type VideosResult = {
+  id: number;
+  results: Video[];
+};
+
 export async function getPopularMovies({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
@@ -162,4 +181,20 @@ export async function getDirectors({
   const directors: Crew[] = data.crew.filter((c) => c.job === "Director");
 
   return directors;
+}
+
+export async function getTrailers({
+  queryKey,
+}: QueryFunctionContext): Promise<Video[]> {
+  const [_key, language, id] = queryKey;
+  const { data }: { data: VideosResult } = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}/videos`,
+    axios_config({ method: "GET", params: { language } })
+  );
+
+  const trailers: Video[] = data.results.filter(
+    (video) => video.type === "Trailer"
+  );
+
+  return trailers;
 }

@@ -1,14 +1,7 @@
 import { Button } from "@/components/ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useLanguage } from "@/context/language-provider";
-import { getDirectors, getOneMovie } from "@/lib/api";
+import { getDirectors, getOneMovie, getTrailers } from "@/lib/api";
 import { getImg } from "@/lib/constants";
 import { BookmarkIcon } from "@radix-ui/react-icons";
 import { useQuery } from "@tanstack/react-query";
@@ -31,11 +24,18 @@ export default function ViewShow() {
     queryFn: getDirectors,
   });
 
+  const { data: trailers } = useQuery({
+    queryKey: ["trailers", language, id],
+    queryFn: getTrailers,
+  });
+
   const genreList = data?.genres.map((genre) => genre.name);
   const directorList = directors?.map((director) => director.name);
   const year = data && new Date(data?.release_date).getFullYear();
+  const officialTrailer = trailers?.find(
+    (trailer) => trailer.name === "Official Trailer"
+  );
 
-  console.log(directorList);
   return (
     <main
       className={`w-full relative p-6`}
@@ -88,19 +88,31 @@ export default function ViewShow() {
             </Button>
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant={"secondary"} className="gap-1">
-                  <Play className="w-5 h-5" />
-                  <p>Play Trailer</p>
+                <Button
+                  variant={"secondary"}
+                  className="gap-1"
+                  disabled={!officialTrailer}
+                >
+                  {officialTrailer ? (
+                    <>
+                      <Play className="w-5 h-5" />
+                      <p> Play Trailer</p>
+                    </>
+                  ) : (
+                    "No Available Trailer"
+                  )}
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-screen-lg p-0 border-none bg-none">
-                <div className="aspect-video relative">
-                  <iframe
-                    className="absolute top-0 left-0 w-full h-full"
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                    allowFullScreen
-                  ></iframe>
-                </div>
+                {officialTrailer && (
+                  <div className="aspect-video relative">
+                    <iframe
+                      className="absolute top-0 left-0 w-full h-full"
+                      src={`https://www.youtube.com/embed/${officialTrailer.key}`}
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                )}
               </DialogContent>
             </Dialog>
           </div>
