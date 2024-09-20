@@ -28,7 +28,11 @@ export type Crew = Credits & {
   job: string;
 };
 
-type CreditsResult = {};
+type CreditsResult = {
+  id: number;
+  cast: Cast[];
+  crew: Crew[];
+};
 
 type API_Result = {
   page: number;
@@ -146,4 +150,16 @@ export async function getOneMovie({
   return data;
 }
 
-export async function getDirectors({}) {}
+export async function getDirectors({
+  queryKey,
+}: QueryFunctionContext): Promise<Crew[]> {
+  const [_key, language, id] = queryKey;
+  const { data }: { data: CreditsResult } = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}/credits`,
+    axios_config({ method: "GET", params: { language } })
+  );
+
+  const directors: Crew[] = data.crew.filter((c) => c.job === "Director");
+
+  return directors;
+}
