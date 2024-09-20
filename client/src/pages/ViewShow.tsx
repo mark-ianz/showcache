@@ -40,13 +40,12 @@ export default function ViewShow() {
           <div className="flex gap-4 font-thin">
             <p>{data?.runtime} min</p>
             <p>{genreList?.join(" / ")}</p>
-            <p>{year}</p>
           </div>
-          <div className="flex gap-4 items-center">
-            <p className="text-4xl font-bold">{data?.title}</p>
-            <Rating rating={data?.vote_average!}/>
+          <div className="flex gap-4 items-center text-4xl">
+            <p className="font-bold">{data?.title}</p>
+            <p className="">({year})</p>
           </div>
-          <p className="text-muted-foreground italic">{`"${data?.tagline}"`}</p>
+          <p className="text-muted-foreground italic mt-1">{`"${data?.tagline}"`}</p>
           <p className="text-xl font-bold mt-4">Overview</p>
           <p>{data?.overview}</p>
         </div>
