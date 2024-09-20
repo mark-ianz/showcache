@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/context/language-provider";
-import { getOneMovie } from "@/lib/api";
+import { getDirectors, getOneMovie } from "@/lib/api";
 import { getImg } from "@/lib/constants";
 import { BookmarkIcon } from "@radix-ui/react-icons";
 import { useQuery } from "@tanstack/react-query";
@@ -18,9 +18,16 @@ export default function ViewShow() {
     queryFn: getOneMovie,
   });
 
+  const { data: directors } = useQuery({
+    queryKey: ["directors", language, id],
+    queryFn: getDirectors,
+  });
+
   const genreList = data?.genres.map((genre) => genre.name);
+  const directorList = directors?.map((director) => director.name);
   const year = data && new Date(data?.release_date).getFullYear();
 
+  console.log(directorList);
   return (
     <main
       className={`w-full relative p-6`}
@@ -46,10 +53,15 @@ export default function ViewShow() {
             <p className="font-bold">{data?.title}</p>
             <p className="">({year})</p>
           </div>
-          <div>
+          <div className="flex flex-col gap-2">
             <p className="text-muted-foreground italic">{`"${data?.tagline}"`}</p>
-            <p className="text-xl font-bold mt-2">Overview</p>
-            <p>{data?.overview}</p>
+            <div>
+              <p className="text-xl font-bold">Overview</p>
+              <p>{data?.overview}</p>
+            </div>
+            <p className="text-muted-foreground">
+              Directed by {directorList?.join(", ")}
+            </p>
           </div>
           <div className="flex gap-4">
             <Button
@@ -67,7 +79,7 @@ export default function ViewShow() {
               <BookmarkIcon className="w-5 h-5" />
             </Button>
             <Button variant={"secondary"} className="gap-1">
-              <Play className="w-5 h-5"/>
+              <Play className="w-5 h-5" />
               <p>Play Trailer</p>
             </Button>
           </div>
