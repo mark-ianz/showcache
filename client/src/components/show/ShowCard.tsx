@@ -3,6 +3,7 @@ import { StarFilledIcon } from "@radix-ui/react-icons";
 import { Badge } from "../ui/badge";
 import { getGenre } from "@/lib/utils";
 import { useId } from "react";
+import RatingIcon from "@/icons/RatingIcon";
 
 type ShowCardProps = {
   name: string;
@@ -35,7 +36,7 @@ export default function ShowCard({
             {name}
           </CardTitle>
           <div className="flex items-center gap-1">
-            <StarFilledIcon color="#3b82f6" />
+            <RatingIcon />
             <p>{vote_average.toFixed(1)}</p>
           </div>
         </div>

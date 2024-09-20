@@ -1,8 +1,7 @@
 import { useLanguage } from "@/components/context/language-provider";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+import RatingIcon from "@/icons/RatingIcon";
 import { getOneMovie } from "@/lib/api";
 import { getImg } from "@/lib/constants";
-import { StarFilledIcon } from "@radix-ui/react-icons";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
@@ -46,7 +45,7 @@ export default function ViewShow() {
             <p className="text-4xl font-bold">{data?.title}</p>
             <div className="flex items-center gap-1">
               <p className="font-thin">8.2</p>
-              <StarFilledIcon />
+              <RatingIcon />
             </div>
           </div>
           <p className="text-muted-foreground italic">{`"${data?.tagline}"`}</p>
