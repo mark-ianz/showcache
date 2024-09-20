@@ -1,9 +1,10 @@
-import Rating from "@/components/Rating";
+import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/context/language-provider";
-import RatingIcon from "@/icons/RatingIcon";
 import { getOneMovie } from "@/lib/api";
 import { getImg } from "@/lib/constants";
+import { BookmarkIcon } from "@radix-ui/react-icons";
 import { useQuery } from "@tanstack/react-query";
+import { HeartIcon, Play } from "lucide-react";
 import { useParams } from "react-router-dom";
 
 export default function ViewShow() {
@@ -36,7 +37,7 @@ export default function ViewShow() {
           alt={data?.title + "backdrop"}
           className="object-cover rounded-lg"
         />
-        <div>
+        <div className="flex flex-col gap-4">
           <div className="flex gap-4 font-thin">
             <p>{data?.runtime} min</p>
             <p>{genreList?.join(" / ")}</p>
@@ -45,9 +46,31 @@ export default function ViewShow() {
             <p className="font-bold">{data?.title}</p>
             <p className="">({year})</p>
           </div>
-          <p className="text-muted-foreground italic mt-1">{`"${data?.tagline}"`}</p>
-          <p className="text-xl font-bold mt-4">Overview</p>
-          <p>{data?.overview}</p>
+          <div>
+            <p className="text-muted-foreground italic">{`"${data?.tagline}"`}</p>
+            <p className="text-xl font-bold mt-2">Overview</p>
+            <p>{data?.overview}</p>
+          </div>
+          <div className="flex gap-4">
+            <Button
+              size={"icon"}
+              className="rounded-full"
+              variant={"secondary"}
+            >
+              <HeartIcon className="w-5 h-5" />
+            </Button>
+            <Button
+              size={"icon"}
+              className="rounded-full"
+              variant={"secondary"}
+            >
+              <BookmarkIcon className="w-5 h-5" />
+            </Button>
+            <Button variant={"secondary"} className="gap-1">
+              <Play className="w-5 h-5"/>
+              <p>Play Trailer</p>
+            </Button>
+          </div>
         </div>
       </div>
     </main>
