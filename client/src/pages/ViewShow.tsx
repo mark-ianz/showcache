@@ -1,4 +1,12 @@
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useLanguage } from "@/context/language-provider";
 import { getDirectors, getOneMovie } from "@/lib/api";
 import { getImg } from "@/lib/constants";
@@ -78,24 +86,26 @@ export default function ViewShow() {
             >
               <BookmarkIcon className="w-5 h-5" />
             </Button>
-            <Button variant={"secondary"} className="gap-1">
-              <Play className="w-5 h-5" />
-              <p>Play Trailer</p>
-            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant={"secondary"} className="gap-1">
+                  <Play className="w-5 h-5" />
+                  <p>Play Trailer</p>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-screen-lg p-0 border-none bg-none">
+                <div className="aspect-video relative">
+                  <iframe
+                    className="absolute top-0 left-0 w-full h-full"
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </div>
     </main>
   );
-}
-
-{
-  /* <AspectRatio ratio={16 / 4} className="relative">
-  <span className="absolute inset-0 bg-black bg-opacity-55"></span>
-  <img
-    src={getImg(data?.backdrop_path!, "w1280")}
-    alt={data?.title + "backdrop"}
-    className="w-full h-full object-cover"
-  />
-</AspectRatio> */
 }
