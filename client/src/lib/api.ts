@@ -198,3 +198,15 @@ export async function getTrailers({
 
   return trailers;
 }
+
+export async function getCasts({
+  queryKey,
+}: QueryFunctionContext): Promise<Cast[]> {
+  const [_key, language, id] = queryKey;
+  const { data }: { data: CreditsResult } = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}/credits`,
+    axios_config({ method: "GET", params: { language } })
+  );
+
+  return data.cast;
+}
