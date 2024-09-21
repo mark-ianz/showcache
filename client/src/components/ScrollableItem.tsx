@@ -1,3 +1,4 @@
+import { AspectRatio } from "./ui/aspect-ratio";
 import { Card, CardContent } from "./ui/card";
 import { getImg } from "@/lib/constants";
 
@@ -12,13 +13,13 @@ export default function ScrollableItem({ image_path, title, subtext }: Props) {
     <li className="min-w-36">
       <Card className="h-full">
         <CardContent>
-          <div>
+          <AspectRatio ratio={12 / 16}>
             <img
               src={getImg(image_path, "w780")}
               alt={`Image of ${title}`}
-              className="rounded-t-xl min-h-50 object-cover"
+              className="rounded-t-xl h-full w-full object-cover"
             />
-          </div>
+          </AspectRatio>
           <div className="p-2">
             <p className="font-semibold line-clamp-2">{title}</p>
             <p className="text-sm font-thin text-muted-foreground line-clamp-2">
