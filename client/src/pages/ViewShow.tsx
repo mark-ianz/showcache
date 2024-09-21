@@ -19,21 +19,25 @@ export default function ViewShow() {
   const { data, error, isLoading, isError } = useQuery({
     queryKey: ["single_show", language, id],
     queryFn: getOneMovie,
+    staleTime: 1000 * 60 * 5,
   });
 
   const { data: directors } = useQuery({
     queryKey: ["directors", language, id],
     queryFn: getDirectors,
+    staleTime: 1000 * 60 * 5,
   });
 
   const { data: trailers } = useQuery({
     queryKey: ["trailers", language, id],
     queryFn: getTrailers,
+    staleTime: 1000 * 60 * 5,
   });
 
   const { data: casts } = useQuery({
     queryKey: ["casts", language, id],
     queryFn: getCasts,
+    staleTime: 1000 * 60 * 5,
   });
 
   const genreList = data?.genres.map((genre) => genre.name);
