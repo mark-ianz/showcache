@@ -1,3 +1,4 @@
+import ScrollableItem from "@/components/ScrollableItem";
 import ScrollableSection from "@/components/ScrollableSection";
 import ViewShowInfoSection from "@/components/show/ViewShowInfoSection";
 import { Card, CardContent } from "@/components/ui/card";
@@ -46,7 +47,7 @@ export default function ViewShow() {
     (trailer) => trailer.name === "Official Trailer" || trailer.official
   );
 
-  if (!casts) return <p>loading</p>;
+  if (!data || !casts) return <p>loading</p>;
 
   return (
     <>
@@ -61,25 +62,12 @@ export default function ViewShow() {
 
         <ScrollableSection>
           {casts.slice(0, 14).map((cast) => (
-            <li className="min-w-36" key={cast.id}>
-              <Card className="h-full">
-                <CardContent>
-                  <div>
-                    <img
-                      src={getImg(cast.profile_path, "w780")}
-                      alt={`Image of ${cast.name}`}
-                      className="rounded-t-xl"
-                    />
-                  </div>
-                  <div className="p-2">
-                    <p className="font-semibold line-clamp-2">{cast.name}</p>
-                    <p className="text-sm font-thin text-muted-foreground line-clamp-2">
-                      {cast.character}
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-            </li>
+            <ScrollableItem
+              key={cast.id}
+              image_path={cast.profile_path}
+              title={cast.name}
+              subtext={cast.character}
+            />
           ))}
           {casts.length > 14 && (
             <li className="min-w-36">
