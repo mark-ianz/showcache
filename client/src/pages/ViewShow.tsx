@@ -41,8 +41,9 @@ export default function ViewShow() {
   const genreList = data?.genres.map((genre) => genre.name);
   const directorList = directors?.map((director) => director.name);
   const year = data && new Date(data?.release_date).getFullYear();
+  console.log(trailers);
   const officialTrailer = trailers?.find(
-    (trailer) => trailer.name === "Official Trailer"
+    (trailer) => trailer.name === "Official Trailer" || trailer.official
   );
 
   if (!casts) return <p>loading</p>;
