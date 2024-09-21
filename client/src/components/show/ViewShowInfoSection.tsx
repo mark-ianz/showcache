@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogTitle,
   DialogTrigger,
@@ -8,7 +9,7 @@ import {
 import { Video } from "@/lib/api";
 import { getImg } from "@/lib/constants";
 import { MovieFullDetails } from "@/pages/LandingPage";
-import { BookmarkIcon } from "@radix-ui/react-icons";
+import { BookmarkIcon, Cross2Icon } from "@radix-ui/react-icons";
 import { HeartIcon, Play } from "lucide-react";
 
 type ViewShowInfoSectionProps = {
@@ -96,19 +97,22 @@ const ViewShowInfoSection = ({
                 </Button>
               </DialogTrigger>
               <DialogContent
-                className="max-w-screen-lg p-0 border-none bg-none"
+                className="max-w-screen-lg p-0 pt-4 border-none bg-black"
                 aria-describedby={undefined}
               >
-                <DialogTitle className="pl-2">{showData.title} Trailer</DialogTitle>
-                {officialTrailer && (
-                  <div className="aspect-video relative">
-                    <iframe
-                      className="absolute top-0 left-0 w-full h-full"
-                      src={`https://www.youtube.com/embed/${officialTrailer.key}`}
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                )}
+                <div className="flex items-center">
+                  <DialogTitle className="pl-4 text-white">
+                    {showData.title} Trailer
+                  </DialogTitle>
+                  <DialogClose color="#ffffff" />
+                </div>
+                <div className="aspect-video relative">
+                  <iframe
+                    className="absolute top-0 left-0 w-full h-full"
+                    src={`https://www.youtube.com/embed/${officialTrailer.key}`}
+                    allowFullScreen
+                  ></iframe>
+                </div>
               </DialogContent>
             </Dialog>
           </div>
