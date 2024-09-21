@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useLanguage } from "@/context/language-provider";
@@ -44,6 +44,7 @@ export default function ViewShow() {
   );
 
   if (!casts) return <p>loading</p>;
+
   return (
     <>
       <main className={`w-full relative`}>
@@ -138,7 +139,7 @@ export default function ViewShow() {
             <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-r from-transparent to-background"></div>
             <ol className="flex gap-3 items-stretch overflow-x-auto p-4">
               {casts.slice(0, 14).map((cast) => (
-                <li className="min-w-36">
+                <li className="min-w-36" key={cast.id}>
                   <Card className="h-full">
                     <CardContent>
                       <div>
