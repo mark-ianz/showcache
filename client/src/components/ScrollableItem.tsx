@@ -13,7 +13,7 @@ export default function ScrollableItem({ image_path, title, subtext }: Props) {
     <li className="min-w-36">
       <Card className="h-full">
         <CardContent>
-          <AspectRatio ratio={12 / 16}>
+          <AspectRatio ratio={2/3}>
             <img
               src={getImg(image_path, "w780")}
               alt={`Image of ${title}`}
