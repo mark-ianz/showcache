@@ -69,18 +69,6 @@ export default function ViewShow() {
               subtext={cast.character}
             />
           ))}
-          {casts.length > 14 && (
-            <li className="min-w-36">
-              <Card className="h-full">
-                <CardContent className="flex items-center justify-center h-full">
-                  <div className="flex items-center gap-1">
-                    <p>View More</p>
-                    <ArrowRight />
-                  </div>
-                </CardContent>
-              </Card>
-            </li>
-          )}
         </ScrollableSection>
       </main>
     </>
