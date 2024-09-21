@@ -32,7 +32,7 @@ export default function Nav() {
   ];
 
   return (
-    <nav className="w-full mb-20">
+    <nav className="w-full mb-[5vh]">
       <ol className="flex justify-around">
         {lists.map(({ name, path }) => (
           <Button
