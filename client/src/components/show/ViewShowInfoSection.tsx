@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Video } from "@/lib/api";
 import { getImg } from "@/lib/constants";
 import { MovieFullDetails } from "@/pages/LandingPage";
@@ -90,7 +96,11 @@ const ViewShowInfoSection = ({
                   )}
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-screen-lg p-0 border-none bg-none">
+              <DialogContent
+                className="max-w-screen-lg p-0 border-none bg-none"
+                aria-describedby={undefined}
+              >
+                <DialogTitle className="pl-2">{showData.title} Trailer</DialogTitle>
                 {officialTrailer && (
                   <div className="aspect-video relative">
                     <iframe
