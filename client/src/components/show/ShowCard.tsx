@@ -3,6 +3,7 @@ import { Badge } from "../ui/badge";
 import { getGenre } from "@/lib/utils";
 import { useId } from "react";
 import Rating from "../Rating";
+import { AspectRatio } from "../ui/aspect-ratio";
 
 type ShowCardProps = {
   name: string;
@@ -21,14 +22,14 @@ export default function ShowCard({
 
   return (
     <Card className="cursor-pointer w-full h-full flex flex-col">
-      <div>
+      <AspectRatio ratio={2/3}>
         <img
           src={image}
           alt={`Poster image of ${name}`}
           className="w-full h-full object-cover rounded-t-xl"
           loading="lazy"
         />
-      </div>
+      </AspectRatio>
       <CardContent className="p-2 flex flex-col justify-between flex-grow gap-2">
         <div className="flex items-center justify-between">
           <CardTitle className="font-semibold text-sm line-clamp-1 hover:underline">
