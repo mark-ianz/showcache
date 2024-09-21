@@ -1,12 +1,9 @@
 import ScrollableItem from "@/components/ScrollableItem";
 import ScrollableSection from "@/components/ScrollableSection";
 import ViewShowInfoSection from "@/components/show/ViewShowInfoSection";
-import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/context/language-provider";
 import { getCasts, getDirectors, getOneMovie, getTrailers } from "@/lib/api";
-import { getImg } from "@/lib/constants";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowRight } from "lucide-react";
 import { useParams } from "react-router-dom";
 
 export default function ViewShow() {

@@ -1,9 +1,7 @@
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { StarFilledIcon } from "@radix-ui/react-icons";
 import { Badge } from "../ui/badge";
 import { getGenre } from "@/lib/utils";
 import { useId } from "react";
-import RatingIcon from "@/icons/RatingIcon";
 import Rating from "../Rating";
 
 type ShowCardProps = {
