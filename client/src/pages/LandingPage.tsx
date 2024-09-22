@@ -9,6 +9,7 @@ import useShows, { useShowsProps } from "@/hooks/useShows";
 import { useLanguage } from "@/context/language-provider";
 import ListMainWrapper from "@/components/ListMainWrapper";
 import { URL } from "url";
+import { Genre } from "@/types/genre";
 
 type Show = {
   adult: boolean;
@@ -34,11 +35,6 @@ type BelongsToCollection = {
   id: number;
   name: string;
   poster_path: string;
-};
-
-type Genre = {
-  id: number;
-  name: string;
 };
 
 type ProductionCompany = {

@@ -1,10 +1,8 @@
 import no_image from "@/assets/no-image.png";
+import { Genre } from "@/types/genre";
 import { Language } from "@/types/language";
 
-export type Genre = {
-  id: number;
-  name: string;
-};
+
 
 export const languages: Language[] = [
   {
