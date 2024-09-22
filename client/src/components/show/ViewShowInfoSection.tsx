@@ -53,7 +53,7 @@ const ViewShowInfoSection = ({
         )}
         <div className="flex flex-col gap-4">
           <div className="flex gap-4 font-thin">
-            <p>{showData?.runtime} min</p>
+            <p>{showData?.runtime ? `${showData.runtime} min` : "N/A"} </p>
             <p>{genreList?.join(" / ")}</p>
           </div>
           <div className="flex gap-4 items-center text-4xl">
