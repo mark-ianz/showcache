@@ -2,8 +2,6 @@ import no_image from "@/assets/no-image.png";
 import { Genre } from "@/types/genre";
 import { Language } from "@/types/language";
 
-
-
 export const languages: Language[] = [
   {
     iso_639_1: "en",

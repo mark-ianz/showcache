@@ -1,4 +1,4 @@
-import { Movie, TV } from "@/pages/LandingPage";
+import { Movie, TV } from "@/types/show";
 import { QueryFunctionContext, useQuery } from "@tanstack/react-query";
 
 export type useShowsProps = {

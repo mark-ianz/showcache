@@ -8,8 +8,8 @@ import {
 } from "@/components/ui/dialog";
 import { Video } from "@/lib/api";
 import { getImg } from "@/lib/constants";
-import { MovieFullDetails } from "@/pages/LandingPage";
-import { BookmarkIcon, Cross2Icon } from "@radix-ui/react-icons";
+import { MovieFullDetails } from "@/types/movieDetails";
+import { BookmarkIcon } from "@radix-ui/react-icons";
 import { HeartIcon, Play } from "lucide-react";
 
 type ViewShowInfoSectionProps = {
