@@ -68,7 +68,11 @@ export default function ViewShow() {
           officialTrailer={officialTrailer}
         />
 
-        <ScrollableSection viewMoreLink="#" title="Cast">
+        <ScrollableSection
+          viewMore={(scrollItems.length >= 14) as true} // broken as fuck, I don't know why this shit works
+          viewMoreLink="#"
+          title="Cast"
+        >
           {scrollItems.map((credit) => (
             <ScrollableItem
               key={credit.id}
