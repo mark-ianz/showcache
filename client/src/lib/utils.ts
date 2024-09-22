@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { genres } from "./constants";
 import axios from "axios";
+import { genres } from "@/constants/genres";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
