@@ -1,8 +1,8 @@
-import { languages } from "@/lib/constants";
 import { useId, useState } from "react";
 import { Button } from "./ui/button";
 import { PopoverTrigger, Popover, PopoverContent } from "./ui/popover";
 import { useLanguage } from "../context/language-provider";
+import { languages } from "@/constants/languages";
 
 export default function LanguageSelect() {
   const [open, setOpen] = useState<boolean>(false);
