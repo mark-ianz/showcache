@@ -156,7 +156,7 @@ export async function getSearchResult({
     axios_config({ method: "GET", params: { language, page, query } })
   );
 
-  console.log(data)
+  console.log(data);
   return data.results;
 }
 
@@ -202,14 +202,15 @@ export async function getTrailers({
   return trailers;
 }
 
-export async function getCasts({
+export async function getCredits({
   queryKey,
-}: QueryFunctionContext): Promise<Cast[]> {
+}: QueryFunctionContext): Promise<CreditsResult> {
   const [_key, language, id] = queryKey;
   const { data }: { data: CreditsResult } = await axios.get(
     `https://api.themoviedb.org/3/movie/${id}/credits`,
     axios_config({ method: "GET", params: { language } })
   );
 
-  return data.cast;
+  console.log(data);
+  return data;
 }

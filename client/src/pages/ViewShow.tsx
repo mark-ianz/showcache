@@ -2,7 +2,14 @@ import ScrollableItem from "@/components/ScrollableItem";
 import ScrollableSection from "@/components/ScrollableSection";
 import ViewShowInfoSection from "@/components/show/ViewShowInfoSection";
 import { useLanguage } from "@/context/language-provider";
-import { getCasts, getDirectors, getOneMovie, getTrailers } from "@/lib/api";
+import {
+  Cast,
+  Crew,
+  getCredits,
+  getDirectors,
+  getOneMovie,
+  getTrailers,
+} from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
@@ -30,13 +37,13 @@ export default function ViewShow() {
     staleTime: 1000 * 60 * 5,
   });
 
-  const { data: casts } = useQuery({
-    queryKey: ["casts", language, id],
-    queryFn: getCasts,
+  const { data: credits } = useQuery({
+    queryKey: ["credits", language, id],
+    queryFn: getCredits,
     staleTime: 1000 * 60 * 5,
   });
 
-  if (!data || !casts || !trailers || !directors) return <p>loading</p>;
+  if (!data || !credits || !trailers || !directors) return <p>loading</p>;
 
   const genreList = data?.genres.map((genre) => genre.name);
   const directorList = directors.map((director) => director.name);
@@ -44,6 +51,11 @@ export default function ViewShow() {
   const officialTrailer = trailers.find(
     (trailer) => trailer.name === "Official Trailer" || trailer.official
   );
+
+  const scrollItems: (Cast | Crew)[] =
+    credits.cast.length > 14
+      ? credits.cast.slice(0, 14)
+      : [...credits.cast, ...credits.crew.slice(0, 14 - credits.cast.length)];
 
   return (
     <>
@@ -57,12 +69,12 @@ export default function ViewShow() {
         />
 
         <ScrollableSection viewMoreLink="#" title="Cast">
-          {casts.slice(0, 14).map((cast) => (
+          {scrollItems.map((credit) => (
             <ScrollableItem
-              key={cast.id}
-              image_path={cast.profile_path}
-              title={cast.name}
-              subtext={cast.character}
+              key={credit.id}
+              image_path={credit.profile_path}
+              title={credit.name}
+              subtext={"character" in credit ? credit.character : credit.job} // Type narrowing
             />
           ))}
         </ScrollableSection>
