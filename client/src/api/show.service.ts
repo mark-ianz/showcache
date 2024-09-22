@@ -3,6 +3,7 @@ import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 import { axios_config } from "./axios.config";
 import { API_Result, Movie, TV } from "@/types/show";
+import { ImageResult } from "@/types/images";
 
 export async function getTrailers({
   queryKey,
@@ -30,4 +31,16 @@ export async function getSearchResult({
   );
 
   return data.results;
+}
+
+export async function getImages({
+  queryKey,
+}: QueryFunctionContext): Promise<ImageResult> {
+  const [_key, language, type, id] = queryKey;
+  const { data }: { data: ImageResult } = await axios.get(
+    `https://api.themoviedb.org/3/${type}/${id}/images`,
+    axios_config({ method: "GET", params: { language } })
+  );
+
+  return data;
 }

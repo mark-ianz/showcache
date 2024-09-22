@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { getOneMovie } from "@/api/movies.service";
 import { getCredits, getDirectors } from "@/api/credits.service";
-import { getTrailers } from "@/api/show.service";
+import { getImages, getTrailers } from "@/api/show.service";
 import { Cast, Crew } from "@/types/credits";
 
 export default function ViewShow() {
@@ -39,8 +39,15 @@ export default function ViewShow() {
     staleTime: 1000 * 60 * 5,
   });
 
+  const { data: images } = useQuery({
+    queryKey: ["images", language, "movie", id],
+    queryFn: getImages,
+    staleTime: 1000 * 60 * 5,
+  });
+
   if (!data || !credits || !trailers || !directors) return <p>loading</p>;
 
+  console.log(images)
   const genreList = data?.genres.map((genre) => genre.name);
   const directorList = directors.map((director) => director.name);
   const year = data && new Date(data.release_date).getFullYear();
