@@ -1,13 +1,9 @@
-import {
-  getNewReleases,
-  getTrendingThisWeek,
-  getTv,
-  getUpcomingMovies,
-} from "@/lib/api";
 import ShowSection from "@/components/show/ShowSection";
 import useShows, { useShowsProps } from "@/hooks/useShows";
 import { useLanguage } from "@/context/language-provider";
 import ListMainWrapper from "@/components/ListMainWrapper";
+import { getNewReleases, getTrendingThisWeek, getUpcomingMovies } from "@/api/movies.service";
+import { getTv } from "@/api/tv.service";
 
 const useData = ({ queryKey, queryFn }: useShowsProps) => {
   return useShows({

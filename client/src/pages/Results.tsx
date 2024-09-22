@@ -2,8 +2,8 @@ import { useLanguage } from "@/context/language-provider";
 import ListMainWrapper from "@/components/ListMainWrapper";
 import ShowSection from "@/components/show/ShowSection";
 import useShows from "@/hooks/useShows";
-import { getSearchResult } from "@/lib/api";
 import { useSearchParams } from "react-router-dom";
+import { getSearchResult } from "@/api/show.service";
 
 export default function Results() {
   const {

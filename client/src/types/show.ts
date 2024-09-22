@@ -22,3 +22,10 @@ export type TV = Show & {
   first_air_date: Date;
   name: string;
 };
+
+export type API_Result = {
+  page: number;
+  results: [];
+  total_pages: number;
+  total_results: number;
+};

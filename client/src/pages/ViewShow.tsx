@@ -2,17 +2,12 @@ import ScrollableItem from "@/components/ScrollableItem";
 import ScrollableSection from "@/components/ScrollableSection";
 import ViewShowInfoSection from "@/components/show/ViewShowInfoSection";
 import { useLanguage } from "@/context/language-provider";
-import {
-  Cast,
-  Crew,
-  getCredits,
-  getDirectors,
-  getOneMovie,
-  getTrailers,
-} from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
-import { useId } from "react";
 import { useParams } from "react-router-dom";
+import { getOneMovie } from "@/api/movies.service";
+import { getCredits, getDirectors } from "@/api/credits.service";
+import { getTrailers } from "@/api/show.service";
+import { Cast, Crew } from "@/types/credits";
 
 export default function ViewShow() {
   const { id } = useParams();

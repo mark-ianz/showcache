@@ -2,7 +2,7 @@ import { useLanguage } from "@/context/language-provider";
 import ListMainWrapper from "@/components/ListMainWrapper";
 import ShowSection from "@/components/show/ShowSection";
 import useShows from "@/hooks/useShows";
-import { getTv } from "@/lib/api";
+import { getTv } from "@/api/tv.service";
 
 export default function Tv() {
   const {

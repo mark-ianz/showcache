@@ -2,7 +2,7 @@ import { useLanguage } from "@/context/language-provider";
 import ListMainWrapper from "@/components/ListMainWrapper";
 import ShowSection from "@/components/show/ShowSection";
 import useShows from "@/hooks/useShows";
-import { getPopularMovies } from "@/lib/api";
+import { getPopularMovies } from "@/api/movies.service";
 
 export default function PopularMovies() {
   const {
