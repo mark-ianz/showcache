@@ -27,10 +27,10 @@ export default function ScrollableSection({
 }: Props) {
   return (
     <div className="mt-10 relative">
-      <p className="relative text-3xl font-semibold pl-4">{title}</p>
+      <p className="relative text-3xl font-semibold">{title}</p>
       <ScrollArea className="w-full h-full relative">
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-r from-transparent to-background z-10"></div>
-        <ol className="flex gap-3 items-stretch overflow-x-auto py-4 pl-4 pr-10">
+        <ol className="flex gap-3 items-stretch overflow-x-auto py-4 pr-10">
           {children}
           {viewMore && (
             <li className="min-w-36 z-10">

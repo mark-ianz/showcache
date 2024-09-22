@@ -36,25 +36,24 @@ export default function ViewShow() {
     staleTime: 1000 * 60 * 5,
   });
 
+  if (!data || !casts || !trailers || !directors) return <p>loading</p>;
+
   const genreList = data?.genres.map((genre) => genre.name);
-  const directorList = directors?.map((director) => director.name);
-  const year = data && new Date(data?.release_date).getFullYear();
-  console.log(data);
-  const officialTrailer = trailers?.find(
+  const directorList = directors.map((director) => director.name);
+  const year = data && new Date(data.release_date).getFullYear();
+  const officialTrailer = trailers.find(
     (trailer) => trailer.name === "Official Trailer" || trailer.official
   );
-
-  if (!data || !casts || !trailers) return <p>loading</p>;
 
   return (
     <>
       <main className={`w-full relative`}>
         <ViewShowInfoSection
-          showData={data!}
-          genreList={genreList!}
-          directorList={directorList!}
-          year={year!}
-          officialTrailer={officialTrailer!}
+          showData={data}
+          genreList={genreList}
+          directorList={directorList}
+          year={year}
+          officialTrailer={officialTrailer}
         />
 
         <ScrollableSection viewMore viewMoreLink="#" title="Cast">

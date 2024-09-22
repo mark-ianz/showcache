@@ -17,7 +17,7 @@ type ViewShowInfoSectionProps = {
   genreList: string[];
   directorList: string[];
   year: number;
-  officialTrailer: Video;
+  officialTrailer: Video | undefined;
 };
 
 const ViewShowInfoSection = ({
@@ -96,24 +96,26 @@ const ViewShowInfoSection = ({
                   )}
                 </Button>
               </DialogTrigger>
-              <DialogContent
-                className="max-w-screen-lg p-0 pt-4 border-none bg-black"
-                aria-describedby={undefined}
-              >
-                <div className="flex items-center">
-                  <DialogTitle className="pl-4 text-white">
-                    {showData.title} Trailer
-                  </DialogTitle>
-                  <DialogClose color="#ffffff" />
-                </div>
-                <div className="aspect-video relative">
-                  <iframe
-                    className="absolute top-0 left-0 w-full h-full"
-                    src={`https://www.youtube.com/embed/${officialTrailer.key}`}
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </DialogContent>
+              {officialTrailer && (
+                <DialogContent
+                  className="max-w-screen-lg p-0 pt-4 border-none bg-black"
+                  aria-describedby={undefined}
+                >
+                  <div className="flex items-center">
+                    <DialogTitle className="pl-4 text-white">
+                      {showData.title} Trailer
+                    </DialogTitle>
+                    <DialogClose color="#ffffff" />
+                  </div>
+                  <div className="aspect-video relative">
+                    <iframe
+                      className="absolute top-0 left-0 w-full h-full"
+                      src={`https://www.youtube.com/embed/${officialTrailer.key}`}
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+                </DialogContent>
+              )}
             </Dialog>
           </div>
         </div>
