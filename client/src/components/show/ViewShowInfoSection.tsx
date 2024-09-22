@@ -29,6 +29,7 @@ const ViewShowInfoSection = ({
 }: ViewShowInfoSectionProps) => {
   const backdrop_path = getImg(showData?.backdrop_path!, "w1280", true);
   const poster_path = getImg(showData?.poster_path!, "w300", true);
+  const tagline = showData?.tagline;
 
   return (
     <section
@@ -57,10 +58,12 @@ const ViewShowInfoSection = ({
           </div>
           <div className="flex gap-4 items-center text-4xl">
             <p className="font-bold">{showData?.title}</p>
-            <p className="">({year})</p>
+            <p>({year})</p>
           </div>
           <div className="flex flex-col gap-2">
-            <p className="text-muted-foreground italic">{`"${showData?.tagline}"`}</p>
+            {tagline && (
+              <p className="text-muted-foreground italic">{tagline}</p>
+            )}
             <div>
               <p className="text-xl font-bold">Overview</p>
               <p>{showData?.overview}</p>
