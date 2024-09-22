@@ -56,7 +56,7 @@ export default function ViewShow() {
           officialTrailer={officialTrailer}
         />
 
-        <ScrollableSection viewMore viewMoreLink="#" title="Cast">
+        <ScrollableSection viewMoreLink="#" title="Cast">
           {casts.slice(0, 14).map((cast) => (
             <ScrollableItem
               key={cast.id}
