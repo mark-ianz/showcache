@@ -6,7 +6,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { getImg } from "@/lib/utils";
+import { getImg } from "@/lib/helpers";
 import { MovieFullDetails } from "@/types/movie.details";
 import { Video } from "@/types/video";
 import { BookmarkIcon } from "@radix-ui/react-icons";

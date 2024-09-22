@@ -1,9 +1,9 @@
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Badge } from "../ui/badge";
-import { getGenre } from "@/lib/utils";
 import { useId } from "react";
 import Rating from "../Rating";
 import { AspectRatio } from "../ui/aspect-ratio";
+import { getGenre } from "@/lib/helpers";
 
 type ShowCardProps = {
   name: string;
