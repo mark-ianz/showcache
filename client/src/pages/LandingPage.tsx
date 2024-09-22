@@ -10,25 +10,7 @@ import { useLanguage } from "@/context/language-provider";
 import ListMainWrapper from "@/components/ListMainWrapper";
 import { URL } from "url";
 import { Genre } from "@/types/genre";
-
-type Show = {
-  adult: boolean;
-  backdrop_path: string;
-  genre_ids: number[];
-  id: number;
-  original_language: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  vote_average: number;
-  vote_count: number;
-};
-
-export type Movie = Show & {
-  original_title: string;
-  release_date: Date;
-  title: string;
-};
+import { Movie } from "@/types/show";
 
 type BelongsToCollection = {
   backdrop_path: string;
@@ -60,12 +42,6 @@ export type MovieFullDetails = Movie & {
   tagline: string;
 };
 
-export type TV = Show & {
-  origin_country: string[];
-  original_name: string;
-  first_air_date: Date;
-  name: string;
-};
 
 const useData = ({ queryKey, queryFn }: useShowsProps) => {
   return useShows({
