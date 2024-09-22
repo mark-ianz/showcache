@@ -1,4 +1,4 @@
-import { Language } from "@/lib/constants";
+import { Language } from "@/types/language";
 import { createContext, ReactNode, useContext, useState } from "react";
 
 type LanguageProviderState = {
