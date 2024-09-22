@@ -155,6 +155,8 @@ export async function getSearchResult({
     `https://api.themoviedb.org/3/search/${searchFor}?include_adult=false`,
     axios_config({ method: "GET", params: { language, page, query } })
   );
+
+  console.log(data)
   return data.results;
 }
 

@@ -27,11 +27,14 @@ const ViewShowInfoSection = ({
   year,
   officialTrailer,
 }: ViewShowInfoSectionProps) => {
+  const backdrop_path = getImg(showData?.backdrop_path!, "w1280", true);
+  const poster_path = getImg(showData?.poster_path!, "w300", true);
+
   return (
     <section
       className="p-6"
       style={{
-        backgroundImage: `url(${getImg(showData?.backdrop_path!, "w1280")})`,
+        backgroundImage: `url(${backdrop_path})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -40,11 +43,13 @@ const ViewShowInfoSection = ({
       <div className="absolute inset-0 bg-background opacity-90 z-0"></div>
 
       <div className="flex gap-10 relative z-10 items-center">
-        <img
-          src={getImg(showData?.poster_path!, "w300")}
-          alt={showData?.title + "backdrop"}
-          className="object-cover rounded-lg"
-        />
+        {poster_path && (
+          <img
+            src={poster_path}
+            alt={showData.title + " poster path"}
+            className="object-cover rounded-lg"
+          />
+        )}
         <div className="flex flex-col gap-4">
           <div className="flex gap-4 font-thin">
             <p>{showData?.runtime} min</p>
