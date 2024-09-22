@@ -44,7 +44,7 @@ export default function ViewShow() {
     (trailer) => trailer.name === "Official Trailer" || trailer.official
   );
 
-  if (!data || !casts) return <p>loading</p>;
+  if (!data || !casts || !trailers) return <p>loading</p>;
 
   return (
     <>
