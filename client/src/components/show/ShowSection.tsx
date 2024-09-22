@@ -29,7 +29,7 @@ export default function ShowSection({
       </div>
       <ShowListWrapper>
         {showArray?.map((show) => (
-          <li key={show.id} onClick={() => console.log(show)}>
+          <li key={show.id}>
             <Link to={`/${isTv ? "tv" : "movie"}/${show.id}`}>
               <ShowCard
                 genre_ids={show.genre_ids}

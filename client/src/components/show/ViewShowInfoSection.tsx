@@ -11,6 +11,7 @@ import { MovieFullDetails } from "@/types/movie.details";
 import { Video } from "@/types/video";
 import { BookmarkIcon } from "@radix-ui/react-icons";
 import { HeartIcon, Play } from "lucide-react";
+import Rating from "../Rating";
 
 type ViewShowInfoSectionProps = {
   showData: MovieFullDetails;
@@ -55,6 +56,7 @@ const ViewShowInfoSection = ({
           <div className="flex gap-4 font-thin">
             <p>{showData?.runtime ? `${showData.runtime} min` : "N/A"} </p>
             <p>{genreList?.join(" / ")}</p>
+            <Rating rating={showData.vote_average}/>
           </div>
           <div className="flex gap-4 items-center text-4xl">
             <p className="font-bold">{showData?.title}</p>
