@@ -1,7 +1,8 @@
-import { Movie, MovieFullDetails, TV } from "@/pages/LandingPage";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 import { axios_config, throwFetchError } from "./utils";
+import { Movie, TV } from "@/types/show";
+import { MovieFullDetails } from "@/types/movieDetails";
 
 type Gender = 0 | 1 | 2;
 
