@@ -7,7 +7,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Video } from "@/lib/api";
-import { getImg } from "@/lib/constants";
+import { getImg } from "@/lib/utils";
 import { MovieFullDetails } from "@/types/movieDetails";
 import { BookmarkIcon } from "@radix-ui/react-icons";
 import { HeartIcon, Play } from "lucide-react";

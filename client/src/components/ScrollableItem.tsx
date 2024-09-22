@@ -1,6 +1,6 @@
+import { getImg } from "@/lib/utils";
 import { AspectRatio } from "./ui/aspect-ratio";
 import { Card, CardContent } from "./ui/card";
-import { getImg } from "@/lib/constants";
 
 type Props = {
   image_path: string;

@@ -2,6 +2,7 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import axios from "axios";
 import { genres } from "@/constants/genres";
+import no_image from "@/assets/no-image.png";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -57,3 +58,13 @@ export function throwFetchError(error: unknown): never {
     throw new Error("An unexpected error occurred.");
   }
 }
+
+export const getImg = (
+  path: string,
+  size: "w300" | "w780" | "w1280" | "original"
+) => {
+  if (!path) {
+    return no_image;
+  }
+  return `https://image.tmdb.org/t/p/${size}${path}`;
+};
