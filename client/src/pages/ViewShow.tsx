@@ -11,6 +11,7 @@ import {
   getTrailers,
 } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
+import { useId } from "react";
 import { useParams } from "react-router-dom";
 
 export default function ViewShow() {
@@ -73,9 +74,11 @@ export default function ViewShow() {
           viewMoreLink="#"
           title="Cast"
         >
-          {scrollItems.map((credit) => (
+          {scrollItems.map((credit: Cast | Crew, index: number) => (
             <ScrollableItem
-              key={credit.id}
+              key={`${credit.id}-${
+                "character" in credit ? credit.character : credit.job
+              }-${index}`}
               image_path={credit.profile_path}
               title={credit.name}
               subtext={"character" in credit ? credit.character : credit.job} // Type narrowing
