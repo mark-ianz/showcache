@@ -7,7 +7,7 @@ import { Button } from "./ui/button";
 
 type Props = {
   children: ReactNode;
-  viewMore?: false;
+  viewMore?: boolean;
   viewMoreLink?: string;
   title: string;
 };
