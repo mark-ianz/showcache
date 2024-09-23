@@ -1,6 +1,6 @@
 import { LanguageCode } from "./language";
 
-type Image = {
+export type Image = {
   aspect_ratio: number;
   file_path: string;
   height: number;

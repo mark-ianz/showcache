@@ -10,7 +10,7 @@ type Props = {
   children: ReactNode;
   viewMore?: boolean;
   viewMoreLink?: string;
-  title: string;
+  title?: string;
 };
 
 export default function ScrollableSection({
@@ -21,7 +21,7 @@ export default function ScrollableSection({
 }: Props) {
   return (
     <div className="relative">
-      <HeaderText>{title}</HeaderText>
+      {title && <HeaderText>{title}</HeaderText>}
       <ScrollArea className="w-full h-full">
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-r from-transparent to-background z-10"></div>
         <ol className="flex gap-3 items-stretch overflow-x-auto py-4">
