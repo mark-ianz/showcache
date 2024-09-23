@@ -8,7 +8,6 @@ import { getOneMovie } from "@/api/movies.service";
 import { getCredits, getDirectors } from "@/api/credits.service";
 import { getImages, getTrailers } from "@/api/show.service";
 import { Cast, Crew } from "@/types/credits";
-import Rating from "@/components/Rating";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { getImg } from "@/lib/helpers";
 
