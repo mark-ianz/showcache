@@ -20,7 +20,7 @@ export default function ScrollableSection({
   title,
 }: Props) {
   return (
-    <div className="mt-10 relative">
+    <div className="relative">
       <HeaderText>{title}</HeaderText>
       <ScrollArea className="w-full h-full">
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-r from-transparent to-background z-10"></div>

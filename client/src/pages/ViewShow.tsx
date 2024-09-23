@@ -11,9 +11,13 @@ import { Cast, Crew } from "@/types/credits";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { getImg } from "@/lib/helpers";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import HeaderText from "@/components/HeaderText";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 export default function ViewShow() {
   const { id } = useParams();
+  const [tab, setTab] = useState("hello");
   const {
     language: { iso_639_1: language },
   } = useLanguage();
@@ -66,7 +70,7 @@ export default function ViewShow() {
 
   return (
     <>
-      <main className="w-full relative">
+      <main className="w-full relative flex flex-col gap-10">
         <ViewShowInfoSection
           showData={data}
           genreList={genreList}
@@ -93,41 +97,41 @@ export default function ViewShow() {
         </ScrollableSection>
 
         <section>
-          <ScrollableSection
-            viewMore={images.backdrops.length >= 14}
-            viewMoreLink="#"
-            title="Posters"
-          >
-            {images.backdrops.slice(0, 14).map((backdrop, index) => (
-              <li key={backdrop.file_path + index} className="w-[400px]">
-                <AspectRatio ratio={backdrop.aspect_ratio}>
-                  <img
-                    src={getImg(backdrop.file_path, "w780")}
-                    className="w-full h-full object-cover"
-                  />
-                </AspectRatio>
-              </li>
-            ))}
-          </ScrollableSection>
+          <div className="relative">
+            <Tabs defaultValue={tab} onValueChange={setTab}>
+              <HeaderText className="mb-2">Media</HeaderText>
+              <TabsList className="flex items-start justify-start p-0 h-auto bg-background">
+                <TabsTrigger value="hello" asChild>
+                  <Button variant={"secondary"}>HEllo</Button>
+                </TabsTrigger>
+                <TabsTrigger value="world" asChild>
+                  <Button variant={"secondary"}>HEllo</Button>
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="hello">
+                <ScrollableSection
+                  viewMore={images.backdrops.length >= 14}
+                  viewMoreLink="#"
+                  title="Posters"
+                >
+                  {images.backdrops.slice(0, 14).map((backdrop, index) => (
+                    <li key={backdrop.file_path + index} className="w-[400px]">
+                      <AspectRatio ratio={backdrop.aspect_ratio}>
+                        <img
+                          src={getImg(backdrop.file_path, "w780")}
+                          className="w-full h-full object-cover"
+                        />
+                      </AspectRatio>
+                    </li>
+                  ))}
+                </ScrollableSection>
+              </TabsContent>
+              <TabsContent value="world">
+                <p>world</p>
+              </TabsContent>
+            </Tabs>
+          </div>
         </section>
-
-        <div className="relative">
-          <Tabs defaultValue="hello" className="w-96">
-            <div className="flex items-center">
-              <p>Media</p>
-            </div>
-            <TabsList className="grid grid-cols-2">
-              <TabsTrigger value="hello">Hello</TabsTrigger>
-              <TabsTrigger value="world">world</TabsTrigger>
-            </TabsList>
-            <TabsContent value="hello">
-              <p>Hello</p>
-            </TabsContent>
-            <TabsContent value="world">
-              <p>world</p>
-            </TabsContent>
-          </Tabs>
-        </div>
       </main>
     </>
   );
