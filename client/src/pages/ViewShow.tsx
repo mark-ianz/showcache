@@ -10,6 +10,7 @@ import { getImages, getTrailers } from "@/api/show.service";
 import { Cast, Crew } from "@/types/credits";
 import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { getImg } from "@/lib/helpers";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function ViewShow() {
   const { id } = useParams();
@@ -65,7 +66,7 @@ export default function ViewShow() {
 
   return (
     <>
-      <main className={`w-full relative`}>
+      <main className="w-full relative">
         <ViewShowInfoSection
           showData={data}
           genreList={genreList}
@@ -93,7 +94,7 @@ export default function ViewShow() {
 
         <section>
           <ScrollableSection
-            viewMore={(images.posters.length >= 14) as true} // broken as fuck, I don't know why this shit works
+            viewMore={images.backdrops.length >= 14}
             viewMoreLink="#"
             title="Posters"
           >
@@ -109,6 +110,24 @@ export default function ViewShow() {
             ))}
           </ScrollableSection>
         </section>
+
+        <div className="relative">
+          <Tabs defaultValue="hello" className="w-96">
+            <div className="flex items-center">
+              <p>Media</p>
+            </div>
+            <TabsList className="grid grid-cols-2">
+              <TabsTrigger value="hello">Hello</TabsTrigger>
+              <TabsTrigger value="world">world</TabsTrigger>
+            </TabsList>
+            <TabsContent value="hello">
+              <p>Hello</p>
+            </TabsContent>
+            <TabsContent value="world">
+              <p>world</p>
+            </TabsContent>
+          </Tabs>
+        </div>
       </main>
     </>
   );
