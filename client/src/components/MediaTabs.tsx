@@ -29,7 +29,7 @@ export default function MediaTabs({ tabs }: Props) {
             <TabsList className="flex items-start justify-start p-0 h-auto gap-4 bg-background">
               <TabsTrigger value="Backdrops" asChild>
                 <Button
-                  variant={"link"}
+                  variant={"ghost"}
                   className="p-0 hover:bg-inherit text-muted-foreground"
                 >
                   Backdrops
@@ -37,7 +37,7 @@ export default function MediaTabs({ tabs }: Props) {
               </TabsTrigger>
               <TabsTrigger value="Posters" asChild>
                 <Button
-                  variant={"link"}
+                  variant={"ghost"}
                   className="p-0 hover:bg-inherit text-muted-foreground"
                 >
                   Posters
