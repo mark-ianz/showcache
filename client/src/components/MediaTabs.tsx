@@ -42,11 +42,18 @@ export default function MediaTabs({ tabs }: Props) {
                 viewMoreLink="#"
               >
                 {tab.images.slice(0, 14).map((backdrop, index) => (
-                  <li key={backdrop.file_path + index} className="w-[400px]">
+                  <li
+                    key={backdrop.file_path + index}
+                    className={`w-[500px] ${
+                      tab.value === "Posters" ? "h-[300px] w-[190px]" : ""
+                    }`}
+                  >
                     <AspectRatio ratio={backdrop.aspect_ratio}>
                       <img
                         src={getImg(backdrop.file_path, "w780")}
-                        className="w-full h-full object-cover"
+                        className={`w-full object-cover min-h-[300px] ${
+                          tab.value === "Backdrops" && " h-[300px]"
+                        }`}
                       />
                     </AspectRatio>
                   </li>
