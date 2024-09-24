@@ -91,14 +91,12 @@ export default function ViewShow() {
           ))}
         </ScrollableSection>
 
-        <section>
-          <MediaTabs
-            tabs={[
-              { images: images.backdrops, value: "Backdrops" },
-              { images: images.posters, value: "Posters" },
-            ]}
-          />
-        </section>
+        <MediaTabs
+          tabs={[
+            { images: images.backdrops, value: "Backdrops" },
+            { images: images.posters, value: "Posters" },
+          ]}
+        />
       </main>
     </>
   );

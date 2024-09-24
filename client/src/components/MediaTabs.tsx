@@ -26,12 +26,22 @@ export default function MediaTabs({ tabs }: Props) {
         >
           <div className="flex flex-col items-start">
             <HeaderText className="mb-2">Media</HeaderText>
-            <TabsList className="flex items-start justify-start p-0 h-auto gap-2 bg-background">
+            <TabsList className="flex items-start justify-start p-0 h-auto gap-4 bg-background">
               <TabsTrigger value="Backdrops" asChild>
-                <Button variant={"ghost"}>Backdrops</Button>
+                <Button
+                  variant={"link"}
+                  className="p-0 hover:bg-inherit text-muted-foreground"
+                >
+                  Backdrops
+                </Button>
               </TabsTrigger>
               <TabsTrigger value="Posters" asChild>
-                <Button variant={"ghost"}>Posters</Button>
+                <Button
+                  variant={"link"}
+                  className="p-0 hover:bg-inherit text-muted-foreground"
+                >
+                  Posters
+                </Button>
               </TabsTrigger>
             </TabsList>
           </div>
@@ -45,17 +55,15 @@ export default function MediaTabs({ tabs }: Props) {
                   <li
                     key={backdrop.file_path + index}
                     className={`w-[500px] ${
-                      tab.value === "Posters" ? "h-[300px] w-[190px]" : ""
+                      tab.value === "Posters" ? "h-[300px] w-[199px]" : ""
                     }`}
                   >
-                    <AspectRatio ratio={backdrop.aspect_ratio}>
-                      <img
-                        src={getImg(backdrop.file_path, "w780")}
-                        className={`w-full object-cover min-h-[300px] ${
-                          tab.value === "Backdrops" && " h-[300px]"
-                        }`}
-                      />
-                    </AspectRatio>
+                    <img
+                      src={getImg(backdrop.file_path, "w780")}
+                      className={`w-full object-cover min-h-[300px] ${
+                        tab.value === "Backdrops" && " h-[300px]"
+                      }`}
+                    />
                   </li>
                 ))}
               </ScrollableSection>

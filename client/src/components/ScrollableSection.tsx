@@ -22,9 +22,9 @@ export default function ScrollableSection({
   return (
     <div className="relative">
       {title && <HeaderText>{title}</HeaderText>}
-      <ScrollArea className="w-full h-full">
+      <ScrollArea className="w-full">
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-r from-transparent to-background z-10"></div>
-        <ol className="flex gap-3 items-stretch overflow-x-auto py-4">
+        <ol className="flex gap-3 items-stretch overflow-x-auto py-4 justify-center">
           {children}
           {viewMore && viewMoreLink && (
             <li className="min-w-36 z-10">
