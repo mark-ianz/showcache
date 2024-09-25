@@ -93,3 +93,15 @@ export async function getOneMovie({
 
   return data;
 }
+
+export async function getRecommendations({
+  queryKey,
+}: QueryFunctionContext): Promise<Movie[]> {
+  const [_key, language, id, page = 1] = queryKey;
+  const { data }: { data: API_Result } = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}/recommendations?language=en-US&page=${page}`,
+    axios_config({ method: "GET", params: { language } })
+  );
+
+  return data.results;
+}

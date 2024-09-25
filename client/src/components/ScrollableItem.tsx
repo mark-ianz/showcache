@@ -4,13 +4,13 @@ import { Card, CardContent } from "./ui/card";
 
 type Props = {
   image_path: string;
-  title: string;
-  subtext: string;
+  title?: string;
+  subtext?: string;
 };
 
 export default function ScrollableItem({ image_path, title, subtext }: Props) {
   return (
-    <li className="min-w-36">
+    <li className="min-w-36 cursor-pointer">
       <Card className="h-full">
         <CardContent>
           <AspectRatio ratio={2/3}>
