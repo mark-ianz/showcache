@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import ScrollableSection from "./ScrollableSection";
 import { useId, useState } from "react";
 import { Image } from "@/types/images";
+import { Link } from "react-router-dom";
 
 type Props = { tabs: TabContent[] };
 type Tab = "Backdrops" | "Posters";
@@ -43,6 +44,13 @@ export default function MediaTabs({ tabs }: Props) {
                   Posters
                 </Button>
               </TabsTrigger>
+              <Button
+                asChild
+                variant={"ghost"}
+                className="p-0 hover:bg-inherit text-muted-foreground"
+              >
+                <Link to={"#"}>View All Media</Link>
+              </Button>
             </TabsList>
           </div>
           {tabs.map((tab) => (
