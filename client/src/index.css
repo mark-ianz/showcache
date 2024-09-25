@@ -69,3 +69,7 @@
   text-decoration: underline;
   text-decoration-color: rgb(59 130 246);
 }
+
+.poster {
+  width: 200px;
+}

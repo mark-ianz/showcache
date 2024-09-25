@@ -55,13 +55,13 @@ export default function MediaTabs({ tabs }: Props) {
                   <li
                     key={backdrop.file_path + index}
                     className={`w-[500px] ${
-                      tab.value === "Posters" ? "h-[300px] w-[199px]" : ""
+                      tab.value === "Posters" && "poster"
                     }`}
                   >
                     <img
                       src={getImg(backdrop.file_path, "w780")}
-                      className={`w-full object-cover min-h-[300px] ${
-                        tab.value === "Backdrops" && " h-[300px]"
+                      className={`w-full object-cover h-[300px] ${
+                        tab.value === "Posters" && "poster"
                       }`}
                     />
                   </li>
