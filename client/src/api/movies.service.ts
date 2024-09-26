@@ -44,7 +44,7 @@ export async function getTrendingThisWeek({
 export async function getNewReleases({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
-  const [_key, language, page] = queryKey;
+  const [_key, language, page = 1] = queryKey;
   const { data } = await axios.get<API_Result>(
     `https://api.themoviedb.org/3/movie/now_playing?language=${language}&page=${page}`,
     axios_config({
