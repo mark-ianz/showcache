@@ -82,7 +82,7 @@ export async function getTopRated({
   return data.results;
 }
 
-export async function getOneMovie({
+export async function getMovieFullDetails({
   queryKey,
 }: QueryFunctionContext): Promise<MovieFullDetails> {
   const [_key, language, id] = queryKey;

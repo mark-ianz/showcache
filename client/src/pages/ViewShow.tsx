@@ -4,7 +4,7 @@ import ViewShowInfoSection from "@/components/show/ViewShowInfoSection";
 import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { getOneMovie, getRecommendations } from "@/api/movies.service";
+import { getMovieFullDetails, getRecommendations } from "@/api/movies.service";
 import { getCredits, getDirectors } from "@/api/credits.service";
 import { getImages, getTrailers } from "@/api/show.service";
 import { Cast, Crew } from "@/types/credits";
@@ -20,7 +20,7 @@ export default function ViewShow() {
 
   const { data, error, isLoading, isError } = useQuery({
     queryKey: ["single_show", language, id],
-    queryFn: getOneMovie,
+    queryFn: getMovieFullDetails,
     staleTime: 1000 * 60 * 5,
   });
 
