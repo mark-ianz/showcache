@@ -8,14 +8,13 @@ import { MovieFullDetails } from "@/types/movie.details";
 export async function getPopularMovies({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
-  const [_key, language, page] = queryKey;
+  const [_key, language, page = 1] = queryKey;
 
   try {
-    const { data }: { data: API_Result } = await axios.get(
-      `https://api.themoviedb.org/3/movie/popular`,
+    const { data } = await axios.get<API_Result>(
+      `https://api.themoviedb.org/3/movie/popular?language=${language}&page=${page}`,
       axios_config({
         method: "GET",
-        params: { language, page },
       })
     );
     return data.results;
@@ -27,13 +26,12 @@ export async function getPopularMovies({
 export async function getTrendingThisWeek({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
-  const [_key, language, date = "week"] = queryKey;
+  const [_key, language] = queryKey;
   try {
-    const { data }: { data: API_Result } = await axios.get(
-      `https://api.themoviedb.org/3/trending/movie/${date}`,
+    const { data } = await axios.get<API_Result>(
+      `https://api.themoviedb.org/3/trending/movie/week?language=${language}`,
       axios_config({
         method: "GET",
-        params: { language },
       })
     );
 
@@ -47,11 +45,10 @@ export async function getNewReleases({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
   const [_key, language, page] = queryKey;
-  const { data }: { data: API_Result } = await axios.get(
-    "https://api.themoviedb.org/3/movie/now_playing",
+  const { data } = await axios.get<API_Result>(
+    `https://api.themoviedb.org/3/movie/now_playing?language=${language}&page=${page}`,
     axios_config({
       method: "GET",
-      params: { language, page },
     })
   );
   return data.results;
@@ -60,12 +57,12 @@ export async function getNewReleases({
 export async function getUpcomingMovies({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
-  const [_key, language, page] = queryKey;
-  const { data }: { data: API_Result } = await axios.get(
-    "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&sort_by=popularity.desc",
+  const [_key, language, page = 1] = queryKey;
+  const { data } = await axios.get<API_Result>(
+    `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&sort_by=popularity.desc&language=${language}&page=${page}`,
     axios_config({
       method: "GET",
-      params: { language, "primary_release_date.gte": new Date(), page },
+      params: { "primary_release_date.gte": new Date() },
     })
   );
   return data.results;
@@ -74,10 +71,10 @@ export async function getUpcomingMovies({
 export async function getTopRated({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
-  const [_key, language] = queryKey;
-  const { data }: { data: API_Result } = await axios.get(
-    "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
-    axios_config({ method: "GET", params: { language } })
+  const [_key, language, page = 1] = queryKey;
+  const { data } = await axios.get<API_Result>(
+    `https://api.themoviedb.org/3/movie/top_rated?language=${language}&page=${page}`,
+    axios_config({ method: "GET" })
   );
   return data.results;
 }
@@ -86,9 +83,9 @@ export async function getMovieFullDetails({
   queryKey,
 }: QueryFunctionContext): Promise<MovieFullDetails> {
   const [_key, language, id] = queryKey;
-  const { data }: { data: MovieFullDetails } = await axios.get(
-    `https://api.themoviedb.org/3/movie/${id}`,
-    axios_config({ method: "GET", params: { language } })
+  const { data } = await axios.get<MovieFullDetails>(
+    `https://api.themoviedb.org/3/movie/${id}?language=${language}`,
+    axios_config({ method: "GET" })
   );
 
   return data;
@@ -98,9 +95,9 @@ export async function getRecommendations({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
   const [_key, language, id, page = 1] = queryKey;
-  const { data }: { data: API_Result } = await axios.get(
-    `https://api.themoviedb.org/3/movie/${id}/recommendations?language=en-US&page=${page}`,
-    axios_config({ method: "GET", params: { language } })
+  const { data } = await axios.get<API_Result>(
+    `https://api.themoviedb.org/3/movie/${id}/recommendations?language=${language}&page=${page}`,
+    axios_config({ method: "GET" })
   );
 
   return data.results;
