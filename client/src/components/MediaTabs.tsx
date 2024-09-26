@@ -7,6 +7,7 @@ import ScrollableSection from "./ScrollableSection";
 import { useId, useState } from "react";
 import { Image } from "@/types/images";
 import { Link } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
 type Props = { tabs: TabContent[] };
 type Tab = "Backdrops" | "Posters";
@@ -62,15 +63,17 @@ export default function MediaTabs({ tabs }: Props) {
                 {tab.images.slice(0, 14).map((backdrop, index) => (
                   <li
                     key={backdrop.file_path + index}
-                    className={`w-[500px] ${
-                      tab.value === "Posters" && "poster"
-                    }`}
+                    className={cn(
+                      "w-[500px]",
+                      tab.value === "Posters" && "poster",
+                    )}
                   >
                     <img
                       src={getImg(backdrop.file_path, "w780")}
-                      className={`w-full object-cover h-[300px] ${
+                      className={cn(
+                        "w-full object-cover h-[300px]",
                         tab.value === "Posters" && "poster"
-                      }`}
+                      )}
                     />
                   </li>
                 ))}

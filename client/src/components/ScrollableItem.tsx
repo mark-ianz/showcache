@@ -1,19 +1,26 @@
 import { getImg } from "@/lib/helpers";
 import { AspectRatio } from "./ui/aspect-ratio";
 import { Card, CardContent } from "./ui/card";
+import { cn } from "@/lib/utils";
 
 type Props = {
   image_path: string;
   title?: string;
   subtext?: string;
+  lastItem?: boolean;
 };
 
-export default function ScrollableItem({ image_path, title, subtext }: Props) {
+export default function ScrollableItem({
+  image_path,
+  title,
+  subtext,
+  lastItem,
+}: Props) {
   return (
-    <li className="min-w-36 cursor-pointer">
+    <li className={cn("min-w-36 cursor-pointer", lastItem && "z-10")}>
       <Card className="h-full">
         <CardContent>
-          <AspectRatio ratio={2/3}>
+          <AspectRatio ratio={2 / 3}>
             <img
               src={getImg(image_path, "w780")}
               alt={`Image of ${title}`}
