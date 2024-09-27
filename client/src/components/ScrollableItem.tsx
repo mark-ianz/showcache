@@ -20,7 +20,7 @@ export default function ScrollableItem({
   path,
 }: Props) {
   return (
-    <li className={cn("min-w-36", lastItem && "z-10")}>
+    <li className={cn("min-w-48", lastItem && "z-10")}>
       <Link to={path}>
         <Card className="h-full">
           <CardContent>

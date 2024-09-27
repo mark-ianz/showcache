@@ -11,6 +11,9 @@ import { Cast, Crew } from "@/types/credits";
 import { useState } from "react";
 import MediaTabs from "@/components/MediaTabs";
 import { Movie } from "@/types/show";
+import ShowCard from "@/components/show/ShowCard";
+import { getImg } from "@/lib/helpers";
+import no_image from "@/assets/no-image.png";
 
 export default function ViewShow() {
   const { id } = useParams();
@@ -119,17 +122,32 @@ export default function ViewShow() {
         {recommendations.length > 0 && (
           <ScrollableSection title="Recommendations">
             {recommendations.map((movie: Movie, index: number) => (
-              <ScrollableItem
-                path={"/movie/" + movie.id}
-                lastItem={index + 1 === recommendations.length}
-                key={movie.id}
-                image_path={movie.poster_path}
-                title={movie.title}
-              />
+              <li className="min-w-48">
+                <ShowCard
+                  genre_ids={movie.genre_ids}
+                  vote_average={movie.vote_average}
+                  name={movie.title}
+                  image={
+                    movie.poster_path
+                      ? "https://image.tmdb.org/t/p/w400" + movie.poster_path
+                      : no_image
+                  }
+                />
+              </li>
             ))}
           </ScrollableSection>
         )}
       </main>
     </>
   );
+}
+
+{
+  /* <ScrollableItem
+  path={"/movie/" + movie.id}
+  lastItem={index + 1 === recommendations.length}
+  key={movie.id}
+  image_path={movie.poster_path}
+  title={movie.title}
+/> */
 }
