@@ -71,7 +71,7 @@ export default function ViewShow() {
     (trailer) => trailer.name === "Official Trailer" || trailer.official
   );
 
-  console.log(images);
+  console.log(recommendations);
   const scrollItems: (Cast | Crew)[] =
     credits.cast.length > 14
       ? credits.cast.slice(0, 14)
@@ -107,24 +107,28 @@ export default function ViewShow() {
           ))}
         </ScrollableSection>
 
-        <MediaTabs
-          tabs={[
-            { images: images.backdrops, value: "Backdrops" },
-            { images: images.posters, value: "Posters" },
-          ]}
-        />
+        {!images.backdrops && !images.posters && (
+          <MediaTabs
+            tabs={[
+              { images: images.backdrops, value: "Backdrops" },
+              { images: images.posters, value: "Posters" },
+            ]}
+          />
+        )}
 
-        <ScrollableSection title="Recommendations">
-          {recommendations.map((movie: Movie, index: number) => (
-            <ScrollableItem
-              path={"/movie/" + movie.id}
-              lastItem={index + 1 === recommendations.length}
-              key={movie.id}
-              image_path={movie.poster_path}
-              title={movie.title}
-            />
-          ))}
-        </ScrollableSection>
+        {recommendations.length > 0 && (
+          <ScrollableSection title="Recommendations">
+            {recommendations.map((movie: Movie, index: number) => (
+              <ScrollableItem
+                path={"/movie/" + movie.id}
+                lastItem={index + 1 === recommendations.length}
+                key={movie.id}
+                image_path={movie.poster_path}
+                title={movie.title}
+              />
+            ))}
+          </ScrollableSection>
+        )}
       </main>
     </>
   );

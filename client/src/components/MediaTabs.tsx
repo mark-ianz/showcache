@@ -65,7 +65,7 @@ export default function MediaTabs({ tabs }: Props) {
                     key={backdrop.file_path + index}
                     className={cn(
                       "w-[500px]",
-                      tab.value === "Posters" && "poster",
+                      tab.value === "Posters" && "poster"
                     )}
                   >
                     <img
