@@ -95,6 +95,7 @@ export default function ViewShow() {
         >
           {scrollItems.map((credit: Cast | Crew, index: number) => (
             <ScrollableItem
+              path={"/person/" + credits.id}
               lastItem={index + 1 === scrollItems.length}
               key={`${credit.id}-${
                 "character" in credit ? credit.character : credit.job
@@ -116,6 +117,7 @@ export default function ViewShow() {
         <ScrollableSection title="Recommendations">
           {recommendations.map((movie: Movie, index: number) => (
             <ScrollableItem
+              path={"/movie/" + movie.id}
               lastItem={index + 1 === recommendations.length}
               key={movie.id}
               image_path={movie.poster_path}
