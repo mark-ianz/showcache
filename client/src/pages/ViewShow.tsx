@@ -121,9 +121,10 @@ export default function ViewShow() {
 
         {recommendations.length > 0 && (
           <ScrollableSection title="Recommendations">
-            {recommendations.map((movie: Movie, index: number) => (
+            {recommendations.map((movie: Movie) => (
               <li className="min-w-48">
                 <ShowCard
+                  path={"/movie/" + movie.id}
                   genre_ids={movie.genre_ids}
                   vote_average={movie.vote_average}
                   name={movie.title}
