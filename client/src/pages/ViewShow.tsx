@@ -128,11 +128,7 @@ export default function ViewShow() {
                   genre_ids={movie.genre_ids}
                   vote_average={movie.vote_average}
                   name={movie.title}
-                  image={
-                    movie.poster_path
-                      ? "https://image.tmdb.org/t/p/w400" + movie.poster_path
-                      : no_image
-                  }
+                  image_path={movie.poster_path}
                 />
               </li>
             ))}

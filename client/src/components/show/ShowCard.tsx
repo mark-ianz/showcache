@@ -3,23 +3,23 @@ import { Badge } from "../ui/badge";
 import { useId } from "react";
 import Rating from "../Rating";
 import { AspectRatio } from "../ui/aspect-ratio";
-import { getGenre } from "@/lib/helpers";
+import { getGenre, getImg } from "@/lib/helpers";
 import { Link } from "react-router-dom";
 
 type ShowCardProps = {
   name: string;
-  image: string;
+  image_path: string;
   vote_average: number;
   genre_ids: number[];
-  path: string,
+  path: string;
 };
 
 export default function ShowCard({
   name,
-  image,
+  image_path,
   vote_average,
   genre_ids,
-  path
+  path,
 }: ShowCardProps) {
   const genre_list = getGenre(genre_ids);
 
@@ -28,7 +28,7 @@ export default function ShowCard({
       <Card className="cursor-pointer w-full h-full flex flex-col">
         <AspectRatio ratio={2 / 3}>
           <img
-            src={image}
+            src={getImg(image_path, "w780", false)}
             alt={`Poster image of ${name}`}
             className="w-full h-full object-cover rounded-t-xl"
             loading="lazy"
@@ -36,7 +36,7 @@ export default function ShowCard({
         </AspectRatio>
         <CardContent className="p-2 flex flex-col justify-between flex-grow gap-2">
           <div className="flex items-center justify-between">
-            <CardTitle className="font-semibold text-sm line-clamp-1 hover:underline">
+            <CardTitle className="font-semibold text-sm line-clamp-2 hover:underline">
               {name}
             </CardTitle>
             <Rating rating={vote_average} />

@@ -35,11 +35,7 @@ export default function ShowSection({
               genre_ids={show.genre_ids}
               vote_average={show.vote_average}
               name={isTv ? (show as TV).name : (show as Movie).title}
-              image={
-                show.poster_path
-                  ? "https://image.tmdb.org/t/p/w400" + show.poster_path
-                  : no_image
-              }
+              image_path={show.poster_path}
             />
           </li>
         ))}
