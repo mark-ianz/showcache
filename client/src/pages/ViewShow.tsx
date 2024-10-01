@@ -46,7 +46,7 @@ export default function ViewShow() {
   });
 
   const { data: images } = useQuery({
-    queryKey: ["images", language, "movie", id],
+    queryKey: ["images", "movie", id],
     queryFn: getImages,
     staleTime: 1000 * 60 * 5,
   });
@@ -74,7 +74,7 @@ export default function ViewShow() {
     (trailer) => trailer.name === "Official Trailer" || trailer.official
   );
 
-  console.log(recommendations);
+  console.log(images);
   const scrollItems: (Cast | Crew)[] =
     credits.cast.length > 14
       ? credits.cast.slice(0, 14)
@@ -110,7 +110,7 @@ export default function ViewShow() {
           ))}
         </ScrollableSection>
 
-        {images.backdrops.length > 0 || images.posters.length > 0 && (
+        {images.backdrops.length > 0 && images.posters.length > 0 && (
           <MediaTabs
             tabs={[
               { images: images.backdrops, value: "Backdrops" },
