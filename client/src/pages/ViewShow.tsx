@@ -110,7 +110,7 @@ export default function ViewShow() {
           ))}
         </ScrollableSection>
 
-        {!images.backdrops && !images.posters && (
+        {images.backdrops.length > 0 || images.posters.length > 0 && (
           <MediaTabs
             tabs={[
               { images: images.backdrops, value: "Backdrops" },
