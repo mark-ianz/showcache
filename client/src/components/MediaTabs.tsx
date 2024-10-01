@@ -32,7 +32,7 @@ export default function MediaTabs({ tabs }: Props) {
               <TabsTrigger value="Backdrops" asChild>
                 <Button
                   variant={"ghost"}
-                  className="p-0 hover:bg-inherit text-muted-foreground"
+                  className="p-0 hover:bg-inherit text-muted-foreground focus-visible:ring-0"
                 >
                   Backdrops
                 </Button>
@@ -40,7 +40,7 @@ export default function MediaTabs({ tabs }: Props) {
               <TabsTrigger value="Posters" asChild>
                 <Button
                   variant={"ghost"}
-                  className="p-0 hover:bg-inherit text-muted-foreground"
+                  className="p-0 hover:bg-inherit text-muted-foreground focus-visible:ring-0"
                 >
                   Posters
                 </Button>
@@ -48,7 +48,7 @@ export default function MediaTabs({ tabs }: Props) {
               <Button
                 asChild
                 variant={"ghost"}
-                className="p-0 hover:bg-inherit text-muted-foreground"
+                className="p-0 hover:bg-inherit text-muted-foreground focus-visible:ring-0"
               >
                 <Link to={"#"}>View All Media</Link>
               </Button>
