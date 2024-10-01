@@ -27,8 +27,8 @@ export default function ScrollableSection({
         <ol className="flex gap-3 items-stretch overflow-x-auto py-4 justify-start">
           {children}
           {viewMore && viewMoreLink && (
-            <li className="min-w-36 z-10">
-              <Card className="h-full">
+            <li className="min-w-48 z-10">
+              <Card className="h-full border-none">
                 <CardContent className="flex items-center justify-center h-full">
                   <Button asChild variant={"link"}>
                     <Link
