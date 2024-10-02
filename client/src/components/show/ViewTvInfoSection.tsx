@@ -14,6 +14,10 @@ import Rating from "../Rating";
 import { TvFullDetails } from "@/types/tv";
 import ViewInfoSectionWrapper from "./ViewInfoSectionWrapper";
 import TrailerDialog from "./TrailerDialog";
+import JoinGenreList from "./JoinGenreList";
+import ShowNameWYear from "./ShowNameWYear";
+import OtherShowDescription from "./OtherShowDescription";
+import OptionButtons from "./OptionButtons";
 
 type ViewTvInfoSectionProps = {
   showData: TvFullDetails;
@@ -32,7 +36,6 @@ export default function ViewTvInfoSection({
 }: ViewTvInfoSectionProps) {
   const backdrop_path = getImg(showData?.backdrop_path!, "w1280", true);
   const poster_path = getImg(showData?.poster_path!, "w300", true);
-  const tagline = showData?.tagline;
 
   return (
     <ViewInfoSectionWrapper backdrop_path={backdrop_path}>
@@ -47,47 +50,21 @@ export default function ViewTvInfoSection({
         <div className="flex flex-col gap-4">
           <div className="flex gap-4 font-thin">
             <p>
-              {showData?.seasons ? `${showData.seasons.length} seasons` : "N/A"}{" "}
+              {showData?.seasons ? `${showData.seasons.length} seasons` : "N/A"}
             </p>
-            <p>{genreList?.join(" / ")}</p>
+            <JoinGenreList genreList={genreList} />
             <Rating rating={showData.vote_average} />
           </div>
-          <div className="flex gap-4 items-center text-4xl">
-            <p className="font-bold">{showData?.name}</p>
-            <p>({year})</p>
-          </div>
-          <div className="flex flex-col gap-2">
-            {tagline && (
-              <p className="text-muted-foreground italic">{tagline}</p>
-            )}
-            <div>
-              <p className="text-xl font-bold">Overview</p>
-              <p>{showData?.overview}</p>
-            </div>
-            <p className="text-muted-foreground">
-              Directed by {directorList?.join(", ")}
-            </p>
-          </div>
-          <div className="flex gap-4">
-            <Button
-              size={"icon"}
-              className="rounded-full"
-              variant={"secondary"}
-            >
-              <HeartIcon className="w-5 h-5" />
-            </Button>
-            <Button
-              size={"icon"}
-              className="rounded-full"
-              variant={"secondary"}
-            >
-              <BookmarkIcon className="w-5 h-5" />
-            </Button>
-            <TrailerDialog
-              officialTrailer={officialTrailer}
-              showName={showData.name}
-            />
-          </div>
+          <ShowNameWYear showName={showData.name} year={year} />
+          <OtherShowDescription
+            directorList={directorList}
+            tagline={showData.tagline}
+            overview={showData.overview}
+          />
+          <OptionButtons
+            officialTrailer={officialTrailer}
+            showName={showData.name}
+          />
         </div>
       </div>
     </ViewInfoSectionWrapper>
