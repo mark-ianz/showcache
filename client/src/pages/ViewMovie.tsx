@@ -83,7 +83,7 @@ export default function ViewMovie() {
     <>
       <main className="w-full relative flex flex-col gap-10">
         <ViewShowInfoSection
-          showData={data}
+          movieFullDetails={data}
           genreList={genreList}
           directorList={directorList}
           year={year}

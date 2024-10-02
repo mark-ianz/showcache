@@ -12,6 +12,8 @@ import { BookmarkIcon } from "@radix-ui/react-icons";
 import { HeartIcon, Play } from "lucide-react";
 import Rating from "../Rating";
 import { TvFullDetails } from "@/types/tv";
+import ViewInfoSectionWrapper from "./ViewInfoSectionWrapper";
+import TrailerDialog from "./TrailerDialog";
 
 type ViewTvInfoSectionProps = {
   showData: TvFullDetails;
@@ -33,17 +35,7 @@ export default function ViewTvInfoSection({
   const tagline = showData?.tagline;
 
   return (
-    <section
-      className="p-6"
-      style={{
-        backgroundImage: `url(${backdrop_path})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-background opacity-90 z-0"></div>
-
+    <ViewInfoSectionWrapper backdrop_path={backdrop_path}>
       <div className="flex gap-10 relative z-10 items-center">
         {poster_path && (
           <img
@@ -91,47 +83,13 @@ export default function ViewTvInfoSection({
             >
               <BookmarkIcon className="w-5 h-5" />
             </Button>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button
-                  variant={"secondary"}
-                  className="gap-1"
-                  disabled={!officialTrailer}
-                >
-                  {officialTrailer ? (
-                    <>
-                      <Play className="w-5 h-5" />
-                      <p> Play Trailer</p>
-                    </>
-                  ) : (
-                    "No Available Trailer"
-                  )}
-                </Button>
-              </DialogTrigger>
-              {officialTrailer && (
-                <DialogContent
-                  className="max-w-screen-lg p-0 pt-4 border-none bg-black"
-                  aria-describedby={undefined}
-                >
-                  <div className="flex items-center">
-                    <DialogTitle className="pl-4 text-white">
-                      {showData.name} Trailer
-                    </DialogTitle>
-                    <DialogClose color="#ffffff" />
-                  </div>
-                  <div className="aspect-video relative">
-                    <iframe
-                      className="absolute top-0 left-0 w-full h-full"
-                      src={`https://www.youtube.com/embed/${officialTrailer.key}`}
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                </DialogContent>
-              )}
-            </Dialog>
+            <TrailerDialog
+              officialTrailer={officialTrailer}
+              showName={showData.name}
+            />
           </div>
         </div>
       </div>
-    </section>
+    </ViewInfoSectionWrapper>
   );
 }
