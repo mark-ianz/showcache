@@ -1,19 +1,14 @@
 import ScrollableItem from "@/components/ScrollableItem";
 import ScrollableSection from "@/components/ScrollableSection";
-import ViewShowInfoSection from "@/components/show/ViewMovieInfoSection";
 import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { getMovieFullDetails } from "@/api/movies.service";
-import { getCredits, getDirectors } from "@/api/credits.service";
-import { getImages, getRecommendations, getTrailers } from "@/api/show.service";
+import { getCredits } from "@/api/credits.service";
+import { getImages, getTrailers, getTvRecommendations } from "@/api/show.service";
 import { Cast, Crew } from "@/types/credits";
-import { useState } from "react";
 import MediaTabs from "@/components/MediaTabs";
-import { Movie } from "@/types/show";
+import { Movie, TV } from "@/types/show";
 import ShowCard from "@/components/show/ShowCard";
-import { getImg } from "@/lib/helpers";
-import no_image from "@/assets/no-image.png";
 import { getTvFullDetails } from "@/api/tv.service";
 import ViewTvInfoSection from "@/components/show/ViewTvInfoSection";
 
@@ -48,8 +43,8 @@ export default function ViewTv() {
   });
 
   const { data: recommendations } = useQuery({
-    queryKey: ["recommendations", language, id],
-    queryFn: getRecommendations,
+    queryKey: ["tv_recommendations", language, id],
+    queryFn: getTvRecommendations,
     staleTime: 1000 * 60 * 5,
   });
 
@@ -111,14 +106,14 @@ export default function ViewTv() {
 
         {recommendations.length > 0 && (
           <ScrollableSection title="Recommendations">
-            {recommendations.map((movie: Movie) => (
-              <li className="min-w-48" key={movie.id}>
+            {recommendations.map((tv: TV) => (
+              <li className="min-w-48" key={tv.id}>
                 <ShowCard
-                  path={"/movie/" + movie.id}
-                  genre_ids={movie.genre_ids}
-                  vote_average={movie.vote_average}
-                  name={movie.title}
-                  image_path={movie.poster_path}
+                  path={"/tv/" + tv.id}
+                  genre_ids={tv.genre_ids}
+                  vote_average={tv.vote_average}
+                  name={tv.name}
+                  image_path={tv.poster_path}
                 />
               </li>
             ))}

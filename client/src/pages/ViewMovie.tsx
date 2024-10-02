@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { getMovieFullDetails } from "@/api/movies.service";
 import { getCredits, getDirectors } from "@/api/credits.service";
-import { getImages, getRecommendations, getTrailers } from "@/api/show.service";
+import { getImages, getMovieRecommendations, getTrailers } from "@/api/show.service";
 import { Cast, Crew } from "@/types/credits";
 import { useState } from "react";
 import MediaTabs from "@/components/MediaTabs";
@@ -52,8 +52,8 @@ export default function ViewMovie() {
   });
 
   const { data: recommendations } = useQuery({
-    queryKey: ["recommendations", language, id],
-    queryFn: getRecommendations,
+    queryKey: ["movie_recommendations", language, id],
+    queryFn: getMovieRecommendations,
     staleTime: 1000 * 60 * 5,
   });
 

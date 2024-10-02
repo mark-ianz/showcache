@@ -45,12 +45,24 @@ export async function getImages({
   return data;
 }
 
-export async function getRecommendations({
+export async function getMovieRecommendations({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
   const [_key, language, id, page = 1] = queryKey;
   const { data } = await axios.get<API_Result>(
     `https://api.themoviedb.org/3/movie/${id}/recommendations?language=${language}&page=${page}`,
+    axios_config({ method: "GET" })
+  );
+
+  return data.results;
+}
+
+export async function getTvRecommendations({
+  queryKey,
+}: QueryFunctionContext): Promise<TV[]> {
+  const [_key, language, id, page = 1] = queryKey;
+  const { data } = await axios.get<API_Result>(
+    `https://api.themoviedb.org/3/tv/${id}/recommendations?language=${language}&page=${page}`,
     axios_config({ method: "GET" })
   );
 
