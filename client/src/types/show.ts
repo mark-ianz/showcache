@@ -40,9 +40,13 @@ export type ProductionCompany = {
   origin_country: string;
 };
 
-export type ProductionCountries = { iso_3166_1: string; name: string }
+export type ProductionCountries = { iso_3166_1: string; name: string };
 
-export type SpokenLanguage = { english_name: string; iso_639_1: string; name: string }
+export type SpokenLanguage = {
+  english_name: string;
+  iso_639_1: string;
+  name: string;
+};
 
 export type FullDetails = {
   production_companies: ProductionCompany[];
@@ -51,5 +55,6 @@ export type FullDetails = {
   genres: Genre[];
   tagline: string;
   homepage: URL;
-  spoken_languages:SpokenLanguage [];
-}
+  imdb_id: string;
+  spoken_languages: SpokenLanguage[];
+};

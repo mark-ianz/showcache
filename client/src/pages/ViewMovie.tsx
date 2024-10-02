@@ -66,7 +66,6 @@ export default function ViewMovie() {
     !recommendations
   )
     return <p>loading</p>;
-
   const genreList = data?.genres.map((genre) => genre.name);
   const directorList = directors.map((director) => director.name);
   const year = data && new Date(data.release_date).getFullYear();
@@ -122,7 +121,7 @@ export default function ViewMovie() {
         {recommendations.length > 0 && (
           <ScrollableSection title="Recommendations">
             {recommendations.map((movie: Movie) => (
-              <li className="min-w-48">
+              <li className="min-w-48" key={movie.id}>
                 <ShowCard
                   path={"/movie/" + movie.id}
                   genre_ids={movie.genre_ids}

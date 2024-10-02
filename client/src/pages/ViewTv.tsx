@@ -112,7 +112,7 @@ export default function ViewTv() {
         {recommendations.length > 0 && (
           <ScrollableSection title="Recommendations">
             {recommendations.map((movie: Movie) => (
-              <li className="min-w-48">
+              <li className="min-w-48" key={movie.id}>
                 <ShowCard
                   path={"/movie/" + movie.id}
                   genre_ids={movie.genre_ids}
