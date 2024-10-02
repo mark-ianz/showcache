@@ -87,18 +87,5 @@ export async function getMovieFullDetails({
     `https://api.themoviedb.org/3/movie/${id}?language=${language}`,
     axios_config({ method: "GET" })
   );
-
   return data;
-}
-
-export async function getRecommendations({
-  queryKey,
-}: QueryFunctionContext): Promise<Movie[]> {
-  const [_key, language, id, page = 1] = queryKey;
-  const { data } = await axios.get<API_Result>(
-    `https://api.themoviedb.org/3/movie/${id}/recommendations?language=${language}&page=${page}`,
-    axios_config({ method: "GET" })
-  );
-
-  return data.results;
 }

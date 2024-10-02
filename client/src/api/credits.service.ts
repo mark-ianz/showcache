@@ -6,9 +6,9 @@ import { QueryFunctionContext } from "@tanstack/react-query";
 export async function getDirectors({
   queryKey,
 }: QueryFunctionContext): Promise<Crew[]> {
-  const [_key, language, id] = queryKey;
+  const [_key,type, language, id] = queryKey;
   const { data }: { data: CreditsResult } = await axios.get(
-    `https://api.themoviedb.org/3/movie/${id}/credits`,
+    `https://api.themoviedb.org/3/${type}/${id}/credits`,
     axios_config({ method: "GET", params: { language } })
   );
 
@@ -20,9 +20,9 @@ export async function getDirectors({
 export async function getCredits({
   queryKey,
 }: QueryFunctionContext): Promise<CreditsResult> {
-  const [_key, language, id] = queryKey;
+  const [_key,type, language, id] = queryKey;
   const { data }: { data: CreditsResult } = await axios.get(
-    `https://api.themoviedb.org/3/movie/${id}/credits`,
+    `https://api.themoviedb.org/3/${type}/${id}/credits`,
     axios_config({ method: "GET", params: { language } })
   );
 

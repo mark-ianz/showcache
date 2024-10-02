@@ -7,27 +7,27 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { getImg } from "@/lib/helpers";
-import { MovieFullDetails } from "@/types/movie.details";
 import { Video } from "@/types/video";
 import { BookmarkIcon } from "@radix-ui/react-icons";
 import { HeartIcon, Play } from "lucide-react";
 import Rating from "../Rating";
+import { TvFullDetails } from "@/types/tv";
 
-type ViewShowInfoSectionProps = {
-  showData: MovieFullDetails;
+type ViewTvInfoSectionProps = {
+  showData: TvFullDetails;
   genreList: string[];
   directorList: string[];
   year: number;
   officialTrailer: Video | undefined;
 };
 
-const ViewShowInfoSection = ({
+export default function ViewTvInfoSection({
   showData,
   genreList,
   directorList,
   year,
   officialTrailer,
-}: ViewShowInfoSectionProps) => {
+}: ViewTvInfoSectionProps) {
   const backdrop_path = getImg(showData?.backdrop_path!, "w1280", true);
   const poster_path = getImg(showData?.poster_path!, "w300", true);
   const tagline = showData?.tagline;
@@ -48,18 +48,20 @@ const ViewShowInfoSection = ({
         {poster_path && (
           <img
             src={poster_path}
-            alt={showData.title + " poster path"}
+            alt={showData.name + " poster path"}
             className="object-cover rounded-lg"
           />
         )}
         <div className="flex flex-col gap-4">
           <div className="flex gap-4 font-thin">
-            <p>{showData?.runtime ? `${showData.runtime} min` : "N/A"} </p>
+            <p>
+              {showData?.seasons ? `${showData.seasons.length} seasons` : "N/A"}{" "}
+            </p>
             <p>{genreList?.join(" / ")}</p>
-            <Rating rating={showData.vote_average}/>
+            <Rating rating={showData.vote_average} />
           </div>
           <div className="flex gap-4 items-center text-4xl">
-            <p className="font-bold">{showData?.title}</p>
+            <p className="font-bold">{showData?.name}</p>
             <p>({year})</p>
           </div>
           <div className="flex flex-col gap-2">
@@ -113,7 +115,7 @@ const ViewShowInfoSection = ({
                 >
                   <div className="flex items-center">
                     <DialogTitle className="pl-4 text-white">
-                      {showData.title} Trailer
+                      {showData.name} Trailer
                     </DialogTitle>
                     <DialogClose color="#ffffff" />
                   </div>
@@ -132,6 +134,4 @@ const ViewShowInfoSection = ({
       </div>
     </section>
   );
-};
-
-export default ViewShowInfoSection;
+}

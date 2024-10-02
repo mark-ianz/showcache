@@ -1,9 +1,12 @@
+import { Genre } from "./genre";
+import { LanguageCode } from "./language";
+
 export type Show = {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
   id: number;
-  original_language: string;
+  original_language: LanguageCode;
   overview: string;
   popularity: number;
   poster_path: string;
@@ -29,3 +32,24 @@ export type API_Result = {
   total_pages: number;
   total_results: number;
 };
+
+export type ProductionCompany = {
+  id: number;
+  logo_path: string;
+  name: string;
+  origin_country: string;
+};
+
+export type ProductionCountries = { iso_3166_1: string; name: string }
+
+export type SpokenLanguage = { english_name: string; iso_639_1: string; name: string }
+
+export type FullDetails = {
+  production_companies: ProductionCompany[];
+  production_countries: ProductionCountries[];
+  status: string;
+  genres: Genre[];
+  tagline: string;
+  homepage: URL;
+  spoken_languages:SpokenLanguage [];
+}

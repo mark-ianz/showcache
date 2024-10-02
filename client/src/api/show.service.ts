@@ -8,9 +8,9 @@ import { ImageResult } from "@/types/images";
 export async function getTrailers({
   queryKey,
 }: QueryFunctionContext): Promise<Video[]> {
-  const [_key, language, id] = queryKey;
+  const [_key, type, language, id] = queryKey;
   const { data }: { data: VideosResult } = await axios.get(
-    `https://api.themoviedb.org/3/movie/${id}/videos`,
+    `https://api.themoviedb.org/3/${type}/${id}/videos`,
     axios_config({ method: "GET", params: { language } })
   );
 
@@ -43,4 +43,16 @@ export async function getImages({
   );
 
   return data;
+}
+
+export async function getRecommendations({
+  queryKey,
+}: QueryFunctionContext): Promise<Movie[]> {
+  const [_key, language, id, page = 1] = queryKey;
+  const { data } = await axios.get<API_Result>(
+    `https://api.themoviedb.org/3/movie/${id}/recommendations?language=${language}&page=${page}`,
+    axios_config({ method: "GET" })
+  );
+
+  return data.results;
 }

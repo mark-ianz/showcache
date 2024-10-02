@@ -1,12 +1,12 @@
 import ScrollableItem from "@/components/ScrollableItem";
 import ScrollableSection from "@/components/ScrollableSection";
-import ViewShowInfoSection from "@/components/show/ViewShowInfoSection";
+import ViewShowInfoSection from "@/components/show/ViewMovieInfoSection";
 import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { getMovieFullDetails, getRecommendations } from "@/api/movies.service";
+import { getMovieFullDetails } from "@/api/movies.service";
 import { getCredits, getDirectors } from "@/api/credits.service";
-import { getImages, getTrailers } from "@/api/show.service";
+import { getImages, getRecommendations, getTrailers } from "@/api/show.service";
 import { Cast, Crew } from "@/types/credits";
 import { useState } from "react";
 import MediaTabs from "@/components/MediaTabs";
@@ -15,7 +15,7 @@ import ShowCard from "@/components/show/ShowCard";
 import { getImg } from "@/lib/helpers";
 import no_image from "@/assets/no-image.png";
 
-export default function ViewShow() {
+export default function ViewMovie() {
   const { id } = useParams();
   const {
     language: { iso_639_1: language },
@@ -28,19 +28,19 @@ export default function ViewShow() {
   });
 
   const { data: directors } = useQuery({
-    queryKey: ["directors", language, id],
+    queryKey: ["directors","movie", language, id],
     queryFn: getDirectors,
     staleTime: 1000 * 60 * 5,
   });
 
   const { data: trailers } = useQuery({
-    queryKey: ["trailers", language, id],
+    queryKey: ["trailers","movie", language, id],
     queryFn: getTrailers,
     staleTime: 1000 * 60 * 5,
   });
 
   const { data: credits } = useQuery({
-    queryKey: ["credits", language, id],
+    queryKey: ["credits","movie", language, id],
     queryFn: getCredits,
     staleTime: 1000 * 60 * 5,
   });
