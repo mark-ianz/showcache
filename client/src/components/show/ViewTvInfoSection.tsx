@@ -1,19 +1,8 @@
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { getImg } from "@/lib/helpers";
 import { Video } from "@/types/video";
-import { BookmarkIcon } from "@radix-ui/react-icons";
-import { HeartIcon, Play } from "lucide-react";
 import Rating from "../Rating";
 import { TvFullDetails } from "@/types/tv";
 import ViewInfoSectionWrapper from "./ViewInfoSectionWrapper";
-import TrailerDialog from "./TrailerDialog";
 import JoinGenreList from "./JoinGenreList";
 import ShowNameWYear from "./ShowNameWYear";
 import OtherShowDescription from "./OtherShowDescription";
