@@ -28,19 +28,19 @@ export default function ViewMovie() {
   });
 
   const { data: directors } = useQuery({
-    queryKey: ["directors","movie", language, id],
+    queryKey: ["directors", "movie", language, id],
     queryFn: getDirectors,
     staleTime: 1000 * 60 * 5,
   });
 
   const { data: trailers } = useQuery({
-    queryKey: ["trailers","movie", language, id],
+    queryKey: ["trailers", "movie", language, id],
     queryFn: getTrailers,
     staleTime: 1000 * 60 * 5,
   });
 
   const { data: credits } = useQuery({
-    queryKey: ["credits","movie", language, id],
+    queryKey: ["credits", "movie", language, id],
     queryFn: getCredits,
     staleTime: 1000 * 60 * 5,
   });
