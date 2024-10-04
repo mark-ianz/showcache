@@ -12,9 +12,11 @@ export default function OtherShowDescription({
         <p className="text-xl font-bold">Overview</p>
         <p>{overview}</p>
       </div>
-      <p className="text-muted-foreground">
-        Directed by {directorList?.join(", ")}
-      </p>
+      {directorList.length > 0 && (
+        <p className="text-muted-foreground">
+          Directed by {directorList.join(", ")}
+        </p>
+      )}
     </div>
   );
 }

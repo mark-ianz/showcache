@@ -66,6 +66,7 @@ export default function ViewMovie() {
     !recommendations
   )
     return <p>loading</p>;
+    console.log(data)
   const genreList = data?.genres.map((genre) => genre.name);
   const directorList = directors.map((director) => director.name);
   const year = data && new Date(data.release_date).getFullYear();
@@ -73,7 +74,6 @@ export default function ViewMovie() {
     (trailer) => trailer.name === "Official Trailer" || trailer.official
   );
 
-  console.log(images);
   const scrollItems: (Cast | Crew)[] =
     credits.cast.length > 14
       ? credits.cast.slice(0, 14)
