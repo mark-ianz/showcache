@@ -28,7 +28,6 @@ export default function ViewTvInfoSection({
 
   return (
     <ViewInfoSectionWrapper backdrop_path={backdrop_path}>
-      <div className="flex gap-10 relative z-10 items-center">
         {poster_path && (
           <img
             src={poster_path}
@@ -55,7 +54,6 @@ export default function ViewTvInfoSection({
             showName={showData.name}
           />
         </div>
-      </div>
     </ViewInfoSectionWrapper>
   );
 }

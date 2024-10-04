@@ -17,7 +17,7 @@ export default function ViewInfoSectionWrapper({
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-background opacity-90 z-0"></div>
-      {children}
+      <div className="flex gap-10 relative z-10 items-center max-md:flex-col">{children}</div>
     </section>
   );
 }

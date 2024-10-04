@@ -27,35 +27,33 @@ export default function ViewMovieInfoSection({
   const poster_path = getImg(movieFullDetails?.poster_path!, "w300", true);
   return (
     <ViewInfoSectionWrapper backdrop_path={backdrop_path}>
-      <div className="flex gap-10 relative z-10 items-center">
-        {poster_path && (
-          <img
-            src={poster_path}
-            alt={movieFullDetails.title + " poster path"}
-            className="object-cover rounded-lg"
-          />
-        )}
-        <div className="flex flex-col gap-4">
-          <div className="flex gap-4 font-thin items-center">
-            <p className="min-w-fit">
-              {movieFullDetails?.runtime
-                ? `${movieFullDetails.runtime} min`
-                : "N/A"}
-            </p>
-            <JoinGenreList genreList={genreList} />
-            <Rating rating={movieFullDetails.vote_average} />
-          </div>
-          <ShowNameWYear showName={movieFullDetails.title} year={year} />
-          <OtherShowDescription
-            directorList={directorList}
-            tagline={movieFullDetails.tagline}
-            overview={movieFullDetails.overview}
-          />
-          <OptionButtons
-            officialTrailer={officialTrailer}
-            showName={movieFullDetails.title}
-          />
+      {poster_path && (
+        <img
+          src={poster_path}
+          alt={movieFullDetails.title + " poster path"}
+          className="object-cover rounded-lg"
+        />
+      )}
+      <div className="flex flex-col gap-4">
+        <div className="flex gap-4 font-thin items-center">
+          <p className="min-w-fit">
+            {movieFullDetails?.runtime
+              ? `${movieFullDetails.runtime} min`
+              : "N/A"}
+          </p>
+          <JoinGenreList genreList={genreList} />
+          <Rating rating={movieFullDetails.vote_average} />
         </div>
+        <ShowNameWYear showName={movieFullDetails.title} year={year} />
+        <OtherShowDescription
+          directorList={directorList}
+          tagline={movieFullDetails.tagline}
+          overview={movieFullDetails.overview}
+        />
+        <OptionButtons
+          officialTrailer={officialTrailer}
+          showName={movieFullDetails.title}
+        />
       </div>
     </ViewInfoSectionWrapper>
   );
