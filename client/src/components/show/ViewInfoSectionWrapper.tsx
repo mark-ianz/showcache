@@ -8,7 +8,7 @@ export default function ViewInfoSectionWrapper({
 }: Props) {
   return (
     <section
-      className="p-6"
+      className="p-6 relative"
       style={{
         backgroundImage: `url(${backdrop_path})`,
         backgroundSize: "cover",

@@ -4,13 +4,18 @@ import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { getCredits } from "@/api/credits.service";
-import { getImages, getTrailers, getTvRecommendations } from "@/api/show.service";
+import {
+  getImages,
+  getTrailers,
+  getTvRecommendations,
+} from "@/api/show.service";
 import { Cast, Crew } from "@/types/credits";
 import MediaTabs from "@/components/MediaTabs";
 import { Movie, TV } from "@/types/show";
 import ShowCard from "@/components/show/ShowCard";
 import { getTvFullDetails } from "@/api/tv.service";
 import ViewTvInfoSection from "@/components/show/ViewTvInfoSection";
+import Seasons from "@/components/Seasons";
 
 export default function ViewTv() {
   const { id } = useParams();
@@ -94,6 +99,8 @@ export default function ViewTv() {
             />
           ))}
         </ScrollableSection>
+
+        <Seasons />
 
         {images.backdrops.length > 0 && images.posters.length > 0 && (
           <MediaTabs

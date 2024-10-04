@@ -21,7 +21,7 @@ export default function MediaTabs({ tabs }: Props) {
   const [tab, setTab] = useState<Tab>("Backdrops");
   return (
     <section>
-      <div className="relative">
+      <div>
         <Tabs
           defaultValue={tab}
           onValueChange={(value) => setTab(value as Tab)}
