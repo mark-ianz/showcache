@@ -100,7 +100,7 @@ export default function ViewTv() {
           ))}
         </ScrollableSection>
 
-        <Seasons />
+        <Seasons seasons={data.seasons}/>
 
         {images.backdrops.length > 0 && images.posters.length > 0 && (
           <MediaTabs

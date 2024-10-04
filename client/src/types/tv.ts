@@ -2,7 +2,7 @@ import { Crew } from "./credits";
 import { LanguageCode } from "./language";
 import { FullDetails, TV } from "./show";
 
-type Season = {
+export type Season = {
   air_date: Date;
   episode_count: number;
   id: number;
