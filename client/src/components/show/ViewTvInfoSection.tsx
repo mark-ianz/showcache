@@ -37,8 +37,8 @@ export default function ViewTvInfoSection({
           />
         )}
         <div className="flex flex-col gap-4">
-          <div className="flex gap-4 font-thin">
-            <p>
+          <div className="flex gap-4 font-thin items-center">
+            <p className="min-w-fit">
               {showData?.seasons ? `${showData.seasons.length} seasons` : "N/A"}
             </p>
             <JoinGenreList genreList={genreList} />

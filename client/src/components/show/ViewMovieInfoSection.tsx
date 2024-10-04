@@ -36,8 +36,8 @@ export default function ViewMovieInfoSection({
           />
         )}
         <div className="flex flex-col gap-4">
-          <div className="flex gap-4 font-thin">
-            <p>
+          <div className="flex gap-4 font-thin items-center">
+            <p className="min-w-fit">
               {movieFullDetails?.runtime
                 ? `${movieFullDetails.runtime} min`
                 : "N/A"}
