@@ -81,11 +81,7 @@ export default function ViewTv() {
           officialTrailer={officialTrailer}
         />
 
-        <ScrollableSection
-          viewMore={scrollItems.length >= 14}
-          viewMoreLink="#"
-          title="Cast"
-        >
+        <ScrollableSection title="Cast">
           {scrollItems.map((credit: Cast | Crew, index: number) => (
             <ScrollableItem
               path={"/person/" + credits.id}
@@ -100,7 +96,7 @@ export default function ViewTv() {
           ))}
         </ScrollableSection>
 
-        <Seasons seasons={data.seasons}/>
+        <Seasons seasons={data.seasons} />
 
         {images.backdrops.length > 0 && images.posters.length > 0 && (
           <MediaTabs

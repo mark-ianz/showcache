@@ -56,10 +56,7 @@ export default function MediaTabs({ tabs }: Props) {
           </div>
           {tabs.map((tab) => (
             <TabsContent value={tab.value} key={useId()}>
-              <ScrollableSection
-                viewMore={tab.images.length >= 14}
-                viewMoreLink="#"
-              >
+              <ScrollableSection>
                 {tab.images.slice(0, 14).map((backdrop, index) => (
                   <li
                     key={backdrop.file_path + index}

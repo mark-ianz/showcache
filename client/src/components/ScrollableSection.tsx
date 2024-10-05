@@ -8,15 +8,11 @@ import HeaderText from "./HeaderText";
 
 type Props = {
   children: ReactNode;
-  viewMore?: boolean;
-  viewMoreLink?: string;
   title?: string;
 };
 
 export default function ScrollableSection({
   children,
-  viewMore,
-  viewMoreLink,
   title,
 }: Props) {
   return (
@@ -26,23 +22,6 @@ export default function ScrollableSection({
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-r from-transparent to-background z-10"></div>
         <ol className="flex gap-3 items-stretch overflow-x-auto py-4 justify-start">
           {children}
-          {viewMore && viewMoreLink && (
-            <li className="min-w-48 z-10">
-              <Card className="h-full border-none">
-                <CardContent className="flex items-center justify-center h-full">
-                  <Button asChild variant={"link"}>
-                    <Link
-                      to={viewMoreLink}
-                      className="flex items-center gap-1 outline-none"
-                    >
-                      <p>View More</p>
-                      <ArrowRight />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            </li>
-          )}
         </ol>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>

@@ -96,8 +96,6 @@ export default function ViewMovie() {
         />
 
         <ScrollableSection
-          viewMore={scrollItems.length >= 14}
-          viewMoreLink="#"
           title="Cast"
         >
           {scrollItems.map((credit: Cast | Crew, index: number) => (
