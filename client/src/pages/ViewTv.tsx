@@ -16,6 +16,7 @@ import ShowCard from "@/components/show/ShowCard";
 import { getTvFullDetails } from "@/api/tv.service";
 import ViewTvInfoSection from "@/components/show/ViewTvInfoSection";
 import Seasons from "@/components/Seasons";
+import { cn } from "@/lib/utils";
 
 export default function ViewTv() {
   const { id } = useParams();
@@ -109,8 +110,14 @@ export default function ViewTv() {
 
         {recommendations.length > 0 && (
           <ScrollableSection title="Recommendations">
-            {recommendations.map((tv: TV) => (
-              <li className="min-w-48" key={tv.id}>
+            {recommendations.map((tv, index) => (
+              <li
+                className={cn(
+                  "min-w-48",
+                  index + 1 === recommendations.length && "z-10"
+                )}
+                key={tv.id}
+              >
                 <ShowCard
                   path={"/tv/" + tv.id}
                   genre_ids={tv.genre_ids}
