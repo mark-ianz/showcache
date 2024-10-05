@@ -16,7 +16,7 @@ export default function Seasons({ seasons }: Props) {
             key={season.id}
             image_path={season.poster_path}
             path="#"
-            title={season.name}
+            title={`${season.name} (${season.episode_count} eps)`}
             subtext={season.overview}
           />
         ))}

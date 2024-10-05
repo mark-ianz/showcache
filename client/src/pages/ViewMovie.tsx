@@ -6,7 +6,11 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { getMovieFullDetails } from "@/api/movies.service";
 import { getCredits, getDirectors } from "@/api/credits.service";
-import { getImages, getMovieRecommendations, getTrailers } from "@/api/show.service";
+import {
+  getImages,
+  getMovieRecommendations,
+  getTrailers,
+} from "@/api/show.service";
 import { Cast, Crew } from "@/types/credits";
 import { useState } from "react";
 import MediaTabs from "@/components/MediaTabs";
@@ -14,6 +18,7 @@ import { Movie } from "@/types/show";
 import ShowCard from "@/components/show/ShowCard";
 import { getImg } from "@/lib/helpers";
 import no_image from "@/assets/no-image.png";
+import { cn } from "@/lib/utils";
 
 export default function ViewMovie() {
   const { id } = useParams();
@@ -66,7 +71,7 @@ export default function ViewMovie() {
     !recommendations
   )
     return <p>loading</p>;
-    console.log(data)
+  console.log(data);
   const genreList = data?.genres.map((genre) => genre.name);
   const directorList = directors.map((director) => director.name);
   const year = data && new Date(data.release_date).getFullYear();
@@ -120,8 +125,14 @@ export default function ViewMovie() {
 
         {recommendations.length > 0 && (
           <ScrollableSection title="Recommendations">
-            {recommendations.map((movie: Movie) => (
-              <li className="min-w-48" key={movie.id}>
+            {recommendations.map((movie: Movie, index: number) => (
+              <li
+                className={cn(
+                  "min-w-48",
+                  index + 1 === recommendations.length && "z-10"
+                )}
+                key={movie.id}
+              >
                 <ShowCard
                   path={"/movie/" + movie.id}
                   genre_ids={movie.genre_ids}

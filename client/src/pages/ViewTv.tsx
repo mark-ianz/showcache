@@ -64,7 +64,7 @@ export default function ViewTv() {
     (trailer) => trailer.name === "Official Trailer" || trailer.official
   );
 
-  console.log(images);
+  console.log(credits);
   const scrollItems: (Cast | Crew)[] =
     credits.cast.length > 14
       ? credits.cast.slice(0, 14)
