@@ -1,4 +1,4 @@
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { BookmarkIcon, HeartIcon } from "lucide-react";
 import TrailerDialog from "./TrailerDialog";
 import { Video } from "@/types/video";

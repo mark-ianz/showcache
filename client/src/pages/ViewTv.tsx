@@ -14,7 +14,7 @@ import MediaTabs from "@/components/MediaTabs";
 import { Movie, TV } from "@/types/show";
 import ShowCard from "@/components/show/ShowCard";
 import { getTvFullDetails } from "@/api/tv.service";
-import ViewTvInfoSection from "@/components/show/ViewTvInfoSection";
+import ViewTvInfoSection from "@/components/show/InfoSection/ViewTvInfoSection";
 import Seasons from "@/components/Seasons";
 import { cn } from "@/lib/utils";
 

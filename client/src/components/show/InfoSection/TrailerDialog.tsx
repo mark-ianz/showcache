@@ -4,8 +4,8 @@ import {
   DialogContent,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
-import { Button } from "../ui/button";
+} from "../../ui/dialog";
+import { Button } from "../../ui/button";
 import { Play } from "lucide-react";
 import { Video } from "@/types/video";
 

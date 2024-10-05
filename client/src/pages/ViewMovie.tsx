@@ -1,6 +1,6 @@
 import ScrollableItem from "@/components/ScrollableItem";
 import ScrollableSection from "@/components/ScrollableSection";
-import ViewShowInfoSection from "@/components/show/ViewMovieInfoSection";
+import ViewShowInfoSection from "@/components/show/InfoSection/ViewMovieInfoSection";
 import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
