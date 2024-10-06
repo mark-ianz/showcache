@@ -11,12 +11,11 @@ import {
 } from "@/api/show.service";
 import { Cast, Crew } from "@/types/credits";
 import MediaTabs from "@/components/MediaTabs";
-import { Movie, TV } from "@/types/show";
 import ShowCard from "@/components/show/ShowCard";
 import { getTvFullDetails } from "@/api/tv.service";
-import ViewTvInfoSection from "@/components/show/InfoSection/ViewTvInfoSection";
 import Seasons from "@/components/Seasons";
 import { cn } from "@/lib/utils";
+import ViewInfoSection from "@/components/show/InfoSection/ViewInfoSection";
 
 export default function ViewTv() {
   const { id } = useParams();
@@ -57,15 +56,6 @@ export default function ViewTv() {
   if (!data || !credits || !trailers || !images || !recommendations)
     return <p>loading</p>;
 
-  console.log(data);
-  const genreList = data?.genres.map((genre) => genre.name);
-  const year = data && new Date(data.first_air_date).getFullYear();
-  const directors = data.created_by.map((director) => director.name);
-  const officialTrailer = trailers.find(
-    (trailer) => trailer.name === "Official Trailer" || trailer.official
-  );
-
-  console.log(credits);
   const scrollItems: (Cast | Crew)[] =
     credits.cast.length > 14
       ? credits.cast.slice(0, 14)
@@ -74,12 +64,8 @@ export default function ViewTv() {
   return (
     <>
       <main className="w-full relative flex flex-col gap-10">
-        <ViewTvInfoSection
-          directorList={directors}
+        <ViewInfoSection
           showData={data}
-          genreList={genreList}
-          year={year}
-          officialTrailer={officialTrailer}
         />
 
         <ScrollableSection title="Cast">

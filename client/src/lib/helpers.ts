@@ -2,6 +2,10 @@ import { genres } from "@/constants/genres";
 import no_image from "@/assets/no-image.png";
 import { TvFullDetails } from "@/types/tv";
 import { MovieFullDetails } from "@/types/movie.details";
+import { useQuery } from "@tanstack/react-query";
+import { getDirectors } from "@/api/credits.service";
+import { Crew } from "@/types/credits";
+import { LanguageCode } from "@/types/language";
 
 export function getGenre(genre_ids: number[]): string[] {
   let genre_list: string[] = [];
@@ -44,4 +48,26 @@ export function getShowDuration(
     : showData.runtime
     ? `${showData.runtime} min`
     : "N/A";
+}
+
+export async function getShowDirectors(
+  showData: TvFullDetails | MovieFullDetails,
+): Promise<string[]> {
+  if ("created_by" in showData) {
+    return showData.created_by.map((director) => director.name);
+  }
+
+  const directors = await getDirectors (showData.id)
+
+  return directors || [];
+}
+
+export function getShowYear(
+  showData: TvFullDetails | MovieFullDetails
+): number {
+  if ("first_air_date" in showData) {
+    return new Date(showData.first_air_date).getFullYear();
+  }
+
+  return new Date(showData.release_date).getFullYear();
 }

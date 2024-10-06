@@ -1,11 +1,12 @@
 import { Button } from "../../ui/button";
 import { BookmarkIcon, HeartIcon } from "lucide-react";
 import TrailerDialog from "./TrailerDialog";
-import { Video } from "@/types/video";
+import { TvFullDetails } from "@/types/tv";
+import { MovieFullDetails } from "@/types/movie.details";
 
-type Props = { officialTrailer: Video | undefined; showName: string };
+type Props = { showData: TvFullDetails | MovieFullDetails };
 
-export default function OptionButtons({ officialTrailer, showName }: Props) {
+export default function OptionButtons({ showData }: Props) {
   return (
     <div className="flex gap-4">
       <Button size={"icon"} className="rounded-full" variant={"secondary"}>
@@ -14,7 +15,7 @@ export default function OptionButtons({ officialTrailer, showName }: Props) {
       <Button size={"icon"} className="rounded-full" variant={"secondary"}>
         <BookmarkIcon className="w-5 h-5" />
       </Button>
-      <TrailerDialog officialTrailer={officialTrailer} showName={showName} />
+      <TrailerDialog showData={showData} />
     </div>
   );
 }

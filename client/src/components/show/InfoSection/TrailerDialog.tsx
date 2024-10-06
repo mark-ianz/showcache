@@ -8,18 +8,53 @@ import {
 import { Button } from "../../ui/button";
 import { Play } from "lucide-react";
 import { Video } from "@/types/video";
+import { TvFullDetails } from "@/types/tv";
+import { MovieFullDetails } from "@/types/movie.details";
+import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useLanguage } from "@/context/language-provider";
+import { getTrailers } from "@/api/show.service";
 
-type Props = { officialTrailer: Video | undefined; showName: string };
+type Props = { showData: TvFullDetails | MovieFullDetails };
 
-export default function TrailerDialog({ officialTrailer, showName }: Props) {
+export default function TrailerDialog({ showData }: Props) {
+  const {
+    language: { iso_639_1: language },
+  } = useLanguage();
+  const [showName, setShowName] = useState<string>();
+  const [showType, setShowType] = useState<"movie" | "tv">("movie");
+  const [officialTrailer, setOfficialTrailer] = useState<Video | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    if ("title" in showData) {
+      setShowName(showData.title);
+      setShowType("movie");
+    } else {
+      setShowName(showData.name);
+      setShowType("tv");
+    }
+  }, [showData]);
+
+  const { data: trailers, isLoading } = useQuery({
+    queryKey: ["trailers", showType, language, showData.id],
+    queryFn: getTrailers,
+    staleTime: 1000 * 60 * 5,
+  });
+
+  useEffect(() => {
+    setOfficialTrailer(
+      trailers?.find(
+        (trailer) => trailer.name === "Official Trailer" || trailer.official
+      )
+    );
+  }, [trailers]);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button
-          variant={"secondary"}
-          className="gap-1"
-          disabled={!officialTrailer}
-        >
+        <Button variant={"secondary"} className="gap-1" disabled={isLoading}>
           {officialTrailer ? (
             <>
               <Play className="w-5 h-5" />

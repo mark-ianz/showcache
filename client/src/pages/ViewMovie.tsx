@@ -1,11 +1,10 @@
 import ScrollableItem from "@/components/ScrollableItem";
 import ScrollableSection from "@/components/ScrollableSection";
-import ViewShowInfoSection from "@/components/show/InfoSection/ViewMovieInfoSection";
 import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { getMovieFullDetails } from "@/api/movies.service";
-import { getCredits, getDirectors } from "@/api/credits.service";
+import { getCredits } from "@/api/credits.service";
 import {
   getImages,
   getMovieRecommendations,
@@ -19,6 +18,7 @@ import ShowCard from "@/components/show/ShowCard";
 import { getImg } from "@/lib/helpers";
 import no_image from "@/assets/no-image.png";
 import { cn } from "@/lib/utils";
+import ViewInfoSection from "@/components/show/InfoSection/ViewInfoSection";
 
 export default function ViewMovie() {
   const { id } = useParams();
@@ -29,12 +29,6 @@ export default function ViewMovie() {
   const { data, error, isLoading, isError } = useQuery({
     queryKey: ["single_show", language, id],
     queryFn: getMovieFullDetails,
-    staleTime: 1000 * 60 * 5,
-  });
-
-  const { data: directors } = useQuery({
-    queryKey: ["directors", "movie", language, id],
-    queryFn: getDirectors,
     staleTime: 1000 * 60 * 5,
   });
 
@@ -66,18 +60,10 @@ export default function ViewMovie() {
     !data ||
     !credits ||
     !trailers ||
-    !directors ||
     !images ||
     !recommendations
   )
     return <p>loading</p>;
-  console.log(data);
-  const genreList = data?.genres.map((genre) => genre.name);
-  const directorList = directors.map((director) => director.name);
-  const year = data && new Date(data.release_date).getFullYear();
-  const officialTrailer = trailers.find(
-    (trailer) => trailer.name === "Official Trailer" || trailer.official
-  );
 
   const scrollItems: (Cast | Crew)[] =
     credits.cast.length > 14
@@ -87,17 +73,9 @@ export default function ViewMovie() {
   return (
     <>
       <main className="w-full relative flex flex-col gap-10">
-        <ViewShowInfoSection
-          movieFullDetails={data}
-          genreList={genreList}
-          directorList={directorList}
-          year={year}
-          officialTrailer={officialTrailer}
-        />
+        <ViewInfoSection showData={data} />
 
-        <ScrollableSection
-          title="Cast"
-        >
+        <ScrollableSection title="Cast">
           {scrollItems.map((credit: Cast | Crew, index: number) => (
             <ScrollableItem
               path={"/person/" + credits.id}
