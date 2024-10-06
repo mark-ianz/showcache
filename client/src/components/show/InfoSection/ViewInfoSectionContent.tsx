@@ -14,7 +14,7 @@ type Props = {
   directorList: string[];
   year: number;
   officialTrailer: Video | undefined;
-  poster_path: string;
+  poster_path: string | undefined;
 };
 
 export default function ViewInfoSectionContent({

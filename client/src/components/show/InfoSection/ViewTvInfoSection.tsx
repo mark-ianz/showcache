@@ -28,7 +28,7 @@ export default function ViewTvInfoSection({
         directorList={directorList}
         genreList={genreList}
         officialTrailer={officialTrailer}
-        poster_path={poster_path!}
+        poster_path={poster_path}
         showData={showData}
         year={year}
       />

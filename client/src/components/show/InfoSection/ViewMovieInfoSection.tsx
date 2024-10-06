@@ -27,7 +27,7 @@ export default function ViewMovieInfoSection({
         directorList={directorList}
         genreList={genreList}
         officialTrailer={officialTrailer}
-        poster_path={poster_path!}
+        poster_path={poster_path}
         showData={movieFullDetails}
         year={year}
       />
