@@ -5,18 +5,11 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { getMovieFullDetails } from "@/api/movies.service";
 import { getCredits } from "@/api/credits.service";
-import {
-  getImages,
-  getMovieRecommendations,
-  getTrailers,
-} from "@/api/show.service";
+import { getMovieRecommendations, getTrailers } from "@/api/show.service";
 import { Cast, Crew } from "@/types/credits";
-import { useState } from "react";
 import MediaTabs from "@/components/MediaTabs";
 import { Movie } from "@/types/show";
 import ShowCard from "@/components/show/ShowCard";
-import { getImg } from "@/lib/helpers";
-import no_image from "@/assets/no-image.png";
 import { cn } from "@/lib/utils";
 import ViewInfoSection from "@/components/show/InfoSection/ViewInfoSection";
 
@@ -44,26 +37,13 @@ export default function ViewMovie() {
     staleTime: 1000 * 60 * 5,
   });
 
-  const { data: images } = useQuery({
-    queryKey: ["images", "movie", id],
-    queryFn: getImages,
-    staleTime: 1000 * 60 * 5,
-  });
-
   const { data: recommendations } = useQuery({
     queryKey: ["movie_recommendations", language, id],
     queryFn: getMovieRecommendations,
     staleTime: 1000 * 60 * 5,
   });
 
-  if (
-    !data ||
-    !credits ||
-    !trailers ||
-    !images ||
-    !recommendations
-  )
-    return <p>loading</p>;
+  if (!data || !credits || !trailers || !recommendations) return <p>loading</p>;
 
   const scrollItems: (Cast | Crew)[] =
     credits.cast.length > 14
@@ -90,14 +70,7 @@ export default function ViewMovie() {
           ))}
         </ScrollableSection>
 
-        {images.backdrops.length > 0 && images.posters.length > 0 && (
-          <MediaTabs
-            tabs={[
-              { images: images.backdrops, value: "Backdrops" },
-              { images: images.posters, value: "Posters" },
-            ]}
-          />
-        )}
+        <MediaTabs showData={data} />
 
         {recommendations.length > 0 && (
           <ScrollableSection title="Recommendations">
