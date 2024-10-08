@@ -33,10 +33,10 @@ export async function getSearchResult({
   return data.results;
 }
 
-export async function getImages({
-  queryKey,
-}: QueryFunctionContext): Promise<ImageResult> {
-  const [_key, type, id] = queryKey;
+export async function getImages(
+  id: number,
+  type: "movie" | "tv"
+): Promise<ImageResult> {
   const { data }: { data: ImageResult } = await axios.get(
     `https://api.themoviedb.org/3/${type}/${id}/images`,
     axios_config({ method: "GET" })

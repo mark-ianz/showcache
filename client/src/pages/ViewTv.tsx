@@ -41,20 +41,13 @@ export default function ViewTv() {
     staleTime: 1000 * 60 * 5,
   });
 
-  const { data: images } = useQuery({
-    queryKey: ["images", "tv", id],
-    queryFn: getImages,
-    staleTime: 1000 * 60 * 5,
-  });
-
   const { data: recommendations } = useQuery({
     queryKey: ["tv_recommendations", language, id],
     queryFn: getTvRecommendations,
     staleTime: 1000 * 60 * 5,
   });
 
-  if (!data || !credits || !trailers || !images || !recommendations)
-    return <p>loading</p>;
+  if (!data || !credits || !trailers || !recommendations) return <p>loading</p>;
 
   const scrollItems: (Cast | Crew)[] =
     credits.cast.length > 14
@@ -64,9 +57,7 @@ export default function ViewTv() {
   return (
     <>
       <main className="w-full relative flex flex-col gap-10">
-        <ViewInfoSection
-          showData={data}
-        />
+        <ViewInfoSection showData={data} />
 
         <ScrollableSection title="Cast">
           {scrollItems.map((credit: Cast | Crew, index: number) => (
@@ -84,15 +75,7 @@ export default function ViewTv() {
         </ScrollableSection>
 
         <Seasons seasons={data.seasons} />
-
-        {images.backdrops.length > 0 && images.posters.length > 0 && (
-          <MediaTabs
-            tabs={[
-              { images: images.backdrops, value: "Backdrops" },
-              { images: images.posters, value: "Posters" },
-            ]}
-          />
-        )}
+        <MediaTabs showData={data} />
 
         {recommendations.length > 0 && (
           <ScrollableSection title="Recommendations">
