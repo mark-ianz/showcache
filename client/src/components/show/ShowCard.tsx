@@ -35,7 +35,7 @@ export default function ShowCard({
           />
         </AspectRatio>
         <CardContent className="p-2 flex flex-col justify-between flex-grow gap-2">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-2">
             <CardTitle className="font-semibold text-sm line-clamp-2 hover:underline">
               {name}
             </CardTitle>
