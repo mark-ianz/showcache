@@ -13,7 +13,7 @@ export default function SeasonCard({ season }: { season: Season }) {
     <li className="">
       <Link to={"#"}>
         <Card>
-          <CardContent className="flex">
+          <CardContent className="flex gap-1">
             <div>
               <img
                 src={getImg(season.poster_path, "w780")}
