@@ -1,14 +1,10 @@
-import { cn } from "@/lib/utils";
-import React from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "../ui/card";
-import { AspectRatio } from "../ui/aspect-ratio";
 import { getImg } from "@/lib/helpers";
 import { Season } from "@/types/tv";
 import Rating from "../Rating";
 
 export default function SeasonCard({ season }: { season: Season }) {
-  console.log(season);
   return (
     <li className="">
       <Link to={"#"}>
