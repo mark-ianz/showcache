@@ -31,10 +31,12 @@ export default function Seasons({ seasons }: Props) {
             ))}
           </ol>
         </ScrollArea>
+        {!isExpanded && <div className="bg-transparent absolute inset-0"></div>}
         <div
           className={cn(
             "w-full mt-5 flex items-center justify-center",
-            !isExpanded && "bg-gradient-to-b from-transparent to-background absolute bottom-0 h-20 mt-0"
+            !isExpanded &&
+              "bg-gradient-to-b from-transparent to-background absolute bottom-0 h-20 mt-0"
           )}
         >
           <Button
