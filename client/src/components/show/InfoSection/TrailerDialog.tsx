@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useLanguage } from "@/context/language-provider";
 import { getTrailers } from "@/api/show.service";
+import { getShowName } from "@/lib/helpers";
 
 type Props = { showData: TvFullDetails | MovieFullDetails };
 
@@ -21,33 +22,22 @@ export default function TrailerDialog({ showData }: Props) {
   const {
     language: { iso_639_1: language },
   } = useLanguage();
-  const [showName, setShowName] = useState<string>();
-  const [showType, setShowType] = useState<"movie" | "tv">("movie");
+  const type = "title" in showData ? "movie" : "tv";
   const [officialTrailer, setOfficialTrailer] = useState<Video | undefined>(
     undefined
   );
 
-  useEffect(() => {
-    if ("title" in showData) {
-      setShowName(showData.title);
-      setShowType("movie");
-    } else {
-      setShowName(showData.name);
-      setShowType("tv");
-    }
-  }, [showData]);
-
   const { data: trailers, isLoading } = useQuery({
-    queryKey: ["trailers", showType, language, showData.id],
+    queryKey: ["trailers", type, language, showData.id],
     queryFn: getTrailers,
     staleTime: 1000 * 60 * 5,
   });
 
   useEffect(() => {
     setOfficialTrailer(
-      trailers?.find(
-        (trailer) => trailer.name === "Official Trailer" || trailer.official
-      )
+      trailers?.find((trailer) => trailer.name === "Official Trailer") ||
+        trailers?.find((trailer) => trailer.name === "Final Trailer") ||
+        trailers?.[0]
     );
   }, [trailers]);
 
@@ -72,7 +62,7 @@ export default function TrailerDialog({ showData }: Props) {
         >
           <div className="flex items-center">
             <DialogTitle className="pl-4 text-white">
-              {showName} Trailer
+              {getShowName(showData)} Trailer
             </DialogTitle>
             <DialogClose color="#ffffff" />
           </div>
