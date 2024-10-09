@@ -4,10 +4,7 @@ import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { getCredits } from "@/api/credits.service";
-import {
-  getTrailers,
-  getTvRecommendations,
-} from "@/api/show.service";
+import { getTvRecommendations } from "@/api/show.service";
 import { Cast, Crew } from "@/types/credits";
 import MediaTabs from "@/components/MediaTabs";
 import ShowCard from "@/components/show/ShowCard";
@@ -28,12 +25,6 @@ export default function ViewTv() {
     staleTime: 1000 * 60 * 5,
   });
 
-  const { data: trailers } = useQuery({
-    queryKey: ["trailers", "tv", language, id],
-    queryFn: getTrailers,
-    staleTime: 1000 * 60 * 5,
-  });
-
   const { data: credits } = useQuery({
     queryKey: ["credits", "tv", language, id],
     queryFn: getCredits,
@@ -46,7 +37,7 @@ export default function ViewTv() {
     staleTime: 1000 * 60 * 5,
   });
 
-  if (!data || !credits || !trailers || !recommendations) return <p>loading</p>;
+  if (!data || !credits || !recommendations) return <p>loading</p>;
 
   const scrollItems: (Cast | Crew)[] =
     credits.cast.length > 14
