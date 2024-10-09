@@ -22,13 +22,11 @@ export default function ViewMovie() {
   if (!data) return <p>loading</p>;
 
   return (
-    <>
-      <main className="w-full relative flex flex-col gap-10">
-        <ViewInfoSection showData={data} />
-        <Casts id={id!} type="movie" />
-        <MediaTabs showData={data} />
-        <Recommendations id={id!} />
-      </main>
-    </>
+    <main className="w-full relative flex flex-col gap-10">
+      <ViewInfoSection showData={data} />
+      <Casts id={id!} type="movie" />
+      <MediaTabs showData={data} />
+      <Recommendations id={id!} />
+    </main>
   );
 }
