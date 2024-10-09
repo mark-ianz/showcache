@@ -5,7 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { getCredits } from "@/api/credits.service";
 import {
-  getImages,
   getTrailers,
   getTvRecommendations,
 } from "@/api/show.service";

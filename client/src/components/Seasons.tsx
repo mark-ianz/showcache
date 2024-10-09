@@ -1,12 +1,10 @@
 import { Season } from "@/types/tv";
 import HeaderText from "./HeaderText";
 import SeasonCard from "./show/SeasonCard";
-import ScrollableSection from "./ScrollableSection";
-import ScrollableItem from "./ScrollableItem";
-import { ScrollArea, ScrollBar } from "./ui/scroll-area";
+import { ScrollArea} from "./ui/scroll-area";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { ArrowDown, ArrowDownCircle, ArrowUp } from "lucide-react";
+import { ArrowDown,ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Props = {
