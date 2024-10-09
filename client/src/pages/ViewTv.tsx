@@ -1,15 +1,13 @@
-import ScrollableSection from "@/components/ScrollableSection";
 import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { getTvRecommendations } from "@/api/show.service";
 import MediaTabs from "@/components/MediaTabs";
-import ShowCard from "@/components/show/ShowCard";
 import { getTvFullDetails } from "@/api/tv.service";
 import Seasons from "@/components/Seasons";
-import { cn } from "@/lib/utils";
 import ViewInfoSection from "@/components/show/InfoSection/ViewInfoSection";
 import Casts from "@/components/show/Casts";
+import Recommendations from "@/components/show/Recommendations";
 
 export default function ViewTv() {
   const { id } = useParams();
@@ -38,28 +36,7 @@ export default function ViewTv() {
         <Casts type="tv" id={id!} />
         <Seasons seasons={data.seasons} />
         <MediaTabs showData={data} />
-
-        {recommendations.length > 0 && (
-          <ScrollableSection title="Recommendations">
-            {recommendations.map((tv, index) => (
-              <li
-                className={cn(
-                  "min-w-48",
-                  index + 1 === recommendations.length && "z-10"
-                )}
-                key={tv.id}
-              >
-                <ShowCard
-                  path={"/tv/" + tv.id}
-                  genre_ids={tv.genre_ids}
-                  vote_average={tv.vote_average}
-                  name={tv.name}
-                  image_path={tv.poster_path}
-                />
-              </li>
-            ))}
-          </ScrollableSection>
-        )}
+        <Recommendations id={id!} />
       </main>
     </>
   );
