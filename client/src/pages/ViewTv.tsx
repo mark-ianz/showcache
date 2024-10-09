@@ -1,7 +1,6 @@
 import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { getTvRecommendations } from "@/api/show.service";
 import MediaTabs from "@/components/MediaTabs";
 import { getTvFullDetails } from "@/api/tv.service";
 import Seasons from "@/components/Seasons";
@@ -21,13 +20,7 @@ export default function ViewTv() {
     staleTime: 1000 * 60 * 5,
   });
 
-  const { data: recommendations } = useQuery({
-    queryKey: ["tv_recommendations", language, id],
-    queryFn: getTvRecommendations,
-    staleTime: 1000 * 60 * 5,
-  });
-
-  if (!data || !recommendations) return <p>loading</p>;
+  if (!data) return <p>loading</p>;
 
   return (
     <>
