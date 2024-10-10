@@ -14,13 +14,14 @@ export default function ViewTv() {
     language: { iso_639_1: language },
   } = useLanguage();
 
-  const { data, error, isLoading, isError } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["single_show", language, id],
     queryFn: getTvFullDetails,
     staleTime: 1000 * 60 * 5,
   });
 
-  if (!data) return <p>loading</p>;
+  if (isLoading) return <p>loading</p>;
+  if (!data) return <p>no data</p>;
 
   return (
     <main className="w-full relative flex flex-col gap-10">
@@ -32,3 +33,4 @@ export default function ViewTv() {
     </main>
   );
 }
+

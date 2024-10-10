@@ -1,17 +1,21 @@
-import { getTvRecommendations } from "@/api/show.service";
+import { getRecommendations } from "@/api/show.service";
 import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
 import ScrollableSection from "../ScrollableSection";
 import { cn } from "@/lib/utils";
 import ShowCard from "./ShowCard";
+import { useLocation } from "react-router-dom";
+import { getShowName, getShowTypeFromUseLocation } from "@/lib/helpers";
 
 export default function Recommendations({ id }: { id: string }) {
   const {
     language: { iso_639_1: language },
   } = useLanguage();
+  const type = getShowTypeFromUseLocation(useLocation());
+
   const { data: recommendations } = useQuery({
-    queryKey: ["tv_recommendations", language, id],
-    queryFn: getTvRecommendations,
+    queryKey: ["tv_recommendations", type, language, id],
+    queryFn: getRecommendations,
     staleTime: 1000 * 60 * 5,
   });
 
@@ -20,20 +24,20 @@ export default function Recommendations({ id }: { id: string }) {
   return (
     recommendations.length > 0 && (
       <ScrollableSection title="Recommendations">
-        {recommendations.map((tv, index) => (
+        {recommendations.map((show, index) => (
           <li
             className={cn(
               "min-w-48",
               index + 1 === recommendations.length && "z-10"
             )}
-            key={tv.id}
+            key={show.id}
           >
             <ShowCard
-              path={"/tv/" + tv.id}
-              genre_ids={tv.genre_ids}
-              vote_average={tv.vote_average}
-              name={tv.name}
-              image_path={tv.poster_path}
+              path={`/${type}/` + show.id}
+              genre_ids={show.genre_ids}
+              vote_average={show.vote_average}
+              name={getShowName(show)}
+              image_path={show.poster_path}
             />
           </li>
         ))}

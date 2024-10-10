@@ -2,10 +2,9 @@ import { genres } from "@/constants/genres";
 import no_image from "@/assets/no-image.png";
 import { TvFullDetails } from "@/types/tv";
 import { MovieFullDetails } from "@/types/movie.details";
-import { useQuery } from "@tanstack/react-query";
 import { getDirectors } from "@/api/credits.service";
-import { Crew } from "@/types/credits";
-import { LanguageCode } from "@/types/language";
+import { Location } from "react-router-dom";
+import { Movie, TV } from "@/types/show";
 
 export function getGenre(genre_ids: number[]): string[] {
   let genre_list: string[] = [];
@@ -33,7 +32,7 @@ export const getImg = (
 };
 
 export function getShowName(
-  showData: TvFullDetails | MovieFullDetails
+  showData: TvFullDetails | MovieFullDetails | Movie | TV
 ): string {
   return "name" in showData ? showData.name : showData.title;
 }
@@ -51,13 +50,13 @@ export function getShowDuration(
 }
 
 export async function getShowDirectors(
-  showData: TvFullDetails | MovieFullDetails,
+  showData: TvFullDetails | MovieFullDetails
 ): Promise<string[]> {
   if ("created_by" in showData) {
     return showData.created_by.map((director) => director.name);
   }
 
-  const directors = await getDirectors (showData.id)
+  const directors = await getDirectors(showData.id);
 
   return directors || [];
 }
@@ -70,4 +69,10 @@ export function getShowYear(
   }
 
   return new Date(showData.release_date).getFullYear();
+}
+
+export function getShowTypeFromUseLocation(location: Location): "movie" | "tv" {
+  const { pathname } = location;
+  const splitted = pathname.split("/");
+  return splitted[1] as "movie" | "tv";
 }
