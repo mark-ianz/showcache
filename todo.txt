@@ -1,0 +1,6 @@
+1. Add a view image when clicked.
+2. Make the nav links responsive.
+3. Make the header responsive.
+4. Add a collection section for movies if they are part of it.
+5. Add facts section.
+6. Make the Cards smaller on small screens.
