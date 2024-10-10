@@ -2,7 +2,7 @@ import { Video, VideosResult } from "@/types/video";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 import { axios_config } from "./axios.config";
-import { API_Result, Movie, TV } from "@/types/show";
+import { API_Result, Movie, ShowType, TV } from "@/types/show";
 import { ImageResult } from "@/types/images";
 
 export async function getTrailers({
@@ -35,7 +35,7 @@ export async function getSearchResult({
 
 export async function getImages(
   id: number,
-  type: "movie" | "tv"
+  type: ShowType
 ): Promise<ImageResult> {
   const { data }: { data: ImageResult } = await axios.get(
     `https://api.themoviedb.org/3/${type}/${id}/images`,

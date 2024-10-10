@@ -4,8 +4,9 @@ import ScrollableItem from "../ScrollableItem";
 import { getCredits } from "@/api/credits.service";
 import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
+import { ShowType } from "@/types/show";
 
-type Props = { id: string; type: "movie" | "tv" };
+type Props = { id: string; type: ShowType };
 
 export default function Casts({ id, type }: Props) {
   const {
