@@ -1,6 +1,8 @@
 import { Genre } from "./genre";
 import { LanguageCode } from "./language";
 
+export type ShowType = "movie" | "tv";
+
 export type Show = {
   adult: boolean;
   backdrop_path: string;
