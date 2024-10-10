@@ -57,12 +57,12 @@ export async function getMovieRecommendations({
   return data.results;
 }
 
-export async function getTvRecommendations({
+export async function getRecommendations({
   queryKey,
-}: QueryFunctionContext): Promise<TV[]> {
-  const [_key, language, id, page = 1] = queryKey;
+}: QueryFunctionContext): Promise<TV[] | Movie []> {
+  const [_key, type, language, id, page = 1] = queryKey;
   const { data } = await axios.get<API_Result>(
-    `https://api.themoviedb.org/3/tv/${id}/recommendations?language=${language}&page=${page}`,
+    `https://api.themoviedb.org/3/${type}/${id}/recommendations?language=${language}&page=${page}`,
     axios_config({ method: "GET" })
   );
 
