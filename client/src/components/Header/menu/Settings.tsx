@@ -1,6 +1,6 @@
-import { Separator } from "../ui/separator";
-import ThemeSwitch2 from "../ThemeSwitch2";
-import LanguageSelect from "../LanguageSelect";
+import { Separator } from "@/components/ui/separator";
+import ThemeSwitch from "./ThemeSwitch";
+import LanguageSelect from "./LanguageSelect";
 import AccountSettings from "./AccountSettings";
 
 export default function Settings() {
@@ -9,7 +9,7 @@ export default function Settings() {
       <p className="text-lg font-semibold">Settings</p>
       <Separator className="my-2" />
       <div className="flex flex-col gap-4">
-        <ThemeSwitch2 />
+        <ThemeSwitch />
         <LanguageSelect />
         <AccountSettings />
       </div>
