@@ -48,30 +48,34 @@ export default function ViewInfoSection({ showData }: Props) {
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-background opacity-90 z-0"></div>
-      <div className="flex gap-10 relative z-10 items-center max-md:flex-col">
-        {poster_path && (
-          <img
-            src={poster_path}
-            alt={getShowName(showData) + " poster path"}
-            className="object-cover rounded-lg"
-          />
-        )}
-        <div className="flex flex-col gap-4">
-          <div className="flex gap-4 font-thin items-center">
-            <p className="min-w-fit">{getShowDuration(showData)}</p>
-            <JoinGenreList genreList={genreList} />
-            <Rating rating={showData.vote_average} />
+      <div className="relative z-10 items-center">
+        <div className="flex gap-10 max-md:flex-col">
+          <div className="flex justify-center items-center">
+            {poster_path && (
+              <img
+                src={poster_path}
+                alt={getShowName(showData) + " poster path"}
+                className="object-cover rounded-lg"
+              />
+            )}
           </div>
-          <ShowNameWYear
-            showName={getShowName(showData)}
-            year={getShowYear(showData)}
-          />
-          <OtherShowDescription
-            directorList={directors}
-            tagline={showData.tagline}
-            overview={showData.overview}
-          />
-          <OptionButtons showData={showData} />
+          <div className="flex flex-col gap-4">
+            <div className="flex gap-4 font-thin items-center">
+              <p className="min-w-fit">{getShowDuration(showData)}</p>
+              <JoinGenreList genreList={genreList} />
+              <Rating rating={showData.vote_average} />
+            </div>
+            <ShowNameWYear
+              showName={getShowName(showData)}
+              year={getShowYear(showData)}
+            />
+            <OtherShowDescription
+              directorList={directors}
+              tagline={showData.tagline}
+              overview={showData.overview}
+            />
+            <OptionButtons showData={showData} />
+          </div>
         </div>
       </div>
     </section>
