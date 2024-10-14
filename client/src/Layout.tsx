@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Header from "./components/header/Header";
-import Nav from "./components/header/Nav";
+import Nav from "./components/header/nav/Nav";
 
 export default function Layout() {
   return (
