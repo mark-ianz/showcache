@@ -1,9 +1,5 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { ArrowRight } from "lucide-react";
 import { ReactNode } from "react";
-import { Link } from "react-router-dom";
-import { Button } from "./ui/button";
 import HeaderText from "./HeaderText";
 
 type Props = {

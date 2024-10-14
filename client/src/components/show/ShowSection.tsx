@@ -1,9 +1,7 @@
 import ShowCard from "./ShowCard";
 import ShowListWrapper from "./ShowListWrapper";
-import no_image from "@/assets/no-image.png";
 import { Movie, TV } from "@/types/show";
 import { LoaderIcon } from "lucide-react";
-import { Link } from "react-router-dom";
 
 type ShowSectionProps = {
   showArray: Movie[] | TV[] | undefined;

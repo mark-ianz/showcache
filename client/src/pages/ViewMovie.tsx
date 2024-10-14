@@ -13,7 +13,7 @@ export default function ViewMovie() {
     language: { iso_639_1: language },
   } = useLanguage();
 
-  const { data, error, isLoading, isError } = useQuery({
+  const { data } = useQuery({
     queryKey: ["single_show", language, id],
     queryFn: getMovieFullDetails,
     staleTime: 1000 * 60 * 5,
