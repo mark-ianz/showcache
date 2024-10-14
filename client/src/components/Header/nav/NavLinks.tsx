@@ -1,5 +1,5 @@
 import { nav_lists } from "@/lib/constants";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import { NavLink } from "react-router-dom";
 
 export default function NavLinks() {
