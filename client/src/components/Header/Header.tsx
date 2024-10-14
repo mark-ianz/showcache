@@ -5,7 +5,7 @@ import Searchbar from "./Searchbar";
 export default function Header() {
   return (
     <>
-      <header className="flex flex-col border-b pb-3 w-full">
+      <header className="flex flex-col w-full max-md:pb-5">
         <div className="flex items-center justify-between w-full mb-4">
           <Logo className={"mr-20"} />
           <div className="flex grow gap-4 items-center justify-end">
@@ -13,7 +13,7 @@ export default function Header() {
             <Menu />
           </div>
         </div>
-        <div className="grow">
+        <div className="grow hidden max-md:flex">
           <Searchbar className="ml-0 max-w-none"/>
         </div>
       </header>
