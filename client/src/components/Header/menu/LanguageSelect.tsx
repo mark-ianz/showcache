@@ -1,12 +1,12 @@
-import { useId, useState } from "react";
+import { useState } from "react";
 import { Button } from "../../ui/button";
 import { PopoverTrigger, Popover, PopoverContent } from "../../ui/popover";
 import { useLanguage } from "../../../context/language-provider";
 import { languages } from "@/constants/languages";
+import { cn } from "@/lib/utils";
 
 export default function LanguageSelect() {
   const [open, setOpen] = useState<boolean>(false);
-
   const { setLanguage, language } = useLanguage();
 
   return (
@@ -21,18 +21,22 @@ export default function LanguageSelect() {
         </PopoverTrigger>
         <PopoverContent asChild>
           <ul className="grid grid-cols-3">
-            {languages.map((language) => (
+            {languages.map((arrLanguage, index) => (
               <Button
                 asChild
-                key={useId()}
+                key={index + arrLanguage.iso_639_1}
                 variant={"ghost"}
                 onClick={() => {
                   setOpen(!open);
-                  setLanguage(language);
+                  setLanguage(arrLanguage);
                 }}
-                className="cursor-pointer"
+                className={cn(
+                  "cursor-pointer",
+                  arrLanguage.iso_639_1 === language.iso_639_1 &&
+                    "text-tertiary"
+                )}
               >
-                <li>{language.english_name}</li>
+                <li>{arrLanguage.english_name}</li>
               </Button>
             ))}
           </ul>
