@@ -8,8 +8,13 @@ import {
 import { Input } from "../ui/input";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
-export default function Searchbar() {
+type Props = {
+  className?: string | undefined;
+};
+
+export default function Searchbar({ className }: Props) {
   const navigate = useNavigate();
   const [searchFor, setSearchFor] = useState<string>("movie");
   const [input, setInput] = useState<string>("");
@@ -22,7 +27,7 @@ export default function Searchbar() {
   return (
     <form
       onSubmit={handleSearchSubmit}
-      className="grow max-w-md ml-auto flex relative"
+      className={cn("grow max-w-md ml-auto flex relative", className)}
     >
       <Input
         value={input}
