@@ -43,8 +43,9 @@ export default function MediaTabs({ showData }: NewProps) {
       setOpenedTab(tab.value);
     }
   }, [tabs]);
+
   return (
-    tabs.length > 0 && (
+    tabs.some((tab) => tab.images.length > 0) && (
       <section>
         <div>
           <Tabs
