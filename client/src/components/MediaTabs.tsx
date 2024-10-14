@@ -37,33 +37,40 @@ export default function MediaTabs({ showData }: NewProps) {
     fetchImages();
   }, [showData, type]);
 
+  useEffect(() => {
+    const tab = tabs.find((tab) => tab.images.length > 0);
+    if (tab) {
+      setOpenedTab(tab.value);
+    }
+  }, [tabs]);
   return (
-    tabs && (
+    tabs.length > 0 && (
       <section>
         <div>
           <Tabs
-            defaultValue={openedTab}
+            value={openedTab}
             onValueChange={(value) => setOpenedTab(value as Tab)}
           >
             <div className="flex flex-col items-start">
               <HeaderText className="mb-2">Media</HeaderText>
               <TabsList className="flex items-start justify-start p-0 h-auto gap-4 bg-background">
-                <TabsTrigger value="Backdrops" asChild>
-                  <Button
-                    variant={"ghost"}
-                    className="p-0 hover:bg-inherit text-muted-foreground focus-visible:ring-0"
-                  >
-                    Backdrops
-                  </Button>
-                </TabsTrigger>
-                <TabsTrigger value="Posters" asChild>
-                  <Button
-                    variant={"ghost"}
-                    className="p-0 hover:bg-inherit text-muted-foreground focus-visible:ring-0"
-                  >
-                    Posters
-                  </Button>
-                </TabsTrigger>
+                {tabs.map(
+                  (tab, index) =>
+                    tab.images.length > 0 && (
+                      <TabsTrigger
+                        value={tab.value}
+                        asChild
+                        key={index + tab.value}
+                      >
+                        <Button
+                          variant={"ghost"}
+                          className="p-0 hover:bg-inherit text-muted-foreground focus-visible:ring-0"
+                        >
+                          {tab.value}
+                        </Button>
+                      </TabsTrigger>
+                    )
+                )}
                 <Button
                   asChild
                   variant={"ghost"}
