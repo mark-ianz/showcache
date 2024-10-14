@@ -20,7 +20,7 @@ export default function LanguageSelect() {
           </Button>
         </PopoverTrigger>
         <PopoverContent asChild>
-          <ul className="flex flex-col gap-2">
+          <ul className="grid grid-cols-3">
             {languages.map((language) => (
               <Button
                 asChild
