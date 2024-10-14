@@ -19,25 +19,28 @@ export default function Casts({ id, type }: Props) {
   });
 
   if (!credits) return <p>loading</p>;
-console.log(credits)
+  console.log(credits);
   const scrollItems: (Cast | Crew)[] =
     credits.cast.length > 14
       ? credits.cast.slice(0, 14)
       : [...credits.cast, ...credits.crew.slice(0, 14 - credits.cast.length)];
+
   return (
-    <ScrollableSection title="Cast">
-      {scrollItems.map((credit: Cast | Crew, index: number) => (
-        <ScrollableItem
-          path={"/person/" + credits.id}
-          lastItem={index + 1 === scrollItems.length}
-          key={`${credit.id}-${
-            "character" in credit ? credit.character : credit.job
-          }-${index}`}
-          image_path={credit.profile_path}
-          title={credit.name}
-          subtext={"character" in credit ? credit.character : credit.job} // Type narrowing
-        />
-      ))}
-    </ScrollableSection>
+    scrollItems.length > 0 && (
+      <ScrollableSection title="Cast">
+        {scrollItems.map((credit: Cast | Crew, index: number) => (
+          <ScrollableItem
+            path={"/person/" + credits.id}
+            lastItem={index + 1 === scrollItems.length}
+            key={`${credit.id}-${
+              "character" in credit ? credit.character : credit.job
+            }-${index}`}
+            image_path={credit.profile_path}
+            title={credit.name}
+            subtext={"character" in credit ? credit.character : credit.job} // Type narrowing
+          />
+        ))}
+      </ScrollableSection>
+    )
   );
 }
