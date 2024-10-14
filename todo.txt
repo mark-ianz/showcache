@@ -1,5 +1,5 @@
-1. Make the nav links responsive.
-2. Make the header responsive.
+1. Make the nav links responsive. // Done
+2. Make the header responsive. // Done
 3. Add a view image when clicked.
 4. Add a collection section for movies if they are part of it.
 5. Add facts section.
