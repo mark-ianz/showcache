@@ -49,7 +49,7 @@ export default function ViewInfoSection({ showData }: Props) {
       {/* Overlay */}
       <div className="absolute inset-0 bg-background opacity-90 z-0"></div>
       <div className="relative z-10 items-center">
-        <div className="flex gap-10 max-md:flex-col">
+        <div className="flex gap-10 max-md:flex-col items-center">
           <div className="flex justify-center">
             {poster_path && (
               <img
