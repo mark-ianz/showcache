@@ -10,10 +10,10 @@ export default function OptionButtons({ showData }: Props) {
   return (
     <div className="flex gap-4">
       <Button size={"icon"} className="rounded-full" variant={"secondary"}>
-        <HeartIcon className="w-5 h-5" />
+        <HeartIcon className="w-4 h-4" />
       </Button>
       <Button size={"icon"} className="rounded-full" variant={"secondary"}>
-        <BookmarkIcon className="w-5 h-5" />
+        <BookmarkIcon className="w-4 h-4" />
       </Button>
       <TrailerDialog showData={showData} />
     </div>

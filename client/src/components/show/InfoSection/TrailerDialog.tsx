@@ -47,8 +47,8 @@ export default function TrailerDialog({ showData }: Props) {
         <Button variant={"secondary"} className="gap-1" disabled={isLoading}>
           {officialTrailer ? (
             <>
-              <Play className="w-5 h-5" />
-              <p> Play Trailer</p>
+              <Play className="w-4 h-4" />
+              <p className="max-md:text-sm"> Play Trailer</p>
             </>
           ) : (
             "No Available Trailer"

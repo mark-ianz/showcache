@@ -60,7 +60,7 @@ export default function ViewInfoSection({ showData }: Props) {
             )}
           </div>
           <div className="flex flex-col gap-4">
-            <div className="flex gap-4 font-thin items-center">
+            <div className="flex gap-4 font-thin items-center max-md:text-sm">
               <p className="min-w-fit">{getShowDuration(showData)}</p>
               <JoinGenreList genreList={genreList} />
               <Rating rating={showData.vote_average} />
