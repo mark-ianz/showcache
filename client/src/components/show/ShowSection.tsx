@@ -1,3 +1,4 @@
+import HeaderText from "../HeaderText";
 import ShowCard from "./ShowCard";
 import ShowListWrapper from "./ShowListWrapper";
 import { Movie, TV } from "@/types/show";
@@ -18,10 +19,11 @@ export default function ShowSection({
   error,
   loading,
 }: ShowSectionProps) {
-  return (
+  return showArray ? (
     <section>
-      <p className="text-2xl mb-3">{title}</p>
-      <p>{error?.message}</p>
+      <HeaderText className="font-normal mb-2 text-2xl max-md:text-xl">
+        {title}
+      </HeaderText>
       <div className="flex items-center justify-center">
         {loading && <LoaderIcon />}
       </div>
@@ -39,5 +41,7 @@ export default function ShowSection({
         ))}
       </ShowListWrapper>
     </section>
+  ) : (
+    <p>{error?.message}</p>
   );
 }
