@@ -20,18 +20,18 @@ export default function ScrollableItem({
   path,
 }: Props) {
   return (
-    <li className={cn("min-w-48", lastItem && "z-10")}>
+    <li className={cn(lastItem && "z-10")}>
       <Link to={path}>
-        <Card className="h-full">
+        <Card className="h-full w-48 max-md:w-36">
           <CardContent>
-            <AspectRatio ratio={2 / 3}>
+            <div>
               <img
                 src={getImg(image_path, "w780")}
                 alt={`Image of ${title}`}
-                className="rounded-t-xl h-full w-full object-cover"
+                className="h-72 object-cover rounded-t-md max-md:h-60"
               />
-            </AspectRatio>
-            <div className="p-2">
+            </div>
+            <div className="p-2 max-md:text-sm">
               <p className="font-semibold line-clamp-2">{title}</p>
               <p className="text-sm font-thin text-muted-foreground line-clamp-2">
                 {subtext}
