@@ -1,5 +1,4 @@
 import { getImg } from "@/lib/helpers";
-import { AspectRatio } from "./ui/aspect-ratio";
 import { Card, CardContent } from "./ui/card";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
