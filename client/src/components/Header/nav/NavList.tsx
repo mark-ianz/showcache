@@ -1,8 +1,9 @@
 import { cn } from "@/lib/utils";
 import NavLinks from "./NavLinks";
+import { ClassNameValue } from "tailwind-merge";
 
 type Props = {
-  className?: string | undefined;
+  className?: ClassNameValue;
 };
 
 export default function NavList({ className }: Props) {

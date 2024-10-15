@@ -9,9 +9,10 @@ import { Input } from "../ui/input";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { ClassNameValue } from "tailwind-merge";
 
 type Props = {
-  className?: string | undefined;
+  className?: ClassNameValue;
 };
 
 export default function Searchbar({ className }: Props) {
