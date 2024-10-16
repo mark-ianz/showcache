@@ -54,7 +54,7 @@ export default function MediaTabs({ showData }: NewProps) {
             onValueChange={(value) => setOpenedTab(value as Tab)}
           >
             <div className="flex flex-col items-start">
-              <HeaderText className="mb-2">Media</HeaderText>
+              <HeaderText>Media</HeaderText>
               <TabsList className="flex items-start justify-start p-0 h-auto gap-4 bg-background">
                 {tabs.map(
                   (tab, index) =>
@@ -84,7 +84,7 @@ export default function MediaTabs({ showData }: NewProps) {
             </div>
             {tabs.map((tab, index) => (
               <TabsContent value={tab.value} key={index}>
-                <ScrollableSection>
+                <ScrollableSection olClassName="gap-1">
                   {tab.images.slice(0, 14).map((backdrop, index) => (
                     <li
                       key={backdrop.file_path + index}
