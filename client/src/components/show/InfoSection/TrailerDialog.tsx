@@ -48,7 +48,7 @@ export default function TrailerDialog({ showData }: Props) {
           {officialTrailer ? (
             <>
               <Play className="w-4 h-4" />
-              <p className="max-md:text-sm"> Play Trailer</p>
+              <p className="max-md:text-sm max-sm:text-xs">Play Trailer</p>
             </>
           ) : (
             "No Available Trailer"
