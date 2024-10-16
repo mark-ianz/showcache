@@ -13,10 +13,10 @@ export default function ScrollableSection({
 }: Props) {
   return (
     <div>
-      {title && <HeaderText>{title}</HeaderText>}
+      {title && <HeaderText className="pb-2">{title}</HeaderText>}
       <ScrollArea className="w-full">
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-r from-transparent to-background z-10"></div>
-        <ol className="flex gap-3 items-stretch overflow-x-auto py-4 justify-start">
+        <ol className="flex gap-3 items-stretch overflow-x-auto pb-4 justify-start">
           {children}
         </ol>
         <ScrollBar orientation="horizontal" />
