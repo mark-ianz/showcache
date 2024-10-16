@@ -3,6 +3,7 @@ import { Card, CardContent } from "../ui/card";
 import { getImg } from "@/lib/helpers";
 import { Season } from "@/types/tv";
 import Rating from "../Rating";
+import { AspectRatio } from "../ui/aspect-ratio";
 
 export default function SeasonCard({ season }: { season: Season }) {
   return (
@@ -10,14 +11,16 @@ export default function SeasonCard({ season }: { season: Season }) {
       <Link to={"#"}>
         <Card>
           <CardContent className="flex gap-1">
-            <div>
-              <img
-                src={getImg(season.poster_path, "w780")}
-                alt={`Image of ${season.name}`}
-                className="rounded-l-xl max-w-[130px] min-w-[130px] object-cover"
-              />
+            <div className="w-52">
+              <AspectRatio ratio={2 / 3}>
+                <img
+                  src={getImg(season.poster_path, "w780")}
+                  alt={`Image of ${season.name}`}
+                  className="w-full h-full rounded-l-xl object-cover"
+                />
+              </AspectRatio>
             </div>
-            <div className="p-2 w-full flex flex-col gap-2 justify-between">
+            <div className="p-2 w-full flex flex-col gap-2 justify-between max-md:text-sm max-xsm:text-xs">
               <div className="flex flex-col gap-2">
                 <div className="flex gap-2">
                   <p className="font-semibold">
@@ -28,11 +31,13 @@ export default function SeasonCard({ season }: { season: Season }) {
                   </p>
                   <Rating rating={season.vote_average} />
                 </div>
-                <p className="text-sm font-thin text-muted-foreground line-clamp-6">
+                <p className="font-thin text-muted-foreground line-clamp-6">
                   {season.overview || "No overview."}
                 </p>
               </div>
-              <p className="text-sm font-thin text-muted-foreground">Episode Count: {season.episode_count}</p>
+              <p className="font-thin text-muted-foreground">
+                Episode Count: {season.episode_count}
+              </p>
             </div>
           </CardContent>
         </Card>
