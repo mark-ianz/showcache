@@ -2,6 +2,7 @@ import { getImg } from "@/lib/helpers";
 import { Card, CardContent } from "./ui/card";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
+import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 type Props = {
   image_path: string;
@@ -19,20 +20,21 @@ export default function ScrollableItem({
   path,
 }: Props) {
   return (
-    <li className={cn(lastItem && "z-10")}>
+    <li className={cn(lastItem && "z-10", "w-48 max-md:w-40 max-sm:w-32")}>
       <Link to={path}>
         <Card className="h-full">
           <CardContent>
-            <div className="w-48 h-72 max-md:h-60 max-md:w-36 max-sm:w-28 max-sm:h-40">
+            <AspectRatio ratio={2 / 3}>
               <img
                 src={getImg(image_path, "w780")}
                 alt={`Image of ${title}`}
-                className="w-full h-full object-cover rounded-t-md"
+                className="w-full h-full object-cover object-center rounded-t-md"
               />
-            </div>
-            <div className="p-2 max-md:text-sm">
+            </AspectRatio>
+
+            <div className="p-2 max-md:text-sm max-sm:text-xs">
               <p className="font-semibold line-clamp-2">{title}</p>
-              <p className="text-sm font-thin text-muted-foreground line-clamp-2">
+              <p className="font-thin text-muted-foreground line-clamp-2">
                 {subtext}
               </p>
             </div>
