@@ -21,7 +21,7 @@ export default function ScrollableItem({
   return (
     <li className={cn(lastItem && "z-10")}>
       <Link to={path}>
-        <Card className="">
+        <Card className="h-full">
           <CardContent>
             <div className="w-48 h-72 max-md:h-60 max-md:w-36 max-sm:w-28 max-sm:h-40">
               <img
