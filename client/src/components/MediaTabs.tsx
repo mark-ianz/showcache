@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { TvFullDetails } from "@/types/tv";
 import { MovieFullDetails } from "@/types/movie.details";
 import { getImages } from "@/api/show.service";
+import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 type Tab = "Backdrops" | "Posters";
 
@@ -88,18 +89,19 @@ export default function MediaTabs({ showData }: NewProps) {
                     <li
                       key={backdrop.file_path + index}
                       className={cn(
-                        "w-[500px]",
-                        tab.value === "Posters" && "poster",
-                        index + 1 === 14 && "z-10"
+                        index + 1 === 14 && "z-10",
+                        "w-[500px] max-xl:w-[400px] max-md:w-[300px] max-sm:w-[250px]",
+                        tab.value === "Posters" && "w-60 max-xl:w-52 max-lg:w-44 max-md:w-36 max-sm:w-28"
                       )}
                     >
-                      <img
-                        src={getImg(backdrop.file_path, "w780")}
-                        className={cn(
-                          "w-full object-cover h-[300px]",
-                          tab.value === "Posters" && "poster"
-                        )}
-                      />
+                      <AspectRatio ratio={backdrop.aspect_ratio}>
+                        <img
+                          src={getImg(backdrop.file_path, "w780")}
+                          className={cn(
+                            "w-full h-full object-cover object-center",
+                          )}
+                        />
+                      </AspectRatio>
                     </li>
                   ))}
                 </ScrollableSection>
