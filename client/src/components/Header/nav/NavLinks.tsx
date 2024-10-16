@@ -8,7 +8,7 @@ export default function NavLinks() {
       key={index + name}
       asChild
       variant={"link"}
-      className="cursor-pointer text-md"
+      className="cursor-pointer text-md max-lg:text-sm"
     >
       <NavLink to={path}>{name}</NavLink>
     </Button>
