@@ -19,7 +19,7 @@ export default function ScrollableSection({
     <div>
       {title && <HeaderText className="pb-2">{title}</HeaderText>}
       <ScrollArea className="w-full">
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-r from-transparent to-background z-10"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-32 max-md:w-24 max-sm:w-12 bg-gradient-to-r from-transparent to-background z-10"></div>
         <ol className={cn("flex gap-3 items-stretch overflow-x-auto pb-4 justify-start", olClassName)}>
           {children}
         </ol>
