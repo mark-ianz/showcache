@@ -3,4 +3,4 @@
 3. Add a view image when clicked.
 4. Add a collection section for movies if they are part of it.
 5. Add facts section.
-6. Make the Cards smaller on small screens.
+6. Make the Cards smaller on small screens. // Done
