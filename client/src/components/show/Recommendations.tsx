@@ -27,7 +27,7 @@ export default function Recommendations({ id }: { id: string }) {
         {recommendations.map((show, index) => (
           <li
             className={cn(
-              "min-w-48",
+              "w-48 max-lg:w-40 max-md:w-36 max-sm:w-32",
               index + 1 === recommendations.length && "z-10"
             )}
             key={show.id}
