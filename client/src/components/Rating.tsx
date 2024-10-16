@@ -4,7 +4,7 @@ export default function Rating({ rating = 0 }: { rating: number }) {
   return (
     <div className="flex items-center gap-1">
       <RatingIcon />
-      <p className="text-sm font-thin text-muted-foreground">
+      <p className="text-sm font-thin text-muted-foreground max-sm:text-xs">
         {rating?.toFixed(1)}
       </p>
     </div>
