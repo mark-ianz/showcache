@@ -6,6 +6,7 @@ import MediaTabs from "@/components/MediaTabs";
 import ViewInfoSection from "@/components/show/InfoSection/ViewInfoSection";
 import Casts from "@/components/show/Casts";
 import Recommendations from "@/components/show/Recommendations";
+import ViewShowLayout from "@/components/show/ViewShowLayout";
 
 export default function ViewMovie() {
   const { id } = useParams();
@@ -22,11 +23,11 @@ export default function ViewMovie() {
   if (!data) return <p>loading</p>;
 
   return (
-    <main className="w-full relative flex flex-col gap-10">
+    <ViewShowLayout>
       <ViewInfoSection showData={data} />
       <Casts id={id!} type="movie" />
       <MediaTabs showData={data} />
       <Recommendations id={id!} />
-    </main>
+    </ViewShowLayout>
   );
 }

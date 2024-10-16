@@ -7,6 +7,7 @@ import Seasons from "@/components/Seasons";
 import ViewInfoSection from "@/components/show/InfoSection/ViewInfoSection";
 import Casts from "@/components/show/Casts";
 import Recommendations from "@/components/show/Recommendations";
+import ViewShowLayout from "@/components/show/ViewShowLayout";
 
 export default function ViewTv() {
   const { id } = useParams();
@@ -24,13 +25,12 @@ export default function ViewTv() {
   if (!data) return <p>no data</p>;
 
   return (
-    <main className="w-full relative flex flex-col gap-10">
+    <ViewShowLayout>
       <ViewInfoSection showData={data} />
       <Casts type="tv" id={id!} />
       <Seasons seasons={data.seasons} />
       <MediaTabs showData={data} />
       <Recommendations id={id!} />
-    </main>
+    </ViewShowLayout>
   );
 }
-
