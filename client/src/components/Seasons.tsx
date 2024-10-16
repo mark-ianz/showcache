@@ -22,7 +22,9 @@ export default function Seasons({ seasons }: Props) {
           <ol
             className={cn(
               "flex flex-col gap-2",
-              !isExpanded && isFewSeasons ? "overflow-hidden max-h-64" : "max-h-[650px]"
+              !isExpanded && isFewSeasons
+                ? "overflow-hidden max-h-64"
+                : "max-h-[700px] max-lg:max-h-[600px] max-md:max-h-[500px]"
             )}
           >
             {seasons.map((season) => (
