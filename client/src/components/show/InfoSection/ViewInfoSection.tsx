@@ -34,7 +34,7 @@ export default function ViewInfoSection({ showData }: Props) {
     fetchDirectors();
   }, [showData, language]);
   const backdrop_path = getImg(showData?.backdrop_path!, "w1280", true);
-  const poster_path = getImg(showData?.poster_path!, "w300", true);
+  const poster_path = getImg(showData?.poster_path!, "w780", true);
   const genreList = showData.genres.map((genre) => genre.name);
 
   return (
@@ -50,7 +50,7 @@ export default function ViewInfoSection({ showData }: Props) {
       <div className="absolute inset-0 bg-background opacity-90 z-0"></div>
       <div className="relative z-10 items-center">
         <div className="flex gap-10 max-md:flex-col items-center">
-          <div className="flex justify-center">
+          <div className="w-72">
             {poster_path && (
               <img
                 src={poster_path}
