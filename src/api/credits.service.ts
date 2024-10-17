@@ -25,3 +25,15 @@ export async function getCredits({
 
   return data;
 }
+
+export async function getPersonFullInfo ({
+  queryKey,
+}: QueryFunctionContext): Promise<CreditsResult> {
+  const [_key, language, id] = queryKey;
+  const { data }: { data: CreditsResult } = await axios.get(
+    `https://api.themoviedb.org/3/person/${id}`,
+    axios_config({ method: "GET", params: { language } })
+  );
+
+  return data;
+}
