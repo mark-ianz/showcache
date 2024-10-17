@@ -28,16 +28,16 @@ export default function Casts({ id, type }: Props) {
   return (
     scrollItems.length > 0 && (
       <ScrollableSection title="Cast">
-        {scrollItems.map((credit: Cast | Crew, index: number) => (
+        {scrollItems.map((person: Cast | Crew, index: number) => (
           <ScrollableItem
-            path={"/person/" + credits.id}
+            path={"/person/" + person.id}
             lastItem={index + 1 === scrollItems.length}
-            key={`${credit.id}-${
-              "character" in credit ? credit.character : credit.job
+            key={`${person.id}-${
+              "character" in person ? person.character : person.job
             }-${index}`}
-            image_path={credit.profile_path}
-            title={credit.name}
-            subtext={"character" in credit ? credit.character : credit.job} // Type narrowing
+            image_path={person.profile_path}
+            title={person.name}
+            subtext={"character" in person ? person.character : person.job} // Type narrowing
           />
         ))}
       </ScrollableSection>
