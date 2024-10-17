@@ -15,6 +15,7 @@ import Upcoming from "./pages/UpcomingMovies.tsx";
 import Results from "./pages/Results.tsx";
 import ViewShow from "./pages/ViewMovie.tsx";
 import ViewTv from "./pages/ViewTv.tsx";
+import ViewPerson from "./pages/ViewPerson.tsx";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
         path: "/tv/:id",
         element: <ViewTv />,
       },
+      {
+        path: "/person/:id",
+        element: <ViewPerson/>
+      }
     ],
   },
 ]);
