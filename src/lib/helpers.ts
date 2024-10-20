@@ -5,6 +5,7 @@ import { MovieFullDetails } from "@/types/movie.details";
 import { getDirectors } from "@/api/credits.service";
 import { Location } from "react-router-dom";
 import { Movie, ShowType, TV } from "@/types/show";
+import { format } from "date-fns";
 
 export function getGenre(genre_ids: number[]): string[] {
   let genre_list: string[] = [];
@@ -75,4 +76,24 @@ export function getShowTypeFromUseLocation(location: Location): ShowType {
   const { pathname } = location;
   const splitted = pathname.split("/");
   return splitted[1] as ShowType;
+}
+
+export function getGender(
+  gender: 0 | 1 | 2
+): "Male" | "Female" | "Not Specify" {
+  switch (gender) {
+    case 1:
+      return "Female";
+    case 2:
+      return "Male";
+    default:
+      return "Not Specify";
+  }
+}
+
+export function formatDate(
+  date: Date,
+  dateFormat: string = "MMMM dd, yyyy"
+): string {
+  return format(date, dateFormat);
 }

@@ -1,14 +1,17 @@
 type Gender = 0 | 1 | 2;
 
-type Credits = {
+type PersonBase = {
   adult: boolean;
   gender: Gender;
   id: number;
   known_for_department: string;
   name: string;
-  original_name: string;
   popularity: number;
   profile_path: string; // img link
+}
+
+type Credits = PersonBase & {
+  original_name: string;
   cast_id: number;
   credit_id: string;
 };
@@ -28,3 +31,11 @@ export type CreditsResult = {
   cast: Cast[];
   crew: Crew[];
 };
+
+export type PersonFullInfo = PersonBase & {
+  also_known_as: string[];
+  biography: string;
+  birthday: Date;
+  deathday: Date | null;
+  place_of_birth: string;
+}

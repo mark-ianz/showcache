@@ -1,0 +1,19 @@
+Datas that I will have:
+
+adult: boolean;
+also_known_as: string[];
+biography: string;
+birthday: Date;
+deathday: Date | null;
+gender: Gender;
+id: number;
+known_for_department: string;
+name: string;
+place_of_birth: string;
+popularity: number;
+profile_path: string;
+
+* combined credits endpoint: Combined movie and TV credits that belong to a person.
+* external_ids endpoint: The external ID's that belong to a person such as social ids.
+* images endpoint: Get the profile images that belong to a person.
+* tagged_images endpoint: Get the tagged images that belong to a person for example their image from this movie or tv.
