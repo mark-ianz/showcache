@@ -8,7 +8,7 @@ type PersonBase = {
   name: string;
   popularity: number;
   profile_path: string; // img link
-}
+};
 
 type Credits = PersonBase & {
   original_name: string;
@@ -38,4 +38,23 @@ export type PersonFullInfo = PersonBase & {
   birthday: Date;
   deathday: Date | null;
   place_of_birth: string;
-}
+};
+
+export type ExternalIds = {
+  facebook_id: string;
+  imdb_id: string;
+  instagram_id: string;
+  tiktok_id: string;
+  tvrage_id: string;
+  twitter_id: string;
+  wikidata_id: string;
+  youtube_id: string;
+};
+
+export type ValidExternalIds = {
+  facebook_id: string;
+  instagram_id: string;
+  tiktok_id: string;
+  twitter_id: string;
+  youtube_id: string;
+};
