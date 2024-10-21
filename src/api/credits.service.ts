@@ -1,6 +1,6 @@
 import axios from "axios";
 import { axios_config } from "./axios.config";
-import { CreditsResult, PersonFullInfo } from "@/types/credits";
+import { CreditsResult, ExternalIds, PersonFullInfo } from "@/types/credits";
 import { QueryFunctionContext } from "@tanstack/react-query";
 
 export async function getDirectors(id: number): Promise<string[]> {
@@ -33,6 +33,18 @@ export async function getPersonFullInfo ({
   const { data }: { data: PersonFullInfo } = await axios.get(
     `https://api.themoviedb.org/3/person/${id}`,
     axios_config({ method: "GET", params: { language } })
+  );
+
+  return data;
+}
+
+export async function getPersonExternalIds ({
+  queryKey,
+}: QueryFunctionContext): Promise<ExternalIds> {
+  const [_key, person_id] = queryKey;
+  const { data }: { data: ExternalIds } = await axios.get(
+    `https://api.themoviedb.org/3/person/${person_id}/external_ids`,
+    axios_config({ method: "GET"})
   );
 
   return data;
