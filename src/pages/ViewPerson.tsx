@@ -1,6 +1,7 @@
 import { getPersonFullInfo } from "@/api/credits.service";
 import HeaderText from "@/components/HeaderText";
 import PersonalInfo from "@/components/person/PersonalInfo";
+import Socials from "@/components/person/Socials";
 import ViewShowLayout from "@/components/show/ViewShowLayout";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useLanguage } from "@/context/language-provider";
@@ -49,7 +50,10 @@ export default function ViewPerson({}: Props) {
                   />
                 </AspectRatio>
               </div>
-              <PersonalInfo person={person} />
+              <div className="p-4">
+                <Socials className="mb-4" person_id={person.id} />
+                <PersonalInfo person={person} />
+              </div>
             </div>
             <div className="flex flex-col gap-4">
               <HeaderText>{person.name}</HeaderText>
