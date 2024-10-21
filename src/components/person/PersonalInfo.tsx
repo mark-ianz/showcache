@@ -34,11 +34,13 @@ export default function PersonalInfo({ person }: Props) {
       </div>
       <div>
         <p className="font-semibold">Also Known As</p>
-        {person.also_known_as.length > 0 ? person.also_known_as.map((aka, index) => (
-          <p className="font-sm" key={index + aka.length + aka[0]}>
-            {aka}
-          </p>
-        )): "-"}
+        {person.also_known_as.length > 0
+          ? person.also_known_as.map((aka, index) => (
+              <p className="font-sm" key={index + aka.length + aka[0]}>
+                {aka}
+              </p>
+            ))
+          : "-"}
       </div>
     </div>
   );
