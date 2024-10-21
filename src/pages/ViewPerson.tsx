@@ -1,5 +1,6 @@
 import { getPersonFullInfo } from "@/api/credits.service";
 import HeaderText from "@/components/HeaderText";
+import Biography from "@/components/person/Biography";
 import PersonalInfo from "@/components/person/PersonalInfo";
 import Socials from "@/components/person/Socials";
 import ViewShowLayout from "@/components/show/ViewShowLayout";
@@ -57,16 +58,7 @@ export default function ViewPerson({}: Props) {
             </div>
             <div className="flex flex-col gap-4">
               <HeaderText>{person.name}</HeaderText>
-              <div className="max-md:text-sm">
-                <p className="text-xl font-semibold mb-2">Biography</p>
-                <div className="flex flex-col gap-2 text-muted-foreground">
-                  {biography && biography.length > 0
-                    ? biography?.map((bio, index) => (
-                        <p key={index + bio.length}>{bio}</p>
-                      ))
-                    : "No biography of " + person.name}
-                </div>
-              </div>
+              <Biography biography={biography} person={person.name}/>
             </div>
           </div>
         </div>
