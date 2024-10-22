@@ -9,7 +9,7 @@ export default function NameAndBio({ person }: Props) {
 
   return (
     <div className="flex flex-col gap-4 w-full">
-      <HeaderText>{person.name}</HeaderText>
+      <HeaderText className="max-xsm:hidden">{person.name}</HeaderText>
       <Biography biography={biography} person={person.name} />
     </div>
   );

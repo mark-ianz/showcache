@@ -1,4 +1,5 @@
 import { getPersonFullInfo } from "@/api/credits.service";
+import HeaderText from "@/components/HeaderText";
 import NameAndBio from "@/components/person/NameAndBio";
 import PersonPortrait from "@/components/person/PersonPortrait";
 import SocialAndPersonalInfo from "@/components/person/SocialAndPersonalInfo";
@@ -34,6 +35,7 @@ export default function ViewPerson({}: Props) {
             name={person.name}
             profile_path={person.profile_path}
           />
+          <HeaderText className="hidden max-xsm:block text-center mt-4">{person.name}</HeaderText>
           <SocialAndPersonalInfo person={person} />
         </div>
         <NameAndBio person={person} />
