@@ -22,17 +22,15 @@ export default function ViewPerson({}: Props) {
   const {
     language: { iso_639_1: language },
   } = useLanguage();
-  const { data: person } = useQuery({
+  const { data: person, isLoading } = useQuery({
     queryKey: ["person", language, id],
     queryFn: getPersonFullInfo,
     staleTime: 1000 * 60 * 5,
   });
 
   const biography = person?.biography.split("\n").filter((p) => p);
-  console.log(biography);
 
-  if (!person) return <p>Loading</p>;
-  console.log(person);
+  if (isLoading || !person) return <p>Loading</p>;
 
   return (
     <ViewShowLayout>
@@ -58,7 +56,7 @@ export default function ViewPerson({}: Props) {
             </div>
             <div className="flex flex-col gap-4">
               <HeaderText>{person.name}</HeaderText>
-              <Biography biography={biography} person={person.name}/>
+              <Biography biography={biography} person={person.name} />
             </div>
           </div>
         </div>
