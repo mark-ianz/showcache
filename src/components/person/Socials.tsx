@@ -44,7 +44,7 @@ export default function Socials({ person_id, className }: Props) {
     socials.length > 0 && (
       <ul className={cn("flex flex-wrap gap-4", className)}>
         {socials.map((social, index) => (
-          <li key={social.name + index} className="w-8 h-8">
+          <li key={social.name + index} className="w-8 aspect-square max-md:w-6">
             <Link to={social.link} target="_blank">
               <img
                 src={social.logo}
