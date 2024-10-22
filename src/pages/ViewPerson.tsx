@@ -1,15 +1,9 @@
 import { getPersonFullInfo } from "@/api/credits.service";
-import HeaderText from "@/components/HeaderText";
-import Biography from "@/components/person/Biography";
 import NameAndBio from "@/components/person/NameAndBio";
-import PersonalInfo from "@/components/person/PersonalInfo";
 import PersonPortrait from "@/components/person/PersonPortrait";
 import SocialAndPersonalInfo from "@/components/person/SocialAndPersonalInfo";
-import Socials from "@/components/person/Socials";
 import ViewShowLayout from "@/components/show/ViewShowLayout";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useLanguage } from "@/context/language-provider";
-import { getImg } from "@/lib/helpers";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
