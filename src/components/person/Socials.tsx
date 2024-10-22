@@ -41,18 +41,20 @@ export default function Socials({ person_id, className }: Props) {
   }
 
   return (
-    <ul className={cn("flex flex-wrap gap-4", className)}>
-      {socials.map((social, index) => (
-        <li key={social.name + index} className="w-8 h-8">
-          <Link to={social.link} target="_blank">
-            <img
-              src={social.logo}
-              alt={"Social Link with" + social.name}
-              className="w-full h-full"
-            />
-          </Link>
-        </li>
-      ))}
-    </ul>
+    socials.length > 0 && (
+      <ul className={cn("flex flex-wrap gap-4", className)}>
+        {socials.map((social, index) => (
+          <li key={social.name + index} className="w-8 h-8">
+            <Link to={social.link} target="_blank">
+              <img
+                src={social.logo}
+                alt={"Social Link with" + social.name}
+                className="w-full h-full"
+              />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    )
   );
 }
