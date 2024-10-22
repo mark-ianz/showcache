@@ -28,7 +28,7 @@ export default function ViewPerson({}: Props) {
   if (isLoading || !person) return <p>Loading</p>;
 
   return (
-    <section>
+    <main className="w-full">
       <div className="flex gap-8 max-xsm:flex-col items-start max-md:gap-6 max-sm:gap-4">
         <div className="flex flex-col max-xsm:w-full">
           <PersonPortrait
@@ -40,6 +40,6 @@ export default function ViewPerson({}: Props) {
         </div>
         <NameAndBio person={person} />
       </div>
-    </section>
+    </main>
   );
 }
