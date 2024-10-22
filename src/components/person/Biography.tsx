@@ -12,7 +12,7 @@ export default function Biography({ biography, person }: Props) {
       <div
         className={cn(
           "flex flex-col gap-2 text-muted-foreground overflow-hidden relative",
-          !isExpanded && "max-h-40 "
+          !isExpanded && "h-60 md:h-40"
         )}
       >
         {biography && biography.length > 0
