@@ -39,8 +39,8 @@ export default function ViewPerson({}: Props) {
         <div className="absolute inset-0 bg-background opacity-90 z-0"></div>
         <div className="relative z-10 items-center">
           <div className="flex gap-8 max-xsm:flex-col items-start max-md:gap-6 max-sm:gap-4">
-            <div className="flex flex-col w-full">
-              <div className="w-64 max-md:w-52 max-sm:w-44 self-center">
+            <div className="flex flex-col max-xsm:w-full">
+              <div className="w-64 max-md:w-52 max-xsm:self-center">
                 <AspectRatio ratio={2 / 3}>
                   <img
                     src={getImg(person.profile_path, "w780")}
@@ -50,12 +50,12 @@ export default function ViewPerson({}: Props) {
                 </AspectRatio>
               </div>
 
-              <div className="p-4 max-sm:p-0 max-sm:py-4">
+              <div className="px-2 py-4 max-sm:p-0 max-sm:py-6">
                 <Socials className="mb-4" person_id={person.id} />
                 <PersonalInfo person={person} />
               </div>
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 w-full">
               <HeaderText>{person.name}</HeaderText>
               <Biography biography={biography} person={person.name} />
             </div>
