@@ -8,7 +8,7 @@ type Props = {
 
 export default function PersonalInfo({ person }: Props) {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 max-md:text-sm">
       <p className="font-bold text-lg">Personal Info</p>
       <div>
         <p className="font-semibold">Known For</p>
