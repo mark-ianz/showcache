@@ -1,7 +1,10 @@
 import { getPersonFullInfo } from "@/api/credits.service";
 import HeaderText from "@/components/HeaderText";
 import Biography from "@/components/person/Biography";
+import NameAndBio from "@/components/person/NameAndBio";
 import PersonalInfo from "@/components/person/PersonalInfo";
+import PersonPortrait from "@/components/person/PersonPortrait";
+import SocialAndPersonalInfo from "@/components/person/SocialAndPersonalInfo";
 import Socials from "@/components/person/Socials";
 import ViewShowLayout from "@/components/show/ViewShowLayout";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -28,38 +31,20 @@ export default function ViewPerson({}: Props) {
     staleTime: 1000 * 60 * 5,
   });
 
-  const biography = person?.biography.split("\n").filter((p) => p);
-
   if (isLoading || !person) return <p>Loading</p>;
 
   return (
     <ViewShowLayout>
-      <section className="relative">
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-background opacity-90 z-0"></div>
-        <div className="relative z-10 items-center">
-          <div className="flex gap-8 max-xsm:flex-col items-start max-md:gap-6 max-sm:gap-4">
-            <div className="flex flex-col max-xsm:w-full">
-              <div className="w-64 max-md:w-52 max-xsm:self-center">
-                <AspectRatio ratio={2 / 3}>
-                  <img
-                    src={getImg(person.profile_path, "w780")}
-                    alt={"Image of " + person.name}
-                    className="object-cover rounded-lg w-full h-full"
-                  />
-                </AspectRatio>
-              </div>
-
-              <div className="px-2 py-4 max-sm:p-0 max-sm:py-6">
-                <Socials className="mb-4" person_id={person.id} />
-                <PersonalInfo person={person} />
-              </div>
-            </div>
-            <div className="flex flex-col gap-4 w-full">
-              <HeaderText>{person.name}</HeaderText>
-              <Biography biography={biography} person={person.name} />
-            </div>
+      <section>
+        <div className="flex gap-8 max-xsm:flex-col items-start max-md:gap-6 max-sm:gap-4">
+          <div className="flex flex-col max-xsm:w-full">
+            <PersonPortrait
+              name={person.name}
+              profile_path={person.profile_path}
+            />
+            <SocialAndPersonalInfo person={person} />
           </div>
+          <NameAndBio person={person} />
         </div>
       </section>
     </ViewShowLayout>
