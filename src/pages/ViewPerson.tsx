@@ -28,19 +28,17 @@ export default function ViewPerson({}: Props) {
   if (isLoading || !person) return <p>Loading</p>;
 
   return (
-    <ViewShowLayout>
-      <section>
-        <div className="flex gap-8 max-xsm:flex-col items-start max-md:gap-6 max-sm:gap-4">
-          <div className="flex flex-col max-xsm:w-full">
-            <PersonPortrait
-              name={person.name}
-              profile_path={person.profile_path}
-            />
-            <SocialAndPersonalInfo person={person} />
-          </div>
-          <NameAndBio person={person} />
+    <section>
+      <div className="flex gap-8 max-xsm:flex-col items-start max-md:gap-6 max-sm:gap-4">
+        <div className="flex flex-col max-xsm:w-full">
+          <PersonPortrait
+            name={person.name}
+            profile_path={person.profile_path}
+          />
+          <SocialAndPersonalInfo person={person} />
         </div>
-      </section>
-    </ViewShowLayout>
+        <NameAndBio person={person} />
+      </div>
+    </section>
   );
 }
