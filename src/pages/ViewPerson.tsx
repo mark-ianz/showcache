@@ -2,7 +2,6 @@ import { getPersonFullInfo } from "@/api/credits.service";
 import NameAndBio from "@/components/person/NameAndBio";
 import PersonPortrait from "@/components/person/PersonPortrait";
 import SocialAndPersonalInfo from "@/components/person/SocialAndPersonalInfo";
-import ViewShowLayout from "@/components/show/ViewShowLayout";
 import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
