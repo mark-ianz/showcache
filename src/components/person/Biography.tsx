@@ -1,12 +1,28 @@
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Props = { biography: string[]; person: string };
 
 export default function Biography({ biography, person }: Props) {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
-  const isShort = biography.join(" ").length < 700;
+  const [isShort, setIsShort] = useState<boolean>(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    const biographyLength = biography.join(" ").length;
+    const limit = screenWidth < 640 ? 500 : 750;
+    setIsShort(biographyLength < limit);
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [biography, screenWidth]);
 
   return (
     <div className="max-md:text-sm">
