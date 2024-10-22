@@ -34,13 +34,13 @@ export default function ViewPerson({}: Props) {
 
   return (
     <ViewShowLayout>
-      <section className="p-6 relative">
+      <section className="relative">
         {/* Overlay */}
         <div className="absolute inset-0 bg-background opacity-90 z-0"></div>
         <div className="relative z-10 items-center">
-          <div className="flex gap-8 max-md:flex-col items-start">
-            <div className="min-w-80 flex flex-col">
-              <div>
+          <div className="flex gap-8 max-xsm:flex-col items-start max-md:gap-6 max-sm:gap-4">
+            <div className="flex flex-col w-full">
+              <div className="w-64 max-md:w-52 max-sm:w-44 self-center">
                 <AspectRatio ratio={2 / 3}>
                   <img
                     src={getImg(person.profile_path, "w780")}
@@ -49,7 +49,8 @@ export default function ViewPerson({}: Props) {
                   />
                 </AspectRatio>
               </div>
-              <div className="p-4">
+
+              <div className="p-4 max-sm:p-0 max-sm:py-4">
                 <Socials className="mb-4" person_id={person.id} />
                 <PersonalInfo person={person} />
               </div>
