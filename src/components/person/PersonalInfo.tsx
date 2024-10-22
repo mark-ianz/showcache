@@ -24,7 +24,7 @@ export default function PersonalInfo({ person }: Props) {
       </div>
       {person.deathday && (
         <div>
-          <p className="font-semibold">Deathdate</p>
+          <p className="font-semibold">Date of Death</p>
           <p className="font-sm">{formatDate(person.deathday)}</p>
         </div>
       )}
