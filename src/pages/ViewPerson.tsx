@@ -43,7 +43,7 @@ export default function ViewPerson({}: Props) {
         </div>
         <div className="flex flex-col gap-4">
           <NameAndBio person={person} />
-          <KnownFor />
+          <KnownFor id={person.id} />
         </div>
       </div>
     </main>
