@@ -15,7 +15,7 @@ export default function Biography({ biography, person }: Props) {
     };
 
     const biographyLength = biography.join(" ").length;
-    const limit = screenWidth < 640 ? 500 : 750;
+    const limit = screenWidth < 400 ? 500 : 750;
     setIsShort(biographyLength < limit);
 
     window.addEventListener("resize", handleResize);
