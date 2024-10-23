@@ -1,3 +1,5 @@
+import { LanguageCode } from "./language";
+
 type Gender = 0 | 1 | 2;
 
 type PersonBase = {
@@ -57,4 +59,23 @@ export type ValidExternalIds = {
   tiktok_id: string;
   twitter_id: string;
   youtube_id: string;
+};
+
+export type ShowCredits = {
+  backdrop_path: string;
+  original_title: string;
+  poster_path: string;
+  title: string;
+  genre_ids: number[];
+  id: number;
+  original_language: LanguageCode;
+  release_date: Date;
+  vote_average: number;
+  popularity: number;
+};
+
+export type CombinedCredits = {
+  id: number;
+  cast: ShowCredits[];
+  crew: ShowCredits[];
 };
