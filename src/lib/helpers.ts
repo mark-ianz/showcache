@@ -6,6 +6,7 @@ import { getDirectors } from "@/api/credits.service";
 import { Location } from "react-router-dom";
 import { Movie, ShowType, TV } from "@/types/show";
 import { format } from "date-fns";
+import { ShowCredits } from "@/types/credits";
 
 export function getGenre(genre_ids: number[]): string[] {
   let genre_list: string[] = [];
@@ -33,7 +34,7 @@ export const getImg = (
 };
 
 export function getShowName(
-  showData: TvFullDetails | MovieFullDetails | Movie | TV
+  showData: TvFullDetails | MovieFullDetails | Movie | TV | ShowCredits
 ): string {
   return "name" in showData ? showData.name : showData.title;
 }
