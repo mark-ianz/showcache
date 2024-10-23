@@ -8,7 +8,7 @@ type Props = {
 
 export default function PersonPortrait({ profile_path, name }: Props) {
   return (
-    <div className="w-64 max-md:w-52 max-xsm:self-center max-sm:w-44">
+    <div className="w-64 max-md:w-52 max-sm:self-center max-sm:w-44">
       <AspectRatio ratio={2 / 3}>
         <img
           src={getImg(profile_path, "w780")}

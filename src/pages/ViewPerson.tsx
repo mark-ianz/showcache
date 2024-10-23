@@ -30,13 +30,13 @@ export default function ViewPerson({}: Props) {
 
   return (
     <main className="w-full">
-      <div className="flex gap-8 max-xsm:flex-col items-start max-md:gap-6 max-sm:gap-4">
-        <div className="flex flex-col max-xsm:w-full">
+      <div className="flex gap-8 max-sm:flex-col items-start max-md:gap-6 max-sm:gap-4">
+        <div className="flex flex-col max-sm:w-full">
           <PersonPortrait
             name={person.name}
             profile_path={person.profile_path}
           />
-          <HeaderText className="hidden max-xsm:block text-center mt-4">
+          <HeaderText className="hidden max-sm:block text-center mt-4">
             {person.name}
           </HeaderText>
           <SocialAndPersonalInfo person={person} />
