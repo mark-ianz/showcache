@@ -30,7 +30,7 @@ export default function ShowCard({
           <img
             src={getImg(image_path, "w780", false)}
             alt={`Poster image of ${name}`}
-            className="w-full h-full object-cover rounded-t-xl"
+            className="w-full h-full object-cover rounded-t-xl object-center"
             loading="lazy"
           />
         </AspectRatio>
