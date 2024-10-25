@@ -98,3 +98,7 @@ export function formatDate(
 ): string {
   return format(date, dateFormat);
 }
+
+export function getShowType(show: TvFullDetails | MovieFullDetails | Movie | TV | ShowCredits) {
+  return "title" in show ? "movie" : "tv";
+}
