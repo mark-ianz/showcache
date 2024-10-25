@@ -4,6 +4,7 @@ import axios from "axios";
 import { axios_config } from "./axios.config";
 import { API_Result, Movie, ShowType, TV } from "@/types/show";
 import { ImageResult } from "@/types/images";
+import { CombinedCredits, ShowCredits } from "@/types/credits";
 
 export async function getTrailers({
   queryKey,
@@ -59,7 +60,7 @@ export async function getMovieRecommendations({
 
 export async function getRecommendations({
   queryKey,
-}: QueryFunctionContext): Promise<TV[] | Movie []> {
+}: QueryFunctionContext): Promise<TV[] | Movie[]> {
   const [_key, type, language, id, page = 1] = queryKey;
   const { data } = await axios.get<API_Result>(
     `https://api.themoviedb.org/3/${type}/${id}/recommendations?language=${language}&page=${page}`,
@@ -67,4 +68,31 @@ export async function getRecommendations({
   );
 
   return data.results;
+}
+
+export async function getCombinedCredits({
+  queryKey,
+}: QueryFunctionContext): Promise<ShowCredits[]> {
+  const [_key, language, id] = queryKey;
+  const { data } = await axios.get<CombinedCredits>(
+    `https://api.themoviedb.org/3/person/${id}/combined_credits`,
+    axios_config({ method: "GET", params: { language } })
+  );
+
+  // cpmbine the cast and crew
+  const combined = data.cast.concat(data.crew);
+
+  const uniqueMap = new Map();
+  for (const show of combined) {
+    if (!uniqueMap.has(show.id)) {
+      uniqueMap.set(show.id, show);
+    }
+  }
+
+  const uniqueShows = Array.from(uniqueMap.values());
+
+  // sort the combined by popularity and sliced the array to 20
+  return uniqueShows
+    .filter((show: ShowCredits) => show.popularity > 50)
+    .splice(0, 20);
 }
