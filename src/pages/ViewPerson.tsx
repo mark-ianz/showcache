@@ -29,23 +29,20 @@ export default function ViewPerson({}: Props) {
   if (isLoading || !person) return <p>Loading</p>;
 
   return (
-    <main className="w-full">
-      <div className="flex gap-8 max-sm:flex-col items-start max-md:gap-6 max-sm:gap-4">
-        <div className="flex flex-col max-sm:w-full">
-          <PersonPortrait
-            name={person.name}
-            profile_path={person.profile_path}
-          />
-          <HeaderText className="hidden max-sm:block text-center mt-4">
-            {person.name}
-          </HeaderText>
-          <SocialAndPersonalInfo person={person} />
-        </div>
-        <div className="flex flex-col gap-4">
-          <NameAndBio person={person} />
-          <KnownFor id={person.id} />
-        </div>
+    <div className="w-full relative flex gap-8 max-sm:flex-col max-md:gap-6 max-sm:gap-4">
+      <div className="flex flex-col max-sm:w-full">
+        <PersonPortrait name={person.name} profile_path={person.profile_path} />
+        <HeaderText className="hidden max-sm:block text-center mt-4">
+          {person.name}
+        </HeaderText>
+        <SocialAndPersonalInfo person={person} />
       </div>
-    </main>
+      <div className="flex flex-col gap-4 overflow-hidden">
+        <NameAndBio person={person} />
+        <KnownFor id={person.id} />
+      </div>
+    </div>
   );
 }
+
+
