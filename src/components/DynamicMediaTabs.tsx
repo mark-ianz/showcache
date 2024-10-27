@@ -19,7 +19,12 @@ type Props = {
 export default function DynamicMediaTabs({ tabs }: Props) {
   const [openedTab, setOpenedTab] = useState<string>(tabs[0].tab_title || "");
 
-  const slicedImagesTab = tabs.map((tab) => ({
+  const sortedImagesTab = tabs.map((tab) => ({
+    ...tab,
+    images: tab.images.sort((a, b) => b.vote_count - a.vote_count),
+  }));
+
+  const slicedImagesTab = sortedImagesTab.map((tab) => ({
     ...tab,
     images: tab.images.slice(0, 14),
   }));
