@@ -34,7 +34,7 @@ export default function Searchbar({ className }: Props) {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         name="query"
-        placeholder="Search for Movies or TV Shows"
+        placeholder="Search for Movies, TV Shows or Person"
         className="pr-20"
       />
       <Select value={searchFor} onValueChange={setSearchFor}>
@@ -44,6 +44,7 @@ export default function Searchbar({ className }: Props) {
         <SelectContent align="end">
           <SelectItem value="movie">Movie</SelectItem>
           <SelectItem value="tv">TV Show</SelectItem>
+          <SelectItem value="person">Person</SelectItem>
         </SelectContent>
       </Select>
     </form>
