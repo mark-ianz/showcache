@@ -24,10 +24,13 @@ export default function ShowSection({
       <HeaderText className="font-normal mb-2 text-2xl max-md:text-xl">
         {title}
       </HeaderText>
-      <div className="flex items-center justify-center">
-        {loading && <LoaderIcon />}
-      </div>
+      {loading && (
+        <div className="flex items-center justify-center">
+          <LoaderIcon />
+        </div>
+      )}
       <ShowListWrapper>
+        {showArray.length === 0 && <p>No result found</p>}
         {showArray?.map((show) => (
           <li key={show.id}>
             <ShowCard
