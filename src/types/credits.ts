@@ -1,4 +1,5 @@
 import { LanguageCode } from "./language";
+import { Show } from "./show";
 
 type Gender = 0 | 1 | 2;
 
@@ -79,3 +80,12 @@ export type CombinedCredits = {
   cast: ShowCredits[];
   crew: ShowCredits[];
 };
+
+export type PersonSearch = PersonBase & {
+  known_for: (Show & {
+    media_type: "movie" | "tv";
+    title: string;
+    name: string;
+    release_date: Date;
+  })[];
+}
