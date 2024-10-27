@@ -19,7 +19,6 @@ export default function Casts({ id, type }: Props) {
   });
 
   if (!credits) return <p>loading</p>;
-  console.log(credits);
   const scrollItems: (Cast | Crew)[] =
     credits.cast.length > 14
       ? credits.cast.slice(0, 14)

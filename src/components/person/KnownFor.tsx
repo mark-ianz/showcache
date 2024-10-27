@@ -22,7 +22,6 @@ export default function KnownFor({ id }: Props) {
 
   if (!data) return <p>loading</p>
 
-  console.log(data);
   return (
     data?.length > 0 && (
       <>
