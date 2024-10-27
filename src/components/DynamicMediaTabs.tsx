@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import ScrollableSection from "./ScrollableSection";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 import { useState } from "react";
 import { TabImage } from "@/types/images";
 
