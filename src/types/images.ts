@@ -16,3 +16,8 @@ export type ImageResult = {
   logos: Image[];
   posters: Image[];
 };
+
+export type TabImage = {
+  file_path: string;
+  aspect_ratio: number;
+};
