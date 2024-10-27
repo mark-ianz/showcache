@@ -1,7 +1,10 @@
-import { getPersonFullInfo } from "@/api/credits.service";
+import {
+  getPersonFullInfo,
+} from "@/api/credits.service";
 import HeaderText from "@/components/HeaderText";
 import KnownFor from "@/components/person/KnownFor";
 import NameAndBio from "@/components/person/NameAndBio";
+import PersonMedia from "@/components/person/PersonMedia";
 import PersonPortrait from "@/components/person/PersonPortrait";
 import SocialAndPersonalInfo from "@/components/person/SocialAndPersonalInfo";
 import { useLanguage } from "@/context/language-provider";
@@ -40,9 +43,8 @@ export default function ViewPerson({}: Props) {
       <div className="flex flex-col gap-4 overflow-hidden">
         <NameAndBio person={person} />
         <KnownFor id={person.id} />
+        <PersonMedia id={person.id}/>
       </div>
     </div>
   );
 }
-
-

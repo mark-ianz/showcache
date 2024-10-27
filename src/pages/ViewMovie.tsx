@@ -2,11 +2,11 @@ import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { getMovieFullDetails } from "@/api/movies.service";
-import MediaTabs from "@/components/MediaTabs";
 import ViewInfoSection from "@/components/show/InfoSection/ViewInfoSection";
 import Casts from "@/components/show/Casts";
 import Recommendations from "@/components/show/Recommendations";
 import ViewShowLayout from "@/components/show/ViewShowLayout";
+import ShowMedia from "@/components/show/ShowMedia";
 
 export default function ViewMovie() {
   const { id } = useParams();
@@ -26,7 +26,7 @@ export default function ViewMovie() {
     <ViewShowLayout>
       <ViewInfoSection showData={data} />
       <Casts id={id!} type="movie" />
-      <MediaTabs showData={data} />
+      <ShowMedia show_data={data} />
       <Recommendations id={id!} />
     </ViewShowLayout>
   );
