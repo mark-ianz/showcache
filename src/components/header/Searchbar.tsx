@@ -6,7 +6,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Input } from "../ui/input";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { ClassNameValue } from "tailwind-merge";
@@ -18,11 +18,16 @@ type Props = {
 export default function Searchbar({ className }: Props) {
   const navigate = useNavigate();
   const [searchFor, setSearchFor] = useState<string>("movie");
-  const [input, setInput] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate(`/results?query=${input}&searchFor=${searchFor}`);
+
+    if (inputRef.current) {
+      navigate(`/results?query=${inputRef.current.value}&searchFor=${searchFor}`);
+      inputRef.current.value = "";
+      inputRef.current.blur();
+    };
   };
 
   return (
@@ -31,8 +36,7 @@ export default function Searchbar({ className }: Props) {
       className={cn("grow max-w-md ml-auto flex relative", className)}
     >
       <Input
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
+        ref={inputRef}
         name="query"
         placeholder="Search for Movies, TV Shows or Person"
         className="pr-20"
