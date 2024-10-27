@@ -2,9 +2,9 @@ import { Video, VideosResult } from "@/types/video";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 import { axios_config } from "./axios.config";
-import { API_Result, Movie, ShowType, TV } from "@/types/show";
+import { API_Result, Movie, TV } from "@/types/show";
 import { ImageResult } from "@/types/images";
-import { CombinedCredits, ShowCredits } from "@/types/credits";
+import { CombinedCredits, PersonSearch, ShowCredits } from "@/types/credits";
 
 export async function getTrailers({
   queryKey,
@@ -24,7 +24,7 @@ export async function getTrailers({
 
 export async function getSearchResult({
   queryKey,
-}: QueryFunctionContext): Promise<Movie[] | TV[]> {
+}: QueryFunctionContext): Promise<Movie[] | TV[] | PersonSearch []> {
   const [_key, language, query, searchFor, page] = queryKey;
   const { data }: { data: API_Result } = await axios.get(
     `https://api.themoviedb.org/3/search/${searchFor}?include_adult=false`,
