@@ -20,4 +20,6 @@ export type ImageResult = {
 export type TabImage = {
   file_path: string;
   aspect_ratio: number;
+  vote_average: number;
+  vote_count: number;
 };
