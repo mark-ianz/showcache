@@ -19,6 +19,11 @@ type Props = {
 export default function DynamicMediaTabs({ tabs }: Props) {
   const [openedTab, setOpenedTab] = useState<string>(tabs[0].tab_title || "");
 
+  const slicedImagesTab = tabs.map((tab) => ({
+    ...tab,
+    images: tab.images.slice(0, 14),
+  }));
+
   return (
     <section>
       <div>
@@ -52,14 +57,14 @@ export default function DynamicMediaTabs({ tabs }: Props) {
               </Button>
             </TabsList>
           </div>
-          {tabs.map((tab, index) => (
+          {slicedImagesTab.map((tab, index) => (
             <TabsContent value={tab.tab_title} key={index}>
               <ScrollableSection olClassName="gap-1">
-                {tab.images.slice(0, 14).map((image, index) => (
+                {tab.images.map((image, index) => (
                   <li
                     key={image.file_path + index}
                     className={cn(
-                      index + 1 === 14 && "z-10",
+                      index + 1 === tab.images.length && "z-10",
                       "w-60 max-xl:w-52 max-lg:w-44 max-md:w-36 max-sm:w-28",
                       tab.tab_title === "Backdrops" &&
                         "w-[500px] max-xl:w-[400px] max-md:w-[300px] max-sm:w-[250px]"
