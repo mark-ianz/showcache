@@ -75,14 +75,10 @@ export default function DynamicMediaTabs({ tabs }: Props) {
                         "w-[500px] max-xl:w-[400px] max-md:w-[300px] max-sm:w-[250px]"
                     )}
                   >
-                    <AspectRatio ratio={image.aspect_ratio}>
-                      <img
-                        src={getImg(image.file_path, "w780")}
-                        className={cn(
-                          "w-full h-full object-cover object-center"
-                        )}
-                      />
-                    </AspectRatio>
+                    <img
+                      src={getImg(image.file_path, "w780")}
+                      className={cn("w-full h-full object-cover object-center")}
+                    />
                   </li>
                 ))}
               </ScrollableSection>
