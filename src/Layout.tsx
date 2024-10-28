@@ -9,7 +9,6 @@ export default function Layout() {
         <Header />
         <Nav />
         <Outlet />
-        <footer>Footer</footer>
       </>
     </div>
   );
