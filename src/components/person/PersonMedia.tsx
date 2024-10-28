@@ -27,6 +27,7 @@ export default function PersonMedia({ id }: Props) {
         { images: images, tab_title: "Images" },
         { images: tagged_images, tab_title: "Tagged Images" },
       ]}
+      view_all_link={`/person/${id}/media`}
     />
   );
 }
