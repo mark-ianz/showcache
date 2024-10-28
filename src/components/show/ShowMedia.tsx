@@ -26,6 +26,7 @@ export default function ShowMedia({ show_data }: Props) {
         { images: data?.backdrops, tab_title: "Backdrops" },
         { images: data?.posters, tab_title: "Posters" },
       ]}
+      view_all_link={`/show/${show_data.id}/media`}
     />
   );
 }

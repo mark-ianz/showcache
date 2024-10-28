@@ -13,9 +13,10 @@ type Props = {
     images: TabImage[];
     tab_title: string;
   }[];
+  view_all_link: string;
 };
 
-export default function DynamicMediaTabs({ tabs }: Props) {
+export default function DynamicMediaTabs({ tabs, view_all_link }: Props) {
   const [openedTab, setOpenedTab] = useState<string>(tabs[0].tab_title || "");
 
   const sortedImagesTab = tabs.map((tab) => ({
@@ -28,11 +29,14 @@ export default function DynamicMediaTabs({ tabs }: Props) {
     images: tab.images.slice(0, 14),
   }));
 
+  const isAllImagesEmpty = slicedImagesTab.every(
+    (tab) => tab.images.length === 0
+  );
   const isFewImages = slicedImagesTab.every((tab) => tab.images.length < 14);
 
-  console.log(isFewImages)
+  console.log(isFewImages);
   return (
-    <section>
+    !isAllImagesEmpty && (
       <div>
         <Tabs value={openedTab} onValueChange={(value) => setOpenedTab(value)}>
           <div className="flex flex-col items-start">
@@ -61,7 +65,7 @@ export default function DynamicMediaTabs({ tabs }: Props) {
                   variant={"ghost"}
                   className="p-0 hover:bg-inherit text-muted-foreground focus-visible:ring-0"
                 >
-                  <Link to={"#"}>View All Media</Link>
+                  <Link to={view_all_link}>View All Media</Link>
                 </Button>
               )}
             </TabsList>
@@ -90,6 +94,6 @@ export default function DynamicMediaTabs({ tabs }: Props) {
           ))}
         </Tabs>
       </div>
-    </section>
+    )
   );
 }
