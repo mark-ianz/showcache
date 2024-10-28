@@ -28,6 +28,9 @@ export default function DynamicMediaTabs({ tabs }: Props) {
     images: tab.images.slice(0, 14),
   }));
 
+  const isFewImages = slicedImagesTab.every((tab) => tab.images.length < 14);
+
+  console.log(isFewImages)
   return (
     <section>
       <div>
@@ -52,13 +55,15 @@ export default function DynamicMediaTabs({ tabs }: Props) {
                     </TabsTrigger>
                   )
               )}
-              <Button
-                asChild
-                variant={"ghost"}
-                className="p-0 hover:bg-inherit text-muted-foreground focus-visible:ring-0"
-              >
-                <Link to={"#"}>View All Media</Link>
-              </Button>
+              {!isFewImages && (
+                <Button
+                  asChild
+                  variant={"ghost"}
+                  className="p-0 hover:bg-inherit text-muted-foreground focus-visible:ring-0"
+                >
+                  <Link to={"#"}>View All Media</Link>
+                </Button>
+              )}
             </TabsList>
           </div>
           {slicedImagesTab.map((tab, index) => (
