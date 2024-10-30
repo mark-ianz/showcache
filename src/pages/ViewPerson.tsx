@@ -1,7 +1,6 @@
-import {
-  getPersonFullInfo,
-} from "@/api/credits.service";
+import { getPersonFullInfo } from "@/api/credits.service";
 import HeaderText from "@/components/HeaderText";
+import LoadingAnimation from "@/components/LoadingAnimation";
 import KnownFor from "@/components/person/KnownFor";
 import NameAndBio from "@/components/person/NameAndBio";
 import PersonMedia from "@/components/person/PersonMedia";
@@ -23,28 +22,46 @@ export default function ViewPerson({}: Props) {
   const {
     language: { iso_639_1: language },
   } = useLanguage();
-  const { data: person, isLoading } = useQuery({
+  const {
+    data: person,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["person", language, id],
     queryFn: getPersonFullInfo,
     staleTime: 1000 * 60 * 5,
   });
 
-  if (isLoading || !person) return <p>Loading</p>;
+  if (isLoading)
+    return (
+      <div>
+        <LoadingAnimation />
+      </div>
+    );
+
+  if (error) {
+    return <p>There was a server error. Please try again later.</p>;
+  }
 
   return (
-    <div className="w-full relative flex gap-8 max-sm:flex-col max-md:gap-6 max-sm:gap-4">
-      <div className="flex flex-col max-sm:w-full">
-        <PersonPortrait name={person.name} profile_path={person.profile_path} />
-        <HeaderText className="hidden max-sm:block text-center mt-4">
-          {person.name}
-        </HeaderText>
-        <SocialAndPersonalInfo person={person} />
+    person && (
+      <div className="w-full relative flex gap-8 max-sm:flex-col max-md:gap-6 max-sm:gap-4">
+        <div className="flex flex-col max-sm:w-full">
+          <PersonPortrait
+            name={person.name}
+            profile_path={person.profile_path}
+          />
+          <HeaderText className="hidden max-sm:block text-center mt-4">
+            {person.name}
+          </HeaderText>
+          <SocialAndPersonalInfo person={person} />
+        </div>
+        <div className="flex flex-col gap-4 overflow-hidden">
+          <NameAndBio person={person} />
+          <KnownFor id={person.id} />
+          <PersonMedia id={person.id} />
+        </div>
       </div>
-      <div className="flex flex-col gap-4 overflow-hidden">
-        <NameAndBio person={person} />
-        <KnownFor id={person.id} />
-        <PersonMedia id={person.id}/>
-      </div>
-    </div>
+    )
   );
 }

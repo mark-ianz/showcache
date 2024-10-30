@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { PersonSearch } from "@/types/credits";
 import { Movie, TV } from "@/types/show";
 import { getImg } from "@/lib/helpers";
+import LoadingAnimation from "@/components/LoadingAnimation";
 
 export default function Results() {
   const {
@@ -24,8 +25,8 @@ export default function Results() {
     staleTime: 1000 * 60 * 60 * 24,
   });
 
-  if (isLoading) return <p>Loading...</p>;
-  if (!data) return <p>No data</p>;
+  if (isLoading) return <LoadingAnimation />;
+  if (error) return <p>There was a server error. Please try again later.</p>;
 
   return (
     <ListMainWrapper>

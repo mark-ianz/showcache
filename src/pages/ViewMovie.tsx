@@ -7,6 +7,7 @@ import Casts from "@/components/show/Casts";
 import Recommendations from "@/components/show/Recommendations";
 import ViewShowLayout from "@/components/show/ViewShowLayout";
 import ShowMedia from "@/components/show/ShowMedia";
+import LoadingAnimation from "@/components/LoadingAnimation";
 
 export default function ViewMovie() {
   const { id } = useParams();
@@ -14,20 +15,23 @@ export default function ViewMovie() {
     language: { iso_639_1: language },
   } = useLanguage();
 
-  const { data } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["single_show", language, id],
     queryFn: getMovieFullDetails,
     staleTime: 1000 * 60 * 5,
   });
 
-  if (!data) return <p>loading</p>;
+  if (isLoading) return <LoadingAnimation />;
+  if (error) return <p>There was a server error. Please try again later.</p>;
 
   return (
-    <ViewShowLayout>
-      <ViewInfoSection showData={data} />
-      <Casts id={id!} type="movie" />
-      <ShowMedia show_data={data} />
-      <Recommendations id={id!} />
-    </ViewShowLayout>
+    data && (
+      <ViewShowLayout>
+        <ViewInfoSection showData={data!} />
+        <Casts id={id!} type="movie" />
+        <ShowMedia show_data={data!} />
+        <Recommendations id={id!} />
+      </ViewShowLayout>
+    )
   );
 }

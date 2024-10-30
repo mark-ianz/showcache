@@ -6,6 +6,7 @@ import ShowCard from "../show/ShowCard";
 import ScrollableSection from "../ScrollableSection";
 import { cn } from "@/lib/utils";
 import HeaderText from "../HeaderText";
+import LoadingAnimation from "../LoadingAnimation";
 
 type Props = { id: number };
 
@@ -14,18 +15,20 @@ export default function KnownFor({ id }: Props) {
     language: { iso_639_1: language },
   } = useLanguage();
 
-  const { data } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["known_for", language, id],
     queryFn: getCombinedCredits,
     staleTime: 1000 * 60 * 5,
   });
 
-  if (!data) return <p>loading</p>
+  if (error) return <p>There was a server error. Please try again later.</p>;
 
   return (
+    data !== undefined &&
     data?.length > 0 && (
       <>
         <HeaderText className="text-2xl max-md:text-xl">Known For</HeaderText>
+        {isLoading && <LoadingAnimation />}
         <ScrollableSection>
           {data?.map((show, index) => (
             <li
