@@ -3,7 +3,6 @@ import LoadingAnimation from "../LoadingAnimation";
 import ShowCard from "./ShowCard";
 import ShowListWrapper from "./ShowListWrapper";
 import { Movie, TV } from "@/types/show";
-import { LoaderIcon } from "lucide-react";
 
 type ShowSectionProps = {
   showArray: Movie[] | TV[] | undefined;
