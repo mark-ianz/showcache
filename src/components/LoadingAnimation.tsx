@@ -1,7 +1,3 @@
-// @ts-nocheck
-import { useTheme } from "@/theme-provider";
-import { useEffect, useState } from "react";
-
 type Props = {};
 
 export default function LoadingAnimation({}: Props) {
