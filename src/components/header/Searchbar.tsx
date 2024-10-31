@@ -24,10 +24,12 @@ export default function Searchbar({ className }: Props) {
     e.preventDefault();
 
     if (inputRef.current) {
-      navigate(`/results?query=${inputRef.current.value}&searchFor=${searchFor}`);
+      navigate(
+        `/results?query=${inputRef.current.value}&searchFor=${searchFor}`
+      );
       inputRef.current.value = "";
       inputRef.current.blur();
-    };
+    }
   };
 
   return (
@@ -46,9 +48,15 @@ export default function Searchbar({ className }: Props) {
           <SelectValue />
         </SelectTrigger>
         <SelectContent align="end">
-          <SelectItem value="movie">Movie</SelectItem>
-          <SelectItem value="tv">TV Show</SelectItem>
-          <SelectItem value="person">Person</SelectItem>
+          <SelectItem value="movie" className="max-lg:text-xs">
+            Movie
+          </SelectItem>
+          <SelectItem value="tv" className="max-lg:text-xs">
+            TV Show
+          </SelectItem>
+          <SelectItem value="person" className="max-lg:text-xs">
+            Person
+          </SelectItem>
         </SelectContent>
       </Select>
     </form>
