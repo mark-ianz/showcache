@@ -50,7 +50,7 @@ export default function ViewInfoSection({ showData }: Props) {
       <div className="absolute inset-0 bg-background opacity-90 z-0"></div>
       <div className="relative z-10 items-center">
         <div className="flex gap-10 max-md:flex-col items-center">
-          <div className="w-72 max-xsm:w-64">
+          <div className="w-72 max-xsm:w-56">
             {poster_path && (
               <img
                 src={poster_path}
