@@ -7,7 +7,7 @@ export default function Header() {
     <>
       <header className="flex flex-col w-full max-md:pb-5">
         <div className="flex items-center justify-between w-full mb-4">
-          <Logo className={"mr-20"} />
+          <Logo />
           <div className="flex grow gap-4 items-center justify-end">
             <Searchbar className="max-md:hidden" />
             <Menu />
