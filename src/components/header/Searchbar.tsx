@@ -39,7 +39,7 @@ export default function Searchbar({ className }: Props) {
         ref={inputRef}
         name="query"
         placeholder="Search for Movies, TV Shows or Person"
-        className="pr-20"
+        className="pr-20 max-lg:text-xs"
       />
       <Select value={searchFor} onValueChange={setSearchFor}>
         <SelectTrigger className="absolute w-fit gap-1 top-1/2 -translate-y-1/2 right-2 text-xs p-1 h-auto border-none focus:ring-0">
