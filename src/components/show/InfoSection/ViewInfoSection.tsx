@@ -19,7 +19,6 @@ type Props = {
 
 export default function ViewInfoSection({ showData }: Props) {
   const backdrop_path = getImg(showData?.backdrop_path!, "w1280", true);
-  const genreList = showData.genres.map((genre) => genre.name);
 
   return (
     <section
@@ -38,7 +37,7 @@ export default function ViewInfoSection({ showData }: Props) {
           <div className="flex flex-col gap-4">
             <div className="flex gap-4 font-thin items-center max-md:text-sm max-sm:text-xs">
               <p className="min-w-fit">{getShowDuration(showData)}</p>
-              <JoinGenreList genreList={genreList} />
+              <JoinGenreList showData={showData} />
               <Rating rating={showData.vote_average} />
             </div>
             <ShowNameWYear
