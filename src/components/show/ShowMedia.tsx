@@ -2,11 +2,10 @@ import DynamicMediaTabs from "../DynamicMediaTabs";
 import { getShowImages } from "@/api/show.service";
 import { useQuery } from "@tanstack/react-query";
 import { getShowType } from "@/lib/helpers";
-import { TvFullDetails } from "@/types/tv";
-import { MovieFullDetails } from "@/types/movie.details";
+import { ShowFullDetails } from "@/types/show";
 
 type Props = {
-  show_data: TvFullDetails | MovieFullDetails;
+  show_data: ShowFullDetails;
 };
 
 export default function ShowMedia({ show_data }: Props) {

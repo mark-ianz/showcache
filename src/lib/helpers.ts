@@ -4,7 +4,7 @@ import { TvFullDetails } from "@/types/tv";
 import { MovieFullDetails } from "@/types/movie.details";
 import { getDirectors } from "@/api/credits.service";
 import { Location } from "react-router-dom";
-import { Movie, ShowType, TV } from "@/types/show";
+import { Movie, ShowFullDetails, ShowType, TV } from "@/types/show";
 import { format } from "date-fns";
 import { ShowCredits } from "@/types/credits";
 
@@ -40,7 +40,7 @@ export function getShowName(
 }
 
 export function getShowDuration(
-  showData: TvFullDetails | MovieFullDetails
+  showData: ShowFullDetails
 ): string {
   return "seasons" in showData
     ? showData.seasons
@@ -52,7 +52,7 @@ export function getShowDuration(
 }
 
 export async function getShowDirectors(
-  showData: TvFullDetails | MovieFullDetails
+  showData: ShowFullDetails
 ): Promise<string[]> {
   if ("created_by" in showData) {
     return showData.created_by.map((director) => director.name);
@@ -64,7 +64,7 @@ export async function getShowDirectors(
 }
 
 export function getShowYear(
-  showData: TvFullDetails | MovieFullDetails
+  showData: ShowFullDetails
 ): number {
   if ("first_air_date" in showData) {
     return new Date(showData.first_air_date).getFullYear();
