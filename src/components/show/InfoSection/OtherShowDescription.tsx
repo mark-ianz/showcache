@@ -1,20 +1,39 @@
-type Props = { tagline: string; overview: string; directorList: string[] };
+import { useLanguage } from "@/context/language-provider";
+import { getShowDirectors } from "@/lib/helpers";
+import { MovieFullDetails } from "@/types/movie.details";
+import { TvFullDetails } from "@/types/tv";
+import { useEffect, useState } from "react";
 
-export default function OtherShowDescription({
-  tagline,
-  overview,
-  directorList,
-}: Props) {
+type Props = {
+  showData: TvFullDetails | MovieFullDetails;
+};
+
+export default function OtherShowDescription({ showData }: Props) {
+  const [directors, setDirectors] = useState<string[] | []>([]);
+  const {
+    language: { iso_639_1: language },
+  } = useLanguage();
+
+  useEffect(() => {
+    const fetchDirectors = async () => {
+      const directorsData = await getShowDirectors(showData);
+      setDirectors(directorsData);
+    };
+
+    fetchDirectors();
+  }, [showData, language]);
   return (
     <div className="flex flex-col gap-2 max-md:text-sm">
-      {tagline && <p className="text-muted-foreground italic">{tagline}</p>}
+      {showData.tagline && (
+        <p className="text-muted-foreground italic">{showData.tagline}</p>
+      )}
       <div>
         <p className="text-xl font-bold max-md:text-lg">Overview</p>
-        <p>{overview || "No overview provided."}</p>
+        <p>{showData.overview || "No overview provided."}</p>
       </div>
-      {directorList.length > 0 && (
+      {directors.length > 0 && (
         <p className="text-muted-foreground">
-          Directed by {directorList.join(", ")}
+          Directed by {directors.join(", ")}
         </p>
       )}
     </div>
