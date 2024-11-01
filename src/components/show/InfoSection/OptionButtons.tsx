@@ -1,10 +1,9 @@
 import { Button } from "../../ui/button";
 import { BookmarkIcon, HeartIcon } from "lucide-react";
 import TrailerDialog from "./TrailerDialog";
-import { TvFullDetails } from "@/types/tv";
-import { MovieFullDetails } from "@/types/movie.details";
+import { ShowFullDetails } from "@/types/show";
 
-type Props = { showData: TvFullDetails | MovieFullDetails };
+type Props = { showData: ShowFullDetails };
 
 export default function OptionButtons({ showData }: Props) {
   return (

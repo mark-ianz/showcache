@@ -1,8 +1,7 @@
 import { getShowName, getShowYear } from "@/lib/helpers";
-import { MovieFullDetails } from "@/types/movie.details";
-import { TvFullDetails } from "@/types/tv";
+import { ShowFullDetails } from "@/types/show";
 
-type Props = { showData: TvFullDetails | MovieFullDetails };
+type Props = { showData: ShowFullDetails };
 
 export default function ShowNameWYear({ showData }: Props) {
   const showName = getShowName(showData);

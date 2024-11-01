@@ -1,11 +1,10 @@
 import { useLanguage } from "@/context/language-provider";
 import { getShowDirectors } from "@/lib/helpers";
-import { MovieFullDetails } from "@/types/movie.details";
-import { TvFullDetails } from "@/types/tv";
+import { ShowFullDetails } from "@/types/show";
 import { useEffect, useState } from "react";
 
 type Props = {
-  showData: TvFullDetails | MovieFullDetails;
+  showData: ShowFullDetails;
 };
 
 export default function OtherShowDescription({ showData }: Props) {

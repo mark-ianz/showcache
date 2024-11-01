@@ -1,5 +1,3 @@
-import { TvFullDetails } from "@/types/tv";
-import { MovieFullDetails } from "@/types/movie.details";
 import {
   getImg,
   getShowDuration,
@@ -10,9 +8,10 @@ import ShowNameWYear from "../ShowNameWYear";
 import OtherShowDescription from "./OtherShowDescription";
 import OptionButtons from "./OptionButtons";
 import ShowPoster from "./ShowPoster";
+import { ShowFullDetails } from "@/types/show";
 
 type Props = {
-  showData: TvFullDetails | MovieFullDetails;
+  showData: ShowFullDetails;
 };
 
 export default function ViewInfoSection({ showData }: Props) {

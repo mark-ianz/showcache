@@ -1,7 +1,6 @@
-import { MovieFullDetails } from "@/types/movie.details";
-import { TvFullDetails } from "@/types/tv";
+import { ShowFullDetails } from "@/types/show";
 
-type Props = { showData: MovieFullDetails | TvFullDetails };
+type Props = { showData: ShowFullDetails };
 
 export default function JoinGenreList({ showData }: Props) {
   const genreList = showData.genres.map((genre) => genre.name);

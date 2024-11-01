@@ -1,5 +1,7 @@
 import { Genre } from "./genre";
 import { LanguageCode } from "./language";
+import { MovieFullDetails } from "./movie.details";
+import { TvFullDetails } from "./tv";
 
 export type ShowType = "movie" | "tv";
 
@@ -60,3 +62,5 @@ export type FullDetails = {
   imdb_id: string;
   spoken_languages: SpokenLanguage[];
 };
+
+export type ShowFullDetails = TvFullDetails | MovieFullDetails

@@ -1,8 +1,7 @@
 import { getImg, getShowName } from "@/lib/helpers";
-import { MovieFullDetails } from "@/types/movie.details";
-import { TvFullDetails } from "@/types/tv";
+import { ShowFullDetails } from "@/types/show";
 
-type Props = { showData: TvFullDetails | MovieFullDetails };
+type Props = { showData: ShowFullDetails };
 
 export default function ShowPoster({ showData }: Props) {
   const poster_path = getImg(showData?.poster_path!, "w780", true);
