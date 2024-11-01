@@ -3,8 +3,6 @@ import { MovieFullDetails } from "@/types/movie.details";
 import {
   getImg,
   getShowDuration,
-  getShowName,
-  getShowYear,
 } from "@/lib/helpers";
 import JoinGenreList from "./JoinGenreList";
 import Rating from "@/components/Rating";
@@ -40,10 +38,7 @@ export default function ViewInfoSection({ showData }: Props) {
               <JoinGenreList showData={showData} />
               <Rating rating={showData.vote_average} />
             </div>
-            <ShowNameWYear
-              showName={getShowName(showData)}
-              year={getShowYear(showData)}
-            />
+            <ShowNameWYear showData={showData} />
             <OtherShowDescription showData={showData} />
             <OptionButtons showData={showData} />
           </div>
