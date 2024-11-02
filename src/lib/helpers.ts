@@ -22,15 +22,20 @@ export function getGenre(genre_ids: number[]): string[] {
 
   return genre_list;
 }
-export const getImg = (
-  path: string,
-  size: "w300" | "w780" | "w1280" | "original",
-  type: "show" | "person",
-  undefineable?: boolean,
-) => {
+export const getImg = ({
+  path,
+  size,
+  undefineable,
+  mediaType,
+}: {
+  path: string;
+  size: "w300" | "w780" | "w1280" | "original";
+  mediaType?: "show" | "person";
+  undefineable?: boolean;
+}) => {
   if (!path) {
     if (undefineable) return undefined;
-    return type === "show" ? no_show_image : no_person_image;
+    return mediaType === "show" ? no_show_image : no_person_image;
   }
   return `https://image.tmdb.org/t/p/${size}${path}`;
 };
@@ -41,9 +46,7 @@ export function getShowName(
   return "name" in showData ? showData.name : showData.title;
 }
 
-export function getShowDuration(
-  showData: ShowFullDetails
-): string {
+export function getShowDuration(showData: ShowFullDetails): string {
   return "seasons" in showData
     ? showData.seasons
       ? `${showData.seasons.length} seasons`
@@ -65,9 +68,7 @@ export async function getShowDirectors(
   return directors || [];
 }
 
-export function getShowYear(
-  showData: ShowFullDetails
-): number {
+export function getShowYear(showData: ShowFullDetails): number {
   if ("first_air_date" in showData) {
     return new Date(showData.first_air_date).getFullYear();
   }
@@ -101,6 +102,8 @@ export function formatDate(
   return format(date, dateFormat);
 }
 
-export function getShowType(show: TvFullDetails | MovieFullDetails | Movie | TV | ShowCredits) {
+export function getShowType(
+  show: TvFullDetails | MovieFullDetails | Movie | TV | ShowCredits
+) {
   return "title" in show ? "movie" : "tv";
 }
