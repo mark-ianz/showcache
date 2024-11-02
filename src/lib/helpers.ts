@@ -99,6 +99,9 @@ export function formatDate(
   date: Date,
   dateFormat: string = "MMMM dd, yyyy"
 ): string {
+  if (!date) {
+    return "";
+  }
   return format(date, dateFormat);
 }
 
