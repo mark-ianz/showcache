@@ -47,3 +47,9 @@ export const external_ids_link: ValidExternalIds = {
   twitter_id: "https://twitter.com/",
   youtube_id: "https://www.youtube.com/@",
 };
+
+export const search_categories = [
+  { name: "People", value: "person" },
+  { name: "Movies", value: "movie" },
+  { name: "TV Shows", value: "tv" },
+];
