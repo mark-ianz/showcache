@@ -6,7 +6,7 @@ import { Movie, TV } from "@/types/show";
 
 type ShowSectionProps = {
   showArray: Movie[] | TV[] | undefined;
-  title: string;
+  title?: string;
   isTv?: boolean;
   error: Error | null;
   loading: boolean;
@@ -25,9 +25,11 @@ export default function ShowSection({
 
   return (
     <section>
-      <HeaderText className="font-normal mb-2 text-2xl max-md:text-xl">
-        {title}
-      </HeaderText>
+      {title && (
+        <HeaderText className="font-normal mb-2 text-2xl max-md:text-xl">
+          {title}
+        </HeaderText>
+      )}
       {loading && <LoadingAnimation />}
       {showArray && (
         <ShowListWrapper>
