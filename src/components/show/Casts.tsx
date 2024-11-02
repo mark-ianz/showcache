@@ -29,6 +29,7 @@ export default function Casts({ id, type }: Props) {
       <ScrollableSection title="Cast">
         {scrollItems.map((person: Cast | Crew, index: number) => (
           <ScrollableItem
+            mediaType="person"
             path={"/person/" + person.id}
             lastItem={index + 1 === scrollItems.length}
             key={`${person.id}-${
