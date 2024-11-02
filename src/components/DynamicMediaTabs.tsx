@@ -33,8 +33,6 @@ export default function DynamicMediaTabs({ tabs, view_all_link }: Props) {
     (tab) => tab.images.length === 0
   );
   const isFewImages = slicedImagesTab.every((tab) => tab.images.length < 14);
-
-  console.log(isFewImages);
   return (
     !isAllImagesEmpty && (
       <div>
