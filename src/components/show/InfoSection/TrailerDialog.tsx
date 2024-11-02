@@ -6,7 +6,7 @@ import {
   DialogTrigger,
 } from "../../ui/dialog";
 import { Button } from "../../ui/button";
-import { Play } from "lucide-react";
+import { Loader2Icon, Play } from "lucide-react";
 import { Video } from "@/types/video";
 import { TvFullDetails } from "@/types/tv";
 import { MovieFullDetails } from "@/types/movie.details";
@@ -44,14 +44,24 @@ export default function TrailerDialog({ showData }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={"secondary"} className="gap-1" disabled={isLoading}>
-          {officialTrailer ? (
+        <Button variant={"secondary"} className="gap-1" disabled={!officialTrailer && !isLoading}>
+          {officialTrailer && (
             <>
               <Play className="w-4 h-4" />
               <p className="max-md:text-sm max-sm:text-xs">Play Trailer</p>
             </>
-          ) : (
-            "No Available Trailer"
+          )}
+          {isLoading && (
+            <>
+              <Loader2Icon className="w-4 h-4 animate-spin" />
+              <p className="max-md:text-sm max-sm:text-xs">Loading...</p>
+            </>
+          )}
+          {!officialTrailer && !isLoading && (
+            <>
+              <Play className="w-4 h-4" />
+              <p className="max-md:text-sm max-sm:text-xs">No Trailer</p>
+            </>
           )}
         </Button>
       </DialogTrigger>
