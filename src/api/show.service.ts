@@ -22,12 +22,24 @@ export async function getTrailers({
   return trailers;
 }
 
-export async function getSearchResult({
+export async function searchShow({
   queryKey,
-}: QueryFunctionContext): Promise<Movie[] | TV[] | PersonSearch []> {
+}: QueryFunctionContext): Promise<Movie[] | TV[]> {
   const [_key, language, query, searchFor, page] = queryKey;
   const { data }: { data: API_Result } = await axios.get(
     `https://api.themoviedb.org/3/search/${searchFor}?include_adult=false`,
+    axios_config({ method: "GET", params: { language, page, query } })
+  );
+
+  return data.results;
+}
+
+export async function searchPerson ({
+  queryKey,
+}: QueryFunctionContext): Promise<PersonSearch[]> {
+  const [_key, language, query, page = 1] = queryKey;
+  const { data }: { data: API_Result } = await axios.get(
+    `https://api.themoviedb.org/3/search/person?include_adult=false`,
     axios_config({ method: "GET", params: { language, page, query } })
   );
 
