@@ -4,7 +4,7 @@ import { ShowFullDetails } from "@/types/show";
 type Props = { showData: ShowFullDetails };
 
 export default function ShowPoster({ showData }: Props) {
-  const poster_path = getImg(showData?.poster_path!, "w780", true);
+  const poster_path = getImg({path: showData.poster_path, size: "w780", mediaType: "show"});
 
   return (
     <div className="w-72 max-xsm:w-56">

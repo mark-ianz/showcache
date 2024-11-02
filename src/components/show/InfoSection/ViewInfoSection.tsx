@@ -1,7 +1,4 @@
-import {
-  getImg,
-  getShowDuration,
-} from "@/lib/helpers";
+import { getImg, getShowDuration } from "@/lib/helpers";
 import JoinGenreList from "./JoinGenreList";
 import Rating from "@/components/Rating";
 import ShowNameWYear from "../ShowNameWYear";
@@ -15,7 +12,7 @@ type Props = {
 };
 
 export default function ViewInfoSection({ showData }: Props) {
-  const backdrop_path = getImg(showData?.backdrop_path!, "w1280", true);
+  const backdrop_path = getImg({path: showData.backdrop_path, size: "original", mediaType: "show", undefineable: true});
 
   return (
     <section

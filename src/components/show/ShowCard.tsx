@@ -26,9 +26,9 @@ export default function ShowCard({
   return (
     <Link to={path}>
       <Card className="cursor-pointer w-full h-full flex flex-col">
-        <AspectRatio ratio={2 / 3} >
+        <AspectRatio ratio={2 / 3}>
           <img
-            src={getImg(image_path, "w780", false)}
+            src={getImg({path: image_path, size: "w780", mediaType: "show"})}
             alt={`Poster image of ${name}`}
             className="w-full h-full object-cover rounded-t-xl object-center"
             loading="lazy"

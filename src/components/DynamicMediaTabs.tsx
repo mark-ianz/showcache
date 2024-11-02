@@ -84,7 +84,7 @@ export default function DynamicMediaTabs({ tabs, view_all_link }: Props) {
                     )}
                   >
                     <img
-                      src={getImg(image.file_path, "w780")}
+                      src={getImg({path: image.file_path, size: "w780", mediaType: "show"})}
                       className={cn("w-full h-full object-cover object-center")}
                     />
                   </li>

@@ -11,7 +11,7 @@ export default function PersonPortrait({ profile_path, name }: Props) {
     <div className="w-64 max-md:w-52 max-sm:self-center max-sm:w-44">
       <AspectRatio ratio={2 / 3}>
         <img
-          src={getImg(profile_path, "w780")}
+          src={getImg({path: profile_path, size: "w780", mediaType: "person"})}
           alt={"Image of " + name}
           className="object-cover rounded-lg w-full h-full"
         />

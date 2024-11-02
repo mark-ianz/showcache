@@ -41,7 +41,7 @@ export default function Results() {
                 <Link to={`/person/${person.id}`} className="flex">
                   <div className="w-32 h-32 aspect-square">
                     <img
-                      src={getImg(person.profile_path, "w300", false)}
+                      src={getImg({path: person.profile_path, size: "w300", mediaType: "person"})}
                       alt={person.name}
                       className="object-cover object-center w-full h-full rounded-md"
                     />

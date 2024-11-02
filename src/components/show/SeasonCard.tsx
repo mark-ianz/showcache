@@ -14,7 +14,7 @@ export default function SeasonCard({ season }: { season: Season }) {
             <div className="w-52">
               <AspectRatio ratio={2 / 3}>
                 <img
-                  src={getImg(season.poster_path, "w780")}
+                  src={getImg({path: season.poster_path, size: "w780", mediaType: "show"})}
                   alt={`Image of ${season.name}`}
                   className="w-full h-full rounded-l-xl object-cover"
                 />
