@@ -22,13 +22,12 @@ export default function KnownFor({ id }: Props) {
   });
 
   if (error) return <p>There was a server error. Please try again later.</p>;
-
+  if (isLoading) return <LoadingAnimation />;
   return (
     data !== undefined &&
     data?.length > 0 && (
       <>
         <HeaderText className="text-2xl max-md:text-xl">Known For</HeaderText>
-        {isLoading && <LoadingAnimation />}
         <ScrollableSection>
           {data?.map((show, index) => (
             <li
