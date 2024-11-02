@@ -1,5 +1,6 @@
 import { genres } from "@/constants/genres";
-import no_image from "@/assets/no-image.png";
+import no_person_image from "@/assets/no_person_image.png";
+import no_show_image from "@/assets/no_show_image.png";
 import { TvFullDetails } from "@/types/tv";
 import { MovieFullDetails } from "@/types/movie.details";
 import { getDirectors } from "@/api/credits.service";
@@ -24,11 +25,12 @@ export function getGenre(genre_ids: number[]): string[] {
 export const getImg = (
   path: string,
   size: "w300" | "w780" | "w1280" | "original",
-  undefineable?: boolean
+  type: "show" | "person",
+  undefineable?: boolean,
 ) => {
   if (!path) {
     if (undefineable) return undefined;
-    return no_image;
+    return type === "show" ? no_show_image : no_person_image;
   }
   return `https://image.tmdb.org/t/p/${size}${path}`;
 };
