@@ -1,13 +1,7 @@
 import { useLanguage } from "@/context/language-provider";
 import ListMainWrapper from "@/components/ListMainWrapper";
-import ShowSection from "@/components/show/ShowSection";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import HeaderText from "@/components/HeaderText";
-import { useQuery } from "@tanstack/react-query";
-import { PersonSearch } from "@/types/credits";
-import { Movie, TV } from "@/types/show";
-import { getImg } from "@/lib/helpers";
-import LoadingAnimation from "@/components/LoadingAnimation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -23,15 +17,6 @@ export default function Results() {
   const [openedTab, setOpenedTab] = useState<string>("person");
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query") || "t";
-  /* 
-  const { data, error, isLoading } = useQuery({
-    queryKey: ["results", language, query, searchFor],
-    queryFn: getSearchResult,
-    staleTime: 1000 * 60 * 60 * 24,
-  });
-
-  if (isLoading) return <LoadingAnimation />;
-  if (error) return <p>There was a server error. Please try again later.</p>; */
 
   return (
     <ListMainWrapper>
