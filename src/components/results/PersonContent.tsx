@@ -1,7 +1,6 @@
 import { searchPerson } from "@/api/show.service";
 import { LanguageCode } from "@/types/language";
 import { useQuery } from "@tanstack/react-query";
-import HeaderText from "../HeaderText";
 import { Link } from "react-router-dom";
 import { getImg } from "@/lib/helpers";
 import LoadingAnimation from "../LoadingAnimation";
