@@ -32,17 +32,9 @@ export default function ViewPerson({}: Props) {
     staleTime: 1000 * 60 * 5,
   });
 
-  if (isLoading)
-    return (
-      <div>
-        <LoadingAnimation />
-      </div>
-    );
+  if (isLoading) return <LoadingAnimation />;
 
-  if (error) {
-    return <p>There was a server error. Please try again later.</p>;
-  }
-
+  if (error) return <p>There was a server error. Please try again later.</p>;
   return (
     person && (
       <div className="w-full relative flex gap-8 max-sm:flex-col max-md:gap-6 max-sm:gap-4">
