@@ -10,6 +10,7 @@ type Props = {
   subtext?: string;
   lastItem?: boolean;
   path: string;
+  mediaType: "show" | "person";
 };
 
 export default function ScrollableItem({
@@ -18,6 +19,7 @@ export default function ScrollableItem({
   subtext,
   lastItem,
   path,
+  mediaType
 }: Props) {
   return (
     <li className={cn(lastItem && "z-10", "w-48 max-md:w-40 max-sm:w-32")}>
@@ -26,7 +28,7 @@ export default function ScrollableItem({
           <CardContent>
             <AspectRatio ratio={2 / 3}>
               <img
-                src={getImg(image_path, "w780")}
+                src={getImg({path: image_path, size: "w780", mediaType})}
                 alt={`Image of ${title}`}
                 className="w-full h-full object-cover object-center rounded-t-md"
               />
