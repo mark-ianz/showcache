@@ -17,7 +17,7 @@ type Props = {
 };
 
 export default function DynamicMediaTabs({ tabs, view_all_link }: Props) {
-  const [openedTab, setOpenedTab] = useState<string>(tabs[0].tab_title || "");
+  const [openedTab, setOpenedTab] = useState<string>(tabs.find((tab) => tab.images.length > 0)?.tab_title || "");
 
   const sortedImagesTab = tabs.map((tab) => ({
     ...tab,
