@@ -1,12 +1,5 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
 import { Input } from "../ui/input";
-import React, { useRef, useState } from "react";
+import React, { useRef} from "react";
 import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { ClassNameValue } from "tailwind-merge";
@@ -17,7 +10,6 @@ type Props = {
 
 export default function Searchbar({ className }: Props) {
   const navigate = useNavigate();
-  const [searchFor, setSearchFor] = useState<string>("movie");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -25,7 +17,7 @@ export default function Searchbar({ className }: Props) {
 
     if (inputRef.current) {
       navigate(
-        `/results?query=${inputRef.current.value}&searchFor=${searchFor}`
+        `/results?query=${inputRef.current.value}`
       );
       inputRef.current.value = "";
       inputRef.current.blur();
@@ -41,24 +33,8 @@ export default function Searchbar({ className }: Props) {
         ref={inputRef}
         name="query"
         placeholder="Search for Movies, TV Shows or Person"
-        className="pr-20 max-lg:text-xs"
+        className="max-lg:text-xs"
       />
-      <Select value={searchFor} onValueChange={setSearchFor}>
-        <SelectTrigger className="absolute w-fit gap-1 top-1/2 -translate-y-1/2 right-2 text-xs p-1 h-auto border-none focus:ring-0">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent align="end">
-          <SelectItem value="movie" className="max-lg:text-xs">
-            Movie
-          </SelectItem>
-          <SelectItem value="tv" className="max-lg:text-xs">
-            TV Show
-          </SelectItem>
-          <SelectItem value="person" className="max-lg:text-xs">
-            Person
-          </SelectItem>
-        </SelectContent>
-      </Select>
     </form>
   );
 }
