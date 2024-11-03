@@ -8,6 +8,7 @@ import Recommendations from "@/components/show/Recommendations";
 import ViewShowLayout from "@/components/show/ViewShowLayout";
 import ShowMedia from "@/components/show/ShowMedia";
 import LoadingAnimation from "@/components/LoadingAnimation";
+import ShowDetails from "@/components/show/ShowDetails";
 
 export default function ViewMovie() {
   const { id } = useParams();
@@ -23,15 +24,24 @@ export default function ViewMovie() {
 
   if (isLoading) return <LoadingAnimation />;
   if (error) return <p>There was a server error. Please try again later.</p>;
-
+  console.log(data);
   return (
     data && (
-      <ViewShowLayout>
+      <div className="flex w-full flex-col gap-10">
         <ViewInfoSection showData={data} />
-        <Casts id={id!} type="movie" />
-        <ShowMedia show_data={data} />
-        <Recommendations id={id!} />
-      </ViewShowLayout>
+        <div className="flex gap-14">
+          <ViewShowLayout className="overflow-hidden">
+            <Casts id={id!} type="movie" />
+            <ShowMedia show_data={data} />
+            <Recommendations id={id!} />
+          </ViewShowLayout>
+
+
+          <div className="w-60">
+            <ShowDetails showData={data}/>
+          </div>
+        </div>
+      </div>
     )
   );
 }
