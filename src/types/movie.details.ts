@@ -7,6 +7,12 @@ export type BelongsToCollection = {
   poster_path: string;
 };
 
+export type CollectionDetails = BelongsToCollection & {
+  overview: string;
+  parts: Movie[];
+}
+
+
 export type MovieFullDetails = Movie & FullDetails & {
   belongs_to_collection: BelongsToCollection | null;
   budget: number;
