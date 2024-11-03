@@ -1,6 +1,6 @@
 import { FullDetails, Movie } from "./show";
 
-type BelongsToCollection = {
+export type BelongsToCollection = {
   backdrop_path: string;
   id: number;
   name: string;
