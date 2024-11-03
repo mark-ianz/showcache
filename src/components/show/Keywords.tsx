@@ -1,7 +1,6 @@
 import { getKeywords } from "@/api/show.service";
 import { ShowType } from "@/types/show";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
 import { Badge } from "../ui/badge";
 
 type Props = {
