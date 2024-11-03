@@ -17,7 +17,9 @@ type Props = {
 };
 
 export default function DynamicMediaTabs({ tabs, view_all_link }: Props) {
-  const [openedTab, setOpenedTab] = useState<string>(tabs.find((tab) => tab.images.length > 0)?.tab_title || "");
+  const [openedTab, setOpenedTab] = useState<string>(
+    tabs.find((tab) => tab.images.length > 0)?.tab_title || ""
+  );
 
   const sortedImagesTab = tabs.map((tab) => ({
     ...tab,
@@ -76,13 +78,19 @@ export default function DynamicMediaTabs({ tabs, view_all_link }: Props) {
                     key={image.file_path + index}
                     className={cn(
                       index + 1 === tab.images.length && "z-10",
-                      "w-60 max-xl:w-52 max-lg:w-44 max-md:w-36 max-sm:w-28",
+                      "h-60 max-xl:h-52 max-lg:h-44 max-md:h-40",
+                      tab.tab_title === "Posters" &&
+                        "w-40 max-xl:w-36  max-lg:w-28 max-md:w-[7.2rem]",
                       tab.tab_title === "Backdrops" &&
-                        "w-[500px] max-xl:w-[400px] max-md:w-[300px] max-sm:w-[250px]"
+                        "w-[400px] max-xl:w-[350px] max-lg:w-[300px] max-md:w-[280px]"
                     )}
                   >
                     <img
-                      src={getImg({path: image.file_path, size: "w780", mediaType: "show"})}
+                      src={getImg({
+                        path: image.file_path,
+                        size: "w780",
+                        mediaType: "show",
+                      })}
                       className={cn("w-full h-full object-cover object-center")}
                     />
                   </li>
