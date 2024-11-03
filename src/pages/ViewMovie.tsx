@@ -29,13 +29,12 @@ export default function ViewMovie() {
     data && (
       <div className="flex w-full flex-col gap-10">
         <ViewInfoSection showData={data} />
-        <div className="flex gap-14">
+        <div className="flex gap-14 max-md:flex-col">
           <ViewShowLayout className="overflow-hidden">
             <Casts id={id!} type="movie" />
             <ShowMedia show_data={data} />
             <Recommendations id={id!} />
           </ViewShowLayout>
-
 
           <div className="w-60">
             <ShowDetails showData={data}/>
