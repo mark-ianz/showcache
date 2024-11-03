@@ -58,7 +58,7 @@ export type FullDetails = {
   status: string;
   genres: Genre[];
   tagline: string;
-  homepage: URL;
+  homepage: string;
   imdb_id: string;
   spoken_languages: SpokenLanguage[];
 };
