@@ -108,3 +108,15 @@ export async function getCombinedCredits({
     .filter((show: ShowCredits) => show.popularity > 50)
     .splice(0, 20);
 }
+
+export async function getKeywords ({
+  queryKey,
+}: QueryFunctionContext): Promise<string[]> {
+  const [_key, type, id] = queryKey;
+  const { data } = await axios.get(
+    `https://api.themoviedb.org/3/${type}/${id}/keywords`,
+    axios_config({ method: "GET" })
+  );
+
+  return data.keywords.map((keyword: { name: string }) => keyword.name);
+}
