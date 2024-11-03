@@ -3,7 +3,7 @@ import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 import { axios_config } from "./axios.config";
 import { throwFetchError } from "@/lib/utils";
-import { MovieFullDetails } from "@/types/movie.details";
+import { CollectionDetails, MovieFullDetails } from "@/types/movie.details";
 
 export async function getPopularMovies({
   queryKey,
@@ -85,6 +85,17 @@ export async function getMovieFullDetails({
   const [_key, language, id] = queryKey;
   const { data } = await axios.get<MovieFullDetails>(
     `https://api.themoviedb.org/3/movie/${id}?language=${language}`,
+    axios_config({ method: "GET" })
+  );
+  return data;
+}
+
+export async function getCollectionDetails({
+  queryKey,
+}: QueryFunctionContext): Promise<CollectionDetails> {
+  const [_key, language, id] = queryKey;
+  const { data } = await axios.get<CollectionDetails>(
+    `https://api.themoviedb.org/3/collection/${id}?language=${language}`,
     axios_config({ method: "GET" })
   );
   return data;
