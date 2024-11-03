@@ -5,7 +5,7 @@ type Props = { children: string; className?: ClassNameValue };
 
 export default function HeaderText({ children, className }: Props) {
   return (
-    <p className={cn("text-3xl font-bold max-md:text-2xl max-sm:text-xl", className)}>
+    <p className={cn("text-2xl font-semibold max-sm:text-xl", className)}>
       {children}
     </p>
   );
