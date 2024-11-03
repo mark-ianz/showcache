@@ -1,4 +1,4 @@
-1. Make the search more dynamic, if user type it will show all results for different category.
+1. Make the search more dynamic, if user type it will show all results for different category. // done
 2. Create 2 different empty image for person and shows. // done
 3. Auth functionality.
 4. Skeleton Loading on some pages.
