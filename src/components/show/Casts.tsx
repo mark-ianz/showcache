@@ -5,6 +5,7 @@ import { getCredits } from "@/api/credits.service";
 import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
 import { ShowType } from "@/types/show";
+import LoadingAnimation from "../LoadingAnimation";
 
 type Props = { id: string; type: ShowType };
 
@@ -12,13 +13,14 @@ export default function Casts({ id, type }: Props) {
   const {
     language: { iso_639_1: language },
   } = useLanguage();
-  const { data: credits } = useQuery({
+  const { data: credits, isLoading, error } = useQuery({
     queryKey: ["credits", type, language, id],
     queryFn: getCredits,
     staleTime: 1000 * 60 * 5,
   });
 
-  if (!credits) return <p>loading</p>;
+  if (error) return <p>There was a server error. Please try again later.</p>;
+  if (isLoading || !credits) return <LoadingAnimation/>;
   const scrollItems: (Cast | Crew)[] =
     credits.cast.length > 14
       ? credits.cast.slice(0, 14)
