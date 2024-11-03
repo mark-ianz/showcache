@@ -27,9 +27,9 @@ export default function ViewMovie() {
   return (
     data && (
       <ViewShowLayout>
-        <ViewInfoSection showData={data!} />
+        <ViewInfoSection showData={data} />
         <Casts id={id!} type="movie" />
-        <ShowMedia show_data={data!} />
+        <ShowMedia show_data={data} />
         <Recommendations id={id!} />
       </ViewShowLayout>
     )
