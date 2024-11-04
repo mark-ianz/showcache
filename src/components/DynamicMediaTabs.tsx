@@ -79,8 +79,7 @@ export default function DynamicMediaTabs({ tabs, view_all_link }: Props) {
                     className={cn(
                       index + 1 === tab.images.length && "z-10",
                       "h-60 max-xl:h-52 max-lg:h-44 max-md:h-40",
-                      tab.tab_title === "Posters" &&
-                        "w-40 max-xl:w-36  max-lg:w-28 max-md:w-[7.2rem]",
+                      "w-40 max-xl:w-36 max-lg:w-28 max-md:w-[7.2rem]",
                       tab.tab_title === "Backdrops" &&
                         "w-[400px] max-xl:w-[350px] max-lg:w-[300px] max-md:w-[280px]"
                     )}
