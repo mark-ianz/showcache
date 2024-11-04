@@ -1,6 +1,6 @@
 type Props = {
   info: string | null;
-  item: string | number | null | JSX.Element;
+  item: string | number | null | JSX.Element | undefined;
 };
 
 export default function InfoItem({ info, item }: Props) {
