@@ -9,7 +9,6 @@ import ViewShowLayout from "@/components/show/ViewShowLayout";
 import ShowMedia from "@/components/show/ShowMedia";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import ShowDetails from "@/components/show/ShowDetails";
-import HeaderText from "@/components/HeaderText";
 import BelongsToCollection from "@/components/show/BelongsToCollection";
 
 export default function ViewMovie() {
@@ -35,16 +34,16 @@ export default function ViewMovie() {
           <ViewShowLayout className="overflow-hidden">
             <Casts id={id!} type="movie" />
             <ShowMedia show_data={data} />
-            <Recommendations id={id!} />
-          </ViewShowLayout>
-
-          <div className="w-60 max-md:w-full">
-            <ShowDetails showData={data} />
             {data.belongs_to_collection && (
               <BelongsToCollection
                 belongs_to_collection={data.belongs_to_collection}
               />
             )}
+            <Recommendations id={id!} />
+          </ViewShowLayout>
+
+          <div className="w-60 max-md:w-full">
+            <ShowDetails showData={data} />
           </div>
         </div>
       </div>
