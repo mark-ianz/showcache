@@ -5,6 +5,7 @@ import { languages } from "@/constants/languages";
 import { formatCurrency, formatDate } from "@/lib/helpers";
 import Keywords from "./Keywords";
 import { useLanguage } from "@/context/language-provider";
+import { useCurrencyRates } from "@/hooks/useCurrency";
 
 type Props = { showData: MovieFullDetails };
 
@@ -12,6 +13,8 @@ export default function ShowDetails({ showData }: Props) {
   const {
     language: { iso_639_1: language },
   } = useLanguage();
+
+  const { data: conversions, isLoading } = useCurrencyRates();
 
   const arrayDetails = [
     { info: "Status", item: showData.status },
@@ -23,11 +26,11 @@ export default function ShowDetails({ showData }: Props) {
     },
     {
       info: "Budget",
-      item: formatCurrency(showData.budget, language),
+      item: formatCurrency(showData.budget, language, conversions, isLoading),
     },
     {
       info: "Revenue",
-      item: formatCurrency(showData.revenue, language),
+      item: formatCurrency(showData.revenue, language, conversions, isLoading),
     },
     {
       info: `Release${showData.status === "Released" ? "d" : ""} Date`,
