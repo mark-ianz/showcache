@@ -25,7 +25,6 @@ export default function ViewMovie() {
 
   if (isLoading) return <LoadingAnimation />;
   if (error) return <p>There was a server error. Please try again later.</p>;
-  console.log(data);
   return (
     data && (
       <div className="flex w-full flex-col gap-10">

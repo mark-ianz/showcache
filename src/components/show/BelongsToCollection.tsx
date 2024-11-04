@@ -33,8 +33,6 @@ export default function BelongsToCollection({ belongs_to_collection }: Props) {
     }
     return movie.title + ", ";
   });
-  console.log(belongs_to_collection);
-  console.log(collection);
 
   return (
     belongs_to_collection && (
