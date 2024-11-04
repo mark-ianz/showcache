@@ -10,11 +10,9 @@ import { format } from "date-fns";
 import { ShowCredits } from "@/types/credits";
 import { LanguageCode } from "@/types/language";
 import { currency } from "@/constants/currency";
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
 
 export function getGenre(genre_ids: number[]): string[] {
-  let genre_list: string[] = [];
+  const genre_list: string[] = [];
 
   genre_ids.map((genre_id) => {
     for (const genre of genres) {
@@ -115,29 +113,22 @@ export function getShowType(
   return "title" in show ? "movie" : "tv";
 }
 
-export function formatCurrency(value: number, iso_639_1: LanguageCode = "en") {
+export function formatCurrency(
+  value: number,
+  iso_639_1: LanguageCode = "en",
+  rates: Record<string, number>,
+  isLoading: boolean
+) {
   const currencyFormat =
     currency.find((c) => c.iso_639_1 === iso_639_1) || currency[0];
-  const api_key = import.meta.env.VITE_EXCHANGE_RATE_API_KEY;
-
-  const { data, isLoading } = useQuery({
-    queryKey: ["currency", iso_639_1],
-    queryFn: async () => {
-      const response = await axios.get(
-        `https://v6.exchangerate-api.com/v6/${api_key}/latest/USD`
-      );
-
-      return response.data.conversion_rates;
-    },
-    staleTime: 1000 * 60 * 60 * 24 * 7,
-  });
 
   if (isLoading) return "Loading...";
+  if (rates) {
+    const conversion_rate = rates[currencyFormat.currency] || 1;
 
-  const conversion_rate = data?.[currencyFormat.currency] || 1;
-
-  return new Intl.NumberFormat(currencyFormat?.locale || "en-US", {
-    style: "currency",
-    currency: currencyFormat?.currency || "USD",
-  }).format(Number((value * conversion_rate).toFixed(2)));
+    return new Intl.NumberFormat(currencyFormat?.locale || "en-US", {
+      style: "currency",
+      currency: currencyFormat?.currency || "USD",
+    }).format(Number((value * conversion_rate).toFixed(2)));
+  }
 }
