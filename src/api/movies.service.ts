@@ -100,3 +100,14 @@ export async function getCollectionDetails({
   );
   return data;
 }
+
+export async function searchCollection ({
+  queryKey,
+}: QueryFunctionContext): Promise<Movie[]> {
+  const [_key, language, query, page = 1] = queryKey;
+  const { data } = await axios.get<API_Result>(
+    `https://api.themoviedb.org/3/search/collection`,
+    axios_config({ method: "GET", params: { include_adult: false, query, language, page } })
+  );
+  return data.results;
+}
