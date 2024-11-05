@@ -12,7 +12,7 @@ type Props = {
 
 export default function PersonContent({ query, language }: Props) {
   const { data, error, isLoading } = useQuery({
-    queryKey: ["results", language, query],
+    queryKey: ["person_search_results", language, query],
     queryFn: searchPerson,
     staleTime: 1000 * 60 * 60 * 24,
   });

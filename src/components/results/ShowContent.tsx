@@ -12,7 +12,7 @@ type Props = {
 
 export default function ShowContent({ query, language, searchFor }: Props) {
   const { data, error, isLoading } = useQuery({
-    queryKey: ["results", language, query, searchFor],
+    queryKey: ["show_search_results", language, query, searchFor],
     queryFn: searchShow,
     staleTime: 1000 * 60 * 60,
   });
