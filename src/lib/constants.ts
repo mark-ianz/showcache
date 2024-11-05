@@ -52,4 +52,5 @@ export const search_categories = [
   { name: "People", value: "person" },
   { name: "Movies", value: "movie" },
   { name: "TV Shows", value: "tv" },
+  {name: "Collections", value: "collection"}
 ];
