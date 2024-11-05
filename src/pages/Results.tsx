@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { search_categories } from "@/lib/constants";
 import PersonContent from "@/components/results/PersonContent";
 import ShowContent from "@/components/results/ShowContent";
+import CollectionsContent from "@/components/results/CollectionsContent";
 
 export default function Results() {
   const {
@@ -45,6 +46,9 @@ export default function Results() {
           </TabsContent>
           <TabsContent value="tv">
             <ShowContent query={query} language={language} searchFor="tv" />
+          </TabsContent>
+          <TabsContent value="collection">
+            <CollectionsContent query={query} language={language}/>
           </TabsContent>
         </Tabs>
       </div>
