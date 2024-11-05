@@ -3,7 +3,7 @@ import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 import { axios_config } from "./axios.config";
 import { throwFetchError } from "@/lib/utils";
-import { CollectionDetails, MovieFullDetails } from "@/types/movie.details";
+import { CollectionDetails, CollectionSearchResult, MovieFullDetails } from "@/types/movie.details";
 
 export async function getPopularMovies({
   queryKey,
@@ -103,7 +103,7 @@ export async function getCollectionDetails({
 
 export async function searchCollection ({
   queryKey,
-}: QueryFunctionContext): Promise<Movie[]> {
+}: QueryFunctionContext): Promise<CollectionSearchResult[]> {
   const [_key, language, query, page = 1] = queryKey;
   const { data } = await axios.get<API_Result>(
     `https://api.themoviedb.org/3/search/collection`,
