@@ -12,6 +12,9 @@ export type CollectionDetails = BelongsToCollection & {
   parts: Movie[];
 }
 
+export type CollectionSearchResult = BelongsToCollection & {
+  overview: string;
+};
 
 export type MovieFullDetails = Movie & FullDetails & {
   belongs_to_collection: BelongsToCollection | null;
