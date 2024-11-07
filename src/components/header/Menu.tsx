@@ -23,7 +23,10 @@ export default function Menu() {
         </div>
       </PopoverTrigger>
 
-      <PopoverContent align="end" className="mt-2 flex flex-col gap-4 text-sm">
+      <PopoverContent
+        align="end"
+        className="mt-2 flex flex-col gap-4 text-sm max-md:w-72 max-sm:w-60 max-[400px]:w-56"
+      >
         <div className="flex flex-col gap-4">
           <MenuNav className="hidden max-md:block" />
           <Settings />
