@@ -27,6 +27,7 @@ export default function ScrollableItem({
           <CardContent>
             <div className="w-40 h-52 max-xl:w-36 max-xl:h-48 max-lg:w-32 max-lg:h-44 max-[500px]:w-28 max-[500px]:h-36">
               <img
+                loading="lazy"
                 src={getImg({ path: image_path, size: "w300", mediaType })}
                 alt={`Image of ${title}`}
                 className="w-full h-full object-cover object-center rounded-t-md"
