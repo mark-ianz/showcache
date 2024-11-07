@@ -8,7 +8,7 @@
 8. Show facts // done
 9. Page when collection was clicked
 10. Make media images clickable.
-11. Make the hamburger menu texts smaller when screen size is smaller.
+11. Make the hamburger menu texts smaller when screen size is smaller. // done
 12. Create a go back button.
 13. Create back to top button.
 14. Create an error component
