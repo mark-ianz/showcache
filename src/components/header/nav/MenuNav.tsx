@@ -8,7 +8,7 @@ type Props = { className?: ClassNameValue };
 export default function MenuNav({ className }: Props) {
   return (
     <div className={cn(className)}>
-      <p className="text-lg font-semibold">Navigation</p>
+      <p className="text-lg font-semibold max-md:text-base">Navigation</p>
       <Separator className="my-2" />
       <NavList className="flex-col" />
     </div>
