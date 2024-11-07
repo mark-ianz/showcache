@@ -14,9 +14,11 @@ export default function LanguageSelect() {
       <p className="text-md font-semibold">Language</p>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button className="w-full" variant={"outline"} size={"sm"}>
-            Select Language:
-            <span className="ml-1 font-bold">{language.english_name}</span>
+          <Button className="w-full" variant={"outline"} size={"sm"} asChild>
+            <p className="max-sm:text-xs">
+              Select Language:
+              <span className="ml-1 font-bold">{language.english_name}</span>
+            </p>
           </Button>
         </PopoverTrigger>
         <PopoverContent asChild>
