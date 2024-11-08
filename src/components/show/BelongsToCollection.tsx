@@ -6,6 +6,7 @@ import { getCollectionDetails } from "@/api/movies.service";
 import { getImg } from "@/lib/helpers";
 import LoadingAnimation from "../LoadingAnimation";
 import { Button } from "../ui/button";
+import { Link } from "react-router-dom";
 
 type Props = { belongs_to_collection: BelongsToCollectionType };
 
@@ -49,7 +50,7 @@ export default function BelongsToCollection({ belongs_to_collection }: Props) {
         }}
       >
         <span className="inset-0 bg-tertiary absolute opacity-60 rounded-md"></span>
-        <div className="text-white z-10 relative flex flex-col justify-center h-full">
+        <Link to={"/collection/" + belongs_to_collection.id} className="text-white z-10 relative flex flex-col justify-center h-full">
           <HeaderText className="font-bold text-3xl max-md:text-2xl max-sm:text-lg max-xsm:text-md">
             {`Belongs to the ${belongs_to_collection?.name}`}
           </HeaderText>
@@ -59,7 +60,7 @@ export default function BelongsToCollection({ belongs_to_collection }: Props) {
           <Button className="w-fit mt-4 max-sm:text-xs max-sm:p-2">
             View Collection
           </Button>
-        </div>
+        </Link>
       </div>
     )
   );
