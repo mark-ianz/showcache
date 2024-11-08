@@ -132,3 +132,12 @@ export function formatCurrency(
     }).format(Number((value * conversion_rate).toFixed(2)));
   }
 }
+
+export function mergeGenreIds (movieArray: Movie[]): Array<number> {
+  const genre_ids_set = movieArray.reduce((acc, movie) => {
+    movie.genre_ids.forEach((genre_id) => acc.add(genre_id));
+    return acc;
+  }, new Set<number>());
+
+  return Array.from(genre_ids_set);
+}
