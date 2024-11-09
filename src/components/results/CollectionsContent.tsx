@@ -24,7 +24,6 @@ export default function CollectionsContent({ query, language }: Props) {
   if (isLoading) return <LoadingAnimation />;
   if (!collections) return <p>No collections found</p>;
 
-  console.log(collections);
   return (
     <div className="flex flex-col gap-4">
       {collections.map((collection, index) => (

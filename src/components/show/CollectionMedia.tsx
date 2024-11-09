@@ -11,7 +11,6 @@ export default function CollectionMedia({ id }: Props) {
     staleTime: 1000 * 60 * 5,
   });
 
-  console.log(data);
   return (
     data && (
       <DynamicMediaTabs
