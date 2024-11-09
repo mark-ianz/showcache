@@ -117,7 +117,7 @@ export function formatCurrency(
   value: number,
   iso_639_1: LanguageCode = "en",
   rates: Record<string, number>,
-  isLoading: boolean
+  isLoading?: boolean
 ) {
   const currencyFormat =
     currency.find((c) => c.iso_639_1 === iso_639_1) || currency[0];
