@@ -6,7 +6,7 @@ import { getCollectionDetails } from "@/api/movies.service";
 import { getImg } from "@/lib/helpers";
 import LoadingAnimation from "../LoadingAnimation";
 import { Button } from "../ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 type Props = { belongs_to_collection: BelongsToCollectionType };
 
