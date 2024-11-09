@@ -4,6 +4,7 @@ import axios from "axios";
 import { axios_config } from "./axios.config";
 import { throwFetchError } from "@/lib/utils";
 import { CollectionDetails, CollectionSearchResult, MovieFullDetails } from "@/types/movie.details";
+import { ImageResult } from "@/types/images";
 
 export async function getPopularMovies({
   queryKey,
@@ -110,4 +111,15 @@ export async function searchCollection ({
     axios_config({ method: "GET", params: { include_adult: false, query, language, page } })
   );
   return data.results;
+}
+
+export async function getCollectionImages({
+  queryKey,
+}: QueryFunctionContext): Promise<ImageResult> {
+  const [_key, id, language] = queryKey;
+  const { data } = await axios.get<ImageResult>(
+    `https://api.themoviedb.org/3/collection/${id}/images`,
+    axios_config({ method: "GET", params: { language } })
+  );
+  return data;
 }
