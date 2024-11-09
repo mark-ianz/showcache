@@ -2,6 +2,7 @@ import { useLanguage } from "@/context/language-provider";
 import { getShowDirectors } from "@/lib/helpers";
 import { ShowFullDetails } from "@/types/show";
 import { useEffect, useState } from "react";
+import Overview from "./Overview";
 
 type Props = {
   showData: ShowFullDetails;
@@ -26,10 +27,7 @@ export default function OtherShowDescription({ showData }: Props) {
       {showData.tagline && (
         <p className="text-muted-foreground italic">{showData.tagline}</p>
       )}
-      <div>
-        <p className="text-xl font-bold max-md:text-lg">Overview</p>
-        <p>{showData.overview || "No overview provided."}</p>
-      </div>
+      <Overview overview={showData.overview}/>
       {directors.length > 0 && (
         <p className="text-muted-foreground">
           Directed by {directors.join(", ")}
