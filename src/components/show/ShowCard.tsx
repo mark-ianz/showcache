@@ -1,6 +1,5 @@
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Badge } from "../ui/badge";
-import { useId } from "react";
 import Rating from "../Rating";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { getGenre, getImg } from "@/lib/helpers";
@@ -42,9 +41,9 @@ export default function ShowCard({
             <Rating rating={vote_average} />
           </div>
           <div className="flex items-end gap-2 flex-wrap truncate max-sm:gap-1">
-            {genre_list.slice(0, 2).map((genre) => (
+            {genre_list.slice(0, 2).map((genre, index) => (
               <Badge
-                key={useId()}
+                key={genre.length + index + genre}
                 variant={"secondary"}
                 className="cursor-text text-gray-500 max-sm:text-2xs max-sm:px-1"
                 title={genre}
