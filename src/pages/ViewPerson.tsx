@@ -1,4 +1,5 @@
 import { getPersonFullInfo } from "@/api/credits.service";
+import ErrorComponent from "@/components/ErrorComponent";
 import HeaderText from "@/components/HeaderText";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import KnownFor from "@/components/person/KnownFor";
@@ -33,7 +34,7 @@ export default function ViewPerson() {
 
   if (isLoading) return <LoadingAnimation />;
 
-  if (error) return <p>There was a server error. Please try again later.</p>;
+  if (error) return <ErrorComponent error={error} />;
   return (
     person && (
       <div className="w-full relative flex gap-8 max-sm:flex-col max-md:gap-6 max-sm:gap-4">

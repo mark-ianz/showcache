@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getShowType } from "@/lib/helpers";
 import { ShowFullDetails } from "@/types/show";
 import LoadingAnimation from "../LoadingAnimation";
+import ErrorComponent from "../ErrorComponent";
 
 type Props = {
   show_data: ShowFullDetails;
@@ -18,7 +19,7 @@ export default function ShowMedia({ show_data }: Props) {
     staleTime: 1000 * 60 * 5,
   });
 
-  if (error) return <p>There was a server error. Please try again later.</p>;
+  if (error) return <ErrorComponent error={error} />;
   if (isLoading) return <LoadingAnimation />;
 
   return (

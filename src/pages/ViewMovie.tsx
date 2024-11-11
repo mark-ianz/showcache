@@ -10,6 +10,7 @@ import ShowMedia from "@/components/show/ShowMedia";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import ShowDetails from "@/components/show/ShowDetails";
 import BelongsToCollection from "@/components/show/BelongsToCollection";
+import ErrorComponent from "@/components/ErrorComponent";
 
 export default function ViewMovie() {
   const { id } = useParams();
@@ -24,7 +25,7 @@ export default function ViewMovie() {
   });
 
   if (isLoading) return <LoadingAnimation />;
-  if (error) return <p>There was a server error. Please try again later.</p>;
+  if (error) return <ErrorComponent error={error} />;
   return (
     data && (
       <div className="flex w-full flex-col gap-10">

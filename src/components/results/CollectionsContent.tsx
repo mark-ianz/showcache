@@ -3,6 +3,7 @@ import { LanguageCode } from "@/types/language";
 import { useQuery } from "@tanstack/react-query";
 import LoadingAnimation from "../LoadingAnimation";
 import { getImg } from "@/lib/helpers";
+import ErrorComponent from "../ErrorComponent";
 
 type Props = {
   query: string;
@@ -20,7 +21,7 @@ export default function CollectionsContent({ query, language }: Props) {
     staleTime: 1000 * 60 * 60 * 24,
   });
 
-  if (error) return <p>There was a server error. Please try again later.</p>;
+  if (error) return <ErrorComponent error={error} />;
   if (isLoading) return <LoadingAnimation />;
   if (!collections) return <p>No collections found</p>;
 

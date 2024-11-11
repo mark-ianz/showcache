@@ -7,6 +7,7 @@ import ScrollableSection from "../ScrollableSection";
 import { cn } from "@/lib/utils";
 import HeaderText from "../HeaderText";
 import LoadingAnimation from "../LoadingAnimation";
+import ErrorComponent from "../ErrorComponent";
 
 type Props = { id: number };
 
@@ -21,7 +22,7 @@ export default function KnownFor({ id }: Props) {
     staleTime: 1000 * 60 * 5,
   });
 
-  if (error) return <p>There was a server error. Please try again later.</p>;
+  if (error) return <ErrorComponent error={error} />;
   if (isLoading) return <LoadingAnimation />;
   return (
     data !== undefined &&

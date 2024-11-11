@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { getImg } from "@/lib/helpers";
 import LoadingAnimation from "../LoadingAnimation";
+import ErrorComponent from "../ErrorComponent";
 
 type Props = {
   query: string;
@@ -17,8 +18,8 @@ export default function PersonContent({ query, language }: Props) {
     staleTime: 1000 * 60 * 60 * 24,
   });
 
+  if (error) return <ErrorComponent error={error} />;
   if (isLoading) return <LoadingAnimation />;
-  if (error) return <p>There was a server error. Please try again later.</p>;
 
   return (
     <>

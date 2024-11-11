@@ -9,6 +9,7 @@ import Recommendations from "@/components/show/Recommendations";
 import ViewShowLayout from "@/components/show/ViewShowLayout";
 import ShowMedia from "@/components/show/ShowMedia";
 import LoadingAnimation from "@/components/LoadingAnimation";
+import ErrorComponent from "@/components/ErrorComponent";
 
 export default function ViewTv() {
   const { id } = useParams();
@@ -23,7 +24,7 @@ export default function ViewTv() {
   });
 
   if (isLoading) return <LoadingAnimation />;
-  if (error) return <p>There was a server error. Please try again later.</p>;
+  if (error) return <ErrorComponent error={error}/>;
 
   return (
     data && (

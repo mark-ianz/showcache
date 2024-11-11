@@ -1,3 +1,4 @@
+import ErrorComponent from "../ErrorComponent";
 import HeaderText from "../HeaderText";
 import LoadingAnimation from "../LoadingAnimation";
 import ShowCard from "./ShowCard";
@@ -19,9 +20,7 @@ export default function ShowSection({
   error,
   loading,
 }: ShowSectionProps) {
-  if (error) {
-    return <p>There was a server error. Please try again later.</p>;
-  }
+  if (error) return <ErrorComponent error={error}/>
 
   return (
     <section>

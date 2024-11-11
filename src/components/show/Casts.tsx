@@ -6,6 +6,7 @@ import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
 import { ShowType } from "@/types/show";
 import LoadingAnimation from "../LoadingAnimation";
+import ErrorComponent from "../ErrorComponent";
 
 type Props = { id: string; type: ShowType };
 
@@ -19,7 +20,7 @@ export default function Casts({ id, type }: Props) {
     staleTime: 1000 * 60 * 5,
   });
 
-  if (error) return <p>There was a server error. Please try again later.</p>;
+  if (error) return <ErrorComponent error={error} />;
   if (isLoading || !credits) return <LoadingAnimation/>;
   const scrollItems: (Cast | Crew)[] =
     credits.cast.length > 14
