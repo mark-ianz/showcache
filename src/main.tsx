@@ -18,6 +18,9 @@ import ViewTv from "./pages/ViewTv.tsx";
 import ViewPerson from "./pages/ViewPerson.tsx";
 import ViewPersonMedia from "./pages/ViewPersonMedia.tsx";
 import ViewCollection from "./pages/ViewCollection.tsx";
+import Contact from "./pages/Contact.tsx";
+import About from "./pages/About.tsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 
 const queryClient = new QueryClient();
 
@@ -64,16 +67,28 @@ const router = createBrowserRouter([
       },
       {
         path: "/person/:id",
-        element: <ViewPerson/>
+        element: <ViewPerson />,
       },
       {
         path: "/person/:id/media",
-        element: <ViewPersonMedia/>
+        element: <ViewPersonMedia />,
       },
       {
         path: "/collection/:id",
-        element: <ViewCollection/>
-      }
+        element: <ViewCollection />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/privacy",
+        element: <PrivacyPolicy />,
+      },
     ],
   },
 ]);
