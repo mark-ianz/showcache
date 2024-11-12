@@ -17,6 +17,7 @@ export default {
       },
       colors: {
         tertiary: "rgb(59 130 246)",
+        tertiaryDark: "rgb(59 130 246 / 0.8)",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
