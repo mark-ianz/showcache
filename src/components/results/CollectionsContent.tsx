@@ -23,7 +23,7 @@ export default function CollectionsContent({ query, language }: Props) {
 
   if (error) return <ErrorComponent error={error} />;
   if (isLoading) return <LoadingAnimation />;
-  if (!collections) return <p>No collections found</p>;
+  if (collections?.length === 0 || !collections) return <p>No result found</p>;
 
   return (
     <div className="flex flex-col gap-4">
