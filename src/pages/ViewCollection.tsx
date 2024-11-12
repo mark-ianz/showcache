@@ -2,6 +2,7 @@ import {
   getCollectionDetails,
   getMovieFullDetails,
 } from "@/api/movies.service";
+import ErrorComponent from "@/components/ErrorComponent";
 import HeaderText from "@/components/HeaderText";
 import LoadingAnimation from "@/components/LoadingAnimation";
 import ScrollableSection from "@/components/ScrollableSection";
@@ -72,15 +73,8 @@ export default function ViewCollection() {
 
   if (isLoading || isLoadingMovies) return <LoadingAnimation />;
 
-  if (error || errorMovies) {
-    if ((error as { status?: number }).status === 404)
-      return <p className="w-full">Collection not found</p>;
-    return (
-      <p className="w-full">
-        There was a server error. Please try again later.
-      </p>
-    );
-  }
+  if (error || errorMovies)
+    return <ErrorComponent error={error || errorMovies} />;
   if (!collection || !movies) return null;
 
   const budget = movies.reduce((acc, movie) => acc + movie.budget, 0);
