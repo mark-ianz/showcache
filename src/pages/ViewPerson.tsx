@@ -12,11 +12,6 @@ import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
-// combined credits endpoint: Combined movie and TV credits that belong to a person.
-// external_ids endpoint: The external ID's that belong to a person such as social ids.
-// images endpoint: Get the profile images that belong to a person.
-// tagged_images endpoint: Get the tagged images that belong to a person for example their image from this movie or tv.
-
 export default function ViewPerson() {
   const { id } = useParams();
   const {
@@ -30,11 +25,12 @@ export default function ViewPerson() {
     queryKey: ["person", language, id],
     queryFn: getPersonFullInfo,
     staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) return <LoadingAnimation />;
-
   if (error) return <ErrorComponent error={error} />;
+
   return (
     person && (
       <div className="w-full relative flex gap-8 max-sm:flex-col max-md:gap-6 max-sm:gap-4">

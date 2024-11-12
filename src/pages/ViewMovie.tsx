@@ -22,6 +22,7 @@ export default function ViewMovie() {
     queryKey: ["single_show", language, id],
     queryFn: getMovieFullDetails,
     staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) return <LoadingAnimation />;

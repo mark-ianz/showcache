@@ -21,6 +21,7 @@ export default function ViewTv() {
     queryKey: ["single_show", language, id],
     queryFn: getTvFullDetails,
     staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
   });
 
   if (isLoading) return <LoadingAnimation />;
