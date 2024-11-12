@@ -21,6 +21,7 @@ import ViewCollection from "./pages/ViewCollection.tsx";
 import Contact from "./pages/Contact.tsx";
 import About from "./pages/About.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
+import PageNotFound from "./pages/PageNotFound.tsx";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,11 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+    errorElement: (
+      <Layout>
+        <PageNotFound/>
+      </Layout>
+    ),
     children: [
       {
         index: true,
