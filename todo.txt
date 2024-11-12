@@ -11,6 +11,6 @@
 11. Make the hamburger menu texts smaller when screen size is smaller. // done
 12. Create a go back button.
 13. Create back to top button.
-14. Create an error component
-15. Createa a footer.
+14. Create an error component. // done
+15. Createa a footer. // done
 16. Create a ViewAllMedia component
