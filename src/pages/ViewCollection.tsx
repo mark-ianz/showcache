@@ -11,6 +11,7 @@ import Overview from "@/components/show/InfoSection/Overview";
 import ShowPoster from "@/components/show/InfoSection/ShowPoster";
 import SectionwBGImage from "@/components/show/SectionwBGImage";
 import ShowCard from "@/components/show/ShowCard";
+import ViewImage from "@/components/ViewImage";
 import { useLanguage } from "@/context/language-provider";
 import { useCurrencyRates } from "@/hooks/useCurrency";
 import { formatCurrency, getGenre, mergeGenreIds } from "@/lib/helpers";
@@ -85,8 +86,10 @@ export default function ViewCollection() {
       {collection && movies && (
         <>
           <SectionwBGImage backdrop_path={collection.backdrop_path}>
-            <div className="relative z-10 flex gap-4">
-              <ShowPoster poster_path={collection.poster_path} />
+            <div className="relative z-10 flex gap-4 max-md:flex-col items-center">
+              <ViewImage src={collection.poster_path}>
+                <ShowPoster poster_path={collection.poster_path} />
+              </ViewImage>
               <div className="flex flex-col justify-center gap-2">
                 <div>
                   <HeaderText>{collection.name}</HeaderText>
