@@ -33,7 +33,7 @@ export default function Contact() {
           </div>
           <Button
             type="submit"
-            className="w-full bg-tertiary text-foreground py-2 rounded-lg hover:bg-tertiaryDark"
+            className="w-full bg-tertiary text-white py-2 rounded-lg hover:bg-tertiaryDark"
           >
             Send Message
           </Button>
