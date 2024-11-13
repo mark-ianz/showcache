@@ -123,6 +123,7 @@ export function formatCurrency(
     currency.find((c) => c.iso_639_1 === iso_639_1) || currency[0];
 
   if (isLoading) return "Loading...";
+  if (value === 0) return "-";
   if (rates) {
     const conversion_rate = rates[currencyFormat.currency] || 1;
 
