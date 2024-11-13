@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import Header from "./components/header/Header";
 import Nav from "./components/header/nav/Nav";
 import Footer from "./components/Footer";
@@ -11,6 +11,7 @@ export default function Layout({children}: {children?: ReactNode}) {
         <Header />
         <Nav />
         <Outlet />
+        <ScrollRestoration/>
         {children}
         <Footer />
       </>
