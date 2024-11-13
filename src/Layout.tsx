@@ -3,16 +3,18 @@ import Header from "./components/header/Header";
 import Nav from "./components/header/nav/Nav";
 import Footer from "./components/Footer";
 import { ReactNode } from "react";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 
-export default function Layout({children}: {children?: ReactNode}) {
+export default function Layout({ children }: { children?: ReactNode }) {
   return (
     <div className="wrapper py-4 px-40 flex flex-col items-center justify-center max-2xl:px-[8vw] max-lg:px-[4vw]">
       <>
         <Header />
         <Nav />
         <Outlet />
-        <ScrollRestoration/>
+        <ScrollRestoration />
         {children}
+        <ScrollToTopButton/>
         <Footer />
       </>
     </div>
