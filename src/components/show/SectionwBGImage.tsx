@@ -1,12 +1,15 @@
 import { getImg } from "@/lib/helpers";
+import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
+import { ClassNameValue } from "tailwind-merge";
 
 type Props = {
   children: ReactNode;
   backdrop_path: string;
+  className?: ClassNameValue;
 };
 
-export default function SectionwBGImage({ children, backdrop_path }: Props) {
+export default function SectionwBGImage({ children, backdrop_path, className }: Props) {
   const backdrop_path_src = getImg({
     path: backdrop_path,
     size: "original",
@@ -15,7 +18,7 @@ export default function SectionwBGImage({ children, backdrop_path }: Props) {
   });
   return (
     <section
-      className="p-6 relative"
+      className={cn("p-6 relative", className)}
       style={{
         backgroundImage: `url(${backdrop_path_src})`,
         backgroundSize: "cover",
