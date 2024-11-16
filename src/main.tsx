@@ -22,7 +22,7 @@ import Contact from "./pages/Contact.tsx";
 import About from "./pages/About.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import PageNotFound from "./pages/PageNotFound.tsx";
-import ViewMedia from "./pages/ViewMedia.tsx";
+import ViewShowMedia from "./pages/ViewShowMedia.tsx";
 
 const queryClient = new QueryClient();
 
@@ -95,10 +95,13 @@ const router = createBrowserRouter([
       {
         path: "/privacy",
         element: <PrivacyPolicy />,
+      },{
+        path: "/person/:id/media",
+        element: <ViewPersonMedia/>
       },
       {
         path: "/:type/:id/media",
-        element: <ViewMedia/>
+        element: <ViewShowMedia/>
       }
     ],
   },
