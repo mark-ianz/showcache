@@ -2,32 +2,50 @@ import { getShowImages } from "@/api/show.service";
 import ErrorComponent from "@/components/ErrorComponent";
 import HeaderText from "@/components/HeaderText";
 import LoadingAnimation from "@/components/LoadingAnimation";
+import Rating from "@/components/Rating";
 import ViewImage from "@/components/ViewImage";
 import { getImg } from "@/lib/helpers";
 import { cn } from "@/lib/utils";
-import { Image, ImageResult } from "@/types/images";
+import { Image } from "@/types/images";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
-type Props = {};
-
 function MediaList({ images }: { images: Image[] }) {
+  const mediaOrientation =
+    images[0].aspect_ratio > 1.5 ? "landscape" : "portrait";
+
   return (
-    <ol className="flex flex-wrap gap-2">
+    <ol className={cn("grid gap-4 grid-cols-3 max-xl:grid-cols-2 max-md:grid-cols-1 w-full")}>
       {images.map((image) => (
         <ViewImage
           src={image.file_path}
           mediaType="show"
-          mediaOrientation={image.aspect_ratio > 1.5 ? "landscape" : "portrait"}
+          mediaOrientation={mediaOrientation}
         >
-          <li className={cn(image.aspect_ratio > 1.5 ? "w-60" : "w-36")}>
-            <img
-              src={getImg({
-                path: image.file_path,
-                size: "w300",
-                mediaType: "show",
-              })}
-            />
+          <li className={cn("border shadow-md rounded-md text-sm grow")}>
+            <div>
+              <img
+                src={getImg({
+                  path: image.file_path,
+                  size: "w780",
+                  mediaType: "show",
+                })}
+                className="w-full h-full object-cover object-center rounded-t-md"
+              />
+            </div>
+            <div className="p-2 relative flex flex-col gap-2 border-t max-md:gap-1">
+              <div className="flex items-start absolute right-2">
+                <Rating rating={image.vote_average} />
+              </div>
+              <div className="flex flex-col items-start">
+                <p className="text-xs">Size</p>
+                <p>{image.width + "x" + image.height}</p>
+              </div>
+              <div className="flex flex-col items-start">
+                <p className="text-xs">Aspect Ratio</p>
+                <p>{image.aspect_ratio}</p>
+              </div>
+            </div>
           </li>
         </ViewImage>
       ))}
@@ -35,11 +53,15 @@ function MediaList({ images }: { images: Image[] }) {
   );
 }
 
-export default function ViewShowMedia({}: Props) {
+export default function ViewShowMedia() {
   const { type, id } = useParams();
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["all_show_images", id, type],
+  const {
+    data: images,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["show_media", id, type],
     queryFn: getShowImages,
     refetchOnWindowFocus: false,
   });
@@ -48,17 +70,17 @@ export default function ViewShowMedia({}: Props) {
   if (error) return <ErrorComponent error={error} />;
 
   return (
-    data && (
-      <main>
+    images && (
+      <main className="w-full">
         <HeaderText>Media</HeaderText>
-        <div className="flex gap-4">
-          <section className="w-1/2">
+        <div className="flex gap-10 justify-between max-lg:gap-6 max-md:gap-4">
+          <section className="grow">
             <HeaderText className="mb-2">Backdrops</HeaderText>
-            <MediaList images={data?.backdrops} />
+            <MediaList images={images.backdrops} />
           </section>
-          <section className="w-1/2">
+          <section className="grow">
             <HeaderText className="mb-2">Posters</HeaderText>
-            <MediaList images={data?.posters} />
+            <MediaList images={images.posters} />
           </section>
         </div>
       </main>
