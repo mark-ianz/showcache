@@ -10,6 +10,7 @@ import { format } from "date-fns";
 import { ShowCredits } from "@/types/credits";
 import { LanguageCode } from "@/types/language";
 import { currency } from "@/constants/currency";
+import { CreditQueriedImage, ShowQueriedImage } from "@/types/images";
 
 export function getGenre(genre_ids: number[]): string[] {
   const genre_list: string[] = [];
@@ -111,6 +112,10 @@ export function getShowType(
   show: TvFullDetails | MovieFullDetails | Movie | TV | ShowCredits
 ) {
   return "title" in show ? "movie" : "tv";
+}
+
+export function getMediaType (imagesQuery: CreditQueriedImage | ShowQueriedImage) {
+  return "profiles" in imagesQuery ? "person" : "show";
 }
 
 export function formatCurrency(
