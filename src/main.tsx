@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     errorElement: (
       <Layout>
-        <PageNotFound/>
+        <PageNotFound />
       </Layout>
     ),
     children: [
@@ -95,14 +95,15 @@ const router = createBrowserRouter([
       {
         path: "/privacy",
         element: <PrivacyPolicy />,
-      },{
-        path: "/person/:id/media",
-        element: <ViewPersonMedia/>
       },
       {
-        path: "/:type/:id/media",
-        element: <ViewShowMedia/>
-      }
+        path: "/media/person/:id",
+        element: <ViewPersonMedia />,
+      },
+      {
+        path: "/media/:type/:id",
+        element: <ViewShowMedia />,
+      },
     ],
   },
 ]);
