@@ -18,7 +18,7 @@ export default function CollectionMedia({ id }: Props) {
           { images: data.backdrops, tab_title: "Backdrops" },
           { images: data.posters, tab_title: "Posters" },
         ]}
-        view_all_link={`/collection/${id}/media`}
+        view_all_link={`/media/collection/${id}`}
       />
     )
   );
