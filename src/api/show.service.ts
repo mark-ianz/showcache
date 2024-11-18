@@ -3,7 +3,7 @@ import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 import { axios_config } from "./axios.config";
 import { API_Result, Movie, TV } from "@/types/show";
-import { ImageResult } from "@/types/images";
+import { Image, ShowQueriedImage } from "@/types/images";
 import { CombinedCredits, PersonSearch, ShowCredits } from "@/types/credits";
 
 export async function getTrailers({
@@ -48,9 +48,9 @@ export async function searchPerson ({
 
 export async function getShowImages({
   queryKey,
-}: QueryFunctionContext): Promise<ImageResult> {
+}: QueryFunctionContext): Promise<ShowQueriedImage> {
   const [_key, id, type] = queryKey;
-  const { data } = await axios.get<ImageResult>(
+  const { data } = await axios.get<ShowQueriedImage>(
     `https://api.themoviedb.org/3/${type}/${id}/images`,
     axios_config({ method: "GET" })
   );
