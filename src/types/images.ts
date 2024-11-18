@@ -10,7 +10,7 @@ export type Image = {
   width: number;
 };
 
-export type ImageResult = {
+export type ShowQueriedImage = {
   backdrops: Image[];
   id: number;
   logos: Image[];
@@ -23,3 +23,16 @@ export type TabImage = {
   vote_average: number;
   vote_count: number;
 };
+
+export type CreditQueriedImage = {
+  id: number,
+  profiles: Image[]
+}
+
+export type TaggedImages = {
+  id: number,
+  page: number,
+  results: Image[],
+  total_pages: number,
+  total_results: number,
+}
