@@ -4,7 +4,7 @@ import axios from "axios";
 import { axios_config } from "./axios.config";
 import { throwFetchError } from "@/lib/utils";
 import { CollectionDetails, CollectionSearchResult, MovieFullDetails } from "@/types/movie.details";
-import { ImageResult } from "@/types/images";
+import { ShowQueriedImage } from "@/types/images";
 
 export async function getPopularMovies({
   queryKey,
@@ -115,9 +115,9 @@ export async function searchCollection ({
 
 export async function getCollectionImages({
   queryKey,
-}: QueryFunctionContext): Promise<ImageResult> {
+}: QueryFunctionContext): Promise<ShowQueriedImage> {
   const [_key, id, language] = queryKey;
-  const { data } = await axios.get<ImageResult>(
+  const { data } = await axios.get<ShowQueriedImage>(
     `https://api.themoviedb.org/3/collection/${id}/images`,
     axios_config({ method: "GET", params: { language } })
   );
