@@ -5,9 +5,10 @@ import LoadingAnimation from "../LoadingAnimation";
 
 type Props = {
   id: number;
+  name: string;
 };
 
-export default function PersonMedia({ id }: Props) {
+export default function PersonMedia({ id, name }: Props) {
   const {
     data: tagged_images,
     isLoading: tagged_images_isLoading,
@@ -40,7 +41,7 @@ export default function PersonMedia({ id }: Props) {
           { images: images, tab_title: "Images" },
           { images: tagged_images, tab_title: "Tagged Images" },
         ]}
-        view_all_link={`/media/person/${id}`}
+        view_all_link={`/media/person/${id}/${name}`}
       />
     )
   );
