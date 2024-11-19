@@ -77,10 +77,6 @@ const router = createBrowserRouter([
         element: <ViewPerson />,
       },
       {
-        path: "/person/:id/media",
-        element: <ViewPersonMedia />,
-      },
-      {
         path: "/collection/:id",
         element: <ViewCollection />,
       },
@@ -97,11 +93,11 @@ const router = createBrowserRouter([
         element: <PrivacyPolicy />,
       },
       {
-        path: "/media/person/:id",
+        path: "/media/person/:id/:name",
         element: <ViewPersonMedia />,
       },
       {
-        path: "/media/:type/:id",
+        path: "/media/:type/:id/:title",
         element: <ViewShowMedia />,
       },
     ],
