@@ -8,9 +8,10 @@ import ErrorComponent from "../ErrorComponent";
 
 type Props = {
   show_data: ShowFullDetails;
+  show_title: string;
 };
 
-export default function ShowMedia({ show_data }: Props) {
+export default function ShowMedia({ show_data, show_title }: Props) {
   const type = getShowType(show_data);
 
   const { data, error, isLoading } = useQuery({
@@ -29,7 +30,7 @@ export default function ShowMedia({ show_data }: Props) {
           { images: data.backdrops, tab_title: "Backdrops" },
           { images: data.posters, tab_title: "Posters" },
         ]}
-        view_all_link={`/media/${type}/${show_data.id}`}
+        view_all_link={`/media/${type}/${show_data.id}/${show_title}`}
       />
     )
   );
