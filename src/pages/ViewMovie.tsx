@@ -34,7 +34,7 @@ export default function ViewMovie() {
         <div className="flex gap-14 max-md:flex-col max-md:gap-5">
           <ViewShowLayout className="overflow-hidden">
             <Casts id={id!} type="movie" />
-            <ShowMedia show_data={data} />
+            <ShowMedia show_data={data} show_title={data.title}/>
             {data.belongs_to_collection && (
               <BelongsToCollection
                 belongs_to_collection={data.belongs_to_collection}
