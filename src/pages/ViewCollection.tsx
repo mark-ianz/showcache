@@ -123,7 +123,7 @@ export default function ViewCollection() {
               </li>
             ))}
           </ScrollableSection>
-          <CollectionMedia id={collection.id} />
+          <CollectionMedia id={collection.id} collectionName={collection.name} />
         </>
       )}
     </div>
