@@ -3,7 +3,7 @@ import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 import { axios_config } from "./axios.config";
 import { API_Result, Movie, TV } from "@/types/show";
-import { Image, ShowQueriedImage } from "@/types/images";
+import { ShowQueriedImage } from "@/types/images";
 import { CombinedCredits, PersonSearch, ShowCredits } from "@/types/credits";
 
 export async function getTrailers({
