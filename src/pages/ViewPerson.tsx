@@ -49,7 +49,7 @@ export default function ViewPerson() {
         <div className="flex flex-col gap-4 overflow-hidden">
           <NameAndBio person={person} />
           <KnownFor id={person.id} />
-          <PersonMedia id={person.id} />
+          <PersonMedia id={person.id} name={person.name}/>
         </div>
       </div>
     )
