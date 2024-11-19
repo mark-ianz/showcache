@@ -25,7 +25,7 @@ export default function ViewTv() {
   });
 
   if (isLoading) return <LoadingAnimation />;
-  if (error) return <ErrorComponent error={error}/>;
+  if (error) return <ErrorComponent error={error} />;
 
   return (
     data && (
@@ -33,7 +33,7 @@ export default function ViewTv() {
         <ViewInfoSection showData={data} />
         <Casts type="tv" id={id!} />
         <Seasons seasons={data.seasons} />
-        <ShowMedia show_data={data} />
+        <ShowMedia show_data={data} show_title={data.name} />
         <Recommendations id={id!} />
       </ViewShowLayout>
     )
