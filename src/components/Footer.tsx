@@ -22,13 +22,13 @@ export default function Footer() {
       <div className="container mx-auto flex flex-col items-center">
         <div className="flex gap-4">
           {links.map((link) => (
-            <Button variant={"link"} className="p-0 text-muted-foreground" asChild key={link.name}>
+            <Button variant={"link"} className="p-0 text-muted-foreground max-md:text-xs" asChild key={link.name}>
               <Link to={link.url}>{link.name}</Link>
             </Button>
           ))}
         </div>
         <div className="flex justify-center">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm max-md:text-xs text-muted-foreground">
             &copy; {new Date().getFullYear()} ShowCache. All rights reserved.
           </p>
         </div>
