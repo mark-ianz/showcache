@@ -11,7 +11,6 @@ import LoadingAnimation from "@/components/LoadingAnimation";
 import ShowDetails from "@/components/show/ShowDetails";
 import BelongsToCollection from "@/components/show/BelongsToCollection";
 import ErrorComponent from "@/components/ErrorComponent";
-import GoBackButton from "@/components/GoBackButton";
 
 export default function ViewMovie() {
   const { id } = useParams();
@@ -30,27 +29,22 @@ export default function ViewMovie() {
   if (error) return <ErrorComponent error={error} />;
   return (
     data && (
-      <div className="w-full flex">
-        <GoBackButton/>
-        <div className="w-full">
-          <div className="flex flex-col gap-10">
-            <ViewInfoSection showData={data} />
-            <div className="flex gap-14 max-md:flex-col max-md:gap-5">
-              <ViewShowLayout className="overflow-hidden">
-                <Casts id={id!} type="movie" />
-                <ShowMedia show_data={data} show_title={data.title} />
-                {data.belongs_to_collection && (
-                  <BelongsToCollection
-                    belongs_to_collection={data.belongs_to_collection}
-                  />
-                )}
-                <Recommendations id={id!} />
-              </ViewShowLayout>
+      <div className="flex w-full flex-col gap-10">
+        <ViewInfoSection showData={data} />
+        <div className="flex gap-14 max-md:flex-col max-md:gap-5">
+          <ViewShowLayout className="overflow-hidden">
+            <Casts id={id!} type="movie" />
+            <ShowMedia show_data={data} show_title={data.title}/>
+            {data.belongs_to_collection && (
+              <BelongsToCollection
+                belongs_to_collection={data.belongs_to_collection}
+              />
+            )}
+            <Recommendations id={id!} />
+          </ViewShowLayout>
 
-              <div className="w-60 max-md:w-full">
-                <ShowDetails showData={data} />
-              </div>
-            </div>
+          <div className="w-60 max-md:w-full">
+            <ShowDetails showData={data} />
           </div>
         </div>
       </div>

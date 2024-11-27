@@ -1,7 +1,7 @@
 import { Separator } from "@/components/ui/separator";
 import ThemeSwitch from "./ThemeSwitch";
 import LanguageSelect from "./LanguageSelect";
-import AccountSettings from "./AccountSettings";
+/* import AccountSettings from "./AccountSettings"; */
 
 export default function Settings() {
   return (
@@ -11,7 +11,7 @@ export default function Settings() {
       <div className="flex flex-col gap-4">
         <ThemeSwitch />
         <LanguageSelect />
-        <AccountSettings />
+        {/* <AccountSettings /> */}
       </div>
     </div>
   );
