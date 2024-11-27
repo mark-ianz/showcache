@@ -54,6 +54,8 @@ export default function Contact() {
           "There was an error sending your message. Please try again later.",
         variant: "destructive",
       });
+    } finally {
+      setError(null);
     }
   };
 
