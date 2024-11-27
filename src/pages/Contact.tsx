@@ -1,10 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Toaster } from "@/components/ui/toaster";
+import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
 import { FormEvent, useRef, useState } from "react";
 
 export default function Contact() {
+  const { toast } = useToast();
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
@@ -12,7 +15,6 @@ export default function Contact() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
     const name = nameRef.current?.value;
     const email = emailRef.current?.value;
     const message = messageRef.current?.value;
@@ -35,13 +37,29 @@ export default function Contact() {
           },
         }
       );
+      nameRef.current!.value = "";
+      emailRef.current!.value = "";
+      messageRef.current!.value = "";
+      toast({
+        title: "Message sent",
+        description:
+          "Thank you for contacting us. We will get back to you as soon as possible.",
+        variant: "success",
+      });
     } catch (error) {
       console.log(error);
+      toast({
+        title: "Message failed",
+        description:
+          "There was an error sending your message. Please try again later.",
+        variant: "destructive",
+      });
     }
   };
 
   return (
     <main className="w-full flex items-center justify-center max-w-lg">
+      <Toaster />
       <div className="p-8 rounded-lg shadow-lg w-full">
         <h2 className="text-2xl font-bold mb-6">Contact Us</h2>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
