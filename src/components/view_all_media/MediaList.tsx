@@ -24,6 +24,7 @@ export function MediaList({
     >
       {images.map((image) => (
         <ViewImage
+          key={image.file_path}
           src={image.file_path}
           mediaType="show"
           mediaOrientation={mediaOrientation}
