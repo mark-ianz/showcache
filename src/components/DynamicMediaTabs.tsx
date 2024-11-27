@@ -53,7 +53,7 @@ export default function DynamicMediaTabs({ tabs, view_all_link }: Props) {
                     >
                       <Button
                         variant={"ghost"}
-                        className="p-0 hover:bg-inherit text-muted-foreground focus-visible:ring-0"
+                        className="p-0 hover:bg-inherit text-muted-foreground focus-visible:ring-0 max-md:text-xs"
                       >
                         {tab.tab_title}
                       </Button>
@@ -64,7 +64,7 @@ export default function DynamicMediaTabs({ tabs, view_all_link }: Props) {
                 <Button
                   asChild
                   variant={"ghost"}
-                  className="p-0 hover:bg-inherit text-muted-foreground focus-visible:ring-0"
+                  className="p-0 hover:bg-inherit text-muted-foreground focus-visible:ring-0 max-md:text-xs"
                 >
                   <Link to={view_all_link}>View All Media</Link>
                 </Button>
