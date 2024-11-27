@@ -27,7 +27,7 @@ function Genres({
 }): JSX.Element {
   const genre_ids = mergeGenreIds(collection.parts);
   const genres = getGenre(genre_ids);
-  return <p>{genres.join(" / ")}</p>;
+  return <p className="text-muted-foreground max-md:text-xs">{genres.join(" / ")}</p>;
 }
 
 export default function ViewCollection() {
@@ -90,7 +90,7 @@ export default function ViewCollection() {
               <ViewImage src={collection.poster_path}>
                 <ShowPoster poster_path={collection.poster_path} />
               </ViewImage>
-              <div className="flex flex-col justify-center gap-2">
+              <div className="flex flex-col justify-center gap-2 max-md:text-sm">
                 <div>
                   <HeaderText>{collection.name}</HeaderText>
                   <Genres collection={collection} />
