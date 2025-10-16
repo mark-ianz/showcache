@@ -1,50 +1,66 @@
-# React + TypeScript + Vite
+# ShowCache
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal React project for browsing **movies, TV shows, people, and collections** using the [TMDB API](https://www.themoviedb.org/). Fully responsive and built to master frontend development skills, including **React**, **Tailwind CSS**, and **Shadcn UI components**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Demo
 
-## Expanding the ESLint configuration
+The project is deployed on Netlify: [https://showcache.netlify.app/](https://showcache.netlify.app/)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## Features
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- Browse movies, TV shows, people, and collections
+- Fully responsive UI for mobile and desktop
+- Search functionality
+- Detail pages with additional information
+- Smooth navigation with React Router
+- UI components powered by **Shadcn** and **Radix UI**
+- State management and API caching with **TanStack Query**
+- Interactive carousels using `embla-carousel-react`
+- Utility-first styling with **Tailwind CSS** and animations
+
+---
+
+## Tech Stack
+
+**Frontend:**
+
+- React 18  
+- TypeScript  
+- Tailwind CSS + Tailwind Animations  
+- Shadcn UI components & Radix UI  
+- TanStack Query for data fetching & caching  
+- Axios for API requests  
+- React Router DOM  
+- Date formatting with date-fns  
+- Carousel with embla-carousel-react  
+- Icons via lucide-react  
+
+**Dev Tools:**
+
+- Vite  
+- ESLint  
+- PostCSS + Autoprefixer  
+- TypeScript  
+
+---
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mark-ianz/showcache.git
+
+2. Install dependencies:
+   ```bash
+   npm install
+
+3. Run the development server:
+  ```bash
+  npm run dev
+
 ```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+The app will be available at http://localhost:5173.
