@@ -54,6 +54,21 @@ The project is deployed on Netlify: [https://showcache.netlify.app/](https://sho
 
 ---
 
+## Environment Variables
+
+This project requires the following environment variables. Create a `.env` file in the root directory and add your keys:
+ ```bash
+   # Exchange Rate API Key
+   VITE_EXCHANGE_RATE_API_KEY=your_exchange_rate_api_key_here
+   # Get your API key from: https://www.exchangerate-api.com/
+   
+   # TMDB Access Token
+   VITE_TMDB_ACCESS_TOKEN_AUTH=your_tmdb_access_token_here
+   # Get your API key from: https://www.themoviedb.org/settings/api
+```
+
+---
+
 ## Installation
 
 1. Clone the repository:
@@ -69,3 +84,4 @@ The project is deployed on Netlify: [https://showcache.netlify.app/](https://sho
      npm run dev
      
 The app will be available at http://localhost:5173.
+
