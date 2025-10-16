@@ -72,16 +72,15 @@ This project requires the following environment variables. Create a `.env` file 
 ## Installation
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/mark-ianz/showcache.git
-
+ ```bash
+ git clone https://github.com/mark-ianz/showcache.git
+ ```
 2. Install dependencies:
-   ```bash
-   npm install
-
+ ```bash
+ npm install
+ ```
 3. Run the development server:
-     ```bash
-     npm run dev
-     
+ ```bash
+ npm run dev
+ ```    
 The app will be available at http://localhost:5173.
-
