@@ -12,7 +12,7 @@ The project is deployed on Netlify: [https://showcache.netlify.app/](https://sho
 
 ## UI Preview
 
-![ShowCache Mockup](images/mockup.png)
+![ShowCache Mockup](mockup.png)
 
 ---
 
