@@ -10,6 +10,12 @@ The project is deployed on Netlify: [https://showcache.netlify.app/](https://sho
 
 ---
 
+## UI Preview
+
+![ShowCache Mockup](images/mockup.png)
+
+---
+
 ## Features
 
 - Browse movies, TV shows, people, and collections
@@ -52,12 +58,10 @@ The project is deployed on Netlify: [https://showcache.netlify.app/](https://sho
 
 1. Clone the repository:
    ```bash
-   
    git clone https://github.com/mark-ianz/showcache.git
 
 2. Install dependencies:
    ```bash
-   
    npm install
 
 3. Run the development server:
