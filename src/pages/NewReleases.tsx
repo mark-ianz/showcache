@@ -21,6 +21,7 @@ export default function NewReleases() {
         error={error}
         loading={isLoading}
         title="New Releases"
+        subtitle="Freshly added to the database"
       />
     </ListMainWrapper>
   );

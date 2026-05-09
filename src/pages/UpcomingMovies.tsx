@@ -21,6 +21,7 @@ export default function UpcomingMovies() {
         error={error}
         loading={isLoading}
         title="Upcoming Movies"
+        subtitle="Anticipated releases coming soon"
       />
     </ListMainWrapper>
   );

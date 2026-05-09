@@ -10,6 +10,7 @@ type ShowSectionProps = {
   showArray: Movie[] | TV[] | undefined;
   title?: string;
   subtitle?: string;
+  exploreLink?: string;
   isTv?: boolean;
   error: Error | null;
   loading: boolean;
@@ -19,10 +20,12 @@ export default function ShowSection({
   showArray,
   title,
   subtitle,
+  exploreLink,
   isTv,
   error,
   loading,
 }: ShowSectionProps) {
+
   if (error) return <ErrorComponent error={error}/>
 
   return (
@@ -39,13 +42,16 @@ export default function ShowSection({
               </p>
             )}
           </div>
-          <Link 
-            to={`/${isTv ? "tv" : "movie"}`} 
-            className="text-primary hover:underline text-sm font-bold flex items-center gap-1 transition-all"
-          >
-            Explore All <span className="text-lg leading-none">›</span>
-          </Link>
+          {exploreLink && (
+            <Link 
+              to={exploreLink} 
+              className="text-primary hover:underline text-sm font-bold flex items-center gap-1 transition-all"
+            >
+              Explore All <span className="text-lg leading-none">›</span>
+            </Link>
+          )}
         </div>
+
       )}
 
 

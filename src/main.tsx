@@ -23,6 +23,8 @@ import About from "./pages/About.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
 import PageNotFound from "./pages/PageNotFound.tsx";
 import ViewShowMedia from "./pages/ViewShowMedia.tsx";
+import Trending from "./pages/Trending.tsx";
+import Movies from "./pages/Movies.tsx";
 
 const queryClient = new QueryClient();
 
@@ -41,9 +43,22 @@ const router = createBrowserRouter([
         element: <LandingPage />,
       },
       {
+        path: "/trending",
+        element: <Trending />,
+      },
+      {
+        path: "/movie",
+        element: <Movies />,
+      },
+      {
+        path: "/movies",
+        element: <Movies />,
+      },
+      {
         path: "top_rated",
         element: <TopRated />,
       },
+
       {
         path: "/popular",
         element: <Popular />,

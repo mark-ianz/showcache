@@ -2,27 +2,26 @@ import { useLanguage } from "@/context/language-provider";
 import ListMainWrapper from "@/components/ListMainWrapper";
 import ShowSection from "@/components/show/ShowSection";
 import useShows from "@/hooks/useShows";
-import { getTv } from "@/api/tv.service";
+import { getTrendingThisWeek } from "@/api/movies.service";
 
-export default function Tv() {
+export default function Trending() {
   const {
     language: { iso_639_1: language },
   } = useLanguage();
 
   const { data, error, isLoading } = useShows({
-    queryKey: ["tv", language],
-    queryFn: getTv,
+    queryKey: ["trending_movies", language],
+    queryFn: getTrendingThisWeek,
   });
 
   return (
     <ListMainWrapper>
       <ShowSection
-        showArray={data}
         error={error}
         loading={isLoading}
-        title="TV Shows"
-        subtitle="Popular series and binge-worthy dramas"
-        isTv
+        showArray={data}
+        title="Trending Now"
+        subtitle="Most viewed titles in the last 24 hours"
       />
     </ListMainWrapper>
   );
