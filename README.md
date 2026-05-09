@@ -10,6 +10,19 @@ The project is deployed on Netlify: [https://showcache.netlify.app/](https://sho
 
 ---
 
+## Documentation
+
+For more detailed information about the project, check out the following documentation:
+
+- [**Introduction**](docs/introduction.md) - Project overview and mission.
+- [**Getting Started**](docs/getting-started.md) - Setup, installation, and environment configuration.
+- [**Architecture**](docs/architecture.md) - Tech stack, project structure, and data flow.
+- [**Components**](docs/components.md) - UI library and custom cinematic components.
+- [**API Integration**](docs/api-integration.md) - TMDB API details and state management.
+- [**Roadmap**](docs/roadmap.md) - Future features and development goals.
+
+---
+
 ## UI Preview
 
 ![ShowCache Mockup](ShowCache.png)
