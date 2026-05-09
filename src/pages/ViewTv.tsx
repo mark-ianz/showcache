@@ -8,7 +8,7 @@ import Casts from "@/components/show/Casts";
 import Recommendations from "@/components/show/Recommendations";
 import ViewShowLayout from "@/components/show/ViewShowLayout";
 import ShowMedia from "@/components/show/ShowMedia";
-import LoadingAnimation from "@/components/LoadingAnimation";
+import ShowDetailSkeleton from "@/components/show/ShowDetailSkeleton";
 import ErrorComponent from "@/components/ErrorComponent";
 
 export default function ViewTv() {
@@ -24,7 +24,8 @@ export default function ViewTv() {
     refetchOnWindowFocus: false,
   });
 
-  if (isLoading) return <LoadingAnimation />;
+  if (isLoading) return <ShowDetailSkeleton />;
+
   if (error) return <ErrorComponent error={error} />;
 
   return (

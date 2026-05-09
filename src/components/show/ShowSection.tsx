@@ -1,6 +1,5 @@
 import ErrorComponent from "../ErrorComponent";
-import HeaderText from "../HeaderText";
-import LoadingAnimation from "../LoadingAnimation";
+import ShowCardSkeleton from "./ShowCardSkeleton";
 import ShowCard from "./ShowCard";
 import ShowListWrapper from "./ShowListWrapper";
 import { Movie, TV } from "@/types/show";
@@ -55,25 +54,35 @@ export default function ShowSection({
       )}
 
 
-      {loading && <LoadingAnimation />}
-      {showArray && (
+      {loading ? (
         <ShowListWrapper>
-          {showArray.length === 0 && <p>No result found</p>}
-          {showArray?.map((show) => (
-            <li key={show.id}>
-              <ShowCard
-                path={`/${isTv ? "tv" : "movie"}/${show.id}`}
-                genre_ids={show.genre_ids}
-                vote_average={show.vote_average}
-                name={isTv ? (show as TV).name : (show as Movie).title}
-                image_path={show.poster_path}
-                release_date={isTv ? (show as TV).first_air_date : (show as Movie).release_date}
-              />
-
+          {Array.from({ length: 12 }).map((_, i) => (
+            <li key={i}>
+              <ShowCardSkeleton />
             </li>
           ))}
         </ShowListWrapper>
+      ) : (
+        showArray && (
+          <ShowListWrapper>
+            {showArray.length === 0 && <p>No result found</p>}
+            {showArray?.map((show) => (
+              <li key={show.id}>
+                <ShowCard
+                  path={`/${isTv ? "tv" : "movie"}/${show.id}`}
+                  genre_ids={show.genre_ids}
+                  vote_average={show.vote_average}
+                  name={isTv ? (show as TV).name : (show as Movie).title}
+                  image_path={show.poster_path}
+                  release_date={isTv ? (show as TV).first_air_date : (show as Movie).release_date}
+                />
+
+              </li>
+            ))}
+          </ShowListWrapper>
+        )
       )}
     </section>
   );
 }
+

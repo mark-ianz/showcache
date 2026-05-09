@@ -7,7 +7,7 @@ import Casts from "@/components/show/Casts";
 import Recommendations from "@/components/show/Recommendations";
 import ViewShowLayout from "@/components/show/ViewShowLayout";
 import ShowMedia from "@/components/show/ShowMedia";
-import LoadingAnimation from "@/components/LoadingAnimation";
+import ShowDetailSkeleton from "@/components/show/ShowDetailSkeleton";
 import ShowDetails from "@/components/show/ShowDetails";
 import BelongsToCollection from "@/components/show/BelongsToCollection";
 import ErrorComponent from "@/components/ErrorComponent";
@@ -25,7 +25,8 @@ export default function ViewMovie() {
     refetchOnWindowFocus: false,
   });
 
-  if (isLoading) return <LoadingAnimation />;
+  if (isLoading) return <ShowDetailSkeleton />;
+
   if (error) return <ErrorComponent error={error} />;
   return (
     data && (

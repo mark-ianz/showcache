@@ -6,7 +6,7 @@ import ShowCard from "../show/ShowCard";
 import ScrollableSection from "../ScrollableSection";
 import { cn } from "@/lib/utils";
 import HeaderText from "../HeaderText";
-import LoadingAnimation from "../LoadingAnimation";
+import { Skeleton } from "../ui/skeleton";
 import ErrorComponent from "../ErrorComponent";
 
 type Props = { id: number };
@@ -23,7 +23,17 @@ export default function KnownFor({ id }: Props) {
   });
 
   if (error) return <ErrorComponent error={error} />;
-  if (isLoading) return <LoadingAnimation />;
+  if (isLoading) return (
+    <div className="space-y-4 mt-6">
+      <Skeleton className="h-8 w-32" />
+      <div className="flex gap-4 overflow-hidden">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <Skeleton key={i} className="h-48 w-32 flex-shrink-0" />
+        ))}
+      </div>
+    </div>
+  );
+
   return (
     data !== undefined &&
     data?.length > 0 && (

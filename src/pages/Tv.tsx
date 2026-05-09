@@ -5,7 +5,8 @@ import ShowSection from "@/components/show/ShowSection";
 import { useInfiniteShows } from "@/hooks/useShows";
 import { getTv } from "@/api/tv.service";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import LoadingAnimation from "@/components/LoadingAnimation";
+import ShowCardSkeleton from "@/components/show/ShowCardSkeleton";
+import ShowListWrapper from "@/components/show/ShowListWrapper";
 
 export default function Tv() {
   const {
@@ -45,8 +46,16 @@ export default function Tv() {
         isTv
       />
       {hasNextPage && (
-        <div ref={targetRef} className="py-8 flex justify-center">
-          {isFetchingNextPage && <LoadingAnimation />}
+        <div ref={targetRef} className="mt-8">
+          {isFetchingNextPage && (
+            <ShowListWrapper>
+              {Array.from({ length: 6 }).map((_, i) => (
+                <li key={i}>
+                  <ShowCardSkeleton />
+                </li>
+              ))}
+            </ShowListWrapper>
+          )}
         </div>
       )}
     </ListMainWrapper>

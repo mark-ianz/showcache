@@ -4,7 +4,7 @@ import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
 import { getCollectionDetails } from "@/api/movies.service";
 import { getImg } from "@/lib/helpers";
-import LoadingAnimation from "../LoadingAnimation";
+import { Skeleton } from "../ui/skeleton";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
 
@@ -28,7 +28,8 @@ export default function BelongsToCollection({ belongs_to_collection }: Props) {
   });
 
   if (error || (!isLoading && !collection)) return null;
-  if (isLoading) return <LoadingAnimation />;
+  if (isLoading) return <Skeleton className="w-full h-48 rounded-2xl" />;
+
 
   const moviesIncluded = collection?.parts.map((movie, index) => {
     if (index + 1 === collection.parts.length) {

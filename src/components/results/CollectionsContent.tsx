@@ -1,7 +1,7 @@
 import { searchCollection } from "@/api/movies.service";
 import { LanguageCode } from "@/types/language";
 import { useQuery } from "@tanstack/react-query";
-import LoadingAnimation from "../LoadingAnimation";
+import { Skeleton } from "../ui/skeleton";
 import { getImg } from "@/lib/helpers";
 import ErrorComponent from "../ErrorComponent";
 
@@ -22,7 +22,24 @@ export default function CollectionsContent({ query, language }: Props) {
   });
 
   if (error) return <ErrorComponent error={error} />;
-  if (isLoading) return <LoadingAnimation />;
+  if (isLoading) return (
+    <div className="flex flex-col gap-4">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <div key={i} className="flex border rounded-md shadow-sm">
+          <Skeleton className="w-32 h-48 rounded-l-md rounded-r-none" />
+          <div className="flex-1 p-4 space-y-4">
+            <Skeleton className="h-6 w-1/2" />
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-2/3" />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
   if (collections?.length === 0 || !collections) return <p>No result found</p>;
 
   return (

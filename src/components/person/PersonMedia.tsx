@@ -1,7 +1,7 @@
 import DynamicMediaTabs from "../DynamicMediaTabs";
 import { useQuery } from "@tanstack/react-query";
 import { getPersonImages, getPersonTaggedImages } from "@/api/credits.service";
-import LoadingAnimation from "../LoadingAnimation";
+import { Skeleton } from "../ui/skeleton";
 
 type Props = {
   id: number;
@@ -29,7 +29,13 @@ export default function PersonMedia({ id, name }: Props) {
     staleTime: 1000 * 60 * 5,
   });
 
-  if (tagged_images_isLoading || images_isLoading) return <LoadingAnimation />;
+  if (tagged_images_isLoading || images_isLoading) return (
+    <div className="space-y-4">
+      <Skeleton className="h-8 w-32" />
+      <Skeleton className="h-48 w-full rounded-xl" />
+    </div>
+  );
+
   if (tagged_images_error || images_error)
     return <p>There was a server error. Please try again later.</p>;
 

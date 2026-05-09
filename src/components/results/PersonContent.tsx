@@ -3,7 +3,7 @@ import { LanguageCode } from "@/types/language";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { getImg } from "@/lib/helpers";
-import LoadingAnimation from "../LoadingAnimation";
+import { Skeleton } from "../ui/skeleton";
 import ErrorComponent from "../ErrorComponent";
 
 type Props = {
@@ -19,7 +19,20 @@ export default function PersonContent({ query, language }: Props) {
   });
 
   if (error) return <ErrorComponent error={error} />;
-  if (isLoading) return <LoadingAnimation />;
+  if (isLoading) return (
+    <div className="flex flex-col gap-4">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <div key={i} className="flex gap-4">
+          <Skeleton className="w-32 h-32 aspect-square rounded-md" />
+          <div className="flex-1 space-y-2 py-2">
+            <Skeleton className="h-5 w-1/3" />
+            <Skeleton className="h-4 w-2/3" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
 
   return (
     <>

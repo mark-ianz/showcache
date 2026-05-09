@@ -13,6 +13,7 @@ const useData = ({ queryKey, queryFn }: useShowsProps) => {
 };
 
 import Hero from "@/components/show/Hero";
+import HeroSkeleton from "@/components/show/HeroSkeleton";
 
 export default function LandingPage() {
   const {
@@ -40,7 +41,11 @@ export default function LandingPage() {
 
   return (
     <ListMainWrapper>
-      <Hero movie={trending_this_week.data?.[0]} />
+      {trending_this_week.isLoading ? (
+        <HeroSkeleton />
+      ) : (
+        <Hero movie={trending_this_week.data?.[0]} />
+      )}
       
       <ShowSection
         showArray={trending_this_week.data}

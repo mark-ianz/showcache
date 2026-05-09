@@ -4,7 +4,6 @@ import {
 } from "@/api/movies.service";
 import ErrorComponent from "@/components/ErrorComponent";
 import HeaderText from "@/components/HeaderText";
-import LoadingAnimation from "@/components/LoadingAnimation";
 import ScrollableSection from "@/components/ScrollableSection";
 import CollectionMedia from "@/components/show/CollectionMedia";
 import Overview from "@/components/show/InfoSection/Overview";
@@ -29,6 +28,8 @@ function Genres({
   const genres = getGenre(genre_ids);
   return <p className="text-muted-foreground max-md:text-xs">{genres.join(" / ")}</p>;
 }
+
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ViewCollection() {
   const {
@@ -72,7 +73,20 @@ export default function ViewCollection() {
     enabled: !!collection,
   });
 
-  if (isLoading || isLoadingMovies) return <LoadingAnimation />;
+  if (isLoading || isLoadingMovies) return (
+    <div className="flex w-full flex-col gap-10">
+      <Skeleton className="w-full h-80 rounded-2xl" />
+      <div className="space-y-4">
+        <Skeleton className="h-8 w-32" />
+        <div className="flex gap-4 overflow-hidden">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <Skeleton key={i} className="h-48 w-32 flex-shrink-0" />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
 
   if (error || errorMovies)
     return <ErrorComponent error={error || errorMovies} />;

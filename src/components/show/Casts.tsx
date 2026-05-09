@@ -5,7 +5,7 @@ import { getCredits } from "@/api/credits.service";
 import { useLanguage } from "@/context/language-provider";
 import { useQuery } from "@tanstack/react-query";
 import { ShowType } from "@/types/show";
-import LoadingAnimation from "../LoadingAnimation";
+import { Skeleton } from "../ui/skeleton";
 import ErrorComponent from "../ErrorComponent";
 
 type Props = { id: string; type: ShowType };
@@ -21,7 +21,17 @@ export default function Casts({ id, type }: Props) {
   });
 
   if (error) return <ErrorComponent error={error} />;
-  if (isLoading || !credits) return <LoadingAnimation/>;
+  if (isLoading || !credits) return (
+    <div className="space-y-4">
+      <Skeleton className="h-8 w-20" />
+      <div className="flex gap-4 overflow-hidden">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <Skeleton key={i} className="h-48 w-32 flex-shrink-0" />
+        ))}
+      </div>
+    </div>
+  );
+
   const scrollItems: (Cast | Crew)[] =
     credits.cast.length > 14
       ? credits.cast.slice(0, 14)

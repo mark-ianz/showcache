@@ -3,7 +3,7 @@ import { getShowImages } from "@/api/show.service";
 import { useQuery } from "@tanstack/react-query";
 import { getShowType } from "@/lib/helpers";
 import { ShowFullDetails } from "@/types/show";
-import LoadingAnimation from "../LoadingAnimation";
+import { Skeleton } from "../ui/skeleton";
 import ErrorComponent from "../ErrorComponent";
 
 type Props = {
@@ -21,7 +21,13 @@ export default function ShowMedia({ show_data, show_title }: Props) {
   });
 
   if (error) return <ErrorComponent error={error} />;
-  if (isLoading) return <LoadingAnimation />;
+  if (isLoading) return (
+    <div className="space-y-4">
+      <Skeleton className="h-8 w-40" />
+      <Skeleton className="h-64 w-full rounded-xl" />
+    </div>
+  );
+
 
   return (
     data && (
