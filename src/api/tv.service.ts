@@ -10,7 +10,7 @@ export async function getTv({ queryKey }: QueryFunctionContext): Promise<TV[]> {
     `https://api.themoviedb.org/3/tv/${sort}`,
     axios_config({ method: "GET", params: { language, page } })
   );
-  return data.results;
+  return data.results || [];
 }
 
 export async function getTvFullDetails({

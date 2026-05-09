@@ -18,7 +18,7 @@ export async function getPopularMovies({
         method: "GET",
       })
     );
-    return data.results;
+    return data.results || [];
   } catch (error) {
     throw new Error("Failed to fetch popular movies");
   }
@@ -36,7 +36,7 @@ export async function getTrendingThisWeek({
       })
     );
 
-    return data.results;
+    return data.results || [];
   } catch (error: unknown) {
     throwFetchError(error);
   }
@@ -53,7 +53,7 @@ export async function getNewReleases({
       method: "GET",
     })
   );
-  return data.results;
+  return data.results || [];
 }
 
 export async function getUpcomingMovies({
@@ -64,10 +64,10 @@ export async function getUpcomingMovies({
     `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&sort_by=popularity.desc&language=${language}&page=${page}`,
     axios_config({
       method: "GET",
-      params: { "primary_release_date.gte": new Date() },
+    params: { "primary_release_date.gte": new Date().toISOString().split("T")[0] },
     })
   );
-  return data.results;
+  return data.results || [];
 }
 
 export async function getTopRated({
@@ -78,7 +78,7 @@ export async function getTopRated({
     `https://api.themoviedb.org/3/movie/top_rated?language=${language}&page=${page}`,
     axios_config({ method: "GET" })
   );
-  return data.results;
+  return data.results || [];
 }
 
 export async function getMovieFullDetails({
@@ -111,7 +111,7 @@ export async function searchCollection ({
     `https://api.themoviedb.org/3/search/collection`,
     axios_config({ method: "GET", params: { include_adult: false, query, language, page } })
   );
-  return data.results;
+  return data.results || [];
 }
 
 export async function getCollectionImages({

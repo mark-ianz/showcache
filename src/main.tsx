@@ -7,24 +7,24 @@ import { ThemeProvider } from "./theme-provider.tsx";
 import LandingPage from "./pages/LandingPage.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LanguageProvider } from "./context/language-provider.tsx";
-import TopRated from "./pages/TopRated.tsx";
-import Popular from "./pages/PopularMovies.tsx";
-import New from "./pages/NewReleases.tsx";
-import Tv from "./pages/Tv.tsx";
-import Upcoming from "./pages/UpcomingMovies.tsx";
-import Results from "./pages/Results.tsx";
-import ViewShow from "./pages/ViewMovie.tsx";
-import ViewTv from "./pages/ViewTv.tsx";
-import ViewPerson from "./pages/ViewPerson.tsx";
-import ViewPersonMedia from "./pages/ViewPersonMedia.tsx";
-import ViewCollection from "./pages/ViewCollection.tsx";
-import Contact from "./pages/Contact.tsx";
-import About from "./pages/About.tsx";
-import PrivacyPolicy from "./pages/PrivacyPolicy.tsx";
+import TopRatedPage from "./pages/TopRated.tsx";
+import PopularMoviesPage from "./pages/PopularMovies.tsx";
+import NewReleasesPage from "./pages/NewReleases.tsx";
+import TvShowsPage from "./pages/Tv.tsx";
+import UpcomingMoviesPage from "./pages/UpcomingMovies.tsx";
+import ResultsPage from "./pages/Results.tsx";
+import ViewMoviePage from "./pages/ViewMovie.tsx";
+import ViewTvPage from "./pages/ViewTv.tsx";
+import ViewPersonPage from "./pages/ViewPerson.tsx";
+import ViewPersonMediaPage from "./pages/ViewPersonMedia.tsx";
+import ViewCollectionPage from "./pages/ViewCollection.tsx";
+import ContactPage from "./pages/Contact.tsx";
+import AboutPage from "./pages/About.tsx";
+import PrivacyPolicyPage from "./pages/PrivacyPolicy.tsx";
 import PageNotFound from "./pages/PageNotFound.tsx";
-import ViewShowMedia from "./pages/ViewShowMedia.tsx";
-import Trending from "./pages/Trending.tsx";
-import Movies from "./pages/Movies.tsx";
+import ViewShowMediaPage from "./pages/ViewShowMedia.tsx";
+import TrendingPage from "./pages/Trending.tsx";
+import AllMoviesPage from "./pages/Movies.tsx";
 
 const queryClient = new QueryClient();
 
@@ -44,76 +44,79 @@ const router = createBrowserRouter([
       },
       {
         path: "/trending",
-        element: <Trending />,
-      },
-      {
-        path: "/movie",
-        element: <Movies />,
+        element: <TrendingPage />,
       },
       {
         path: "/movies",
-        element: <Movies />,
+        element: <AllMoviesPage />,
       },
       {
-        path: "top_rated",
-        element: <TopRated />,
+        path: "/movie",
+        element: <AllMoviesPage />,
       },
-
+      {
+        path: "/top_rated",
+        element: <TopRatedPage />,
+      },
       {
         path: "/popular",
-        element: <Popular />,
+        element: <PopularMoviesPage />,
       },
       {
         path: "/new",
-        element: <New />,
+        element: <NewReleasesPage />,
       },
       {
         path: "/tv",
-        element: <Tv />,
+        element: <TvShowsPage />,
       },
       {
         path: "/upcoming",
-        element: <Upcoming />,
+        element: <UpcomingMoviesPage />,
       },
       {
         path: "/results",
-        element: <Results />,
+        element: <ResultsPage />,
       },
       {
         path: "/movie/:id",
-        element: <ViewShow />,
+        element: <ViewMoviePage />,
       },
       {
         path: "/tv/:id",
-        element: <ViewTv />,
+        element: <ViewTvPage />,
       },
       {
         path: "/person/:id",
-        element: <ViewPerson />,
+        element: <ViewPersonPage />,
       },
       {
         path: "/collection/:id",
-        element: <ViewCollection />,
+        element: <ViewCollectionPage />,
       },
       {
         path: "/contact",
-        element: <Contact />,
+        element: <ContactPage />,
       },
       {
         path: "/about",
-        element: <About />,
+        element: <AboutPage />,
       },
       {
         path: "/privacy",
-        element: <PrivacyPolicy />,
+        element: <PrivacyPolicyPage />,
       },
       {
         path: "/media/person/:id/:name",
-        element: <ViewPersonMedia />,
+        element: <ViewPersonMediaPage />,
       },
       {
         path: "/media/:type/:id/:title",
-        element: <ViewShowMedia />,
+        element: <ViewShowMediaPage />,
+      },
+      {
+        path: "*",
+        element: <PageNotFound />,
       },
     ],
   },

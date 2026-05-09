@@ -63,7 +63,7 @@ export default function ShowSection({
           ))}
         </ShowListWrapper>
       ) : (
-        showArray && (
+        Array.isArray(showArray) && (
           <ShowListWrapper>
             {showArray.length === 0 && <p>No result found</p>}
             {showArray?.map((show) => (

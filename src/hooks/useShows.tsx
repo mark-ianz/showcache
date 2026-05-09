@@ -23,7 +23,12 @@ export default function useShows({
     staleTime: 1000 * 60 * 5,
   });
 
-  return { data, isError, isLoading, error };
+  return { 
+    data: Array.isArray(data) ? data : undefined, 
+    isError, 
+    isLoading, 
+    error 
+  };
 }
 
 export function useInfiniteShows({
@@ -48,11 +53,12 @@ export function useInfiniteShows({
     },
     staleTime: 1000 * 60 * 5,
   });
-
-  const flattenedData = data?.pages.flat() as (Movie | TV)[];
+  const flattenedData = Array.isArray(data?.pages) 
+    ? data.pages.flat() 
+    : [];
 
   return {
-    data: flattenedData,
+    data: flattenedData as (Movie | TV)[],
     error,
     fetchNextPage,
     hasNextPage,
