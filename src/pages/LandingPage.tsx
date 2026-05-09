@@ -46,28 +46,31 @@ export default function LandingPage() {
         showArray={trending_this_week.data}
         error={trending_this_week.error}
         loading={trending_this_week.isLoading}
-        title="Trending This Week"
+        title="Trending Now"
+        subtitle="Most viewed titles in the last 24 hours"
       />
       <ShowSection
         showArray={new_releases.data}
         error={new_releases.error}
         loading={new_releases.isLoading}
         title="New Releases"
+        subtitle="Freshly added to the database"
       />
       <ShowSection
         showArray={upcoming_movies.data}
         error={upcoming_movies.error}
         loading={upcoming_movies.isLoading}
         title="Upcoming Movies"
+        subtitle="Anticipated releases coming soon"
       />
       <ShowSection
         showArray={tv.data}
         error={tv.error}
         loading={tv.isLoading}
         title="TV Shows"
+        subtitle="Popular series and binge-worthy dramas"
         isTv
       />
     </ListMainWrapper>
   );
 }
-

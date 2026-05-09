@@ -4,10 +4,12 @@ import LoadingAnimation from "../LoadingAnimation";
 import ShowCard from "./ShowCard";
 import ShowListWrapper from "./ShowListWrapper";
 import { Movie, TV } from "@/types/show";
+import { Link } from "react-router-dom";
 
 type ShowSectionProps = {
   showArray: Movie[] | TV[] | undefined;
   title?: string;
+  subtitle?: string;
   isTv?: boolean;
   error: Error | null;
   loading: boolean;
@@ -16,6 +18,7 @@ type ShowSectionProps = {
 export default function ShowSection({
   showArray,
   title,
+  subtitle,
   isTv,
   error,
   loading,
@@ -23,15 +26,28 @@ export default function ShowSection({
   if (error) return <ErrorComponent error={error}/>
 
   return (
-    <section className="mb-12">
+    <section className="mb-16">
       {title && (
-        <div className="flex items-center gap-3 mb-6">
-          <div className="h-6 w-1 bg-primary rounded-full" />
-          <h2 className="text-xl font-bold tracking-tight text-foreground">
-            {title}
-          </h2>
+        <div className="flex items-end justify-between mb-8 border-b border-border/40 pb-4">
+          <div className="flex flex-col gap-1">
+            <h2 className="text-3xl font-bold tracking-tight text-foreground">
+              {title}
+            </h2>
+            {subtitle && (
+              <p className="text-muted-foreground text-sm font-medium">
+                {subtitle}
+              </p>
+            )}
+          </div>
+          <Link 
+            to={`/${isTv ? "tv" : "movie"}`} 
+            className="text-primary hover:underline text-sm font-bold flex items-center gap-1 transition-all"
+          >
+            Explore All <span className="text-lg leading-none">›</span>
+          </Link>
         </div>
       )}
+
 
       {loading && <LoadingAnimation />}
       {showArray && (
@@ -45,7 +61,9 @@ export default function ShowSection({
                 vote_average={show.vote_average}
                 name={isTv ? (show as TV).name : (show as Movie).title}
                 image_path={show.poster_path}
+                release_date={isTv ? (show as TV).first_air_date : (show as Movie).release_date}
               />
+
             </li>
           ))}
         </ShowListWrapper>
