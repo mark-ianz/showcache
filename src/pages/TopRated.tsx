@@ -1,27 +1,53 @@
+import { useEffect } from "react";
 import { useLanguage } from "@/context/language-provider";
 import ListMainWrapper from "@/components/ListMainWrapper";
 import ShowSection from "@/components/show/ShowSection";
-import useShows from "@/hooks/useShows";
+import { useInfiniteShows } from "@/hooks/useShows";
 import { getTopRated } from "@/api/movies.service";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import LoadingAnimation from "@/components/LoadingAnimation";
 
 export default function TopRated() {
   const {
     language: { iso_639_1: language },
   } = useLanguage();
 
-  const { data, error, isLoading } = useShows({
-    queryKey: ["top_rated", language],
+  const { 
+    data, 
+    error, 
+    isLoading, 
+    fetchNextPage, 
+    hasNextPage, 
+    isFetchingNextPage 
+  } = useInfiniteShows({
+    queryKey: ["top_rated_movies", language],
     queryFn: getTopRated,
   });
+
+  const { targetRef, isIntersecting } = useIntersectionObserver({
+    enabled: hasNextPage && !isFetchingNextPage,
+  });
+
+  useEffect(() => {
+    if (isIntersecting && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [isIntersecting, hasNextPage, fetchNextPage]);
 
   return (
     <ListMainWrapper>
       <ShowSection
-        showArray={data}
         error={error}
         loading={isLoading}
-        title="Top Rated"
+        showArray={data}
+        title="Top Rated Movies"
+        subtitle="Highest rated films of all time"
       />
+      {hasNextPage && (
+        <div ref={targetRef} className="py-8 flex justify-center">
+          {isFetchingNextPage && <LoadingAnimation />}
+        </div>
+      )}
     </ListMainWrapper>
   );
 }

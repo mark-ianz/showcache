@@ -27,10 +27,10 @@ export async function getPopularMovies({
 export async function getTrendingThisWeek({
   queryKey,
 }: QueryFunctionContext): Promise<Movie[]> {
-  const [_key, language] = queryKey;
+  const [_key, language, page = 1] = queryKey;
   try {
     const { data } = await axios.get<API_Result>(
-      `https://api.themoviedb.org/3/trending/movie/week?language=${language}`,
+      `https://api.themoviedb.org/3/trending/movie/week?language=${language}&page=${page}`,
       axios_config({
         method: "GET",
       })
@@ -41,6 +41,7 @@ export async function getTrendingThisWeek({
     throwFetchError(error);
   }
 }
+
 
 export async function getNewReleases({
   queryKey,
