@@ -23,12 +23,16 @@ export default function ShowSection({
   if (error) return <ErrorComponent error={error}/>
 
   return (
-    <section>
+    <section className="mb-12">
       {title && (
-        <HeaderText className="font-normal mb-2 text-2xl max-md:text-xl">
-          {title}
-        </HeaderText>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="h-6 w-1 bg-primary rounded-full" />
+          <h2 className="text-xl font-bold tracking-tight text-foreground">
+            {title}
+          </h2>
+        </div>
       )}
+
       {loading && <LoadingAnimation />}
       {showArray && (
         <ShowListWrapper>

@@ -7,16 +7,19 @@ import ScrollToTopButton from "./components/ScrollToTopButton";
 
 export default function Layout({ children }: { children?: ReactNode }) {
   return (
-    <div className="wrapper py-4 px-40 flex flex-col items-center justify-center max-2xl:px-[8vw] max-lg:px-[4vw]">
-      <>
-        <Header />
+    <div className="min-h-screen bg-background font-sans antialiased">
+      <Header />
+      <div className="max-w-[1280px] mx-auto px-6 py-8">
         <Nav />
-        <Outlet />
-        <ScrollRestoration />
-        {children}
-        <ScrollToTopButton/>
-        <Footer />
-      </>
+        <main>
+          <Outlet />
+          {children}
+        </main>
+      </div>
+      <ScrollRestoration />
+      <ScrollToTopButton />
+      <Footer />
     </div>
   );
 }
+

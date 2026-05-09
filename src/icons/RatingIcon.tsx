@@ -1,7 +1,11 @@
 import { StarFilledIcon } from "@radix-ui/react-icons";
 
-const RatingIcon = ({ color }: { color?: string }) => {
-  return <StarFilledIcon color={color || "#3b82f6"} className="max-sm:w-3"/>;
+import { cn } from "@/lib/utils";
+import { ClassNameValue } from "tailwind-merge";
+
+const RatingIcon = ({ color, className }: { color?: string; className?: ClassNameValue }) => {
+  return <StarFilledIcon color={color} className={cn("max-sm:w-3", className)}/>;
 };
+
 
 export default RatingIcon;

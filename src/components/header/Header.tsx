@@ -1,22 +1,20 @@
 import Logo from "./Logo";
-import Menu from "./Menu";
 import Searchbar from "./Searchbar";
+
 
 export default function Header() {
   return (
-    <>
-      <header className="flex flex-col w-full max-md:pb-5">
-        <div className="flex items-center justify-between w-full mb-4">
-          <Logo />
-          <div className="flex grow gap-4 items-center justify-end">
-            <Searchbar className="max-md:hidden" />
-            <Menu />
-          </div>
+    <header className="glass-header h-16 flex items-center">
+      <div className="max-w-[1280px] mx-auto w-full px-6 flex items-center justify-between gap-8">
+        <Logo className="shrink-0" />
+        <div className="flex-1 max-w-xl">
+          <Searchbar />
         </div>
-        <div className="grow hidden max-md:flex">
-          <Searchbar className="ml-0 max-w-none"/>
+        <div className="hidden md:flex items-center gap-6 text-sm font-medium">
+          {/* Main category links could also go here if preferred */}
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   );
 }
+

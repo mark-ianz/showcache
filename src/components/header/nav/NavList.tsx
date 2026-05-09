@@ -8,7 +8,7 @@ type Props = {
 
 export default function NavList({ className }: Props) {
   return (
-    <ol className={cn("flex justify-around", className)}>
+    <ol className={cn("flex justify-center items-center gap-2", className)}>
       <NavLinks />
     </ol>
   );

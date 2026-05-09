@@ -12,6 +12,8 @@ const useData = ({ queryKey, queryFn }: useShowsProps) => {
   });
 };
 
+import Hero from "@/components/show/Hero";
+
 export default function LandingPage() {
   const {
     language: { iso_639_1: language },
@@ -38,6 +40,8 @@ export default function LandingPage() {
 
   return (
     <ListMainWrapper>
+      <Hero movie={trending_this_week.data?.[0]} />
+      
       <ShowSection
         showArray={trending_this_week.data}
         error={trending_this_week.error}
@@ -66,3 +70,4 @@ export default function LandingPage() {
     </ListMainWrapper>
   );
 }
+

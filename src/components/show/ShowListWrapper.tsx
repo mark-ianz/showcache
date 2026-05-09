@@ -1,9 +1,8 @@
-import { ReactNode } from "react";
-
 export default function ShowListWrapper({ children }: { children: ReactNode }) {
   return (
-    <ul className="grid gap-4 grid-cols-5 max-xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2">
+    <ul className="grid gap-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
       {children}
     </ul>
   );
 }
+

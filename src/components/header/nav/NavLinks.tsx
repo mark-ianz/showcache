@@ -7,10 +7,13 @@ export default function NavLinks() {
     <Button
       key={index + name}
       asChild
-      variant={"link"}
-      className="cursor-pointer text-md max-lg:text-sm max-sm:text-xs"
+      variant="ghost"
+      className="cursor-pointer text-sm font-medium hover:text-primary transition-colors px-4"
     >
-      <NavLink to={path}>{name}</NavLink>
+      <NavLink to={path} className={({ isActive }) => (isActive ? "active" : "")}>
+        {name}
+      </NavLink>
     </Button>
+
   ));
 }

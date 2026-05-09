@@ -1,9 +1,8 @@
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { Badge } from "../ui/badge";
 import Rating from "../Rating";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { getGenre, getImg } from "@/lib/helpers";
 import { Link } from "react-router-dom";
+
 
 type ShowCardProps = {
   name: string;
@@ -23,37 +22,36 @@ export default function ShowCard({
   const genre_list = getGenre(genre_ids);
 
   return (
-    <Link to={path}>
-      <Card className="cursor-pointer w-full h-full flex flex-col">
-        <AspectRatio ratio={2 / 3}>
+    <Link to={path} className="group block h-full">
+      <div className="saas-card overflow-hidden rounded-lg h-full flex flex-col">
+        <AspectRatio ratio={2 / 3} className="overflow-hidden">
           <img
-            src={getImg({path: image_path, size: "w780", mediaType: "show"})}
+            src={getImg({ path: image_path, size: "w780", mediaType: "show" })}
             alt={`Poster image of ${name}`}
-            className="w-full h-full object-cover rounded-t-xl object-center"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
           />
         </AspectRatio>
-        <CardContent className="p-2 flex flex-col justify-between flex-grow gap-2">
-          <div className="flex items-center justify-between gap-2">
-            <CardTitle className="font-semibold text-sm max-sm:text-xs line-clamp-2 hover:underline">
-              {name}
-            </CardTitle>
+        <div className="p-3 flex flex-col gap-1.5 flex-grow">
+          <h3 className="font-semibold text-sm line-clamp-1 group-hover:text-primary transition-colors">
+            {name}
+          </h3>
+          <div className="flex items-center justify-between mt-auto">
+            <div className="flex items-center gap-1.5">
+              {genre_list.slice(0, 1).map((genre, index) => (
+                <span
+                  key={index}
+                  className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold"
+                >
+                  {genre}
+                </span>
+              ))}
+            </div>
             <Rating rating={vote_average} />
           </div>
-          <div className="flex items-end gap-2 flex-wrap truncate max-sm:gap-1">
-            {genre_list.slice(0, 2).map((genre, index) => (
-              <Badge
-                key={genre.length + index + genre}
-                variant={"secondary"}
-                className="cursor-text text-gray-500 max-sm:text-2xs max-sm:px-1"
-                title={genre}
-              >
-                {genre}
-              </Badge>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </Link>
   );
 }
+
