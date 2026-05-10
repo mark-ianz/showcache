@@ -23,43 +23,72 @@ export const accountService = {
     return data;
   },
 
-  async markAsFavorite(
+  async addRating(
     accessToken: string,
     mediaType: "movie" | "tv",
     mediaId: number,
-    favorite: boolean
-  ): Promise<void> {
-    await axios.post(
-      `https://api.themoviedb.org/3/account/favorite`,
-      { media_type: mediaType, media_id: mediaId, favorite },
+    value: number
+  ): Promise<any> {
+    const { data } = await axios.post(
+      `https://api.themoviedb.org/3/${mediaType}/${mediaId}/rating`,
+      { value },
       axios_config({ 
         method: "POST",
         headers: { Authorization: `Bearer ${accessToken}` }
       })
     );
+    return data;
+  },
+
+  async markAsFavorite(
+    accessToken: string,
+    accountId: string,
+    mediaType: "movie" | "tv",
+    mediaId: number,
+    favorite: boolean
+  ): Promise<any> {
+    const { data } = await axios.post(
+      `https://api.themoviedb.org/3/account/${accountId}/favorite`,
+      {
+        media_type: mediaType,
+        media_id: mediaId,
+        favorite: favorite,
+      },
+      axios_config({ 
+        method: "POST",
+        headers: { Authorization: `Bearer ${accessToken}` }
+      })
+    );
+    return data;
   },
 
   async addToWatchlist(
     accessToken: string,
+    accountId: string,
     mediaType: "movie" | "tv",
     mediaId: number,
     watchlist: boolean
-  ): Promise<void> {
-    await axios.post(
-      `https://api.themoviedb.org/3/account/watchlist`,
-      { media_type: mediaType, media_id: mediaId, watchlist },
+  ): Promise<any> {
+    const { data } = await axios.post(
+      `https://api.themoviedb.org/3/account/${accountId}/watchlist`,
+      {
+        media_type: mediaType,
+        media_id: mediaId,
+        watchlist: watchlist,
+      },
       axios_config({ 
         method: "POST",
         headers: { Authorization: `Bearer ${accessToken}` }
       })
     );
+    return data;
   },
 
   async getAccountStates(
     accessToken: string,
     mediaType: "movie" | "tv",
     mediaId: number
-  ): Promise<{ favorite: boolean; watchlist: boolean }> {
+  ): Promise<any> {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/${mediaType}/${mediaId}/account_states`,
       axios_config({ 

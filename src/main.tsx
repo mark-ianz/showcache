@@ -7,6 +7,7 @@ import { ThemeProvider } from "./theme-provider.tsx";
 import LandingPage from "./pages/LandingPage.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LanguageProvider } from "./context/language-provider.tsx";
+import { TooltipProvider } from "./components/ui/tooltip";
 import ResultsPage from "./pages/Results.tsx";
 import ViewMoviePage from "./pages/ViewMovie.tsx";
 import ViewTvPage from "./pages/ViewTv.tsx";
@@ -148,7 +149,9 @@ createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-          <RouterProvider router={router} />
+          <TooltipProvider>
+            <RouterProvider router={router} />
+          </TooltipProvider>
         </ThemeProvider>
       </LanguageProvider>
     </QueryClientProvider>
