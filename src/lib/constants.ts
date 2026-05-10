@@ -27,7 +27,7 @@ export const nav_lists = [
     submenu: [
       { name: "Popular", path: "/movie/popular" },
       { name: "Now Playing", path: "/movie/now-playing" },
-      { name: "Upcoming", path: "/movie/upcoming" },
+      { name: "Upcoming ", path: "/movie/upcoming" },
       { name: "Top Rated", path: "/movie/top-rated" },
     ],
   },

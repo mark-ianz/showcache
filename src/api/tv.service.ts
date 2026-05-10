@@ -35,3 +35,17 @@ export async function getTvFullDetails({
 
   return data;
 }
+
+export async function getUpcomingTv({
+  queryKey,
+}: QueryFunctionContext): Promise<TV[]> {
+  const [_key, language, page = 1] = queryKey;
+  const { data } = await axios.get<API_Result>(
+    `https://api.themoviedb.org/3/discover/tv?include_adult=false&sort_by=popularity.desc&language=${language}&page=${page}`,
+    axios_config({
+      method: "GET",
+      params: { "first_air_date.gte": new Date().toISOString().split("T")[0] },
+    })
+  );
+  return data.results || [];
+}

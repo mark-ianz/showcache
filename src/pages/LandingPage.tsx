@@ -3,7 +3,7 @@ import useShows, { useShowsProps } from "@/hooks/useShows";
 import { useLanguage } from "@/context/language-provider";
 import ListMainWrapper from "@/components/ListMainWrapper";
 import { getNewReleases, getTrendingThisWeek, getUpcomingMovies } from "@/api/movies.service";
-import { getTv } from "@/api/tv.service";
+import { getTv, getUpcomingTv } from "@/api/tv.service";
 
 const useData = ({ queryKey, queryFn }: useShowsProps) => {
   return useShows({
@@ -38,6 +38,10 @@ export default function LandingPage() {
     queryKey: ["tv", language],
     queryFn: getTv,
   });
+  const upcoming_tv = useData({
+    queryKey: ["upcoming_tv", language],
+    queryFn: getUpcomingTv,
+  });
 
   return (
     <ListMainWrapper>
@@ -46,7 +50,7 @@ export default function LandingPage() {
       ) : (
         <Hero movie={trending_this_week.data?.[0]} />
       )}
-      
+
       <ShowSection
         showArray={trending_this_week.data}
         error={trending_this_week.error}
@@ -72,7 +76,17 @@ export default function LandingPage() {
         title="Upcoming Movies"
         subtitle="Anticipated releases coming soon"
         isCarousel
-        exploreLink="/upcoming"
+        exploreLink="/movie/upcoming"
+      />
+      <ShowSection
+        showArray={upcoming_tv.data}
+        error={upcoming_tv.error}
+        loading={upcoming_tv.isLoading}
+        title="Upcoming TV Shows"
+        subtitle="Highly anticipated series premieres"
+        isTv
+        isCarousel
+        exploreLink="/tv/upcoming"
       />
       <ShowSection
         showArray={tv.data}

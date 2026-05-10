@@ -76,15 +76,19 @@ export default function ShowSection({
             {showArray?.length === 0 && <p>No result found</p>}
             {showArray?.filter(Boolean).map((show) => {
               const Item = isCarousel ? CarouselItem : "li";
+              const type = show.media_type || (isTv ? "tv" : "movie");
+              const name = type === "tv" ? (show as TV).name : (show as Movie).title;
+              const date = type === "tv" ? (show as TV).first_air_date : (show as Movie).release_date;
+              
               return (
                 <Item key={show.id} className={itemClass}>
                   <ShowCard
-                    path={`/${isTv ? "tv" : "movie"}/${show.id}`}
+                    path={`/${type}/${show.id}`}
                     genre_ids={show.genre_ids}
                     vote_average={show.vote_average}
-                    name={isTv ? (show as TV).name : (show as Movie).title}
+                    name={name}
                     image_path={show.poster_path}
-                    release_date={isTv ? (show as TV).first_air_date : (show as Movie).release_date}
+                    release_date={date}
                   />
                 </Item>
               );

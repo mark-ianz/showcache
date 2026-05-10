@@ -30,7 +30,7 @@ export async function getTrendingThisWeek({
   const [_key, language, page = 1] = queryKey;
   try {
     const { data } = await axios.get<API_Result>(
-      `https://api.themoviedb.org/3/trending/movie/week?language=${language}&page=${page}`,
+      `https://api.themoviedb.org/3/trending/all/week?language=${language}&page=${page}`,
       axios_config({
         method: "GET",
       })
@@ -48,7 +48,7 @@ export async function getNewReleases({
 }: QueryFunctionContext): Promise<Movie[]> {
   const [_key, language, page = 1] = queryKey;
   const { data } = await axios.get<API_Result>(
-    `https://api.themoviedb.org/3/movie/now_playing?language=${language}&page=${page}`,
+    `https://api.themoviedb.org/3/trending/all/day?language=${language}&page=${page}`,
     axios_config({
       method: "GET",
     })

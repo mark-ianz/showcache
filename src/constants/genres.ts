@@ -10,6 +10,10 @@ export const genres: Genre[] = [
     name: "Adventure",
   },
   {
+    id: 10759,
+    name: "Action & Adventure",
+  },
+  {
     id: 16,
     name: "Animation",
   },
@@ -46,6 +50,10 @@ export const genres: Genre[] = [
     name: "Horror",
   },
   {
+    id: 10762,
+    name: "Kids",
+  },
+  {
     id: 10402,
     name: "Music",
   },
@@ -54,12 +62,32 @@ export const genres: Genre[] = [
     name: "Mystery",
   },
   {
+    id: 10763,
+    name: "News",
+  },
+  {
+    id: 10764,
+    name: "Reality",
+  },
+  {
     id: 10749,
     name: "Romance",
   },
   {
     id: 878,
     name: "Science Fiction",
+  },
+  {
+    id: 10765,
+    name: "Sci-Fi & Fantasy",
+  },
+  {
+    id: 10766,
+    name: "Soap",
+  },
+  {
+    id: 10767,
+    name: "Talk",
   },
   {
     id: 10770,
@@ -72,6 +100,10 @@ export const genres: Genre[] = [
   {
     id: 10752,
     name: "War",
+  },
+  {
+    id: 10768,
+    name: "War & Politics",
   },
   {
     id: 37,

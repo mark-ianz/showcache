@@ -21,6 +21,7 @@ export type Show = {
   poster_path: string;
   vote_average: number;
   vote_count: number;
+  media_type?: "movie" | "tv" | "person";
 };
 
 export type Movie = Show & {
