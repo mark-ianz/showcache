@@ -5,30 +5,36 @@ import twitter_icon from "@/assets/twitter_icon.png";
 import youtube_icon from "@/assets/youtube_icon.png";
 import { ValidExternalIds } from "@/types/credits";
 
-export const nav_lists: { name: string; path: string }[] = [
+export const nav_lists = [
   {
     name: "Home",
     path: "/",
+    icon: "Home",
   },
   {
-    name: "Top Rated",
-    path: "/top_rated",
+    name: "Trending",
+    path: "/trending",
+    icon: "TrendingUp",
   },
   {
-    name: "Popular Movies",
-    path: "/popular",
-  },
-  {
-    name: "New Releases",
-    path: "/new",
+    name: "Movies",
+    path: "/movies",
+    icon: "Film",
   },
   {
     name: "TV Shows",
     path: "/tv",
+    icon: "Tv",
+  },
+  {
+    name: "New",
+    path: "/new",
+    icon: "Sparkles",
   },
   {
     name: "Upcoming",
     path: "/upcoming",
+    icon: "Calendar",
   },
 ];
 

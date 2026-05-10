@@ -48,16 +48,17 @@
     transform: translateY(-4px);
   }
   .glass-header {
-    @apply sticky top-0 z-50 w-full bg-background/80 backdrop-blur-md border-b border-border/50;
+    @apply sticky top-0 z-50 w-full bg-background/70 backdrop-blur-xl border-b border-border/40 transition-all duration-300;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+  }
+  .search-container {
+    @apply relative flex items-center w-full transition-all duration-300;
+  }
+  .search-input {
+    @apply w-full bg-secondary/50 border-none rounded-full px-10 py-2 text-sm focus:ring-2 focus:ring-primary/30 focus:bg-background transition-all outline-none hover:bg-secondary/70;
   }
 }
 
 .active {
-  @apply text-primary font-bold;
-  position: relative;
+  @apply text-primary font-semibold bg-primary/10 px-3 py-1.5 rounded-full transition-all;
 }
-
-.active::after {
-  content: '';
-  @apply absolute -bottom-1 left-0 w-full h-0.5 bg-primary rounded-full;
-}

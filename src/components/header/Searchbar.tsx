@@ -26,14 +26,14 @@ export default function Searchbar({ className }: Props) {
   return (
     <form
       onSubmit={handleSearchSubmit}
-      className={cn("relative w-full group", className)}
+      className={cn("search-container group", className)}
     >
-      <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
-      <Input
+      <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors z-10" />
+      <input
         ref={inputRef}
         name="query"
         placeholder="Search movies, TV shows, people..."
-        className="w-full pl-10 bg-muted/50 border-border/50 focus-visible:ring-primary/20 focus-visible:border-primary transition-all h-10 text-sm"
+        className="search-input"
       />
     </form>
   );
