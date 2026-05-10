@@ -9,7 +9,7 @@ export default function Logo({ className }: { className?: ClassNameValue }) {
       <div className="bg-primary p-1.5 rounded-lg group-hover:rotate-12 transition-transform duration-300">
         <Play className="fill-primary-foreground text-primary-foreground h-4 w-4" />
       </div>
-      <h1 className="font-extrabold text-2xl tracking-tighter text-foreground uppercase italic">
+      <h1 className="font-extrabold text-xl sm:text-2xl tracking-tighter text-foreground uppercase italic">
         Show<span className="text-primary">Cache</span>
       </h1>
     </Link>

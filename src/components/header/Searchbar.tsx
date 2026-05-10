@@ -6,11 +6,12 @@ import { ClassNameValue } from "tailwind-merge";
 
 type Props = {
   className?: ClassNameValue;
+  onSearch?: () => void;
 };
 
 import { Search } from "lucide-react";
 
-export default function Searchbar({ className }: Props) {
+export default function Searchbar({ className, onSearch }: Props) {
   const navigate = useNavigate();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -20,6 +21,7 @@ export default function Searchbar({ className }: Props) {
       navigate(`/results?query=${inputRef.current.value}`);
       inputRef.current.value = "";
       inputRef.current.blur();
+      onSearch?.();
     }
   };
 

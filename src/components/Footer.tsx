@@ -9,7 +9,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="mt-20 py-12 border-t border-border/50 bg-muted/30">
+    <footer className="mt-10 sm:mt-20 py-12 border-t border-border/50 bg-muted/30">
       <div className="max-w-[1280px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex flex-col items-center md:items-start gap-2">
           <Logo className="opacity-50 grayscale hover:grayscale-0 transition-all" />

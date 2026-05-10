@@ -8,7 +8,7 @@ export default function Layout({ children }: { children?: ReactNode }) {
   return (
     <div className="min-h-screen bg-background font-sans antialiased">
       <Header />
-      <div className="max-w-[1400px] mx-auto px-6 py-8">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-4 sm:py-8">
         <main>
           <Outlet />
           {children}

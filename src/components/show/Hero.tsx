@@ -49,8 +49,8 @@ export default function Hero({ movie }: HeroProps) {
         />
       </div>
 
-      <div className="relative z-10 p-12 md:p-16 flex flex-col gap-6 max-w-4xl">
-        <div className="flex items-center gap-4 text-sm text-muted-foreground font-medium">
+      <div className="relative z-10 p-6 sm:p-12 md:p-16 flex flex-col gap-4 sm:gap-6 max-w-4xl">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-muted-foreground font-medium">
           {movie.runtime && <span>{movie.runtime} min</span>}
           <span className="flex items-center gap-2">
             {genres}
@@ -58,41 +58,41 @@ export default function Hero({ movie }: HeroProps) {
           <Rating rating={movie.vote_average} />
         </div>
 
-        <div className="flex items-baseline gap-3">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+        <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-3">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground line-clamp-2">
             {movie.title || movie.name}
           </h1>
           {releaseYear && (
-            <span className="text-3xl font-light text-muted-foreground/60">({releaseYear})</span>
+            <span className="text-xl sm:text-3xl font-light text-muted-foreground/60">({releaseYear})</span>
           )}
         </div>
 
         {movie.tagline && (
-          <p className="text-lg italic text-muted-foreground/80 font-medium tracking-tight">
+          <p className="text-sm sm:text-lg italic text-muted-foreground/80 font-medium tracking-tight line-clamp-1">
             "{movie.tagline}"
           </p>
         )}
 
-        <div className="flex flex-col gap-3">
-          <h2 className="text-xl font-semibold text-foreground">Overview</h2>
-          <p className="text-base text-foreground/80 leading-relaxed max-w-3xl line-clamp-3">
+        <div className="flex flex-col gap-2 sm:gap-3">
+          <h2 className="text-lg sm:text-xl font-semibold text-foreground">Overview</h2>
+          <p className="text-sm sm:text-base text-foreground/80 leading-relaxed max-w-3xl line-clamp-3">
             {movie.overview}
           </p>
         </div>
 
         {directors && (
-          <p className="text-sm text-muted-foreground font-medium">
+          <p className="text-xs sm:text-sm text-muted-foreground font-medium">
             Directed by <span className="text-foreground/70">{directors}</span>
           </p>
         )}
 
-        <div className="flex items-center gap-4 mt-4">
-          <Button variant="outline" size="lg" className="px-8 font-bold bg-background/80 hover:bg-background border-border/50 flex items-center gap-2 shadow-sm">
+        <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-2 sm:mt-4">
+          <Button variant="outline" size="lg" className="flex-1 sm:flex-none px-4 sm:px-8 font-bold bg-background/80 hover:bg-background border-border/50 flex items-center justify-center gap-2 shadow-sm text-sm sm:text-base h-11 sm:h-12">
             <span className="scale-110">▷</span> Play Trailer
           </Button>
 
-          <Link to={`/${showType}/${movie.id}`}>
-            <Button variant="default" size="lg" className="px-8 font-bold flex items-center gap-2 shadow-sm">
+          <Link to={`/${showType}/${movie.id}`} className="flex-1 sm:flex-none">
+            <Button variant="default" size="lg" className="w-full sm:w-auto px-4 sm:px-8 font-bold flex items-center justify-center gap-2 shadow-sm text-sm sm:text-base h-11 sm:h-12">
               <Info size={18} />
               Explore
             </Button>

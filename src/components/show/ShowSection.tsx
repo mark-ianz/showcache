@@ -38,7 +38,7 @@ export default function ShowSection({
   return (
     <section>
       {title && (
-        <div className="flex items-end justify-between mb-8 border-b border-border/40 pb-4 gap-4">
+        <div className="flex items-center sm:items-end justify-between mb-8 border-b border-border/40 pb-4 gap-2 sm:gap-4">
           <div className="flex flex-col gap-1 min-w-0">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground truncate">
               {title}
