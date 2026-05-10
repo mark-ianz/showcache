@@ -68,5 +68,28 @@ export const accountService = {
       })
     );
     return data;
+  },
+
+  async getV4PersonalizedList(
+    accessToken: string,
+    accountId: string,
+    type: "favorite" | "watchlist" | "rated",
+    mediaType: "movies" | "tv",
+    page: number = 1
+  ): Promise<any> {
+    // V4 Pattern: /4/account/{id}/{media_type}/{action}
+    // Note: mediaType must be 'movie' or 'tv' (singular) for V4, and action for favorites is 'favorites' (plural)
+    const normalizedMediaType = mediaType === "movies" ? "movie" : "tv";
+    let action = type as string;
+    if (type === "favorite") action = "favorites";
+
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/4/account/${accountId}/${normalizedMediaType}/${action}?page=${page}`,
+      axios_config({ 
+        method: "GET",
+        headers: { Authorization: `Bearer ${accessToken}` }
+      })
+    );
+    return data;
   }
 };

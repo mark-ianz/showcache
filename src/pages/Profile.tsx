@@ -24,9 +24,10 @@ export default function Profile() {
         </div>
 
         <Tabs defaultValue="favorites" className="w-full">
-          <TabsList className="grid w-full max-w-[400px] grid-cols-2">
+          <TabsList className="grid w-full max-w-[600px] grid-cols-3">
             <TabsTrigger value="favorites">Favorites</TabsTrigger>
             <TabsTrigger value="watchlist">Watchlist</TabsTrigger>
+            <TabsTrigger value="rated">Rated</TabsTrigger>
           </TabsList>
           
           <TabsContent value="favorites" className="mt-6">
@@ -36,39 +37,35 @@ export default function Profile() {
           <TabsContent value="watchlist" className="mt-6">
             <MediaGrid account={account!} type="watchlist" />
           </TabsContent>
+
+          <TabsContent value="rated" className="mt-6">
+            <MediaGrid account={account!} type="rated" />
+          </TabsContent>
         </Tabs>
       </div>
     </div>
   );
 }
 
-function MediaGrid({ account, type }: { account: any, type: "favorite" | "watchlist" }) {
+function MediaGrid({ account, type }: { account: any, type: "favorite" | "watchlist" | "rated" }) {
   const { data: movies, isLoading: moviesLoading } = useQuery({
-    queryKey: [type, "movies", account.access_token],
-    queryFn: async () => {
-      const { data } = await axios.get(
-        `https://api.themoviedb.org/3/account/null/${type}/movies`,
-        axios_config({ 
-          method: "GET",
-          headers: { Authorization: `Bearer ${account.access_token}` }
-        })
-      );
-      return data.results as Movie[];
-    },
+    queryKey: [type, "movies", account.access_token, account.account_id],
+    queryFn: () => accountService.getV4PersonalizedList(
+      account.access_token, 
+      account.account_id, 
+      type, 
+      "movies"
+    ).then(res => res.results as Movie[]),
   });
 
   const { data: tvShows, isLoading: tvLoading } = useQuery({
-    queryKey: [type, "tv", account.access_token],
-    queryFn: async () => {
-      const { data } = await axios.get(
-        `https://api.themoviedb.org/3/account/null/${type}/tv`,
-        axios_config({ 
-          method: "GET",
-          headers: { Authorization: `Bearer ${account.access_token}` }
-        })
-      );
-      return data.results as TV[];
-    },
+    queryKey: [type, "tv", account.access_token, account.account_id],
+    queryFn: () => accountService.getV4PersonalizedList(
+      account.access_token, 
+      account.account_id, 
+      type, 
+      "tv"
+    ).then(res => res.results as TV[]),
   });
 
   if (moviesLoading || tvLoading) {
@@ -95,7 +92,15 @@ function MediaGrid({ account, type }: { account: any, type: "favorite" | "watchl
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
       {allItems.map((item) => (
-        <ShowCard key={item.id} show={item} />
+        <ShowCard 
+          key={item.id} 
+          name={item.title || item.name}
+          image_path={item.poster_path}
+          vote_average={item.vote_average}
+          genre_ids={item.genre_ids}
+          release_date={item.release_date || item.first_air_date}
+          path={`/${item.title ? 'movie' : 'tv'}/${item.id}`}
+        />
       ))}
     </div>
   );
