@@ -46,15 +46,47 @@ const router = createBrowserRouter([
         element: <MediaListPage />,
       },
       {
-        path: "/movie/:category",
-        element: <MediaListPage />,
+        path: "/movie/popular",
+        element: <MediaListPage category="popular" />,
+      },
+      {
+        path: "/movie/now-playing",
+        element: <MediaListPage category="now-playing" />,
+      },
+      {
+        path: "/movie/upcoming",
+        element: <MediaListPage category="upcoming" />,
+      },
+      {
+        path: "/movie/top-rated",
+        element: <MediaListPage category="top-rated" />,
+      },
+      {
+        path: "/movie/:id",
+        element: <ViewMoviePage />,
+      },
+      {
+        path: "/tv/popular",
+        element: <MediaListPage category="popular" />,
+      },
+      {
+        path: "/tv/airing-today",
+        element: <MediaListPage category="airing-today" />,
+      },
+      {
+        path: "/tv/on-the-air",
+        element: <MediaListPage category="on-the-air" />,
+      },
+      {
+        path: "/tv/top-rated",
+        element: <MediaListPage category="top-rated" />,
+      },
+      {
+        path: "/tv/:id",
+        element: <ViewTvPage />,
       },
       {
         path: "/tv",
-        element: <MediaListPage />,
-      },
-      {
-        path: "/tv/:category",
         element: <MediaListPage />,
       },
       {
@@ -64,14 +96,6 @@ const router = createBrowserRouter([
       {
         path: "/results",
         element: <ResultsPage />,
-      },
-      {
-        path: "/movie/:id",
-        element: <ViewMoviePage />,
-      },
-      {
-        path: "/tv/:id",
-        element: <ViewTvPage />,
       },
       {
         path: "/person/:id",

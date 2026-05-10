@@ -10,8 +10,9 @@ import { getTrending } from "@/api/show.service";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import ShowCardSkeleton from "@/components/show/ShowCardSkeleton";
 
-export default function MediaListPage() {
-  const { type, category } = useParams<{ type: string; category: string }>();
+export default function MediaListPage({ category: propCategory }: { category?: string }) {
+  const { type, category: paramCategory } = useParams<{ type: string; category: string }>();
+  const category = propCategory || paramCategory;
   const {
     language: { iso_639_1: language },
   } = useLanguage();
