@@ -53,6 +53,7 @@ export default function LandingPage() {
         loading={trending_this_week.isLoading}
         title="Trending Now"
         subtitle="Most viewed titles in the last 24 hours"
+        isCarousel
         exploreLink="/trending"
       />
       <ShowSection
@@ -61,6 +62,7 @@ export default function LandingPage() {
         loading={new_releases.isLoading}
         title="New Releases"
         subtitle="Freshly added to the database"
+        isCarousel
         exploreLink="/new"
       />
       <ShowSection
@@ -69,6 +71,7 @@ export default function LandingPage() {
         loading={upcoming_movies.isLoading}
         title="Upcoming Movies"
         subtitle="Anticipated releases coming soon"
+        isCarousel
         exploreLink="/upcoming"
       />
       <ShowSection
@@ -78,6 +81,7 @@ export default function LandingPage() {
         title="TV Shows"
         subtitle="Popular series and binge-worthy dramas"
         isTv
+        isCarousel
         exploreLink="/tv"
       />
     </ListMainWrapper>

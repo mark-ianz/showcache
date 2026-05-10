@@ -2,7 +2,7 @@ import { Skeleton } from "../ui/skeleton";
 
 export default function HeroSkeleton() {
   return (
-    <section className="relative w-full mb-16 overflow-hidden rounded-2xl saas-card bg-muted/50">
+    <section className="relative w-full overflow-hidden rounded-2xl saas-card bg-muted/50">
       <div className="relative z-10 p-12 md:p-16 flex flex-col gap-6 max-w-4xl">
         <div className="flex items-center gap-4">
           <Skeleton className="h-5 w-20" />
