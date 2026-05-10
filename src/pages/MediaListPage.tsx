@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useLanguage } from "@/context/language-provider";
 import ListMainWrapper from "@/components/ListMainWrapper";
 import ShowSection from "@/components/show/ShowSection";
 import { useInfiniteShows } from "@/hooks/useShows";
 import { getPopularMovies, getNewReleases, getUpcomingMovies, getTopRated } from "@/api/movies.service";
-import { getTv } from "@/api/tv.service";
+import { getTv, getUpcomingTv } from "@/api/tv.service";
 import { getTrending } from "@/api/show.service";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import ShowCardSkeleton from "@/components/show/ShowCardSkeleton";
@@ -17,12 +17,14 @@ export default function MediaListPage({ category: propCategory }: { category?: s
     language: { iso_639_1: language },
   } = useLanguage();
 
-  const isTrending = window.location.pathname.includes("trending");
-  const mediaType = isTrending ? type : (window.location.pathname.includes("movie") ? "movie" : "tv");
+  const isTrending = window.location.pathname.includes("trending") || category === "trending";
+  const isNew = window.location.pathname.includes("new") || category === "new";
+  const mediaType = isTrending || isNew ? (type || "all") : (window.location.pathname.includes("movie") ? "movie" : "tv");
 
   const getQueryFn = () => {
     if (isTrending) return getTrending;
-    
+    if (isNew) return getNewReleases;
+
     if (mediaType === "movie") {
       switch (category) {
         case "popular": return getPopularMovies;
@@ -32,15 +34,15 @@ export default function MediaListPage({ category: propCategory }: { category?: s
         default: return getPopularMovies;
       }
     } else {
-      // TV categories: airing-today, popular, on-tv, top-rated
-      // API expects: airing_today, popular, on_the_air, top_rated
+      if (category === "upcoming") return getUpcomingTv;
       return getTv;
     }
   };
 
   const getQueryKey = () => {
     if (isTrending) return ["trending", mediaType, language];
-    
+    if (isNew) return ["new_releases", language];
+
     if (mediaType === "movie") {
       return [category || "popular", language];
     } else {
@@ -52,16 +54,20 @@ export default function MediaListPage({ category: propCategory }: { category?: s
     }
   };
 
-  const { 
-    data, 
-    error, 
-    isLoading, 
-    fetchNextPage, 
-    hasNextPage, 
-    isFetchingNextPage 
+  const queryKey = useMemo(() => getQueryKey(), [category, mediaType, language, isTrending, isNew]);
+  const queryFn = useMemo(() => getQueryFn(), [category, mediaType, isTrending, isNew]);
+
+  const {
+    data,
+    error,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage
   } = useInfiniteShows({
-    queryKey: getQueryKey(),
-    queryFn: getQueryFn() as any,
+    queryKey,
+    queryFn: queryFn as any,
+    enabled: !!(queryKey && queryKey.length > 0 && queryFn),
   });
 
   const { targetRef, isIntersecting } = useIntersectionObserver({
@@ -75,10 +81,29 @@ export default function MediaListPage({ category: propCategory }: { category?: s
   }, [isIntersecting, hasNextPage, fetchNextPage]);
 
   const getTitle = () => {
-    if (isTrending) return `Trending ${mediaType === "movie" ? "Movies" : "TV Shows"}`;
-    
-    const catName = category?.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ") || "Popular";
-    return `${catName} ${mediaType === "movie" ? "Movies" : "TV Shows"}`;
+    try {
+      if (isTrending) {
+        if (mediaType === "all") return "Trending Now";
+        return `Trending ${mediaType === "movie" ? "Movies" : "TV Shows"}`;
+      }
+      if (isNew) return "Recent Releases";
+
+      if (!category) return mediaType === "movie" ? "Popular Movies" : "Popular TV Shows";
+
+      const catName = category.split("-").map(w => w?.charAt(0).toUpperCase() + w?.slice(1)).join(" ") || "Popular";
+      return `${catName} ${mediaType === "movie" ? "Movies" : "TV Shows"}`;
+    } catch (e) {
+      return "Browse";
+    }
+  };
+
+  const getSubtitle = () => {
+    if (isTrending) {
+      const noun = mediaType === "all" ? "titles" : (mediaType === "movie" ? "movies" : "series");
+      return `Explore trending ${noun} now`;
+    }
+    if (isNew) return "Explore the freshest content from today";
+    return `Explore ${getTitle().toLowerCase()}`;
   };
 
   return (
@@ -88,7 +113,7 @@ export default function MediaListPage({ category: propCategory }: { category?: s
         loading={isLoading}
         showArray={data}
         title={getTitle()}
-        subtitle={`Explore ${getTitle().toLowerCase()}`}
+        subtitle={getSubtitle()}
         isTv={mediaType === "tv"}
       >
         {hasNextPage && (

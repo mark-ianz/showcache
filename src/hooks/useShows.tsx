@@ -1,5 +1,6 @@
 import { Movie, TV } from "@/types/show";
 import { QueryFunctionContext, useQuery, useInfiniteQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 
 export type useShowsProps = {
   queryKey: any[];
@@ -23,18 +24,22 @@ export default function useShows({
     staleTime: 1000 * 60 * 5,
   });
 
-  return { 
-    data: Array.isArray(data) ? data : undefined, 
-    isError, 
-    isLoading, 
-    error 
+  return {
+    data: Array.isArray(data) ? data : undefined,
+    isError,
+    isLoading,
+    error
   };
 }
 
 export function useInfiniteShows({
   queryKey,
   queryFn,
-}: useShowsProps) {
+  enabled = true,
+}: useShowsProps & { enabled?: boolean }) {
+  const safeKey = Array.isArray(queryKey) ? queryKey : [queryKey];
+  const infiniteQueryKey = [...safeKey, "infinite"];
+
   const {
     data,
     error,
@@ -44,24 +49,31 @@ export function useInfiniteShows({
     status,
     isLoading,
   } = useInfiniteQuery({
-    queryKey,
-    queryFn: (ctx) => queryFn({ ...ctx, queryKey: [...queryKey, ctx.pageParam] }),
+    queryKey: infiniteQueryKey,
+    queryFn: (ctx) => {
+      const pageParam = ctx.pageParam as number;
+      return queryFn({ ...ctx, queryKey: [...safeKey, pageParam] });
+    },
     initialPageParam: 1,
-    getNextPageParam: (lastPage, allPages) => {
-      if (!lastPage || lastPage.length === 0) return undefined;
+    getNextPageParam: (lastPage: any, allPages: any[]) => {
+      if (!lastPage || !Array.isArray(lastPage) || lastPage.length === 0) return undefined;
       return allPages.length + 1;
     },
+    enabled: enabled && !!queryKey && !!queryFn,
     staleTime: 1000 * 60 * 5,
   });
-  const flattenedData = Array.isArray(data?.pages) 
-    ? data.pages.flat() 
-    : [];
+
+  const flattenedData = useMemo(() => {
+    return (data?.pages && Array.isArray(data.pages))
+      ? data.pages.flat().filter(Boolean)
+      : [];
+  }, [data?.pages]);
 
   return {
     data: flattenedData as (Movie | TV)[],
     error,
     fetchNextPage,
-    hasNextPage,
+    hasNextPage: !!hasNextPage,
     isFetchingNextPage,
     status,
     isLoading,

@@ -64,7 +64,7 @@ export default function ShowSection({
 
       {loading ? (
         <Wrapper>
-          {Array.from({ length: isCarousel ? 10 : 12 }).map((_, i) => (
+          {(Array.from({ length: isCarousel ? 10 : 12 }) || []).map((_, i) => (
             <li key={i} className={isCarousel ? itemClass : ""}>
               <ShowCardSkeleton />
             </li>
@@ -73,21 +73,21 @@ export default function ShowSection({
       ) : (
         Array.isArray(showArray) && (
           <Wrapper>
-            {showArray?.length === 0 && <p>No result found</p>}
-            {showArray?.filter(Boolean).map((show) => {
+            {(showArray?.length || 0) === 0 && <p>No result found</p>}
+            {(showArray || []).filter(Boolean).map((show) => {
               const Item = isCarousel ? CarouselItem : "li";
-              const type = show.media_type || (isTv ? "tv" : "movie");
-              const name = type === "tv" ? (show as TV).name : (show as Movie).title;
-              const date = type === "tv" ? (show as TV).first_air_date : (show as Movie).release_date;
+              const type = show?.media_type || (isTv ? "tv" : "movie");
+              const name = type === "tv" ? (show as TV)?.name : (show as Movie)?.title;
+              const date = type === "tv" ? (show as TV)?.first_air_date : (show as Movie)?.release_date;
               
               return (
-                <Item key={show.id} className={itemClass}>
+                <Item key={show?.id} className={itemClass}>
                   <ShowCard
-                    path={`/${type}/${show.id}`}
-                    genre_ids={show.genre_ids}
-                    vote_average={show.vote_average}
+                    path={`/${type}/${show?.id}`}
+                    genre_ids={show?.genre_ids}
+                    vote_average={show?.vote_average}
                     name={name}
-                    image_path={show.poster_path}
+                    image_path={show?.poster_path}
                     release_date={date}
                   />
                 </Item>

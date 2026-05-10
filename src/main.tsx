@@ -41,8 +41,16 @@ const router = createBrowserRouter([
         element: <LandingPage />,
       },
       {
+        path: "/trending",
+        element: <MediaListPage category="trending" />,
+      },
+      {
         path: "/trending/:type",
         element: <MediaListPage />,
+      },
+      {
+        path: "/new",
+        element: <MediaListPage category="new" />,
       },
       {
         path: "/movie",
@@ -79,6 +87,10 @@ const router = createBrowserRouter([
       {
         path: "/tv/on-the-air",
         element: <MediaListPage category="on-the-air" />,
+      },
+      {
+        path: "/tv/upcoming",
+        element: <MediaListPage category="upcoming" />,
       },
       {
         path: "/tv/top-rated",
