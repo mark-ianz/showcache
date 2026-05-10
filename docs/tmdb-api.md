@@ -55,6 +55,33 @@ Common sizes used:
 - `original` for high-quality backdrops
 - `h632` for person profiles
 
+## TMDB API v4 (User Accounts & Lists)
+
+TMDB v4 is used for user-authenticated actions and advanced list management.
+
+- **Base URL**: `https://api.themoviedb.org/4`
+- **Auth Header**: `Authorization: Bearer <USER_ACCESS_TOKEN>`
+
+### V4 Authentication Flow
+
+1. **Create Request Token**: `POST /4/auth/request_token` (Optional `redirect_to` body param).
+2. **User Approval**: Redirect user to `https://www.themoviedb.org/auth/access?request_token={request_token}`.
+3. **Create Access Token**: `POST /4/auth/access_token` with the approved `request_token` to get the `access_token` and `account_id`.
+
+### User Account Endpoints (Read-Only)
+Requires `account_id` (V4 object ID).
+- **Favorites**: `GET /4/account/{account_id}/favorite/movies`
+- **Watchlist**: `GET /4/account/{account_id}/watchlist/movies`
+- **Rated**: `GET /4/account/{account_id}/rated/movies`
+- **User Lists**: `GET /4/account/{account_id}/lists`
+
+### Custom Lists (Full CRUD)
+- **Create List**: `POST /4/list` (Body: `{ "name": "...", "description": "..." }`)
+- **Add Items**: `POST /4/list/{list_id}/items` (Body: `[{"media_type": "movie", "media_id": 123}, ...]`)
+- **Update Items**: `PUT /4/list/{list_id}/items` (Body: `[{"media_type": "movie", "media_id": 123, "comment": "..."}]`)
+- **Remove Items**: `DELETE /4/list/{list_id}/items` (Body: `[{"media_type": "movie", "media_id": 123}]`)
+- **Delete List**: `DELETE /4/list/{list_id}`
+
 ## Integration Details
 
 We use **Axios** for HTTP requests and **TanStack Query** for state management and caching.

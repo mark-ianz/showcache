@@ -20,6 +20,8 @@ import PageNotFound from "./pages/PageNotFound.tsx";
 import ViewShowMediaPage from "./pages/ViewShowMedia.tsx";
 import MediaListPage from "./pages/MediaListPage.tsx";
 import PeoplePage from "./pages/PeoplePage.tsx";
+import AuthCallback from "./pages/AuthCallback.tsx";
+import Profile from "./pages/Profile.tsx";
 
 const queryClient = new QueryClient();
 
@@ -124,6 +126,14 @@ const router = createBrowserRouter([
       {
         path: "/media/:type/:id/:title",
         element: <ViewShowMediaPage />,
+      },
+      {
+        path: "/auth/callback",
+        element: <AuthCallback />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
       {
         path: "*",

@@ -3,6 +3,7 @@ import Searchbar from "./Searchbar";
 import NavLinks from "./nav/NavLinks";
 import ThemeSwitch from "./menu/ThemeSwitch";
 import LanguageSelect from "./menu/LanguageSelect";
+import UserMenu from "./UserMenu";
 
 
 export default function Header() {
@@ -23,6 +24,7 @@ export default function Header() {
           <div className="flex items-center gap-1 border-l pl-2 lg:pl-4 ml-1">
             <LanguageSelect />
             <ThemeSwitch />
+            <UserMenu />
           </div>
         </div>
       </div>

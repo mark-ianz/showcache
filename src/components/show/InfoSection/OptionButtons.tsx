@@ -1,19 +1,19 @@
-/* import { Button } from "../../ui/button";
-import { BookmarkIcon, HeartIcon } from "lucide-react"; */
+import { getShowType } from "@/lib/helpers";
+import AccountActions from "../AccountActions";
 import TrailerDialog from "./TrailerDialog";
 import { ShowFullDetails } from "@/types/show";
 
 type Props = { showData: ShowFullDetails };
 
 export default function OptionButtons({ showData }: Props) {
+  const mediaType = getShowType(showData);
+
   return (
-    <div className="flex gap-4">
-      {/* <Button size={"icon"} className="rounded-full" variant={"secondary"}>
-        <HeartIcon className="w-4 h-4" />
-      </Button>
-      <Button size={"icon"} className="rounded-full" variant={"secondary"}>
-        <BookmarkIcon className="w-4 h-4" />
-      </Button> */}
+    <div className="flex gap-4 items-center">
+      <AccountActions 
+        mediaType={mediaType as "movie" | "tv"} 
+        mediaId={showData.id} 
+      />
       <TrailerDialog showData={showData} />
     </div>
   );
