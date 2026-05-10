@@ -6,7 +6,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getCredits } from "@/api/credits.service";
 import { useLanguage } from "@/context/language-provider";
 import { Info } from "lucide-react";
-import AccountActions from "./AccountActions";
 
 interface HeroProps {
   movie: any;
@@ -98,12 +97,6 @@ export default function Hero({ movie }: HeroProps) {
               Explore
             </Button>
           </Link>
-
-          <AccountActions 
-            mediaType={showType as "movie" | "tv"} 
-            mediaId={movie.id} 
-            className="ml-2"
-          />
         </div>
       </div>
     </section>
