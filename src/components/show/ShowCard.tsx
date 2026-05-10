@@ -39,6 +39,9 @@ export default function ShowCard({
           <h3 className="font-bold text-[15px] leading-tight line-clamp-1 group-hover:text-primary transition-colors text-foreground">
             {name}
           </h3>
+          <div className="flex items-center gap-1.5 text-muted-foreground/60 text-[11px] font-medium line-clamp-1">
+            {getGenre(genre_ids).slice(0, 2).join(" • ")}
+          </div>
           <div className="flex items-center justify-between text-muted-foreground/80">
             <span className="text-[13px] font-medium">
               {releaseYear}
