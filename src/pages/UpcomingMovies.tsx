@@ -6,7 +6,6 @@ import { useInfiniteShows } from "@/hooks/useShows";
 import { getUpcomingMovies } from "@/api/movies.service";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import ShowCardSkeleton from "@/components/show/ShowCardSkeleton";
-import ShowListWrapper from "@/components/show/ShowListWrapper";
 
 export default function UpcomingMovies() {
   const {
@@ -43,20 +42,20 @@ export default function UpcomingMovies() {
         loading={isLoading}
         title="Upcoming Movies"
         subtitle="Anticipated releases coming soon"
-      />
-      {hasNextPage && (
-        <div ref={targetRef} className="mt-8">
-          {isFetchingNextPage && (
-            <ShowListWrapper>
-              {Array.from({ length: 6 }).map((_, i) => (
+      >
+        {hasNextPage && (
+          <>
+            {isFetchingNextPage && (
+              Array.from({ length: 12 }).map((_, i) => (
                 <li key={i}>
                   <ShowCardSkeleton />
                 </li>
-              ))}
-            </ShowListWrapper>
-          )}
-        </div>
-      )}
+              ))
+            )}
+            <li ref={targetRef} className="col-span-full h-1" />
+          </>
+        )}
+      </ShowSection>
     </ListMainWrapper>
   );
 }

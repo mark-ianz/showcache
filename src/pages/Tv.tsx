@@ -6,7 +6,6 @@ import { useInfiniteShows } from "@/hooks/useShows";
 import { getTv } from "@/api/tv.service";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import ShowCardSkeleton from "@/components/show/ShowCardSkeleton";
-import ShowListWrapper from "@/components/show/ShowListWrapper";
 
 export default function Tv() {
   const {
@@ -44,20 +43,20 @@ export default function Tv() {
         title="TV Shows"
         subtitle="Popular series and binge-worthy dramas"
         isTv
-      />
-      {hasNextPage && (
-        <div ref={targetRef} className="mt-8">
-          {isFetchingNextPage && (
-            <ShowListWrapper>
-              {Array.from({ length: 6 }).map((_, i) => (
+      >
+        {hasNextPage && (
+          <>
+            {isFetchingNextPage && (
+              Array.from({ length: 12 }).map((_, i) => (
                 <li key={i}>
                   <ShowCardSkeleton />
                 </li>
-              ))}
-            </ShowListWrapper>
-          )}
-        </div>
-      )}
+              ))
+            )}
+            <li ref={targetRef} className="col-span-full h-1" />
+          </>
+        )}
+      </ShowSection>
     </ListMainWrapper>
   );
 }

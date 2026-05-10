@@ -6,7 +6,6 @@ import { useInfiniteShows } from "@/hooks/useShows";
 import { getNewReleases } from "@/api/movies.service";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import ShowCardSkeleton from "@/components/show/ShowCardSkeleton";
-import ShowListWrapper from "@/components/show/ShowListWrapper";
 
 export default function NewReleases() {
   const {
@@ -43,20 +42,20 @@ export default function NewReleases() {
         loading={isLoading}
         title="New Releases"
         subtitle="Freshly added to the database"
-      />
-      {hasNextPage && (
-        <div ref={targetRef} className="mt-8">
-          {isFetchingNextPage && (
-            <ShowListWrapper>
-              {Array.from({ length: 6 }).map((_, i) => (
+      >
+        {hasNextPage && (
+          <>
+            {isFetchingNextPage && (
+              Array.from({ length: 12 }).map((_, i) => (
                 <li key={i}>
                   <ShowCardSkeleton />
                 </li>
-              ))}
-            </ShowListWrapper>
-          )}
-        </div>
-      )}
+              ))
+            )}
+            <li ref={targetRef} className="col-span-full h-1" />
+          </>
+        )}
+      </ShowSection>
     </ListMainWrapper>
   );
 }

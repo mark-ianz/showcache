@@ -13,6 +13,7 @@ type ShowSectionProps = {
   isTv?: boolean;
   error: Error | null;
   loading: boolean;
+  children?: React.ReactNode;
 };
 
 export default function ShowSection({
@@ -23,6 +24,7 @@ export default function ShowSection({
   isTv,
   error,
   loading,
+  children,
 }: ShowSectionProps) {
 
   if (error) return <ErrorComponent error={error}/>
@@ -79,6 +81,7 @@ export default function ShowSection({
 
               </li>
             ))}
+            {children}
           </ShowListWrapper>
         )
       )}
