@@ -48,7 +48,7 @@ export function useInfiniteShows({
     queryFn: (ctx) => queryFn({ ...ctx, queryKey: [...queryKey, ctx.pageParam] }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.length === 0) return undefined;
+      if (!lastPage || lastPage.length === 0) return undefined;
       return allPages.length + 1;
     },
     staleTime: 1000 * 60 * 5,

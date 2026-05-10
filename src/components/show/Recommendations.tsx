@@ -37,13 +37,13 @@ export default function Recommendations({ id }: { id: string }) {
 
 
   return (
-    recommendations.length > 0 && (
+    recommendations && recommendations.length > 0 && (
       <ScrollableSection title="Recommendations">
         {recommendations.map((show, index) => (
           <li
             className={cn(
               "w-48 max-lg:w-40 max-md:w-36 max-sm:w-32",
-              index + 1 === recommendations.length && "z-10"
+              index + 1 === recommendations?.length && "z-10"
             )}
             key={show.id}
           >

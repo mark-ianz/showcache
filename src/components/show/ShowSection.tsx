@@ -67,8 +67,8 @@ export default function ShowSection({
       ) : (
         Array.isArray(showArray) && (
           <ShowListWrapper>
-            {showArray.length === 0 && <p>No result found</p>}
-            {showArray?.map((show) => (
+            {showArray?.length === 0 && <p>No result found</p>}
+            {showArray?.filter(Boolean).map((show) => (
               <li key={show.id}>
                 <ShowCard
                   path={`/${isTv ? "tv" : "movie"}/${show.id}`}
