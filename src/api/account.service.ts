@@ -40,6 +40,21 @@ export const accountService = {
     return data;
   },
 
+  async deleteRating(
+    accessToken: string,
+    mediaType: "movie" | "tv",
+    mediaId: number
+  ): Promise<any> {
+    const { data } = await axios.delete(
+      `https://api.themoviedb.org/3/${mediaType}/${mediaId}/rating`,
+      axios_config({ 
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${accessToken}` }
+      })
+    );
+    return data;
+  },
+
   async markAsFavorite(
     accessToken: string,
     accountId: string,
