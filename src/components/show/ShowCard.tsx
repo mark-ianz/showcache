@@ -19,7 +19,7 @@ export default function ShowCard({
   genre_ids,
   path,
   release_date,
-}: ShowCardProps & { release_date?: string }) {
+}: ShowCardProps & { release_date?: string | Date }) {
   const releaseYear = release_date ? new Date(release_date).getFullYear() : "";
 
   return (

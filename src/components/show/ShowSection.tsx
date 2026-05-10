@@ -6,7 +6,7 @@ import { Movie, TV } from "@/types/show";
 import { Link } from "react-router-dom";
 
 type ShowSectionProps = {
-  showArray: Movie[] | TV[] | undefined;
+  showArray: (Movie | TV)[] | undefined;
   title?: string;
   subtitle?: string;
   exploreLink?: string;
