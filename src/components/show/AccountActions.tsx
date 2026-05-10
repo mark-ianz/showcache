@@ -45,7 +45,7 @@ export default function AccountActions({ mediaType, mediaId, className }: Accoun
       }));
       return { previousStates };
     },
-    onError: (err, favorite, context: any) => {
+    onError: (_err, _favorite, context: any) => {
       queryClient.setQueryData(["account_states", mediaType, mediaId, account?.access_token], context.previousStates);
     },
     onSettled: () => {
@@ -74,7 +74,7 @@ export default function AccountActions({ mediaType, mediaId, className }: Accoun
       }));
       return { previousStates };
     },
-    onError: (err, watchlist, context: any) => {
+    onError: (_err, _watchlist, context: any) => {
       queryClient.setQueryData(["account_states", mediaType, mediaId, account?.access_token], context.previousStates);
     },
     onSettled: () => {
@@ -102,7 +102,7 @@ export default function AccountActions({ mediaType, mediaId, className }: Accoun
       }));
       return { previousStates };
     },
-    onError: (err, value, context: any) => {
+    onError: (_err, _value, context: any) => {
       queryClient.setQueryData(["account_states", mediaType, mediaId, account?.access_token], context.previousStates);
     },
     onSettled: () => {
@@ -135,7 +135,7 @@ export default function AccountActions({ mediaType, mediaId, className }: Accoun
       }));
       return { previousStates };
     },
-    onError: (err, variables, context: any) => {
+    onError: (_err, _variables, context: any) => {
       queryClient.setQueryData(["account_states", mediaType, mediaId, account?.access_token], context.previousStates);
     },
     onSettled: () => {

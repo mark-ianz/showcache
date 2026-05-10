@@ -7,14 +7,14 @@ interface UseIntersectionObserverProps {
   enabled?: boolean;
 }
 
-export function useIntersectionObserver({
+export function useIntersectionObserver<T extends HTMLElement = HTMLDivElement>({
   root = null,
   rootMargin = "0px",
   threshold = 0,
   enabled = true,
 }: UseIntersectionObserverProps = {}) {
   const [isIntersecting, setIsIntersecting] = useState(false);
-  const targetRef = useRef<HTMLDivElement | null>(null);
+  const targetRef = useRef<T | null>(null);
 
   useEffect(() => {
     if (!enabled) return;

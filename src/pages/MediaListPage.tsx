@@ -70,7 +70,7 @@ export default function MediaListPage({ category: propCategory }: { category?: s
     enabled: !!(queryKey && queryKey.length > 0 && queryFn),
   });
 
-  const { targetRef, isIntersecting } = useIntersectionObserver({
+  const { targetRef, isIntersecting } = useIntersectionObserver<HTMLLIElement>({
     enabled: hasNextPage && !isFetchingNextPage,
   });
 

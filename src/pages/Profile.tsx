@@ -6,8 +6,6 @@ import { Movie, TV } from "@/types/show";
 import ShowCard from "@/components/show/ShowCard";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Navigate } from "react-router-dom";
-import axios from "axios";
-import { axios_config } from "@/api/axios.config";
 
 export default function Profile() {
   const { account, isLoggedIn, loading } = useAuth();
@@ -29,11 +27,11 @@ export default function Profile() {
             <TabsTrigger value="watchlist">Watchlist</TabsTrigger>
             <TabsTrigger value="rated">Rated</TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="favorites" className="mt-6">
             <MediaGrid account={account!} type="favorite" />
           </TabsContent>
-          
+
           <TabsContent value="watchlist" className="mt-6">
             <MediaGrid account={account!} type="watchlist" />
           </TabsContent>
@@ -51,9 +49,9 @@ function MediaGrid({ account, type }: { account: any, type: "favorite" | "watchl
   const { data: movies, isLoading: moviesLoading } = useQuery({
     queryKey: [type, "movies", account.access_token, account.account_id],
     queryFn: () => accountService.getV4PersonalizedList(
-      account.access_token, 
-      account.account_id, 
-      type, 
+      account.access_token,
+      account.account_id,
+      type,
       "movies"
     ).then(res => res.results as Movie[]),
   });
@@ -61,9 +59,9 @@ function MediaGrid({ account, type }: { account: any, type: "favorite" | "watchl
   const { data: tvShows, isLoading: tvLoading } = useQuery({
     queryKey: [type, "tv", account.access_token, account.account_id],
     queryFn: () => accountService.getV4PersonalizedList(
-      account.access_token, 
-      account.account_id, 
-      type, 
+      account.access_token,
+      account.account_id,
+      type,
       "tv"
     ).then(res => res.results as TV[]),
   });
@@ -91,17 +89,24 @@ function MediaGrid({ account, type }: { account: any, type: "favorite" | "watchl
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
-      {allItems.map((item) => (
-        <ShowCard 
-          key={item.id} 
-          name={item.title || item.name}
-          image_path={item.poster_path}
-          vote_average={item.vote_average}
-          genre_ids={item.genre_ids}
-          release_date={item.release_date || item.first_air_date}
-          path={`/${item.title ? 'movie' : 'tv'}/${item.id}`}
-        />
-      ))}
+      {allItems.map((item) => {
+        const isMovie = 'title' in item;
+        const name = isMovie ? item.title : item.name;
+        const release_date = isMovie ? item.release_date : item.first_air_date;
+        const media_type = isMovie ? 'movie' : 'tv';
+
+        return (
+          <ShowCard
+            key={item.id}
+            name={name}
+            image_path={item.poster_path}
+            vote_average={item.vote_average}
+            genre_ids={item.genre_ids}
+            release_date={release_date}
+            path={`/${media_type}/${item.id}`}
+          />
+        );
+      })}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { nav_lists } from "@/lib/constants";
 import { NavLink } from "react-router-dom";
 import * as Icons from "lucide-react";
-import { Menu, X, ChevronDown, Search } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ScrollArea } from "@/components/ui/scroll-area";
