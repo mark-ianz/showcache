@@ -2,7 +2,7 @@ import { Video, VideosResult } from "@/types/video";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import axios from "axios";
 import { axios_config } from "./axios.config";
-import { API_Result, Movie, TV } from "@/types/show";
+import { API_Result, Movie, MultiSearchResult, TV } from "@/types/show";
 import { ShowQueriedImage } from "@/types/images";
 import { CombinedCredits, PersonSearch, ShowCredits } from "@/types/credits";
 
@@ -24,26 +24,38 @@ export async function getTrailers({
 
 export async function searchShow({
   queryKey,
-}: QueryFunctionContext): Promise<Movie[] | TV[]> {
+}: QueryFunctionContext): Promise<API_Result<Movie | TV>> {
   const [_key, language, query, searchFor, page] = queryKey;
-  const { data }: { data: API_Result } = await axios.get(
+  const { data } = await axios.get<API_Result<Movie | TV>>(
     `https://api.themoviedb.org/3/search/${searchFor}?include_adult=false`,
     axios_config({ method: "GET", params: { language, page, query } })
   );
 
-  return data.results;
+  return data;
 }
 
 export async function searchPerson ({
   queryKey,
-}: QueryFunctionContext): Promise<PersonSearch[]> {
+}: QueryFunctionContext): Promise<API_Result<PersonSearch>> {
   const [_key, language, query, page = 1] = queryKey;
-  const { data }: { data: API_Result } = await axios.get(
+  const { data } = await axios.get<API_Result<PersonSearch>>(
     `https://api.themoviedb.org/3/search/person?include_adult=false`,
     axios_config({ method: "GET", params: { language, page, query } })
   );
 
-  return data.results;
+  return data;
+}
+
+export async function searchMulti ({
+  queryKey,
+}: QueryFunctionContext): Promise<API_Result<MultiSearchResult>> {
+  const [_key, language, query, page = 1] = queryKey;
+  const { data } = await axios.get<API_Result<MultiSearchResult>>(
+    `https://api.themoviedb.org/3/search/multi?include_adult=false`,
+    axios_config({ method: "GET", params: { language, page, query } })
+  );
+
+  return data;
 }
 
 export async function getShowImages({

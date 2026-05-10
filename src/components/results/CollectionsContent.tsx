@@ -12,7 +12,7 @@ type Props = {
 
 export default function CollectionsContent({ query, language }: Props) {
   const {
-    data: collections,
+    data,
     isLoading,
     error,
   } = useQuery({
@@ -21,7 +21,9 @@ export default function CollectionsContent({ query, language }: Props) {
     staleTime: 1000 * 60 * 60 * 24,
   });
 
-  if (error) return <ErrorComponent error={error} />;
+  const collections = data?.results;
+
+  if (error) return <ErrorComponent error={error as Error} />;
   if (isLoading) return (
     <div className="flex flex-col gap-4">
       {Array.from({ length: 4 }).map((_, i) => (

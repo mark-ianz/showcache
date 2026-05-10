@@ -18,7 +18,7 @@ export default function ShowContent({ query, language, searchFor }: Props) {
   });
   return (
     <ShowSection
-      showArray={data}
+      showArray={data?.results}
       error={error}
       loading={isLoading}
       isTv={searchFor === "tv"}

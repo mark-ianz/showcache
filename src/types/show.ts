@@ -2,8 +2,13 @@ import { Genre } from "./genre";
 import { LanguageCode } from "./language";
 import { MovieFullDetails } from "./movie.details";
 import { TvFullDetails } from "./tv";
+import { PersonSearch } from "./credits";
 
 export type ShowType = "movie" | "tv";
+
+export type MultiSearchResult = (Movie | TV | PersonSearch) & {
+  media_type: "movie" | "tv" | "person";
+};
 
 export type Show = {
   adult: boolean;
@@ -30,9 +35,9 @@ export type TV = Show & {
   name: string;
 };
 
-export type API_Result = {
+export type API_Result<T = any> = {
   page: number;
-  results: [];
+  results: T[];
   total_pages: number;
   total_results: number;
 };

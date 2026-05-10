@@ -105,13 +105,13 @@ export async function getCollectionDetails({
 
 export async function searchCollection ({
   queryKey,
-}: QueryFunctionContext): Promise<CollectionSearchResult[]> {
+}: QueryFunctionContext): Promise<API_Result<CollectionSearchResult>> {
   const [_key, language, query, page = 1] = queryKey;
-  const { data } = await axios.get<API_Result>(
+  const { data } = await axios.get<API_Result<CollectionSearchResult>>(
     `https://api.themoviedb.org/3/search/collection`,
     axios_config({ method: "GET", params: { include_adult: false, query, language, page } })
   );
-  return data.results || [];
+  return data;
 }
 
 export async function getCollectionImages({

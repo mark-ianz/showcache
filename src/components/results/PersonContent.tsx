@@ -18,7 +18,9 @@ export default function PersonContent({ query, language }: Props) {
     staleTime: 1000 * 60 * 60 * 24,
   });
 
-  if (error) return <ErrorComponent error={error} />;
+  const persons = data?.results;
+
+  if (error) return <ErrorComponent error={error as Error} />;
   if (isLoading) return (
     <div className="flex flex-col gap-4">
       {Array.from({ length: 5 }).map((_, i) => (
@@ -36,9 +38,9 @@ export default function PersonContent({ query, language }: Props) {
 
   return (
     <>
-      {data && data.length === 0 && <p>No result found</p>}
+      {persons && persons.length === 0 && <p>No result found</p>}
       <ol className="flex flex-col gap-2">
-        {data?.map((person) => (
+        {persons?.map((person) => (
           <li key={person.id}>
             <Link to={`/person/${person.id}`} className="flex">
               <div className="w-32 h-32 aspect-square">
