@@ -43,7 +43,7 @@ export default function Hero({ movie }: HeroProps) {
     <section className="relative w-full mb-16 overflow-hidden rounded-2xl saas-card bg-background/50">
       <div className="absolute inset-0 z-0">
         <img
-          src={getImg({ path: movie.backdrop_path, size: "original", mediaType: "show" })}
+          src={getImg({ path: movie.backdrop_path, size: "w1280", mediaType: "show" })}
           alt={movie.title || movie.name}
           className="w-full h-full object-cover opacity-10 filter blur-[2px] scale-105"
         />

@@ -12,7 +12,7 @@ type Props = {
 export default function SectionwBGImage({ children, backdrop_path, className }: Props) {
   const backdrop_path_src = getImg({
     path: backdrop_path,
-    size: "original",
+    size: "w1280",
     mediaType: "show",
     undefineable: true,
   });

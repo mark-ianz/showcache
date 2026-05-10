@@ -93,7 +93,7 @@ export default function DynamicMediaTabs({ tabs, view_all_link }: Props) {
                         loading="lazy"
                         src={getImg({
                           path: image.file_path,
-                          size: "w780",
+                          size: "w500",
                           mediaType: "show",
                         })}
                         className={cn(

@@ -28,7 +28,7 @@ export default function ShowCard({
         <div className="saas-card overflow-hidden rounded-none border-none shadow-none">
           <AspectRatio ratio={2 / 3} className="overflow-hidden">
             <img
-              src={getImg({ path: image_path, size: "w780", mediaType: "show" })}
+              src={getImg({ path: image_path, size: "w500", mediaType: "show" })}
               alt={`Poster image of ${name}`}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               loading="lazy"

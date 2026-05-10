@@ -3,7 +3,7 @@ import { getImg } from "@/lib/helpers";
 type Props = { poster_path: string };
 
 export default function ShowPoster({ poster_path }: Props) {
-  const poster_path_src = getImg({path: poster_path, size: "w780", mediaType: "show"});
+  const poster_path_src = getImg({path: poster_path, size: "w500", mediaType: "show"});
 
   return (
     <div className="w-72 max-xsm:w-56">
