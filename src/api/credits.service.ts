@@ -1,8 +1,9 @@
 import axios from "axios";
 import { axios_config } from "./axios.config";
-import { CreditsResult, ExternalIds, PersonFullInfo } from "@/types/credits";
+import { CreditsResult, ExternalIds, PersonFullInfo, PersonSearch } from "@/types/credits";
 import { QueryFunctionContext } from "@tanstack/react-query";
 import { CreditQueriedImage, Image, TaggedImages } from "@/types/images";
+import { API_Result } from "@/types/show";
 
 export async function getDirectors(id: number): Promise<string[]> {
   const { data }: { data: CreditsResult } = await axios.get(
@@ -73,4 +74,16 @@ export async function getPersonImages ({
   );
 
   return data.profiles;
+}
+
+export async function getPopularPeople({
+  queryKey,
+}: QueryFunctionContext): Promise<PersonSearch[]> {
+  const [_key, language, page = 1] = queryKey;
+  const { data } = await axios.get<API_Result>(
+    `https://api.themoviedb.org/3/person/popular`,
+    axios_config({ method: "GET", params: { language, page } })
+  );
+
+  return (data.results as any) || [];
 }

@@ -120,3 +120,15 @@ export async function getKeywords ({
 
   return data.keywords.map((keyword: { name: string }) => keyword.name);
 }
+
+export async function getTrending({
+  queryKey,
+}: QueryFunctionContext): Promise<any[]> {
+  const [_key, type, language, page = 1] = queryKey;
+  const { data } = await axios.get<API_Result>(
+    `https://api.themoviedb.org/3/trending/${type}/week`,
+    axios_config({ method: "GET", params: { language, page } })
+  );
+
+  return data.results || [];
+}

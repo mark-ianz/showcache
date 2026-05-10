@@ -13,28 +13,39 @@ export const nav_lists = [
   },
   {
     name: "Trending",
-    path: "/trending",
+    path: "/trending/movie",
     icon: "TrendingUp",
+    submenu: [
+      { name: "Movies", path: "/trending/movie" },
+      { name: "TV", path: "/trending/tv" },
+    ],
   },
   {
     name: "Movies",
-    path: "/movies",
+    path: "/movie/popular",
     icon: "Film",
+    submenu: [
+      { name: "Popular", path: "/movie/popular" },
+      { name: "Now Playing", path: "/movie/now-playing" },
+      { name: "Upcoming", path: "/movie/upcoming" },
+      { name: "Top Rated", path: "/movie/top-rated" },
+    ],
   },
   {
     name: "TV Shows",
-    path: "/tv",
+    path: "/tv/popular",
     icon: "Tv",
+    submenu: [
+      { name: "Airing Today", path: "/tv/airing-today" },
+      { name: "Popular", path: "/tv/popular" },
+      { name: "On TV", path: "/tv/on-the-air" },
+      { name: "Top Rated", path: "/tv/top-rated" },
+    ],
   },
   {
-    name: "New",
-    path: "/new",
-    icon: "Sparkles",
-  },
-  {
-    name: "Upcoming",
-    path: "/upcoming",
-    icon: "Calendar",
+    name: "People",
+    path: "/person",
+    icon: "Users",
   },
 ];
 

@@ -5,7 +5,18 @@ import { QueryFunctionContext } from "@tanstack/react-query";
 import { TvFullDetails } from "@/types/tv";
 
 export async function getTv({ queryKey }: QueryFunctionContext): Promise<TV[]> {
-  const [_key, language, page, sort = "top_rated"] = queryKey;
+  const [_key, language, sortOrPage, possiblePage] = queryKey;
+  
+  let sort = "popular";
+  let page = 1;
+
+  if (typeof sortOrPage === "string") {
+    sort = sortOrPage;
+    page = typeof possiblePage === "number" ? possiblePage : 1;
+  } else if (typeof sortOrPage === "number") {
+    page = sortOrPage;
+  }
+
   const { data }: { data: API_Result } = await axios.get(
     `https://api.themoviedb.org/3/tv/${sort}`,
     axios_config({ method: "GET", params: { language, page } })
