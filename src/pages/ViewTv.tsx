@@ -10,6 +10,7 @@ import ViewShowLayout from "@/components/show/ViewShowLayout";
 import ShowMedia from "@/components/show/ShowMedia";
 import ShowDetailSkeleton from "@/components/show/ShowDetailSkeleton";
 import ErrorComponent from "@/components/ErrorComponent";
+import ShowDetails from "@/components/show/ShowDetails";
 
 export default function ViewTv() {
   const { id } = useParams();
@@ -30,13 +31,21 @@ export default function ViewTv() {
 
   return (
     data && (
-      <ViewShowLayout>
+      <div className="flex w-full flex-col gap-10">
         <ViewInfoSection showData={data} />
-        <Casts type="tv" id={id!} />
-        <Seasons seasons={data.seasons} />
-        <ShowMedia show_data={data} show_title={data.name} />
-        <Recommendations id={id!} />
-      </ViewShowLayout>
+        <div className="flex gap-14 max-md:flex-col max-md:gap-5">
+          <ViewShowLayout className="overflow-hidden">
+            <Casts type="tv" id={id!} />
+            <Seasons seasons={data.seasons} />
+            <ShowMedia show_data={data} show_title={data.name} />
+            <Recommendations id={id!} />
+          </ViewShowLayout>
+
+          <div className="w-60 max-md:w-full">
+            <ShowDetails showData={data} />
+          </div>
+        </div>
+      </div>
     )
   );
 }

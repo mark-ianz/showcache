@@ -121,7 +121,7 @@ export async function getCombinedCredits({
     .splice(0, 20);
 }
 
-export async function getKeywords ({
+export async function getKeywords({
   queryKey,
 }: QueryFunctionContext): Promise<string[]> {
   const [_key, type, id] = queryKey;
@@ -130,7 +130,9 @@ export async function getKeywords ({
     axios_config({ method: "GET" })
   );
 
-  return data.keywords.map((keyword: { name: string }) => keyword.name);
+  const keywords = type === "movie" ? data.keywords : data.results;
+
+  return keywords.map((keyword: { name: string }) => keyword.name);
 }
 
 export async function getTrending({
