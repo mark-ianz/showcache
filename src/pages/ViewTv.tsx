@@ -11,6 +11,7 @@ import ShowMedia from "@/components/show/ShowMedia";
 import ShowDetailSkeleton from "@/components/show/ShowDetailSkeleton";
 import ErrorComponent from "@/components/ErrorComponent";
 import ShowDetails from "@/components/show/ShowDetails";
+import Socials from "@/components/person/Socials";
 
 export default function ViewTv() {
   const { id } = useParams();
@@ -41,7 +42,8 @@ export default function ViewTv() {
             <Recommendations id={id!} />
           </ViewShowLayout>
 
-          <div className="w-60 max-md:w-full">
+          <div className="flex flex-col gap-8 w-60 max-md:w-full">
+            <Socials id={id!} type="tv" homepage={data.homepage} />
             <ShowDetails showData={data} />
           </div>
         </div>

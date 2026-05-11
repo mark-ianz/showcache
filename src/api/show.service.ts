@@ -135,6 +135,18 @@ export async function getKeywords({
   return keywords.map((keyword: { name: string }) => keyword.name);
 }
 
+export async function getExternalIds({
+  queryKey,
+}: QueryFunctionContext): Promise<any> {
+  const [_key, type, id] = queryKey;
+  const { data } = await axios.get(
+    `https://api.themoviedb.org/3/${type}/${id}/external_ids`,
+    axios_config({ method: "GET" })
+  );
+
+  return data;
+}
+
 export async function getTrending({
   queryKey,
 }: QueryFunctionContext): Promise<any[]> {

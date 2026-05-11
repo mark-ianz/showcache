@@ -1,24 +1,27 @@
-import { getPersonExternalIds } from "@/api/credits.service";
+import { getExternalIds } from "@/api/show.service";
 import { external_ids_link, external_ids_logo } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { ExternalIds, ValidExternalIds } from "@/types/credits";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { ClassNameValue } from "tailwind-merge";
+import { Globe } from "lucide-react";
 
 type Props = {
-  person_id: number;
+  id: number | string;
+  type: "movie" | "tv" | "person";
+  homepage?: string;
   className?: ClassNameValue;
 };
 
-export default function Socials({ person_id, className }: Props) {
+export default function Socials({ id, type, homepage, className }: Props) {
   const { data } = useQuery({
-    queryKey: ["external_ids", person_id],
-    queryFn: getPersonExternalIds,
+    queryKey: ["external_ids", type, id],
+    queryFn: getExternalIds,
     staleTime: 1000 * 60 * 5,
   });
 
-  let socials = [];
+  const socials = [];
 
   // Loop through the data
   for (const social in data) {
@@ -41,20 +44,35 @@ export default function Socials({ person_id, className }: Props) {
   }
 
   return (
-    socials.length > 0 && (
-      <ul className={cn("flex flex-wrap gap-4", className)}>
-        {socials.map((social, index) => (
-          <li key={social.name + index} className="w-8 aspect-square max-md:w-6">
-            <Link to={social.link} target="_blank">
-              <img
-                src={social.logo}
-                alt={"Social Link with" + social.name}
-                className="w-full h-full"
-              />
-            </Link>
-          </li>
-        ))}
-      </ul>
-    )
+    <div className={cn("flex flex-wrap gap-4 items-center", className)}>
+      {homepage && (
+        <Link
+          to={homepage}
+          target="_blank"
+          className="w-8 aspect-square max-md:w-6 flex items-center justify-center hover:opacity-80 transition-opacity"
+          title="Official Homepage"
+        >
+          <Globe className="w-full h-full text-gray-500" />
+        </Link>
+      )}
+      {socials.length > 0 && (
+        <ul className="flex flex-wrap gap-4">
+          {socials.map((social, index) => (
+            <li
+              key={social.name + index}
+              className="w-8 aspect-square max-md:w-6 hover:opacity-80 transition-opacity"
+            >
+              <Link to={social.link} target="_blank" title={social.name}>
+                <img
+                  src={social.logo}
+                  alt={"Social Link with" + social.name}
+                  className="w-full h-full"
+                />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }

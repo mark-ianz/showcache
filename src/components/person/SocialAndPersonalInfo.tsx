@@ -8,7 +8,7 @@ export default function SocialAndPersonalInfo({ person }: Props) {
   return (
     <div className="px-2 py-4 max-sm:px-0 ">
       <PersonalInfo person={person} />
-      <Socials className="mt-4" person_id={person.id} />
+      <Socials className="mt-4" id={person.id} type="person" />
     </div>
   );
 }

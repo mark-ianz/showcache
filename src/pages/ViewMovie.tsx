@@ -11,6 +11,7 @@ import ShowDetailSkeleton from "@/components/show/ShowDetailSkeleton";
 import ShowDetails from "@/components/show/ShowDetails";
 import BelongsToCollection from "@/components/show/BelongsToCollection";
 import ErrorComponent from "@/components/ErrorComponent";
+import Socials from "@/components/person/Socials";
 
 export default function ViewMovie() {
   const { id } = useParams();
@@ -35,7 +36,7 @@ export default function ViewMovie() {
         <div className="flex gap-14 max-md:flex-col max-md:gap-5">
           <ViewShowLayout className="overflow-hidden">
             <Casts id={id!} type="movie" />
-            <ShowMedia show_data={data} show_title={data.title}/>
+            <ShowMedia show_data={data} show_title={data.title} />
             {data.belongs_to_collection && (
               <BelongsToCollection
                 belongs_to_collection={data.belongs_to_collection}
@@ -44,7 +45,8 @@ export default function ViewMovie() {
             <Recommendations id={id!} />
           </ViewShowLayout>
 
-          <div className="w-60 max-md:w-full">
+          <div className="flex flex-col gap-8 w-60 max-md:w-full">
+            <Socials id={id!} type="movie" homepage={data.homepage} />
             <ShowDetails showData={data} />
           </div>
         </div>
