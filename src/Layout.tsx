@@ -3,6 +3,7 @@ import Header from "./components/header/Header";
 import Footer from "./components/Footer";
 import { ReactNode } from "react";
 import ScrollToTopButton from "./components/ScrollToTopButton";
+import { Toaster } from "./components/ui/toaster";
 
 export default function Layout({ children }: { children?: ReactNode }) {
   return (
@@ -16,6 +17,7 @@ export default function Layout({ children }: { children?: ReactNode }) {
       </div>
       <ScrollRestoration />
       <ScrollToTopButton />
+      <Toaster />
       <Footer />
     </div>
   );

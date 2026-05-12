@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Trash2, Settings, ArrowLeft, Share2, Plus, List } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import ShowCard from "@/components/show/ShowCard";
 
 export default function ManageList() {
@@ -32,11 +32,23 @@ export default function ManageList() {
   const removeMutation = useMutation({
     mutationFn: (item: { media_type: "movie" | "tv", media_id: number }) => 
       accountService.removeItemsFromList(account!.access_token, listId, [item]),
+    onMutate: () => {
+      toast({ title: "Removing...", description: "Updating your list." });
+    },
     onSuccess: () => {
       toast({ title: "Removed", description: "Item removed from list." });
       queryClient.invalidateQueries({ queryKey: ["list_details", listId] });
     }
   });
+
+  const handleShare = () => {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url);
+    toast({ 
+      title: "Link Copied", 
+      description: "List URL copied to clipboard.",
+    });
+  };
 
   useEffect(() => {
     if (!authLoading && !isLoggedIn) {
@@ -120,7 +132,7 @@ export default function ManageList() {
             </DialogContent>
           </Dialog>
 
-          <Button variant="outline" size="icon" className="rounded-xl">
+          <Button variant="outline" size="icon" className="rounded-xl" onClick={handleShare}>
             <Share2 className="w-4 h-4" />
           </Button>
           
@@ -275,9 +287,7 @@ function EditListForm({ list, listId, accessToken, onSuccess }: {
       </div>
 
       <DialogFooter className="pt-4 gap-2">
-        <DialogClose asChild>
-          <Button variant="ghost" className="rounded-xl">Cancel</Button>
-        </DialogClose>
+        <Button variant="ghost" className="rounded-xl" onClick={onSuccess}>Cancel</Button>
         <Button 
           onClick={() => mutation.mutate()} 
           disabled={mutation.isPending}
@@ -300,6 +310,9 @@ function DeleteListButton({ listId, listName }: { listId: number, listName: stri
 
   const deleteMutation = useMutation({
     mutationFn: () => accountService.deleteList(account!.access_token, listId),
+    onMutate: () => {
+      toast({ title: "Deleting...", description: `Removing "${listName}" permanently.` });
+    },
     onSuccess: () => {
       toast({ title: "List Deleted", description: `"${listName}" has been deleted.` });
       queryClient.invalidateQueries({ queryKey: ["lists"] });
@@ -322,9 +335,7 @@ function DeleteListButton({ listId, listName }: { listId: number, listName: stri
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="gap-2">
-          <DialogClose asChild>
-            <Button variant="outline" className="rounded-xl">Cancel</Button>
-          </DialogClose>
+          <Button variant="outline" className="rounded-xl" onClick={() => (document.querySelector('[data-state="open"]')?.parentElement?.querySelector('[type="button"]') as HTMLElement)?.click()}>Cancel</Button>
           <Button 
             variant="destructive"
             onClick={() => deleteMutation.mutate()} 
