@@ -23,6 +23,7 @@ import MediaListPage from "./pages/MediaListPage.tsx";
 import PeoplePage from "./pages/PeoplePage.tsx";
 import AuthCallback from "./pages/AuthCallback.tsx";
 import Profile from "./pages/Profile.tsx";
+import ManageList from "./pages/ManageList.tsx";
 
 const queryClient = new QueryClient();
 
@@ -147,6 +148,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/list/:id",
+        element: <ManageList />,
       },
       {
         path: "*",

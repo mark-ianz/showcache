@@ -1,5 +1,5 @@
 type AxiosConfig = {
-  method: "GET" | "POST" | "DELETE" | "UPDATE";
+  method: "GET" | "POST" | "DELETE" | "UPDATE" | "PUT";
   headers?: {};
   params?: {};
   data?: {};

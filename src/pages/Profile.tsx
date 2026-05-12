@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Movie, TV } from "@/types/show";
 import ShowCard from "@/components/show/ShowCard";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import { TMDBList } from "@/types/list";
 
 export default function Profile() {
@@ -104,6 +104,8 @@ function MediaGrid({ account, type }: { account: any, type: "favorite" | "watchl
         return (
           <ShowCard
             key={item.id}
+            id={item.id}
+            mediaType={media_type}
             name={name}
             image_path={item.poster_path}
             vote_average={item.vote_average}
@@ -147,8 +149,9 @@ function ListsGrid({ account }: { account: any }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {lists.map((list) => (
-        <div 
+        <Link 
           key={list.id} 
+          to={`/list/${list.id}`}
           className="group relative overflow-hidden rounded-2xl border bg-card hover:bg-accent/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
         >
           <div className="aspect-video w-full overflow-hidden bg-muted">
@@ -186,7 +189,7 @@ function ListsGrid({ account }: { account: any }) {
               <p className="mt-4 text-sm text-muted-foreground line-clamp-2">{list.description}</p>
             )}
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

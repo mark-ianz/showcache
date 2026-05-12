@@ -205,7 +205,6 @@ export const accountService = {
     );
     return data;
   },
-
   async checkItemInList(
     accessToken: string,
     listId: number,
@@ -239,5 +238,49 @@ export const accountService = {
       }
       throw error;
     }
+  },
+  async getListDetails(
+    accessToken: string,
+    listId: number,
+    page: number = 1
+  ): Promise<any> {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/4/list/${listId}?page=${page}`,
+      axios_config({ 
+        method: "GET",
+        headers: { Authorization: `Bearer ${accessToken}` }
+      })
+    );
+    return data;
+  },
+
+  async updateList(
+    accessToken: string,
+    listId: number,
+    updates: { name?: string; description?: string; public?: boolean; sort_by?: string }
+  ): Promise<any> {
+    const { data } = await axios.put(
+      `https://api.themoviedb.org/4/list/${listId}`,
+      updates,
+      axios_config({ 
+        method: "PUT",
+        headers: { Authorization: `Bearer ${accessToken}` }
+      })
+    );
+    return data;
+  },
+
+  async deleteList(
+    accessToken: string,
+    listId: number
+  ): Promise<any> {
+    const { data } = await axios.delete(
+      `https://api.themoviedb.org/4/list/${listId}`,
+      axios_config({ 
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${accessToken}` }
+      })
+    );
+    return data;
   }
 };

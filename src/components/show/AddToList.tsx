@@ -17,9 +17,10 @@ interface AddToListProps {
   mediaType: "movie" | "tv";
   mediaId: number;
   className?: string;
+  showLabel?: boolean;
 }
 
-export default function AddToList({ mediaType, mediaId, className }: AddToListProps) {
+export default function AddToList({ mediaType, mediaId, className, showLabel }: AddToListProps) {
   const { account, isLoggedIn, login } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -284,8 +285,15 @@ export default function AddToList({ mediaType, mediaId, className }: AddToListPr
                   )}
                 </AnimatePresence>
                 
+                {showLabel && (
+                  <span className="text-xs font-medium ml-1">Add to list</span>
+                )}
+
                 {isInAnyList && !isOpen && (
-                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full border-2 border-background animate-pulse" />
+                  <span className={cn(
+                    "absolute w-3 h-3 bg-primary rounded-full border-2 border-background animate-pulse",
+                    showLabel ? "top-2 left-6" : "-top-1 -right-1"
+                  )} />
                 )}
               </Button>
             </motion.div>

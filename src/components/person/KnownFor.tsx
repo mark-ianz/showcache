@@ -49,6 +49,8 @@ export default function KnownFor({ id }: Props) {
               )}
             >
               <ShowCard
+                id={show.id}
+                mediaType={getShowType(show) as "movie" | "tv"}
                 genre_ids={show.genre_ids}
                 image_path={show.poster_path}
                 name={getShowName(show)}

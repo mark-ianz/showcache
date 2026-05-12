@@ -48,6 +48,8 @@ export default function Recommendations({ id }: { id: string }) {
             key={show.id}
           >
             <ShowCard
+              id={show.id}
+              mediaType={type as "movie" | "tv"}
               path={`/${type}/` + show.id}
               genre_ids={show.genre_ids}
               vote_average={show.vote_average}

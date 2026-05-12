@@ -128,6 +128,8 @@ export default function ViewCollection() {
                 key={movie.id}
               >
                 <ShowCard
+                  id={movie.id}
+                  mediaType="movie"
                   genre_ids={movie.genres.map((genre) => genre.id)}
                   image_path={movie.poster_path}
                   name={movie.title}
