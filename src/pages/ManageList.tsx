@@ -1,17 +1,24 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient, useInfiniteQuery } from "@tanstack/react-query";
 import { accountService } from "@/api/account.service";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, Trash2, Settings, ArrowLeft, Share2, Plus, List } from "lucide-react";
+import { Loader2, Trash2, Settings, ArrowLeft, Share2, Plus, List, Check, X } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import ShowCard from "@/components/show/ShowCard";
+import { useDebounce } from "@/hooks/useDebounce";
+import { searchMulti } from "@/api/show.service";
+import { useLanguage } from "@/context/language-provider";
+import { Search } from "lucide-react";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
+import { cn } from "@/lib/utils";
 
 export default function ManageList() {
   const { id } = useParams<{ id: string }>();
@@ -37,6 +44,18 @@ export default function ManageList() {
     },
     onSuccess: () => {
       toast({ title: "Removed", description: "Item removed from list." });
+      queryClient.invalidateQueries({ queryKey: ["list_details", listId] });
+    }
+  });
+
+  const addMutation = useMutation({
+    mutationFn: (item: { media_type: "movie" | "tv", media_id: number }) => 
+      accountService.addItemsToList(account!.access_token, listId, [item]),
+    onMutate: () => {
+      toast({ title: "Adding...", description: "Adding title to your list." });
+    },
+    onSuccess: () => {
+      toast({ title: "Added", description: "Item added to list." });
       queryClient.invalidateQueries({ queryKey: ["list_details", listId] });
     }
   });
@@ -146,10 +165,11 @@ export default function ManageList() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">Titles ({list.item_count})</h2>
-          <Button variant="secondary" size="sm" className="rounded-full gap-2" onClick={() => navigate("/")}>
-            <Plus className="w-4 h-4" />
-            Add More
-          </Button>
+          <AddMoreSearchModal 
+          onAdd={(item) => addMutation.mutate(item)} 
+          onRemove={(item) => removeMutation.mutate(item)}
+          existingItems={items}
+        />
         </div>
 
         {items.length === 0 ? (
@@ -347,6 +367,183 @@ function DeleteListButton({ listId, listName }: { listId: number, listName: stri
             Yes, Delete List
           </Button>
         </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+function AddMoreSearchModal({ 
+  onAdd, 
+  onRemove,
+  existingItems 
+}: { 
+  onAdd: (item: { media_type: "movie" | "tv", media_id: number }) => void,
+  onRemove: (item: { media_type: "movie" | "tv", media_id: number }) => void,
+  existingItems: any[]
+}) {
+  const [query, setQuery] = useState("");
+  const debouncedQuery = useDebounce(query, 500);
+  const { language: { iso_639_1: languageCode } } = useLanguage();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const { 
+    data: searchResults, 
+    isLoading, 
+    fetchNextPage, 
+    hasNextPage, 
+    isFetchingNextPage 
+  } = useInfiniteQuery({
+    queryKey: ["search_multi_infinite", languageCode, debouncedQuery],
+    queryFn: ({ pageParam = 1 }) => 
+      searchMulti({ queryKey: ["search_multi", languageCode, debouncedQuery, pageParam] } as any),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      const nextPage = lastPage.page + 1;
+      const maxPages = Math.min(lastPage.total_pages, 500);
+      return nextPage <= maxPages ? nextPage : undefined;
+    },
+    enabled: debouncedQuery.length > 2,
+  });
+
+  const { targetRef, isIntersecting } = useIntersectionObserver({
+    enabled: hasNextPage && !isFetchingNextPage,
+    threshold: 0.1,
+  });
+
+  useEffect(() => {
+    if (isIntersecting && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [isIntersecting, hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  const filteredResults = searchResults?.pages.flatMap(page => 
+    page.results.filter((item: any) => item.media_type === "movie" || item.media_type === "tv")
+  ) || [];
+
+  const existingItemsMap = new Map(existingItems.map(item => [`${item.media_type}:${item.id}`, true]));
+
+  return (
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
+        <Button variant="secondary" size="sm" className="rounded-full gap-2">
+          <Plus className="w-4 h-4" />
+          Add More
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="max-w-2xl max-h-[80vh] flex flex-col p-0 overflow-hidden rounded-3xl">
+        <DialogHeader className="p-6 pb-0">
+          <DialogTitle className="text-2xl">Add to List</DialogTitle>
+          <DialogDescription>Search for movies or TV shows to add to this list.</DialogDescription>
+          <div className="relative mt-4">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input 
+              placeholder="Search titles..." 
+              className="pl-10 rounded-xl bg-muted/50 border-none"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              autoFocus
+            />
+          </div>
+        </DialogHeader>
+
+        <ScrollArea className="h-[450px] w-full">
+          <div className="p-6">
+          {isLoading ? (
+            <div className="flex flex-col gap-4">
+              {[...Array(5)].map((_, i) => (
+                <Skeleton key={i} className="h-20 w-full rounded-2xl" />
+              ))}
+            </div>
+          ) : debouncedQuery.length > 0 && debouncedQuery.length <= 2 ? (
+            <div className="text-center py-10 text-muted-foreground">
+              Type at least 3 characters to search...
+            </div>
+          ) : filteredResults.length > 0 ? (
+            <div className="grid gap-2 w-full">
+              {filteredResults.map((item: any) => {
+                const isInList = existingItemsMap.has(`${item.media_type}:${item.id}`);
+                
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      if (isInList) {
+                        onRemove({ media_type: item.media_type, media_id: item.id });
+                      } else {
+                        onAdd({ media_type: item.media_type, media_id: item.id });
+                      }
+                    }}
+                    className={cn(
+                      "flex items-center gap-4 p-2 w-full rounded-2xl transition-all text-left group overflow-hidden border border-transparent",
+                      isInList ? "bg-primary/5 hover:bg-primary/10 border-primary/10" : "hover:bg-accent/50"
+                    )}
+                  >
+                    <div className="w-12 h-18 bg-muted rounded-xl overflow-hidden shrink-0 aspect-[2/3] shadow-sm">
+                      {item.poster_path ? (
+                        <img 
+                          src={`https://image.tmdb.org/t/p/w92${item.poster_path}`} 
+                          alt={item.title || item.name}
+                          className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-accent">
+                          <Plus className="w-4 h-4 text-muted-foreground" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <h4 className="font-semibold truncate text-lg leading-tight">{item.title || item.name}</h4>
+                        {isInList && (
+                          <span className="flex items-center gap-1 text-[10px] font-bold bg-primary text-primary-foreground px-1.5 py-0.5 rounded-full uppercase tracking-tighter shrink-0">
+                            <Check className="w-2.5 h-2.5" />
+                            In List
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-xs text-muted-foreground uppercase tracking-widest font-bold opacity-70 truncate">
+                        {item.media_type} • {item.release_date || item.first_air_date ? new Date(item.release_date || item.first_air_date).getFullYear() : "N/A"}
+                      </p>
+                    </div>
+                    <div className={cn(
+                      "w-10 h-10 rounded-full flex items-center justify-center transition-all shrink-0",
+                      isInList 
+                        ? "bg-primary text-primary-foreground opacity-100 group-hover:bg-destructive group-hover:text-destructive-foreground" 
+                        : "bg-primary/10 text-primary opacity-0 group-hover:opacity-100"
+                    )}>
+                      {isInList ? (
+                        <>
+                          <Check className="w-5 h-5 group-hover:hidden" />
+                          <X className="w-5 h-5 hidden group-hover:block" />
+                        </>
+                      ) : (
+                        <Plus className="w-5 h-5" />
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+              
+              {/* Infinite Scroll Trigger */}
+              <div ref={targetRef} className="h-10 flex items-center justify-center w-full">
+                {isFetchingNextPage && <Loader2 className="w-6 h-6 animate-spin text-primary" />}
+              </div>
+            </div>
+          ) : debouncedQuery.length > 2 ? (
+            <div className="text-center py-20 text-muted-foreground">
+              <p>No movies or TV shows found for "{debouncedQuery}"</p>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center py-20 text-muted-foreground text-center">
+              <div className="w-20 h-20 rounded-full bg-muted/50 flex items-center justify-center mb-6">
+                <Search className="w-10 h-10 opacity-20" />
+              </div>
+              <p className="text-lg font-medium text-foreground">What are we looking for?</p>
+              <p className="text-sm">Search for titles to expand your collection.</p>
+            </div>
+          )}
+          </div>
+        </ScrollArea>
       </DialogContent>
     </Dialog>
   );
