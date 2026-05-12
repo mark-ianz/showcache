@@ -45,7 +45,7 @@ export default function AddToList({ mediaType, mediaId, className }: AddToListPr
   });
 
   const isInAnyList = useMemo(() => 
-    statusQueries.some(q => q.data?.item_present), 
+    statusQueries.some(q => (q.data as { item_present: boolean } | undefined)?.item_present), 
     [statusQueries]
   );
 

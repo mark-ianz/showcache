@@ -6,6 +6,7 @@ import { Movie, TV } from "@/types/show";
 import ShowCard from "@/components/show/ShowCard";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Navigate } from "react-router-dom";
+import { TMDBList } from "@/types/list";
 
 export default function Profile() {
   const { account, isLoggedIn, loading } = useAuth();
@@ -22,10 +23,11 @@ export default function Profile() {
         </div>
 
         <Tabs defaultValue="favorites" className="w-full">
-          <TabsList className="grid w-full max-w-[600px] grid-cols-3">
+          <TabsList className="grid w-full max-w-[800px] grid-cols-4">
             <TabsTrigger value="favorites">Favorites</TabsTrigger>
             <TabsTrigger value="watchlist">Watchlist</TabsTrigger>
             <TabsTrigger value="rated">Rated</TabsTrigger>
+            <TabsTrigger value="lists">My Lists</TabsTrigger>
           </TabsList>
 
           <TabsContent value="favorites" className="mt-6">
@@ -38,6 +40,10 @@ export default function Profile() {
 
           <TabsContent value="rated" className="mt-6">
             <MediaGrid account={account!} type="rated" />
+          </TabsContent>
+
+          <TabsContent value="lists" className="mt-6">
+            <ListsGrid account={account!} />
           </TabsContent>
         </Tabs>
       </div>
@@ -107,6 +113,81 @@ function MediaGrid({ account, type }: { account: any, type: "favorite" | "watchl
           />
         );
       })}
+    </div>
+  );
+}
+function ListsGrid({ account }: { account: any }) {
+  const { data: lists, isLoading } = useQuery({
+    queryKey: ["lists", account.access_token, account.account_id],
+    queryFn: () => accountService.getAccountLists(
+      account.access_token,
+      account.account_id
+    ).then(res => res.results as TMDBList[]),
+  });
+
+  if (isLoading) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {[...Array(6)].map((_, i) => (
+          <Skeleton key={i} className="h-48 rounded-2xl" />
+        ))}
+      </div>
+    );
+  }
+
+  if (!lists || lists.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 text-center border rounded-2xl bg-muted/30">
+        <p className="text-xl font-medium">No lists found</p>
+        <p className="text-muted-foreground mt-1">You haven't created any lists on TMDB yet.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {lists.map((list) => (
+        <div 
+          key={list.id} 
+          className="group relative overflow-hidden rounded-2xl border bg-card hover:bg-accent/50 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+        >
+          <div className="aspect-video w-full overflow-hidden bg-muted">
+            {list.backdrop_path ? (
+              <img 
+                src={`https://image.tmdb.org/t/p/w500${list.backdrop_path}`} 
+                alt={list.name}
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/20 to-secondary/20">
+                <span className="text-4xl font-bold text-primary/40">{list.name[0]}</span>
+              </div>
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+          </div>
+          
+          <div className="p-5 relative -mt-12">
+            <div className="flex items-end gap-4">
+              {list.poster_path && (
+                <div className="h-24 w-16 overflow-hidden rounded-lg border-2 border-background shadow-lg shrink-0">
+                  <img 
+                    src={`https://image.tmdb.org/t/p/w185${list.poster_path}`} 
+                    alt={list.name}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              )}
+              <div className="mb-2">
+                <h3 className="text-xl font-bold line-clamp-1">{list.name}</h3>
+                <p className="text-sm text-muted-foreground">{list.item_count} items • {list.public ? 'Public' : 'Private'}</p>
+              </div>
+            </div>
+            {list.description && (
+              <p className="mt-4 text-sm text-muted-foreground line-clamp-2">{list.description}</p>
+            )}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
