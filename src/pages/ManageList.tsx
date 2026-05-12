@@ -307,6 +307,7 @@ function DeleteListButton({ listId, listName }: { listId: number, listName: stri
   const navigate = useNavigate();
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const [isOpen, setIsOpen] = useState(false);
 
   const deleteMutation = useMutation({
     mutationFn: () => accountService.deleteList(account!.access_token, listId),
@@ -321,7 +322,7 @@ function DeleteListButton({ listId, listName }: { listId: number, listName: stri
   });
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="ghost" size="icon" className="text-destructive hover:bg-destructive/10 rounded-xl">
           <Trash2 className="w-4 h-4" />
@@ -335,7 +336,7 @@ function DeleteListButton({ listId, listName }: { listId: number, listName: stri
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="gap-2">
-          <Button variant="outline" className="rounded-xl" onClick={() => (document.querySelector('[data-state="open"]')?.parentElement?.querySelector('[type="button"]') as HTMLElement)?.click()}>Cancel</Button>
+          <Button variant="outline" className="rounded-xl" onClick={() => setIsOpen(false)}>Cancel</Button>
           <Button 
             variant="destructive"
             onClick={() => deleteMutation.mutate()} 
