@@ -135,5 +135,109 @@ export const accountService = {
       })
     );
     return data;
+  },
+
+  async getAccountLists(
+    accessToken: string,
+    accountId: string,
+    page: number = 1
+  ): Promise<any> {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/4/account/${accountId}/lists?page=${page}`,
+      axios_config({ 
+        method: "GET",
+        headers: { Authorization: `Bearer ${accessToken}` }
+      })
+    );
+    return data;
+  },
+
+  async createList(
+    accessToken: string,
+    name: string,
+    description: string = "",
+    isPublic: boolean = false
+  ): Promise<any> {
+    const { data } = await axios.post(
+      `https://api.themoviedb.org/4/list`,
+      {
+        name,
+        description,
+        public: isPublic,
+        iso_639_1: "en", // Default to English for now, can be improved
+      },
+      axios_config({ 
+        method: "POST",
+        headers: { Authorization: `Bearer ${accessToken}` }
+      })
+    );
+    return data;
+  },
+
+  async addItemsToList(
+    accessToken: string,
+    listId: number,
+    items: Array<{ media_type: "movie" | "tv", media_id: number }>
+  ): Promise<any> {
+    const { data } = await axios.post(
+      `https://api.themoviedb.org/4/list/${listId}/items`,
+      { items },
+      axios_config({ 
+        method: "POST",
+        headers: { Authorization: `Bearer ${accessToken}` }
+      })
+    );
+    return data;
+  },
+
+  async removeItemsFromList(
+    accessToken: string,
+    listId: number,
+    items: Array<{ media_type: "movie" | "tv", media_id: number }>
+  ): Promise<any> {
+    const { data } = await axios.delete(
+      `https://api.themoviedb.org/4/list/${listId}/items`,
+      axios_config({ 
+        method: "DELETE",
+        data: { items },
+        headers: { Authorization: `Bearer ${accessToken}` }
+      })
+    );
+    return data;
+  },
+
+  async checkItemInList(
+    accessToken: string,
+    listId: number,
+    mediaType: "movie" | "tv",
+    mediaId: number
+  ): Promise<{ item_present: boolean; item_count: number }> {
+    try {
+      const { data } = await axios.get(
+        `https://api.themoviedb.org/4/list/${listId}`,
+        axios_config({ 
+          method: "GET",
+          headers: { Authorization: `Bearer ${accessToken}` }
+        })
+      );
+      
+      // Check if the item is in the first page of results
+      const isPresent = data.results?.some((item: any) => {
+        if (typeof item === 'string') {
+          return item === `${mediaType}:${mediaId}`;
+        }
+        return item.id === mediaId || item.media_id === mediaId;
+      });
+
+      return { 
+        item_present: !!isPresent,
+        item_count: data.item_count || 0
+      };
+    } catch (error: any) {
+      if (error.response?.status === 404 || error.response?.data?.status_code === 34) {
+        return { item_present: false, item_count: 0 };
+      }
+      throw error;
+    }
   }
 };

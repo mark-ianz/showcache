@@ -12,6 +12,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 
 import { motion, AnimatePresence } from "framer-motion";
 import cinemaMeme from "../../assets/absolute-cinema.webp";
+import AddToList from "./AddToList";
 
 interface AccountActionsProps {
   mediaType: "movie" | "tv";
@@ -286,6 +287,8 @@ export default function AccountActions({ mediaType, mediaId, className }: Accoun
             </TooltipContent>
           )}
         </Tooltip>
+
+        <AddToList mediaType={mediaType} mediaId={mediaId} />
       </div>
 
       <div className="w-[1px] h-6 bg-border/50 mx-1" />
